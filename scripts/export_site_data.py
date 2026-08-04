@@ -90,6 +90,8 @@ to_wgs = Transformer.from_crs(32717, 4326, always_xy=True)
 industrial_records = []
 for idx, row in industries.iterrows():
     lon, lat = to_wgs.transform(row["Coord_X"], row["Coord_Y"])
+    pressure = clean(row["Caldero_Capacidad_Presion"])
+    equipment = "Fuente fija" if pressure in (None, "N/A") else f"Caldero · {pressure}"
     industrial_records.append(
         {
             "id": int(idx),
@@ -102,6 +104,51 @@ for idx, row in industries.iterrows():
             "exitVelocity": clean(row["Vel_Salida_m_s"]),
             "stackDiameter": clean(row["Diam_Chimenea_m"]),
             "emissionRate": clean(row["Tasa_Emision_g_s"]),
+            "stackHeight": None,
+            "outletTemperature": None,
+            "source": "UPS · 2015",
+            "category": "Inventario industrial georreferenciado",
+            "equipment": equipment,
+            "sourceCount": 1,
+            "emissions": {
+                "CO": None,
+                "NO₂": None,
+                "SO₂": clean(row["Tasa_Emision_g_s"]),
+            },
+        }
+    )
+
+# Merge the ten anonymized state-university companies that have real UTM
+# coordinates. Their equipment and pollutant loads remain traceable to the
+# 2018 inventory instead of being inferred from the named UPS companies.
+for offset, row in state_coords.iterrows():
+    lon, lat = to_wgs.transform(row["Coord_X_UTM"], row["Coord_Y_UTM"])
+    company = str(row["Empresa"])
+    company_sources = state_sources[state_sources["Empresa"].astype(str) == company]
+    equipment_names = company_sources["Fuente_Fija"].dropna().astype(str).unique().tolist()
+    industrial_records.append(
+        {
+            "id": int(100 + offset),
+            "name": f"Empresa {company}",
+            "lon": round(lon, 7),
+            "lat": round(lat, 7),
+            "altitude": 2560,
+            "fuel": "No documentado",
+            "so2Concentration": None,
+            "exitVelocity": clean(row["Vel_Salida_ms"]),
+            "stackDiameter": clean(row["Diametro_m"]),
+            "emissionRate": clean(row["Carga_Total_gs"]),
+            "stackHeight": clean(row["Altura_m"]),
+            "outletTemperature": clean(row["Temp_Salida_C"]),
+            "source": "UCuenca · 2018",
+            "category": clean(row["Rubro"]),
+            "equipment": " · ".join(equipment_names[:3]) if equipment_names else "Fuente fija",
+            "sourceCount": int(len(company_sources)),
+            "emissions": {
+                "CO": clean(row["CO_gs"]),
+                "NO₂": clean(row["NOx_gs"]),
+                "SO₂": clean(row["SO2_gs"]),
+            },
         }
     )
 
@@ -112,6 +159,104 @@ hour_cols = [
 hourly = base.groupby("HORA")[hour_cols].median().reset_index()
 recent = base.sort_values("Fecha").tail(72)[["Fecha", *hour_cols]].copy()
 recent["Fecha"] = recent["Fecha"].dt.strftime("%Y-%m-%dT%H:%M:%S")
+
+base["Año"] = base["Fecha"].dt.year
+base["Mes"] = base["Fecha"].dt.month
+base["DiaSemana"] = base["Fecha"].dt.dayofweek
+base["Estacion"] = base["Mes"].map(
+    lambda month: "Verano" if month in (12, 1, 2)
+    else "Otoño" if month in (3, 4, 5)
+    else "Invierno" if month in (6, 7, 8)
+    else "Primavera"
+)
+
+
+def historical_profile(frame: pd.DataFrame, key: str, order: list, labels: dict) -> list[dict]:
+    profile = []
+    for value in order:
+        subset = frame[frame[key] == value]
+        if subset.empty:
+            continue
+        values = {}
+        for feature in hour_cols[:7]:
+            series = subset[feature].dropna()
+            values[feature] = {
+                "median": clean(series.median()),
+                "mean": clean(series.mean()),
+                "p90": clean(series.quantile(0.9)),
+                "count": int(len(series)),
+            }
+        profile.append({"key": str(value), "label": labels[value], "values": values})
+    return profile
+
+
+years = sorted(base["Año"].dropna().astype(int).unique().tolist())
+month_labels = {
+    1: "Enero", 2: "Febrero", 3: "Marzo", 4: "Abril", 5: "Mayo", 6: "Junio",
+    7: "Julio", 8: "Agosto", 9: "Septiembre", 10: "Octubre", 11: "Noviembre", 12: "Diciembre",
+}
+weekday_labels = {0: "Lunes", 1: "Martes", 2: "Miércoles", 3: "Jueves", 4: "Viernes", 5: "Sábado", 6: "Domingo"}
+season_order = ["Verano", "Otoño", "Invierno", "Primavera"]
+
+historical = {
+    "annual": historical_profile(base, "Año", years, {year: str(year) for year in years}),
+    "seasonal": historical_profile(base, "Estacion", season_order, {season: season for season in season_order}),
+    "monthly": historical_profile(base, "Mes", list(range(1, 13)), month_labels),
+    "weekly": historical_profile(base, "DiaSemana", list(range(7)), weekday_labels),
+}
+
+# Geographic frame derived from the study maps: the polygon follows Paseo Río
+# Machángara, Cornelio Vintimilla, Av. de las Américas and Av. de los Migrantes.
+# Named route centerlines provide an analytical traffic overlay while the live
+# tile layer supplies the complete street/satellite context.
+park_boundary = [
+    [-78.9840, -2.8816], [-78.9837, -2.8762], [-78.9821, -2.8715],
+    [-78.9792, -2.8693], [-78.9759, -2.8694], [-78.9724, -2.8717],
+    [-78.9688, -2.8750], [-78.9691, -2.8788], [-78.9709, -2.8825],
+    [-78.9761, -2.8837], [-78.9815, -2.8832], [-78.9840, -2.8816],
+]
+roads = [
+    {
+        "name": "Av. de las Américas", "class": "arterial", "trafficWeight": 1.0,
+        "points": [[-78.9845, -2.8813], [-78.9818, -2.8826], [-78.9780, -2.8834], [-78.9739, -2.8834], [-78.9690, -2.8810]],
+    },
+    {
+        "name": "Cornelio Vintimilla", "class": "industrial", "trafficWeight": 0.82,
+        "points": [[-78.9811, -2.8698], [-78.9798, -2.8724], [-78.9781, -2.8754], [-78.9765, -2.8784], [-78.9746, -2.8826]],
+    },
+    {
+        "name": "Octavio Chacón Moscoso", "class": "arterial", "trafficWeight": 0.92,
+        "points": [[-78.9842, -2.8760], [-78.9814, -2.8775], [-78.9786, -2.8793], [-78.9756, -2.8812]],
+    },
+    {
+        "name": "Carlos Tosi", "class": "industrial", "trafficWeight": 0.68,
+        "points": [[-78.9814, -2.8733], [-78.9784, -2.8735], [-78.9752, -2.8736], [-78.9714, -2.8738]],
+    },
+    {
+        "name": "Paseo Río Machángara", "class": "river-road", "trafficWeight": 0.48,
+        "points": [[-78.9838, -2.8708], [-78.9837, -2.8743], [-78.9836, -2.8782], [-78.9838, -2.8818]],
+    },
+    {
+        "name": "Av. de los Migrantes", "class": "arterial", "trafficWeight": 0.76,
+        "points": [[-78.9720, -2.8697], [-78.9705, -2.8729], [-78.9691, -2.8761], [-78.9689, -2.8800]],
+    },
+    {
+        "name": "Manuel Ambrosi", "class": "industrial", "trafficWeight": 0.58,
+        "points": [[-78.9821, -2.8751], [-78.9794, -2.8752], [-78.9762, -2.8755], [-78.9728, -2.8760]],
+    },
+]
+
+local_aermod = aermod[
+    aermod["Coord_X"].between(723700, 726100)
+    & aermod["Coord_Y"].between(9680500, 9683200)
+].copy()
+aermod_points = []
+for _, row in local_aermod.iterrows():
+    lon, lat = to_wgs.transform(row["Coord_X"], row["Coord_Y"])
+    aermod_points.append({
+        "lon": round(lon, 7), "lat": round(lat, 7),
+        "emissionRate": clean(row["emision_rate"]), "id": clean(row["Id"]),
+    })
 
 pollutant_meta = {
     "CO": ("CONT_CO", "mg/m³", "#ef6f4e"),
@@ -161,6 +306,14 @@ app_data = {
     "pollutants": pollutants,
     "hourlyProfile": records(hourly),
     "recentSeries": records(recent),
+    "historical": historical,
+    "geography": {
+        "center": [-78.9771, -2.8767],
+        "initialZoom": 15,
+        "boundary": park_boundary,
+        "roads": roads,
+        "aermodPoints": aermod_points,
+    },
     "industrial": {
         "sites": industrial_records,
         "topStateLoads": records(state_loads.sort_values("Carga_Total_gs", ascending=False).head(12)),

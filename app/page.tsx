@@ -7,6 +7,8 @@ import {
   useRef,
   useState,
   type MouseEvent as ReactMouseEvent,
+  type PointerEvent as ReactPointerEvent,
+  type WheelEvent as ReactWheelEvent,
 } from "react";
 
 type GenericRow = Record<string, string | number | boolean | null>;
@@ -30,10 +32,32 @@ type IndustrialSite = {
   lat: number;
   altitude: number;
   fuel: string;
-  so2Concentration: number;
+  so2Concentration: number | null;
   exitVelocity: number;
   stackDiameter: number;
   emissionRate: number;
+  stackHeight: number | null;
+  outletTemperature: number | null;
+  source: string;
+  category: string;
+  equipment: string;
+  sourceCount: number;
+  emissions: Record<string, number | null>;
+};
+
+type HistorySlice = {
+  key: string;
+  label: string;
+  values: Record<string, { median: number; mean: number; p90: number; count: number }>;
+};
+
+type MapView = { lon: number; lat: number; zoom: number };
+
+type MapRoad = {
+  name: string;
+  class: string;
+  trafficWeight: number;
+  points: [number, number][];
 };
 
 type AppData = {
@@ -57,6 +81,14 @@ type AppData = {
   pollutants: Pollutant[];
   hourlyProfile: GenericRow[];
   recentSeries: GenericRow[];
+  historical: Record<"annual" | "seasonal" | "monthly" | "weekly", HistorySlice[]>;
+  geography: {
+    center: [number, number];
+    initialZoom: number;
+    boundary: [number, number][];
+    roads: MapRoad[];
+    aermodPoints: { id: number; lon: number; lat: number; emissionRate: number }[];
+  };
   industrial: {
     sites: IndustrialSite[];
     topStateLoads: GenericRow[];
@@ -115,6 +147,8 @@ const CHEMISTRY = [
     equation: "NO₂ + hν → NO + O  ·  O + O₂ → O₃",
     explanation:
       "La radiación rompe el NO₂; el oxígeno liberado reacciona con O₂ y forma ozono cerca del suelo.",
+    detail:
+      "Es un ciclo fotoquímico, no una conversión total e instantánea. La intensidad de la radiación acelera la fotólisis del NO₂ y el balance final depende también de NO, compuestos orgánicos volátiles y tiempo de residencia. En el mapa se interpreta como potencial de formación de O₃, no como una concentración calculada.",
     accent: "#f7cf65",
     mapPollutant: "O₃",
   },
@@ -124,6 +158,8 @@ const CHEMISTRY = [
     equation: "SO₂ + oxidantes + H₂O → aerosol de sulfato",
     explanation:
       "En aire húmedo, el SO₂ puede oxidarse y contribuir a partículas finas secundarias que permanecen suspendidas.",
+    detail:
+      "El SO₂ puede oxidarse en fase gaseosa o dentro de gotas y convertirse en sulfato. La humedad facilita la fase acuosa; la radiación y los oxidantes controlan la velocidad. El producto se representa como aerosol secundario probable y no como una reacción estequiométrica cerrada.",
     accent: "#d47af3",
     mapPollutant: "PM₂.₅",
   },
@@ -133,6 +169,8 @@ const CHEMISTRY = [
     equation: "PM₂.₅ + H₂O(g) → partícula hidratada",
     explanation:
       "Las partículas captan agua, crecen y reducen la visibilidad; el simulador aumenta su tamaño aparente.",
+    detail:
+      "Las sales higroscópicas dentro del PM atraen vapor de agua cuando aumenta la humedad relativa. El diámetro óptico crece, cambia la dispersión de la luz y puede aumentar la masa medida sin que aparezca una nueva fuente primaria. La magnitud depende de la composición del aerosol.",
     accent: "#ff8ca1",
     mapPollutant: "PM₂.₅",
   },
@@ -142,6 +180,8 @@ const CHEMISTRY = [
     equation: "Emisión + capa estable → dispersión vertical limitada",
     explanation:
       "Una capa estable reduce la mezcla vertical. El CO y otros contaminantes quedan concentrados cerca de las fuentes.",
+    detail:
+      "La inversión térmica coloca aire más cálido sobre aire frío superficial y limita la convección. Con viento débil, las emisiones se diluyen menos y aumenta su permanencia cerca del suelo. Es un mecanismo de acumulación física, no una reacción química del CO.",
     accent: "#ef6f4e",
     mapPollutant: "CO",
   },
@@ -151,20 +191,28 @@ const CHEMISTRY = [
     equation: "NO + O₃ → NO₂ + O₂",
     explanation:
       "El ozono reacciona con NO y regenera NO₂. La radiación y los compuestos orgánicos controlan el balance del ciclo.",
+    detail:
+      "La titulación de O₃ por NO y la fotólisis posterior del NO₂ forman un ciclo rápido. Sin radicales derivados de compuestos orgánicos, el ciclo por sí solo no produce una acumulación neta sostenida de ozono. La lectura visual comunica el mecanismo y conserva esa limitación.",
     accent: "#9b8cff",
     mapPollutant: "NO₂",
   },
 ];
 
 const INGREDIENTS = [
-  "NO₂",
-  "O₃",
-  "SO₂",
-  "CO",
-  "PM₂.₅",
-  "Humedad",
-  "Luz solar",
-  "Inversión térmica",
+  { label: "NO₂", group: "gas" },
+  { label: "O₃", group: "gas" },
+  { label: "SO₂", group: "gas" },
+  { label: "CO", group: "gas" },
+  { label: "PM₁", group: "partícula" },
+  { label: "PM₂.₅", group: "partícula" },
+  { label: "PM₁₀", group: "partícula" },
+  { label: "Humedad", group: "meteorología" },
+  { label: "Precipitación", group: "meteorología" },
+  { label: "Presión atmosférica", group: "meteorología" },
+  { label: "Temperatura", group: "meteorología" },
+  { label: "Radiación global", group: "meteorología" },
+  { label: "Luz solar", group: "meteorología" },
+  { label: "Inversión térmica", group: "estabilidad" },
 ];
 
 const FEATURE_LABELS: Record<string, string> = {
@@ -259,6 +307,113 @@ function predictForest(
   return probability / model.trees.length;
 }
 
+function interpretMixture(ingredients: string[], fallback: Pollutant | undefined) {
+  const selected = new Set(ingredients);
+  const recipes = CHEMISTRY
+    .filter((recipe) => recipe.ingredients.every((item) => selected.has(item)))
+    .sort((a, b) => b.ingredients.length - a.ingredients.length);
+  const mechanisms: string[] = [];
+
+  if (selected.has("NO₂") && (selected.has("Luz solar") || selected.has("Radiación global"))) {
+    mechanisms.push("fotólisis de NO₂ y potencial de formación de O₃");
+  }
+  if (selected.has("SO₂") && (selected.has("Humedad") || selected.has("Precipitación"))) {
+    mechanisms.push("oxidación acuosa y formación potencial de sulfato");
+  }
+  if (["PM₁", "PM₂.₅", "PM₁₀"].some((item) => selected.has(item)) && selected.has("Humedad")) {
+    mechanisms.push("crecimiento higroscópico del aerosol");
+  }
+  if (["PM₁", "PM₂.₅", "PM₁₀", "SO₂"].some((item) => selected.has(item)) && selected.has("Precipitación")) {
+    mechanisms.push("remoción por deposición húmeda");
+  }
+  if (selected.has("Inversión térmica") || (selected.has("Presión atmosférica") && selected.has("Temperatura"))) {
+    mechanisms.push("estabilidad atmosférica y menor mezcla vertical");
+  }
+
+  const exact = recipes[0];
+  const product = ingredients.length < 2
+    ? "Selecciona dos variables"
+    : mechanisms.length > 1
+      ? "Sistema atmosférico acoplado"
+      : exact?.product ?? mechanisms[0] ?? "Interacción multivariable";
+  const equation = mechanisms.length > 1 ? `${ingredients.join(" + ")} → procesos acoplados` : exact?.equation ?? (ingredients.length ? ingredients.join(" + ") : "—");
+  const explanation = mechanisms.length > 1
+    ? `La selección activa simultáneamente ${mechanisms.join("; ")}. El resultado integra química, remoción y estabilidad sin inventar una concentración final.`
+    : exact?.explanation
+      ?? (ingredients.length < 2
+      ? "Combina contaminantes y condiciones atmosféricas para revelar un mecanismo."
+      : mechanisms.length
+        ? `La selección activa ${mechanisms.join("; ")}. La cámara muestra la dirección esperada del proceso, no una concentración final.`
+        : "Las variables comparten el mismo volumen de aire, pero no hay base suficiente para afirmar un producto químico único. La lectura se conserva como interacción física y contexto de exposición.");
+
+  const detailParts = [
+    exact?.detail,
+    selected.has("Precipitación")
+      ? "La precipitación puede retirar gases solubles y partículas por captura dentro y debajo de las nubes. Un episodio de lluvia suele disminuir la carga suspendida, aunque puede trasladar contaminantes al suelo y al agua."
+      : null,
+    selected.has("Presión atmosférica")
+      ? "La presión no reacciona con los contaminantes; funciona como indicador del estado de la masa de aire. Su efecto debe leerse junto con temperatura, inversión y viento."
+      : null,
+    selected.has("Radiación global")
+      ? "La radiación global aporta energía a la química fotoquímica y también modifica la convección superficial. Su efecto cambia con nubosidad, hora y disponibilidad de precursores."
+      : null,
+    selected.has("PM₁") || selected.has("PM₂.₅") || selected.has("PM₁₀")
+      ? "Las fracciones PM representan tamaños aerodinámicos distintos: PM₁ penetra más profundamente, PM₂.₅ permanece más tiempo suspendido y PM₁₀ sedimenta con mayor rapidez. Mezclarlas no crea una sustancia nueva; integra fracciones de exposición."
+      : null,
+  ].filter(Boolean) as string[];
+
+  return {
+    product,
+    equation,
+    explanation,
+    detail: detailParts.join(" ") || "La cuantificación exigiría concentraciones iniciales, tiempo de residencia, oxidantes, composición del aerosol y constantes cinéticas. El laboratorio evita inventar esos valores y limita el resultado a una interpretación causal.",
+    mechanisms: mechanisms.length ? mechanisms : ["coexistencia sin producto químico determinado"],
+    accent: exact?.accent ?? fallback?.color ?? "#64d5c2",
+    mapPollutant: exact?.mapPollutant
+      ?? ingredients.find((item) => ["NO₂", "O₃", "SO₂", "CO", "PM₁", "PM₂.₅", "PM₁₀"].includes(item))
+      ?? fallback?.label
+      ?? "PM₂.₅",
+  };
+}
+
+const TILE_SIZE = 256;
+const MAX_LATITUDE = 85.05112878;
+const TILE_SOURCES = {
+  streets: {
+    label: "Calles",
+    attribution: "© OpenStreetMap · © CARTO",
+    url: (z: number, x: number, y: number) => `https://${["a", "b", "c", "d"][(x + y) & 3]}.basemaps.cartocdn.com/light_all/${z}/${x}/${y}.png`,
+  },
+  satellite: {
+    label: "Satélite",
+    attribution: "Imágenes © Esri",
+    url: (z: number, x: number, y: number) => `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`,
+  },
+  analysis: {
+    label: "Análisis",
+    attribution: "© OpenStreetMap · © CARTO",
+    url: (z: number, x: number, y: number) => `https://${["a", "b", "c", "d"][(x + y) & 3]}.basemaps.cartocdn.com/dark_all/${z}/${x}/${y}.png`,
+  },
+} as const;
+
+function lonLatToWorld(lon: number, lat: number, zoom: number) {
+  const scale = TILE_SIZE * 2 ** zoom;
+  const safeLat = Math.max(-MAX_LATITUDE, Math.min(MAX_LATITUDE, lat));
+  const sin = Math.sin((safeLat * Math.PI) / 180);
+  return {
+    x: ((lon + 180) / 360) * scale,
+    y: (0.5 - Math.log((1 + sin) / (1 - sin)) / (4 * Math.PI)) * scale,
+  };
+}
+
+function worldToLonLat(x: number, y: number, zoom: number) {
+  const scale = TILE_SIZE * 2 ** zoom;
+  const lon = x / scale * 360 - 180;
+  const n = Math.PI - 2 * Math.PI * y / scale;
+  const lat = (180 / Math.PI) * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n)));
+  return { lon, lat };
+}
+
 function Toggle({
   active,
   label,
@@ -279,6 +434,7 @@ function Toggle({
 function MapCanvas({
   sites,
   monitoring,
+  geography,
   selectedSite,
   selectedPollutant,
   hour,
@@ -287,10 +443,15 @@ function MapCanvas({
   showTraffic,
   showMonitoring,
   showPlumes,
+  mapStyle,
+  view,
+  historyFactor,
+  onViewChange,
   onSelectSite,
 }: {
   sites: IndustrialSite[];
   monitoring: GenericRow[];
+  geography: AppData["geography"];
   selectedSite: IndustrialSite | null;
   selectedPollutant: Pollutant;
   hour: number;
@@ -299,11 +460,18 @@ function MapCanvas({
   showTraffic: boolean;
   showMonitoring: boolean;
   showPlumes: boolean;
+  mapStyle: keyof typeof TILE_SOURCES;
+  view: MapView;
+  historyFactor: number;
+  onViewChange: (view: MapView) => void;
   onSelectSite: (site: IndustrialSite) => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particles = useRef<Particle[]>([]);
   const hits = useRef<{ site: IndustrialSite; x: number; y: number; r: number }[]>([]);
+  const tiles = useRef<Map<string, HTMLImageElement>>(new Map());
+  const drag = useRef<{ pointerId: number; x: number; y: number; worldX: number; worldY: number } | null>(null);
+  const suppressClick = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -315,18 +483,6 @@ function MapCanvas({
     let width = 0;
     let height = 0;
     let dpr = 1;
-
-    const coords = [
-      ...sites.map((site) => ({ lon: site.lon, lat: site.lat })),
-      ...monitoring.map((point) => ({
-        lon: Number(point.Longitud),
-        lat: Number(point.Latitud),
-      })),
-    ].filter((point) => Number.isFinite(point.lon) && Number.isFinite(point.lat));
-    const minLon = Math.min(...coords.map((p) => p.lon));
-    const maxLon = Math.max(...coords.map((p) => p.lon));
-    const minLat = Math.min(...coords.map((p) => p.lat));
-    const maxLat = Math.max(...coords.map((p) => p.lat));
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -345,10 +501,10 @@ function MapCanvas({
     observer.observe(canvas);
     resize();
 
+    const centerWorld = lonLatToWorld(view.lon, view.lat, view.zoom);
     const project = (lon: number, lat: number) => {
-      const x = 38 + ((lon - minLon) / (maxLon - minLon || 1)) * (width - 76);
-      const y = 42 + ((maxLat - lat) / (maxLat - minLat || 1)) * (height - 92);
-      return { x, y };
+      const point = lonLatToWorld(lon, lat, view.zoom);
+      return { x: point.x - centerWorld.x + width / 2, y: point.y - centerWorld.y + height / 2 };
     };
 
     const hexRgb = (hex: string) => {
@@ -356,72 +512,118 @@ function MapCanvas({
       return [0, 2, 4].map((offset) => parseInt(normalized.slice(offset, offset + 2), 16));
     };
     const [red, green, blue] = hexRgb(selectedPollutant.color);
+    const source = TILE_SOURCES[mapStyle];
+    const peak = hour >= 5 && hour <= 9 || hour >= 14 && hour <= 18;
+
+    const emissionFor = (site: IndustrialSite) => {
+      const documented = site.emissions[selectedPollutant.label];
+      if (typeof documented === "number" && Number.isFinite(documented)) return documented;
+      if (selectedPollutant.label === "PM₂.₅" || selectedPollutant.label === "PM₁" || selectedPollutant.label === "PM₁₀") {
+        return site.emissionRate * 0.42;
+      }
+      if (selectedPollutant.label === "O₃") return site.emissionRate * 0.16;
+      return site.emissionRate * 0.28;
+    };
+
+    const drawPath = (points: [number, number][]) => {
+      points.forEach(([lon, lat], index) => {
+        const point = project(lon, lat);
+        if (index === 0) ctx.moveTo(point.x, point.y);
+        else ctx.lineTo(point.x, point.y);
+      });
+    };
 
     const draw = () => {
       frame += 1;
       ctx.clearRect(0, 0, width, height);
 
-      const bg = ctx.createLinearGradient(0, 0, width, height);
-      bg.addColorStop(0, "#0d1b20");
-      bg.addColorStop(0.55, "#10191d");
-      bg.addColorStop(1, "#091216");
-      ctx.fillStyle = bg;
+      ctx.fillStyle = mapStyle === "streets" ? "#e7e9e3" : "#0b1418";
+      ctx.fillRect(0, 0, width, height);
+
+      const tileCount = 2 ** view.zoom;
+      const minTileX = Math.floor((centerWorld.x - width / 2) / TILE_SIZE);
+      const maxTileX = Math.floor((centerWorld.x + width / 2) / TILE_SIZE);
+      const minTileY = Math.max(0, Math.floor((centerWorld.y - height / 2) / TILE_SIZE));
+      const maxTileY = Math.min(tileCount - 1, Math.floor((centerWorld.y + height / 2) / TILE_SIZE));
+      for (let tileX = minTileX; tileX <= maxTileX; tileX += 1) {
+        for (let tileY = minTileY; tileY <= maxTileY; tileY += 1) {
+          const wrappedX = ((tileX % tileCount) + tileCount) % tileCount;
+          const key = `${mapStyle}:${view.zoom}:${wrappedX}:${tileY}`;
+          let image = tiles.current.get(key);
+          if (!image) {
+            image = new Image();
+            image.crossOrigin = "anonymous";
+            image.src = source.url(view.zoom, wrappedX, tileY);
+            tiles.current.set(key, image);
+          }
+          const x = tileX * TILE_SIZE - centerWorld.x + width / 2;
+          const y = tileY * TILE_SIZE - centerWorld.y + height / 2;
+          if (image.complete && image.naturalWidth) ctx.drawImage(image, x, y, TILE_SIZE + 1, TILE_SIZE + 1);
+        }
+      }
+
+      ctx.fillStyle = mapStyle === "satellite" ? "rgba(4,14,17,.34)" : mapStyle === "analysis" ? "rgba(0,8,11,.18)" : "rgba(4,15,18,.08)";
       ctx.fillRect(0, 0, width, height);
 
       ctx.save();
-      ctx.globalAlpha = 0.35;
-      ctx.strokeStyle = "#365158";
-      ctx.lineWidth = 1;
-      for (let i = -height; i < width + height; i += 42) {
-        ctx.beginPath();
-        ctx.moveTo(i, 0);
-        ctx.lineTo(i - height * 0.4, height);
-        ctx.stroke();
-      }
-      for (let y = 54; y < height; y += 66) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(width, y + 36);
-        ctx.stroke();
-      }
+      ctx.beginPath();
+      drawPath(geography.boundary);
+      ctx.closePath();
+      ctx.fillStyle = mapStyle === "streets" ? "rgba(211,80,70,.12)" : "rgba(239,111,78,.11)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,111,91,.92)";
+      ctx.setLineDash([9, 6]);
+      ctx.lineWidth = 2;
+      ctx.stroke();
       ctx.restore();
 
       ctx.save();
+      ctx.lineJoin = "round";
       ctx.lineCap = "round";
-      ctx.strokeStyle = "rgba(141,170,164,.16)";
-      ctx.lineWidth = 15;
-      ctx.beginPath();
-      ctx.moveTo(-20, height * 0.73);
-      ctx.bezierCurveTo(width * 0.24, height * 0.54, width * 0.62, height * 0.83, width + 30, height * 0.58);
-      ctx.stroke();
-      ctx.strokeStyle = "rgba(115,196,218,.2)";
-      ctx.lineWidth = 4;
-      ctx.stroke();
+      for (const road of geography.roads) {
+        ctx.beginPath();
+        drawPath(road.points);
+        ctx.strokeStyle = mapStyle === "streets" ? "rgba(12,38,43,.35)" : "rgba(221,235,228,.34)";
+        ctx.lineWidth = road.class === "arterial" ? 5 : 3;
+        ctx.setLineDash([]);
+        ctx.stroke();
+        if (showTraffic) {
+          ctx.beginPath();
+          drawPath(road.points);
+          ctx.setLineDash([2, 12]);
+          ctx.lineDashOffset = -frame * (peak ? 0.9 : 0.38) * road.trafficWeight;
+          ctx.lineWidth = peak ? 4 : 3;
+          ctx.strokeStyle = peak ? `rgba(247,207,101,${0.48 + road.trafficWeight * 0.34})` : `rgba(247,207,101,${0.24 + road.trafficWeight * 0.22})`;
+          ctx.stroke();
+        }
+      }
       ctx.restore();
 
       if (showTraffic) {
-        const peak = hour >= 5 && hour <= 9 || hour >= 14 && hour <= 18;
         ctx.save();
-        ctx.setLineDash([8, 12]);
-        ctx.lineDashOffset = -frame * (peak ? 0.8 : 0.35);
-        ctx.lineWidth = peak ? 2.5 : 1.5;
-        ctx.strokeStyle = peak ? "rgba(247,207,101,.68)" : "rgba(247,207,101,.35)";
-        const center = project(-78.9798, -2.876);
-        const origins = [
-          [width * 0.05, height * 0.18],
-          [width * 0.08, height * 0.82],
-          [width * 0.48, height - 5],
-          [width * 0.92, height * 0.84],
-          [width * 0.94, height * 0.22],
-        ];
-        for (const [x, y] of origins) {
+        for (const point of geography.aermodPoints) {
+          const pos = project(point.lon, point.lat);
+          if (pos.x < -15 || pos.y < -15 || pos.x > width + 15 || pos.y > height + 15) continue;
+          const radius = 2.5 + Math.min(6, point.emissionRate / 5);
           ctx.beginPath();
-          ctx.moveTo(x, y);
-          ctx.quadraticCurveTo((x + center.x) / 2, center.y - 60, center.x, center.y);
-          ctx.stroke();
+          ctx.arc(pos.x, pos.y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(255,157,72,.74)";
+          ctx.fill();
         }
         ctx.restore();
       }
+
+      ctx.save();
+      ctx.font = "600 9px ui-monospace, monospace";
+      ctx.textAlign = "center";
+      for (const road of geography.roads) {
+        const labelPoint = road.points[Math.floor(road.points.length / 2)];
+        const pos = project(labelPoint[0], labelPoint[1]);
+        if (pos.x < 60 || pos.x > width - 60 || pos.y < 20 || pos.y > height - 20) continue;
+        ctx.fillStyle = mapStyle === "streets" ? "rgba(8,35,39,.82)" : "rgba(235,243,238,.72)";
+        ctx.fillText(road.name, pos.x, pos.y - 7);
+      }
+      ctx.restore();
 
       if (showMonitoring) {
         for (const point of monitoring) {
@@ -437,14 +639,53 @@ function MapCanvas({
           ctx.arc(pos.x, pos.y, 10 + Math.sin(frame * 0.05) * 2, 0, Math.PI * 2);
           ctx.strokeStyle = "rgba(100,213,194,.28)";
           ctx.stroke();
-          ctx.font = "600 9px ui-monospace, monospace";
-          ctx.fillStyle = "rgba(220,239,233,.72)";
-          ctx.fillText(String(point.Punto), pos.x + 8, pos.y - 7);
+          if (pos.x > -12 && pos.y > -12 && pos.x < width + 12 && pos.y < height + 12) {
+            ctx.font = "600 9px ui-monospace, monospace";
+            ctx.fillStyle = mapStyle === "streets" ? "rgba(8,44,47,.9)" : "rgba(220,239,233,.8)";
+            ctx.fillText(String(point.Punto), pos.x + 8, pos.y - 7);
+          }
         }
       }
 
-      const ranked = [...sites].sort((a, b) => b.emissionRate - a.emissionRate);
-      const sources = ranked.slice(0, 9);
+      const ranked = [...sites].sort((a, b) => emissionFor(b) - emissionFor(a));
+      const sources = ranked.slice(0, 12);
+      const maxEmission = Math.max(...sources.map(emissionFor), 1);
+      const windAngle = ((windDirection - 90) * Math.PI) / 180;
+
+      if (showPlumes) {
+        const visibleSources = [...sources.slice(0, 6)];
+        if (selectedSite && !visibleSources.some((site) => site.id === selectedSite.id)) visibleSources.push(selectedSite);
+        ctx.save();
+        ctx.globalCompositeOperation = "screen";
+        for (const site of visibleSources) {
+          const origin = project(site.lon, site.lat);
+          if (origin.x < -220 || origin.y < -220 || origin.x > width + 220 || origin.y > height + 220) continue;
+          const strength = Math.max(0.15, emissionFor(site) / maxEmission) * Math.max(0.45, Math.min(2.25, historyFactor));
+          const length = 68 + strength * 132 + windSpeed * 7;
+          const breadth = 22 + strength * 42 + Math.max(0, 3 - windSpeed) * 6;
+          ctx.save();
+          ctx.translate(origin.x, origin.y);
+          ctx.rotate(windAngle);
+          const bands = [
+            { scale: 1, alpha: 0.10 },
+            { scale: 0.73, alpha: 0.13 },
+            { scale: 0.49, alpha: 0.18 },
+            { scale: 0.28, alpha: 0.26 },
+          ];
+          for (const band of bands) {
+            ctx.beginPath();
+            ctx.ellipse(length * 0.34 * band.scale, 0, length * 0.57 * band.scale, breadth * band.scale, 0, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${red},${green},${blue},${band.alpha})`;
+            ctx.fill();
+            ctx.strokeStyle = `rgba(${red},${green},${blue},${band.alpha + 0.08})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+          ctx.restore();
+        }
+        ctx.restore();
+      }
+
       if (showPlumes && frame % 2 === 0 && particles.current.length < 320) {
         const source = sources[Math.floor(Math.random() * sources.length)];
         particles.current.push({
@@ -458,7 +699,6 @@ function MapCanvas({
         });
       }
 
-      const windAngle = ((windDirection - 90) * Math.PI) / 180;
       particles.current = particles.current.filter((particle) => {
         particle.age += 1;
         return particle.age < particle.life;
@@ -467,7 +707,7 @@ function MapCanvas({
         const source = sites.find((site) => site.id === particle.source);
         if (!source) continue;
         const origin = project(source.lon, source.lat);
-        const travel = particle.age * (0.12 + windSpeed * 0.08);
+        const travel = particle.age * (0.12 + windSpeed * 0.08) * Math.max(0.65, Math.min(1.5, historyFactor));
         const x = origin.x + Math.cos(windAngle) * travel + Math.sin(particle.drift + particle.age * 0.04) * 5;
         const y = origin.y + Math.sin(windAngle) * travel - particle.age * 0.1;
         const alpha = Math.max(0, (1 - particle.age / particle.life) * 0.5);
@@ -484,8 +724,9 @@ function MapCanvas({
       hits.current = [];
       for (const site of sites) {
         const pos = project(site.lon, site.lat);
+        if (pos.x < -35 || pos.y < -35 || pos.x > width + 35 || pos.y > height + 35) continue;
         const selected = selectedSite?.id === site.id;
-        const intensity = Math.min(1, site.emissionRate / 12);
+        const intensity = Math.min(1, emissionFor(site) / maxEmission);
         if (intensity > 0.05) {
           const glow = ctx.createRadialGradient(pos.x, pos.y, 1, pos.x, pos.y, 18 + intensity * 30);
           glow.addColorStop(0, `rgba(${red},${green},${blue},${0.18 + intensity * 0.18})`);
@@ -496,7 +737,7 @@ function MapCanvas({
           ctx.fill();
         }
 
-        ctx.fillStyle = selected ? "#f4efe4" : "#667d82";
+        ctx.fillStyle = selected ? "#f4efe4" : site.source.startsWith("UCuenca") ? "#cf8b6c" : "#667d82";
         ctx.fillRect(pos.x - 5, pos.y - 8, 12, 10);
         ctx.fillStyle = selected ? selectedPollutant.color : "#82989d";
         ctx.fillRect(pos.x + 2, pos.y - 16, 3, 10);
@@ -514,7 +755,7 @@ function MapCanvas({
           ctx.stroke();
           ctx.font = "600 10px ui-monospace, monospace";
           ctx.fillStyle = "#f4efe4";
-          ctx.fillText(site.name.slice(0, 28), pos.x + 14, pos.y - 17);
+          ctx.fillText(`${site.name.slice(0, 24)} · ${site.source}`, pos.x + 14, pos.y - 17);
         }
         hits.current.push({ site, x: pos.x, y: pos.y, r: 16 });
       }
@@ -534,8 +775,23 @@ function MapCanvas({
       ctx.stroke();
       ctx.restore();
       ctx.font = "500 9px ui-monospace, monospace";
-      ctx.fillStyle = "rgba(244,239,228,.65)";
+      ctx.fillStyle = mapStyle === "streets" ? "rgba(8,38,42,.82)" : "rgba(244,239,228,.75)";
       ctx.fillText(`${windDirection}° · ${windSpeed.toFixed(1)} m/s`, 47, height - 27);
+
+      ctx.save();
+      ctx.translate(width - 29, 34);
+      ctx.fillStyle = mapStyle === "streets" ? "#12383c" : "#f4efe4";
+      ctx.beginPath();
+      ctx.moveTo(0, -13);
+      ctx.lineTo(5, 2);
+      ctx.lineTo(0, 0);
+      ctx.lineTo(-5, 2);
+      ctx.closePath();
+      ctx.fill();
+      ctx.font = "700 9px ui-monospace, monospace";
+      ctx.textAlign = "center";
+      ctx.fillText("N", 0, 14);
+      ctx.restore();
 
       animation = requestAnimationFrame(draw);
     };
@@ -545,9 +801,13 @@ function MapCanvas({
       cancelAnimationFrame(animation);
       observer.disconnect();
     };
-  }, [sites, monitoring, selectedSite, selectedPollutant, hour, windSpeed, windDirection, showTraffic, showMonitoring, showPlumes]);
+  }, [sites, monitoring, geography, selectedSite, selectedPollutant, hour, windSpeed, windDirection, showTraffic, showMonitoring, showPlumes, mapStyle, view, historyFactor]);
 
   const handleClick = (event: ReactMouseEvent<HTMLCanvasElement>) => {
+    if (suppressClick.current) {
+      suppressClick.current = false;
+      return;
+    }
     const rect = event.currentTarget.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
@@ -558,11 +818,51 @@ function MapCanvas({
     if (match) onSelectSite(match.site);
   };
 
+  const handleWheel = (event: ReactWheelEvent<HTMLCanvasElement>) => {
+    event.preventDefault();
+    const canvas = event.currentTarget;
+    const rect = canvas.getBoundingClientRect();
+    const nextZoom = Math.max(13, Math.min(18, view.zoom + (event.deltaY < 0 ? 1 : -1)));
+    if (nextZoom === view.zoom) return;
+    const offsetX = event.clientX - rect.left - rect.width / 2;
+    const offsetY = event.clientY - rect.top - rect.height / 2;
+    const currentCenter = lonLatToWorld(view.lon, view.lat, view.zoom);
+    const anchor = worldToLonLat(currentCenter.x + offsetX, currentCenter.y + offsetY, view.zoom);
+    const anchorAtNext = lonLatToWorld(anchor.lon, anchor.lat, nextZoom);
+    const nextCenter = worldToLonLat(anchorAtNext.x - offsetX, anchorAtNext.y - offsetY, nextZoom);
+    onViewChange({ ...nextCenter, zoom: nextZoom });
+  };
+
+  const handlePointerDown = (event: ReactPointerEvent<HTMLCanvasElement>) => {
+    const center = lonLatToWorld(view.lon, view.lat, view.zoom);
+    drag.current = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, worldX: center.x, worldY: center.y };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event: ReactPointerEvent<HTMLCanvasElement>) => {
+    const active = drag.current;
+    if (!active || active.pointerId !== event.pointerId) return;
+    if (Math.hypot(event.clientX - active.x, event.clientY - active.y) > 4) suppressClick.current = true;
+    const next = worldToLonLat(active.worldX - (event.clientX - active.x), active.worldY - (event.clientY - active.y), view.zoom);
+    onViewChange({ ...next, zoom: view.zoom });
+  };
+
+  const handlePointerUp = (event: ReactPointerEvent<HTMLCanvasElement>) => {
+    if (drag.current?.pointerId !== event.pointerId) return;
+    drag.current = null;
+    event.currentTarget.releasePointerCapture(event.pointerId);
+  };
+
   return (
     <canvas
       ref={canvasRef}
       className="map-canvas"
       onClick={handleClick}
+      onWheel={handleWheel}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp}
       aria-label="Mapa atmosférico interactivo del Parque Industrial de Cuenca"
     />
   );
@@ -609,6 +909,12 @@ export default function Home() {
   const [showTraffic, setShowTraffic] = useState(true);
   const [showMonitoring, setShowMonitoring] = useState(true);
   const [showPlumes, setShowPlumes] = useState(true);
+  const [mapStyle, setMapStyle] = useState<keyof typeof TILE_SOURCES>("satellite");
+  const [mapView, setMapView] = useState<MapView>({ lon: -78.9771, lat: -2.8767, zoom: 15 });
+  const [mapTimeMode, setMapTimeMode] = useState<"day" | "history">("day");
+  const [historyDimension, setHistoryDimension] = useState<"annual" | "seasonal" | "monthly" | "weekly">("monthly");
+  const [historyA, setHistoryA] = useState("9");
+  const [historyB, setHistoryB] = useState("2");
   const [selectedPollutantLabel, setSelectedPollutantLabel] = useState("PM₂.₅");
   const [selectedSiteId, setSelectedSiteId] = useState<number | null>(null);
   const [inputs, setInputs] = useState<Record<string, number>>({});
@@ -630,6 +936,7 @@ export default function Home() {
         defaults.MET_HUM = 69.4;
         defaults.MET_PRES = 75645;
         setInputs(defaults);
+        setMapView({ lon: payload.geography.center[0], lat: payload.geography.center[1], zoom: payload.geography.initialZoom });
         const highest = [...payload.industrial.sites].sort((a, b) => b.emissionRate - a.emissionRate)[0];
         setSelectedSiteId(highest?.id ?? null);
       })
@@ -680,30 +987,36 @@ export default function Home() {
     [model, inputs, hour],
   );
   const band = riskBand(probability ?? 0);
+  const referenceProbability = useMemo(() => {
+    if (!model || !data?.recentSeries.length) return null;
+    const reference = data.recentSeries[data.recentSeries.length - 1];
+    const referenceInputs: Record<string, number> = {};
+    for (const [key, value] of Object.entries(reference)) {
+      const numeric = Number(value);
+      if ((key.startsWith("CONT_") || key.startsWith("MET_")) && Number.isFinite(numeric)) referenceInputs[key] = numeric;
+    }
+    const referenceHour = new Date(String(reference.Fecha)).getHours();
+    return predictForest(model, referenceInputs, referenceHour);
+  }, [data, model]);
+  const referenceBand = riskBand(referenceProbability ?? 0);
   const hourProfile = useMemo(
     () => data?.hourlyProfile.find((row) => Number(row.HORA) === hour),
     [data, hour],
   );
-  const mixResult = useMemo(() => {
-    const exact = CHEMISTRY.find((recipe) => recipe.ingredients.every((item) => ingredients.includes(item)));
-    if (exact) return exact;
-    return {
-      product: ingredients.length < 2 ? "Selecciona dos variables" : "Interacción multivariable",
-      equation: ingredients.length ? ingredients.join(" + ") : "—",
-      explanation:
-        ingredients.length < 2
-          ? "Combina contaminantes y condiciones atmosféricas para revelar un mecanismo."
-          : "El sistema combina dispersión, acumulación y afinidad química. Esta mezcla requiere más datos de cinética para cuantificar un producto específico.",
-      accent: selectedPollutant?.color ?? "#64d5c2",
-      mapPollutant: selectedPollutant?.label ?? "PM₂.₅",
-      ingredients,
-    };
-  }, [ingredients, selectedPollutant]);
+  const historySlices = data?.historical[historyDimension] ?? [];
+  const historyPrimary = historySlices.find((slice) => slice.key === historyA) ?? historySlices[0];
+  const historyComparison = historySlices.find((slice) => slice.key === historyB) ?? historySlices[1] ?? historySlices[0];
+  const historyPrimaryValue = historyPrimary?.values[selectedPollutant?.feature ?? ""]?.median ?? selectedPollutant?.median ?? 1;
+  const historyComparisonValue = historyComparison?.values[selectedPollutant?.feature ?? ""]?.median ?? selectedPollutant?.median ?? 1;
+  const historyDelta = historyComparisonValue ? ((historyPrimaryValue - historyComparisonValue) / historyComparisonValue) * 100 : 0;
+  const historyFactor = mapTimeMode === "history"
+    ? Math.max(0.45, Math.min(2.25, historyPrimaryValue / Math.max(selectedPollutant?.median ?? 1, 0.001)))
+    : 1;
+  const mixResult = useMemo(() => interpretMixture(ingredients, selectedPollutant), [ingredients, selectedPollutant]);
 
   const toggleIngredient = useCallback((ingredient: string) => {
     setIngredients((current) => {
       if (current.includes(ingredient)) return current.filter((item) => item !== ingredient);
-      if (current.length >= 4) return [...current.slice(1), ingredient];
       return [...current, ingredient];
     });
   }, []);
@@ -778,6 +1091,7 @@ export default function Home() {
               <MapCanvas
                 sites={data.industrial.sites}
                 monitoring={data.monitoringPoints}
+                geography={data.geography}
                 selectedSite={selectedSite}
                 selectedPollutant={selectedPollutant}
                 hour={hour}
@@ -786,6 +1100,10 @@ export default function Home() {
                 showTraffic={showTraffic}
                 showMonitoring={showMonitoring}
                 showPlumes={showPlumes}
+                mapStyle={mapStyle}
+                view={mapView}
+                historyFactor={historyFactor}
+                onViewChange={setMapView}
                 onSelectSite={(site) => setSelectedSiteId(site.id)}
               />
 
@@ -793,6 +1111,20 @@ export default function Home() {
                 <Toggle active={showPlumes} label="Plumas" onClick={() => setShowPlumes((value) => !value)} />
                 <Toggle active={showTraffic} label="Tráfico" onClick={() => setShowTraffic((value) => !value)} />
                 <Toggle active={showMonitoring} label="Muestreo" onClick={() => setShowMonitoring((value) => !value)} />
+              </div>
+
+              <div className="basemap-switch" aria-label="Mapa base">
+                {(Object.keys(TILE_SOURCES) as (keyof typeof TILE_SOURCES)[]).map((style) => (
+                  <button key={style} className={mapStyle === style ? "is-active" : ""} onClick={() => setMapStyle(style)}>
+                    {TILE_SOURCES[style].label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="map-navigation" aria-label="Navegación del mapa">
+                <button onClick={() => setMapView((current) => ({ ...current, zoom: Math.min(18, current.zoom + 1) }))} aria-label="Acercar">+</button>
+                <button onClick={() => setMapView((current) => ({ ...current, zoom: Math.max(13, current.zoom - 1) }))} aria-label="Alejar">−</button>
+                <button onClick={() => setMapView({ lon: data.geography.center[0], lat: data.geography.center[1], zoom: data.geography.initialZoom })} aria-label="Centrar mapa">◎</button>
               </div>
 
               <div className="pollutant-strip" role="list" aria-label="Contaminantes visibles">
@@ -812,40 +1144,65 @@ export default function Home() {
                 {selectedSite ? (
                   <>
                     <div className="inspector-head">
-                      <span>Fuente seleccionada</span>
+                      <span>{selectedSite.source}</span>
                       <button aria-label="Seleccionar siguiente industria" onClick={() => {
-                        const next = (selectedSite.id + 1) % data.industrial.sites.length;
-                        setSelectedSiteId(next);
+                        const index = data.industrial.sites.findIndex((site) => site.id === selectedSite.id);
+                        setSelectedSiteId(data.industrial.sites[(index + 1) % data.industrial.sites.length].id);
                       }}>↗</button>
                     </div>
                     <h3>{selectedSite.name}</h3>
-                    <p>{selectedSite.fuel} · {compactNumber(selectedSite.altitude, 0)} msnm</p>
+                    <p>{selectedSite.category}</p>
+                    <p className="inspector-equipment">{selectedSite.equipment} · {selectedSite.fuel}</p>
                     <div className="inspector-metrics">
-                      <div><span>SO₂</span><strong>{compactNumber(selectedSite.so2Concentration)}</strong><small>mg/m³</small></div>
-                      <div><span>Emisión</span><strong>{compactNumber(selectedSite.emissionRate, 2)}</strong><small>g/s</small></div>
+                      <div><span>{selectedPollutant.label}</span><strong>{compactNumber(selectedSite.emissions[selectedPollutant.label] ?? selectedSite.emissionRate, 2)}</strong><small>g/s · visual</small></div>
+                      <div><span>Fuentes</span><strong>{selectedSite.sourceCount}</strong><small>equipos</small></div>
                       <div><span>Salida</span><strong>{compactNumber(selectedSite.exitVelocity, 1)}</strong><small>m/s</small></div>
                     </div>
-                    <p className="inspector-note">La pluma combina tasa documentada, hora y viento simulado.</p>
+                    <p className="inspector-note">Ø {compactNumber(selectedSite.stackDiameter, 2)} m{selectedSite.stackHeight ? ` · h ${compactNumber(selectedSite.stackHeight, 1)} m` : ""}{selectedSite.outletTemperature ? ` · ${compactNumber(selectedSite.outletTemperature, 0)} °C` : ""}. La pluma combina inventario, hora y viento simulado.</p>
                   </>
                 ) : null}
               </aside>
 
               <div className="map-legend">
-                <span><i className="legend-factory" /> 32 focos industriales</span>
+                <span><i className="legend-factory" /> {data.industrial.sites.length} fuentes · 2 inventarios</span>
                 <span><i className="legend-monitor" /> 10 puntos de muestreo</span>
-                <span><i className="legend-route" /> Flujos origen-destino</span>
+                <span><i className="legend-route" /> Calles + tráfico AERMOD</span>
               </div>
+
+              <div className="map-attribution">{TILE_SOURCES[mapStyle].attribution} · límite reconstruido de las tesis</div>
             </div>
 
-            <div className="timeline-control">
-              <button className="play-button" onClick={() => setPlaying((value) => !value)} aria-label={playing ? "Pausar tiempo" : "Reproducir tiempo"}>
-                {playing ? "Ⅱ" : "▶"}
-              </button>
-              <div className="time-readout">
-                <strong>{String(hour).padStart(2, "0")}:00</strong>
-                <span>{hour >= 5 && hour <= 9 || hour >= 14 && hour <= 18 ? "franja de alta movilidad" : "franja base"}</span>
+            <div className={`timeline-control ${mapTimeMode === "history" ? "is-history" : ""}`}>
+              <div className="time-mode-tabs" aria-label="Escala temporal">
+                <button className={mapTimeMode === "day" ? "is-active" : ""} onClick={() => setMapTimeMode("day")}>24 horas</button>
+                <button className={mapTimeMode === "history" ? "is-active" : ""} onClick={() => { setMapTimeMode("history"); setPlaying(false); }}>Histórico 2022–2026</button>
               </div>
-              <input type="range" min="0" max="23" value={hour} onChange={(event) => setHour(Number(event.target.value))} aria-label="Hora de simulación" />
+              {mapTimeMode === "day" ? (
+                <>
+                  <button className="play-button" onClick={() => setPlaying((value) => !value)} aria-label={playing ? "Pausar tiempo" : "Reproducir tiempo"}>
+                    {playing ? "Ⅱ" : "▶"}
+                  </button>
+                  <div className="time-readout">
+                    <strong>{String(hour).padStart(2, "0")}:00</strong>
+                    <span>{hour >= 5 && hour <= 9 || hour >= 14 && hour <= 18 ? "franja de alta movilidad" : "franja base"}</span>
+                  </div>
+                  <input className="hour-range" type="range" min="0" max="23" value={hour} onChange={(event) => setHour(Number(event.target.value))} aria-label="Hora de simulación" />
+                </>
+              ) : (
+                <div className="history-lens">
+                  <label>Escala<select value={historyDimension} onChange={(event) => {
+                    const dimension = event.target.value as typeof historyDimension;
+                    const options = data.historical[dimension];
+                    setHistoryDimension(dimension);
+                    setHistoryA(options[Math.max(0, options.length - 1)]?.key ?? "");
+                    setHistoryB(options[0]?.key ?? "");
+                  }}><option value="annual">Año</option><option value="seasonal">Trimestre</option><option value="monthly">Mes</option><option value="weekly">Día</option></select></label>
+                  <label>Lectura<select value={historyPrimary?.key} onChange={(event) => setHistoryA(event.target.value)}>{historySlices.map((slice) => <option key={slice.key} value={slice.key}>{slice.label}</option>)}</select></label>
+                  <span className="history-versus">vs</span>
+                  <label>Comparar<select value={historyComparison?.key} onChange={(event) => setHistoryB(event.target.value)}>{historySlices.map((slice) => <option key={slice.key} value={slice.key}>{slice.label}</option>)}</select></label>
+                  <div className="history-result"><strong>{compactNumber(historyPrimaryValue, selectedPollutant.label === "CO" ? 2 : 1)} {selectedPollutant.unit}</strong><span>{historyDelta >= 0 ? "+" : ""}{compactNumber(historyDelta, 0)}% frente a {historyComparison?.label}</span></div>
+                </div>
+              )}
               <div className="weather-sliders">
                 <label>Viento <b>{windSpeed.toFixed(1)} m/s</b><input type="range" min="0.3" max="8" step="0.1" value={windSpeed} onChange={(event) => setWindSpeed(Number(event.target.value))} /></label>
                 <label>Dirección <b>{windDirection}°</b><input type="range" min="0" max="359" value={windDirection} onChange={(event) => setWindDirection(Number(event.target.value))} /></label>
@@ -862,11 +1219,21 @@ export default function Home() {
               <span className={model ? "model-ready" : "model-loading"}>{model ? "RF · 300 árboles" : "cargando modelo"}</span>
             </div>
 
-            <div className="risk-gauge" style={{ "--risk": `${Math.round((probability ?? 0) * 360)}deg`, "--risk-color": band.color } as React.CSSProperties}>
-              <div>
-                <small>probabilidad</small>
-                <strong>{probability === null ? "—" : `${Math.round(probability * 100)}%`}</strong>
-                <span>{band.label}</span>
+            <div className="risk-comparison">
+              <div className="gauge-block is-reference">
+                <span className="gauge-caption">Estado actual histórico</span>
+                <div className="risk-gauge" style={{ "--risk": `${Math.round((referenceProbability ?? 0) * 360)}deg`, "--risk-color": referenceBand.color } as React.CSSProperties}>
+                  <div><small>fijo</small><strong>{referenceProbability === null ? "—" : `${Math.round(referenceProbability * 100)}%`}</strong><span>{referenceBand.label}</span></div>
+                </div>
+                <small>Corte {data.meta.periodEnd}</small>
+              </div>
+              <div className="gauge-arrow">→</div>
+              <div className="gauge-block">
+                <span className="gauge-caption">Escenario próximas 6 h</span>
+                <div className="risk-gauge" style={{ "--risk": `${Math.round((probability ?? 0) * 360)}deg`, "--risk-color": band.color } as React.CSSProperties}>
+                  <div><small>probabilidad</small><strong>{probability === null ? "—" : `${Math.round(probability * 100)}%`}</strong><span>{band.label}</span></div>
+                </div>
+                <small>Interactivo</small>
               </div>
             </div>
             <p className="risk-note"><i style={{ background: band.color }} />{band.note}</p>
@@ -921,11 +1288,11 @@ export default function Home() {
 
         <div className="mixer-grid">
           <div className="ingredient-bank">
-            <div className="module-head"><span>Variables disponibles</span><small>máximo 4</small></div>
+            <div className="module-head"><span>Variables disponibles</span><small>sin límite artificial</small></div>
             <div className="ingredient-list">
               {INGREDIENTS.map((ingredient) => (
-                <button key={ingredient} className={ingredients.includes(ingredient) ? "is-selected" : ""} onClick={() => toggleIngredient(ingredient)}>
-                  <i />{ingredient}<span>{ingredients.includes(ingredient) ? "−" : "+"}</span>
+                <button key={ingredient.label} className={ingredients.includes(ingredient.label) ? "is-selected" : ""} onClick={() => toggleIngredient(ingredient.label)}>
+                  <i /><span className="ingredient-name">{ingredient.label}<small>{ingredient.group}</small></span><span>{ingredients.includes(ingredient.label) ? "−" : "+"}</span>
                 </button>
               ))}
             </div>
@@ -955,6 +1322,15 @@ export default function Home() {
               <div><span>Permanencia</span><b>{windSpeed < 1.5 ? "alta" : "moderada"}</b></div>
               <div><span>Hora</span><b>{String(hour).padStart(2, "0")}:00</b></div>
             </div>
+            <details className="reaction-detail">
+              <summary>Explicación científica completa <span>＋</span></summary>
+              <div>
+                <p>{mixResult.detail}</p>
+                <strong>Mecanismos activados</strong>
+                <ul>{mixResult.mechanisms.map((mechanism) => <li key={mechanism}>{mechanism}</li>)}</ul>
+                <small>Lectura conceptual: no sustituye una corrida cinética, termodinámica o de dispersión validada.</small>
+              </div>
+            </details>
             <button className="primary-action" onClick={() => {
               setSelectedPollutantLabel(mixResult.mapPollutant);
               document.getElementById("laboratorio")?.scrollIntoView({ behavior: "smooth" });

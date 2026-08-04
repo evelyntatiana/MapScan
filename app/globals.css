@@ -298,7 +298,7 @@ a {
 }
 
 .map-stage {
-  height: clamp(500px, 58vw, 660px);
+  height: clamp(560px, 62vw, 720px);
   margin-top: 21px;
   position: relative;
   overflow: hidden;
@@ -318,8 +318,11 @@ a {
   width: 100%;
   height: 100%;
   display: block;
-  cursor: crosshair;
+  cursor: grab;
+  touch-action: none;
 }
+
+.map-canvas:active { cursor: grabbing; }
 
 .map-tools {
   position: absolute;
@@ -332,6 +335,50 @@ a {
   background: rgba(9, 20, 23, 0.75);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(229, 239, 235, 0.12);
+}
+
+.basemap-switch {
+  position: absolute;
+  left: 14px;
+  top: 61px;
+  z-index: 3;
+  display: flex;
+  padding: 4px;
+  background: rgba(9, 20, 23, 0.78);
+  border: 1px solid rgba(229, 239, 235, 0.12);
+  backdrop-filter: blur(12px);
+}
+
+.basemap-switch button {
+  padding: 7px 9px;
+  border: 0;
+  color: #7f9293;
+  background: transparent;
+  font: 600 8px/1 var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.basemap-switch button.is-active { color: #081619; background: var(--mint); }
+
+.map-navigation {
+  position: absolute;
+  right: 14px;
+  bottom: 66px;
+  z-index: 3;
+  display: grid;
+  gap: 3px;
+}
+
+.map-navigation button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(229, 239, 235, 0.18);
+  color: #e7eee9;
+  background: rgba(9, 20, 23, 0.84);
+  font: 500 17px/1 var(--font-geist-mono), monospace;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
 }
 
 .toggle {
@@ -366,7 +413,7 @@ a {
 .pollutant-strip {
   position: absolute;
   left: 14px;
-  top: 68px;
+  top: 105px;
   z-index: 2;
   display: grid;
   gap: 4px;
@@ -409,7 +456,7 @@ a {
   top: 14px;
   right: 14px;
   z-index: 2;
-  width: min(270px, 30%);
+  width: min(310px, 36%);
   padding: 17px;
   background: rgba(11, 24, 27, 0.86);
   border: 1px solid rgba(229, 239, 235, 0.13);
@@ -446,6 +493,12 @@ a {
   margin: 0;
   color: #8ea09f;
   font-size: 10px;
+}
+
+.site-inspector .inspector-equipment {
+  margin-top: 6px;
+  color: #b5c2bf;
+  line-height: 1.35;
 }
 
 .inspector-metrics {
@@ -485,7 +538,7 @@ a {
 .map-legend {
   position: absolute;
   left: 14px;
-  bottom: 14px;
+  bottom: 27px;
   z-index: 2;
   display: flex;
   gap: 16px;
@@ -506,6 +559,17 @@ a {
 .legend-monitor { border-radius: 50%; background: var(--mint); }
 .legend-route { width: 13px !important; height: 2px !important; border-top: 2px dashed var(--yellow); }
 
+.map-attribution {
+  position: absolute;
+  right: 8px;
+  bottom: 7px;
+  z-index: 3;
+  color: rgba(235, 242, 237, 0.62);
+  font-size: 7px;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 3px #071013;
+}
+
 .timeline-control {
   display: grid;
   grid-template-columns: auto auto minmax(100px, 1fr) minmax(300px, 0.85fr);
@@ -513,6 +577,67 @@ a {
   gap: 16px;
   margin-top: 16px;
 }
+
+.time-mode-tabs {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 4px;
+}
+
+.time-mode-tabs button {
+  padding: 7px 10px;
+  border: 1px solid rgba(229, 239, 235, 0.14);
+  color: #74888a;
+  background: transparent;
+  font: 600 8px/1 var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  cursor: pointer;
+}
+
+.time-mode-tabs button.is-active { color: var(--deep); background: var(--mint); border-color: var(--mint); }
+
+.timeline-control.is-history { grid-template-columns: minmax(0, 1fr) minmax(300px, 0.55fr); }
+
+.history-lens {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(110px, .75fr)) auto minmax(110px, .75fr) minmax(150px, 1fr);
+  align-items: end;
+  gap: 9px;
+}
+
+.history-lens label {
+  display: grid;
+  gap: 5px;
+  color: #718587;
+  font-size: 7px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.history-lens select {
+  min-width: 0;
+  height: 34px;
+  padding: 0 8px;
+  border: 1px solid rgba(229, 239, 235, 0.17);
+  color: #dbe5e0;
+  background: #102226;
+  font: 500 9px/1 var(--font-geist-mono), monospace;
+}
+
+.history-versus { align-self: center; color: #617678; font: 600 9px/1 var(--font-geist-mono), monospace; }
+
+.history-result {
+  min-height: 34px;
+  display: grid;
+  align-content: center;
+  gap: 3px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(229, 239, 235, 0.14);
+}
+
+.history-result strong { color: #eef4ef; font: 500 13px/1 var(--font-geist-mono), monospace; }
+.history-result span { color: #829596; font-size: 8px; }
 
 .play-button {
   width: 39px;
@@ -601,6 +726,31 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .model-loading { color: var(--yellow); }
+
+.risk-comparison {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 5px;
+  margin: 24px 0 16px;
+}
+
+.gauge-block { min-width: 0; display: grid; justify-items: center; gap: 4px; text-align: center; }
+.gauge-block > small { color: #687c7e; font-size: 7px; text-transform: uppercase; letter-spacing: .06em; }
+.gauge-caption { min-height: 20px; color: #8da09f; font-size: 8px; line-height: 1.25; text-transform: uppercase; }
+.gauge-arrow { color: #536a6c; font-size: 16px; }
+
+.risk-comparison .risk-gauge {
+  width: min(118px, 100%);
+  margin: 8px auto;
+  padding: 8px;
+}
+
+.risk-comparison .risk-gauge > div { inset: 17px; }
+.risk-comparison .risk-gauge strong { margin: 3px 0 2px; font-size: clamp(27px, 2.6vw, 38px); }
+.risk-comparison .risk-gauge small,
+.risk-comparison .risk-gauge span { font-size: 6px; }
+.gauge-block.is-reference .risk-gauge { filter: saturate(.7); }
 
 .risk-gauge {
   width: min(210px, 72%);
@@ -804,6 +954,10 @@ input[type="range"]::-webkit-slider-thumb {
   display: grid;
   gap: 7px;
   padding: 22px 0;
+  max-height: 580px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #a9b3b1 transparent;
 }
 
 .ingredient-list button {
@@ -824,6 +978,9 @@ input[type="range"]::-webkit-slider-thumb {
 .ingredient-list button:hover { transform: translateX(3px); }
 .ingredient-list button i { width: 7px; height: 7px; border: 1px solid #768486; border-radius: 50%; }
 .ingredient-list button span { color: #849092; }
+.ingredient-list .ingredient-name { display: grid; gap: 3px; color: inherit; }
+.ingredient-list .ingredient-name small { color: #889495; font-size: 7px; text-transform: uppercase; letter-spacing: .08em; }
+.ingredient-list button.is-selected .ingredient-name small { color: #819897; }
 .ingredient-list button.is-selected { color: #eef3ee; background: var(--ink); }
 .ingredient-list button.is-selected i { background: var(--mint); border-color: var(--mint); box-shadow: 0 0 12px rgba(100,213,194,.5); }
 
@@ -989,6 +1146,34 @@ input[type="range"]::-webkit-slider-thumb {
 .reaction-effects div:last-child { border: 0; }
 .reaction-effects span { color: #778485; font-size: 7px; text-transform: uppercase; }
 .reaction-effects b { font-size: 10px; text-transform: uppercase; }
+
+.reaction-detail {
+  margin: 0 0 18px;
+  border: 1px solid var(--line);
+  background: rgba(231, 225, 213, .45);
+}
+
+.reaction-detail summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 14px;
+  color: #33494a;
+  font: 700 9px/1.2 var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  cursor: pointer;
+  list-style: none;
+}
+
+.reaction-detail summary::-webkit-details-marker { display: none; }
+.reaction-detail[open] summary span { transform: rotate(45deg); }
+.reaction-detail > div { padding: 0 14px 15px; border-top: 1px solid var(--line); }
+.reaction-detail p { color: #5f6e6f; font-size: 10px; line-height: 1.6; }
+.reaction-detail strong { color: #344849; font-size: 8px; text-transform: uppercase; letter-spacing: .08em; }
+.reaction-detail ul { margin: 9px 0 12px; padding-left: 17px; color: #657474; font-size: 9px; line-height: 1.55; }
+.reaction-detail small { display: block; color: #7d8988; font-size: 8px; line-height: 1.45; }
 
 .primary-action {
   width: 100%;
@@ -1392,6 +1577,7 @@ footer > a { font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
   .map-panel { border-right: 0; border-bottom: 1px solid var(--line-dark); }
   .forecast-panel { display: grid; grid-template-columns: 1fr 1.15fr; gap: 24px; }
   .forecast-head { grid-column: 1 / -1; }
+  .risk-comparison { align-self: start; }
   .risk-gauge { align-self: start; }
   .risk-note { align-self: end; }
   .scenario-inputs { grid-column: 2; grid-row: 2 / span 2; max-height: 440px; }
@@ -1432,14 +1618,23 @@ footer > a { font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
   .map-header { padding-inline: 3px; }
   .map-stage { height: 580px; }
   .map-tools { right: 10px; left: 10px; overflow-x: auto; }
-  .pollutant-strip { top: 68px; left: 10px; }
-  .site-inspector { width: calc(100% - 90px); top: auto; left: 76px; right: 10px; bottom: 48px; }
+  .basemap-switch { top: 59px; left: 10px; }
+  .pollutant-strip { top: 103px; left: 10px; }
+  .site-inspector { width: calc(100% - 90px); top: auto; left: 76px; right: 10px; bottom: 52px; }
+  .map-navigation { right: 10px; bottom: 305px; }
+  .map-attribution { max-width: 70%; text-align: right; }
   .map-legend { display: none; }
   .timeline-control { grid-template-columns: auto 1fr; }
   .timeline-control > input { grid-column: 1 / -1; }
+  .timeline-control.is-history { grid-template-columns: 1fr; }
+  .history-lens { grid-template-columns: 1fr 1fr; }
+  .history-lens label:first-child { grid-column: 1 / -1; }
+  .history-versus { display: none; }
+  .history-result { border-left: 0; border-top: 1px solid rgba(229,239,235,.14); padding: 11px 0 0; }
   .weather-sliders { grid-column: 1 / -1; }
   .forecast-panel { grid-template-columns: 1fr; padding: 22px 18px; }
   .forecast-head { grid-column: auto; }
+  .risk-comparison { grid-column: auto; }
   .scenario-inputs { grid-column: auto; grid-row: auto; max-height: none; }
   .forecast-foot { grid-column: auto; }
   .hero-facts { grid-template-columns: 1fr 1fr; }
@@ -1460,6 +1655,7 @@ footer > a { font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
   .metrics-card,
   .importance-card { border-right: 0; border-bottom: 1px solid var(--line); }
   .mix-chamber { min-height: 550px; }
+  .ingredient-list { max-height: none; }
   .reaction-card { grid-column: auto; }
   .traffic-impact-card,
   .fuel-card,
