@@ -57,7 +57,20 @@ type MapRoad = {
   name: string;
   class: string;
   trafficWeight: number;
+  flow: "in" | "out" | "distribution";
+  flowLabel: string;
   points: [number, number][];
+};
+
+type TrafficAccess = {
+  id: number;
+  label: string;
+  shortLabel: string;
+  lon: number;
+  lat: number;
+  confidence: string;
+  role: string;
+  coordinateNote: string;
 };
 
 type AppData = {
@@ -87,6 +100,20 @@ type AppData = {
     initialZoom: number;
     boundary: [number, number][];
     roads: MapRoad[];
+    trafficAccesses: TrafficAccess[];
+    aermodProfile: number[];
+    aermodStats: {
+      points: number;
+      min: number;
+      median: number;
+      p90: number;
+      p95: number;
+      max: number;
+      inventoryPeriod: string;
+      method: string;
+      directMeasurement: boolean;
+    };
+    passThroughEntryPct: number;
     aermodPoints: { id: number; lon: number; lat: number; emissionRate: number }[];
   };
   industrial: {
@@ -441,6 +468,7 @@ function MapCanvas({
   windSpeed,
   windDirection,
   showTraffic,
+  showTrafficEmissions,
   showMonitoring,
   showPlumes,
   mapStyle,
@@ -458,6 +486,7 @@ function MapCanvas({
   windSpeed: number;
   windDirection: number;
   showTraffic: boolean;
+  showTrafficEmissions: boolean;
   showMonitoring: boolean;
   showPlumes: boolean;
   mapStyle: keyof typeof TILE_SOURCES;
@@ -533,6 +562,39 @@ function MapCanvas({
       });
     };
 
+    const pointAlongPath = (points: [number, number][], progress: number) => {
+      const projected = points.map(([lon, lat]) => project(lon, lat));
+      const lengths = projected.slice(1).map((point, index) => Math.hypot(point.x - projected[index].x, point.y - projected[index].y));
+      const total = lengths.reduce((sum, value) => sum + value, 0);
+      let target = Math.max(0, Math.min(1, progress)) * total;
+      for (let index = 0; index < lengths.length; index += 1) {
+        if (target <= lengths[index] || index === lengths.length - 1) {
+          const ratio = lengths[index] ? target / lengths[index] : 0;
+          const start = projected[index];
+          const end = projected[index + 1];
+          return {
+            x: start.x + (end.x - start.x) * ratio,
+            y: start.y + (end.y - start.y) * ratio,
+            angle: Math.atan2(end.y - start.y, end.x - start.x),
+          };
+        }
+        target -= lengths[index];
+      }
+      return { ...projected[0], angle: 0 };
+    };
+
+    const trafficEmissionStyle = (rate: number) => {
+      const min = Math.max(0.001, geography.aermodStats.min);
+      const max = Math.max(min + 0.001, geography.aermodStats.max);
+      const normalized = Math.max(0, Math.min(1, (Math.log1p(rate) - Math.log1p(min)) / (Math.log1p(max) - Math.log1p(min))));
+      const low = [246, 239, 142];
+      const middle = [255, 159, 67];
+      const high = [255, 77, 87];
+      const mix = (from: number[], to: number[], amount: number) => from.map((value, index) => Math.round(value + (to[index] - value) * amount));
+      const rgb = normalized < 0.58 ? mix(low, middle, normalized / 0.58) : mix(middle, high, (normalized - 0.58) / 0.42);
+      return { normalized, rgb };
+    };
+
     const draw = () => {
       frame += 1;
       ctx.clearRect(0, 0, width, height);
@@ -580,36 +642,67 @@ function MapCanvas({
       ctx.save();
       ctx.lineJoin = "round";
       ctx.lineCap = "round";
-      for (const road of geography.roads) {
+      geography.roads.forEach((road) => {
         ctx.beginPath();
         drawPath(road.points);
-        ctx.strokeStyle = mapStyle === "streets" ? "rgba(12,38,43,.35)" : "rgba(221,235,228,.34)";
-        ctx.lineWidth = road.class === "arterial" ? 5 : 3;
+        ctx.strokeStyle = mapStyle === "streets" ? "rgba(12,38,43,.52)" : "rgba(221,235,228,.38)";
+        ctx.lineWidth = road.class === "arterial" ? 5.5 : road.class === "access" ? 4.5 : 3.5;
         ctx.setLineDash([]);
         ctx.stroke();
         if (showTraffic) {
           ctx.beginPath();
           drawPath(road.points);
-          ctx.setLineDash([2, 12]);
+          ctx.setLineDash([3, 11]);
           ctx.lineDashOffset = -frame * (peak ? 0.9 : 0.38) * road.trafficWeight;
-          ctx.lineWidth = peak ? 4 : 3;
+          ctx.lineWidth = peak ? 4.2 : 3.2;
           ctx.strokeStyle = peak ? `rgba(247,207,101,${0.48 + road.trafficWeight * 0.34})` : `rgba(247,207,101,${0.24 + road.trafficWeight * 0.22})`;
           ctx.stroke();
+
+          const arrow = pointAlongPath(road.points, road.flow === "in" ? 0.72 : 0.62);
+          ctx.save();
+          ctx.translate(arrow.x, arrow.y);
+          ctx.rotate(arrow.angle);
+          ctx.setLineDash([]);
+          ctx.fillStyle = road.flow === "in" ? "rgba(100,213,194,.94)" : road.flow === "out" ? "rgba(247,207,101,.96)" : "rgba(235,239,228,.84)";
+          ctx.beginPath();
+          ctx.moveTo(8, 0);
+          ctx.lineTo(-5, -4.5);
+          ctx.lineTo(-2, 0);
+          ctx.lineTo(-5, 4.5);
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
         }
-      }
+      });
       ctx.restore();
 
-      if (showTraffic) {
+      if (showTrafficEmissions && geography.aermodProfile.length) {
         ctx.save();
-        for (const point of geography.aermodPoints) {
-          const pos = project(point.lon, point.lat);
-          if (pos.x < -15 || pos.y < -15 || pos.x > width + 15 || pos.y > height + 15) continue;
-          const radius = 2.5 + Math.min(6, point.emissionRate / 5);
+        ctx.globalCompositeOperation = mapStyle === "streets" ? "multiply" : "screen";
+        geography.aermodProfile.forEach((rate, index) => {
+          const roadIndex = index % geography.roads.length;
+          const road = geography.roads[roadIndex];
+          const slots = Math.ceil((geography.aermodProfile.length - roadIndex) / geography.roads.length);
+          const slot = Math.floor(index / geography.roads.length);
+          const progress = Math.max(0.02, Math.min(0.98, (slot + 0.72 + roadIndex * 0.07) / (slots + 0.44)));
+          const pos = pointAlongPath(road.points, progress);
+          if (pos.x < -15 || pos.y < -15 || pos.x > width + 15 || pos.y > height + 15) return;
+          const { normalized, rgb } = trafficEmissionStyle(rate);
+          const pulse = peak ? 0.94 : 0.66 + Math.sin((hour / 24) * Math.PI * 2) * 0.08;
+          if (normalized > 0.68) {
+            const glow = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, 7 + normalized * 8);
+            glow.addColorStop(0, `rgba(${rgb.join(",")},${0.26 * pulse})`);
+            glow.addColorStop(1, `rgba(${rgb.join(",")},0)`);
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(pos.x, pos.y, 7 + normalized * 8, 0, Math.PI * 2);
+            ctx.fill();
+          }
           ctx.beginPath();
-          ctx.arc(pos.x, pos.y, radius, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(255,157,72,.74)";
+          ctx.arc(pos.x, pos.y, 1.3 + normalized * 3.4, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${rgb.join(",")},${(0.44 + normalized * 0.48) * pulse})`;
           ctx.fill();
-        }
+        });
         ctx.restore();
       }
 
@@ -617,8 +710,7 @@ function MapCanvas({
       ctx.font = "600 9px ui-monospace, monospace";
       ctx.textAlign = "center";
       for (const road of geography.roads) {
-        const labelPoint = road.points[Math.floor(road.points.length / 2)];
-        const pos = project(labelPoint[0], labelPoint[1]);
+        const pos = pointAlongPath(road.points, 0.46);
         if (pos.x < 60 || pos.x > width - 60 || pos.y < 20 || pos.y > height - 20) continue;
         ctx.fillStyle = mapStyle === "streets" ? "rgba(8,35,39,.82)" : "rgba(235,243,238,.72)";
         ctx.fillText(road.name, pos.x, pos.y - 7);
@@ -648,29 +740,27 @@ function MapCanvas({
       }
 
       const ranked = [...sites].sort((a, b) => emissionFor(b) - emissionFor(a));
-      const sources = ranked.slice(0, 12);
+      const sources = ranked;
       const maxEmission = Math.max(...sources.map(emissionFor), 1);
       const windAngle = ((windDirection - 90) * Math.PI) / 180;
 
       if (showPlumes) {
-        const visibleSources = [...sources.slice(0, 6)];
-        if (selectedSite && !visibleSources.some((site) => site.id === selectedSite.id)) visibleSources.push(selectedSite);
         ctx.save();
         ctx.globalCompositeOperation = "screen";
-        for (const site of visibleSources) {
+        for (const site of sources) {
           const origin = project(site.lon, site.lat);
           if (origin.x < -220 || origin.y < -220 || origin.x > width + 220 || origin.y > height + 220) continue;
-          const strength = Math.max(0.15, emissionFor(site) / maxEmission) * Math.max(0.45, Math.min(2.25, historyFactor));
-          const length = 68 + strength * 132 + windSpeed * 7;
-          const breadth = 22 + strength * 42 + Math.max(0, 3 - windSpeed) * 6;
+          const selectedBoost = selectedSite?.id === site.id ? 1.18 : 1;
+          const strength = Math.max(0.06, emissionFor(site) / maxEmission) * Math.max(0.45, Math.min(2.25, historyFactor)) * selectedBoost;
+          const length = 38 + strength * 118 + windSpeed * 5.5;
+          const breadth = 11 + strength * 34 + Math.max(0, 3 - windSpeed) * 3.2;
           ctx.save();
           ctx.translate(origin.x, origin.y);
           ctx.rotate(windAngle);
           const bands = [
-            { scale: 1, alpha: 0.10 },
-            { scale: 0.73, alpha: 0.13 },
-            { scale: 0.49, alpha: 0.18 },
-            { scale: 0.28, alpha: 0.26 },
+            { scale: 1, alpha: selectedSite?.id === site.id ? 0.16 : 0.075 },
+            { scale: 0.63, alpha: selectedSite?.id === site.id ? 0.21 : 0.11 },
+            { scale: 0.31, alpha: selectedSite?.id === site.id ? 0.30 : 0.18 },
           ];
           for (const band of bands) {
             ctx.beginPath();
@@ -686,7 +776,7 @@ function MapCanvas({
         ctx.restore();
       }
 
-      if (showPlumes && frame % 2 === 0 && particles.current.length < 320) {
+      if (showPlumes && frame % 2 === 0 && particles.current.length < 420) {
         const source = sources[Math.floor(Math.random() * sources.length)];
         particles.current.push({
           x: 0,
@@ -699,6 +789,7 @@ function MapCanvas({
         });
       }
 
+      if (!showPlumes) particles.current = [];
       particles.current = particles.current.filter((particle) => {
         particle.age += 1;
         return particle.age < particle.life;
@@ -760,6 +851,50 @@ function MapCanvas({
         hits.current.push({ site, x: pos.x, y: pos.y, r: 16 });
       }
 
+      if (showTraffic) {
+        const labelShifts: Record<number, [number, number]> = {
+          1: [15, -14],
+          2: [15, 22],
+          3: [15, -17],
+          4: [15, 23],
+        };
+        ctx.save();
+        for (const access of geography.trafficAccesses) {
+          const pos = project(access.lon, access.lat);
+          if (pos.x < -80 || pos.y < -40 || pos.x > width + 80 || pos.y > height + 40) continue;
+          const color = access.id === 3 || access.id === 4 ? "#64d5c2" : "#f7cf65";
+          ctx.beginPath();
+          ctx.arc(pos.x, pos.y, 13 + Math.sin(frame * 0.045 + access.id) * 1.4, 0, Math.PI * 2);
+          ctx.strokeStyle = `${color}77`;
+          ctx.lineWidth = 1.4;
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(pos.x, pos.y, 9, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(8,23,26,.92)";
+          ctx.fill();
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.fillStyle = "#f4efe4";
+          ctx.font = "700 9px ui-monospace, monospace";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(String(access.id), pos.x, pos.y + 0.5);
+
+          const [shiftX, shiftY] = labelShifts[access.id] ?? [14, -14];
+          const labelX = pos.x + shiftX;
+          const labelY = pos.y + shiftY;
+          ctx.font = "700 8px ui-monospace, monospace";
+          ctx.textAlign = "left";
+          const labelWidth = Math.min(156, ctx.measureText(access.shortLabel).width + 15);
+          ctx.fillStyle = "rgba(7,20,23,.86)";
+          ctx.fillRect(labelX - 5, labelY - 9, labelWidth, 17);
+          ctx.fillStyle = color;
+          ctx.fillText(access.shortLabel, labelX, labelY);
+        }
+        ctx.restore();
+      }
+
       ctx.save();
       ctx.translate(29, height - 31);
       ctx.rotate(windAngle);
@@ -801,7 +936,7 @@ function MapCanvas({
       cancelAnimationFrame(animation);
       observer.disconnect();
     };
-  }, [sites, monitoring, geography, selectedSite, selectedPollutant, hour, windSpeed, windDirection, showTraffic, showMonitoring, showPlumes, mapStyle, view, historyFactor]);
+  }, [sites, monitoring, geography, selectedSite, selectedPollutant, hour, windSpeed, windDirection, showTraffic, showTrafficEmissions, showMonitoring, showPlumes, mapStyle, view, historyFactor]);
 
   const handleClick = (event: ReactMouseEvent<HTMLCanvasElement>) => {
     if (suppressClick.current) {
@@ -907,6 +1042,7 @@ export default function Home() {
   const [windSpeed, setWindSpeed] = useState(2.4);
   const [windDirection, setWindDirection] = useState(250);
   const [showTraffic, setShowTraffic] = useState(true);
+  const [showTrafficEmissions, setShowTrafficEmissions] = useState(true);
   const [showMonitoring, setShowMonitoring] = useState(true);
   const [showPlumes, setShowPlumes] = useState(true);
   const [mapStyle, setMapStyle] = useState<keyof typeof TILE_SOURCES>("satellite");
@@ -1098,6 +1234,7 @@ export default function Home() {
                 windSpeed={windSpeed}
                 windDirection={windDirection}
                 showTraffic={showTraffic}
+                showTrafficEmissions={showTrafficEmissions}
                 showMonitoring={showMonitoring}
                 showPlumes={showPlumes}
                 mapStyle={mapStyle}
@@ -1110,6 +1247,7 @@ export default function Home() {
               <div className="map-tools" aria-label="Capas del mapa">
                 <Toggle active={showPlumes} label="Plumas" onClick={() => setShowPlumes((value) => !value)} />
                 <Toggle active={showTraffic} label="Tráfico" onClick={() => setShowTraffic((value) => !value)} />
+                <Toggle active={showTrafficEmissions} label="SO₂ tráfico" onClick={() => setShowTrafficEmissions((value) => !value)} />
                 <Toggle active={showMonitoring} label="Muestreo" onClick={() => setShowMonitoring((value) => !value)} />
               </div>
 
@@ -1120,6 +1258,25 @@ export default function Home() {
                   </button>
                 ))}
               </div>
+
+              {showTraffic ? (
+                <aside className="traffic-context-panel" aria-label="Contexto de accesos y emisiones de tráfico">
+                  <div className="traffic-context-head">
+                    <span>Red vial reconstruida</span>
+                    <strong>{data.geography.trafficAccesses.length} nodos</strong>
+                  </div>
+                  <div className="traffic-context-route"><b>Entradas</b><span>Checa / Chiquintad → Patamarca · Ricaurte → 25 de Marzo</span></div>
+                  <div className="traffic-context-route"><b>Salidas</b><span>Centro → Las Américas · Norte → Panamericana / Autopista</span></div>
+                  <div className="traffic-context-stat"><strong>{data.geography.passThroughEntryPct}%</strong><span>del tráfico de paso entra por Cornelio Vintimilla, conectado con Ricaurte.</span></div>
+                  {showTrafficEmissions ? (
+                    <div className="traffic-emission-key">
+                      <div><span>SO₂ tráfico · escala logarítmica</span><b>{compactNumber(data.geography.aermodStats.min, 2)}—{compactNumber(data.geography.aermodStats.max, 2)} g/s</b></div>
+                      <i aria-hidden="true" />
+                      <small>{data.geography.aermodStats.points} puntos AERMOD · inventario 2008–2012 · simulación, no sensor vial.</small>
+                    </div>
+                  ) : null}
+                </aside>
+              ) : null}
 
               <div className="map-navigation" aria-label="Navegación del mapa">
                 <button onClick={() => setMapView((current) => ({ ...current, zoom: Math.min(18, current.zoom + 1) }))} aria-label="Acercar">+</button>
@@ -1164,12 +1321,13 @@ export default function Home() {
               </aside>
 
               <div className="map-legend">
-                <span><i className="legend-factory" /> {data.industrial.sites.length} fuentes · 2 inventarios</span>
+                <span><i className="legend-factory" /> {data.industrial.sites.length} fuentes · todas con pluma</span>
                 <span><i className="legend-monitor" /> 10 puntos de muestreo</span>
-                <span><i className="legend-route" /> Calles + tráfico AERMOD</span>
+                <span><i className="legend-route" /> Flujo 24 h sobre calles</span>
+                <span><i className="legend-traffic-emission" /> SO₂ tráfico AERMOD</span>
               </div>
 
-              <div className="map-attribution">{TILE_SOURCES[mapStyle].attribution} · límite reconstruido de las tesis</div>
+              <div className="map-attribution">{TILE_SOURCES[mapStyle].attribution} · vías OSM · nodos reconstruidos de la guía</div>
             </div>
 
             <div className={`timeline-control ${mapTimeMode === "history" ? "is-history" : ""}`}>
