@@ -213,7 +213,7 @@ const CHEMISTRY = [
     mapPollutant: "CO",
   },
   {
-    ingredients: ["NO₂", "O₃"],
+    ingredients: ["NO", "O₃"],
     product: "Ciclo fotoquímico",
     equation: "NO + O₃ → NO₂ + O₂",
     explanation:
@@ -230,6 +230,7 @@ const INGREDIENTS = [
   { label: "O₃", group: "gas" },
   { label: "SO₂", group: "gas" },
   { label: "CO", group: "gas" },
+  { label: "NO", group: "gas" },
   { label: "PM₁", group: "partícula" },
   { label: "PM₂.₅", group: "partícula" },
   { label: "PM₁₀", group: "partícula" },
@@ -239,7 +240,29 @@ const INGREDIENTS = [
   { label: "Temperatura", group: "meteorología" },
   { label: "Radiación global", group: "meteorología" },
   { label: "Luz solar", group: "meteorología" },
-  { label: "Inversión térmica", group: "estabilidad" },
+  { label: "Inversión térmica", group: "meteorología" },
+];
+
+const POLLUTANT_NAMES: Record<string, string> = {
+  CO: "monóxido de carbono",
+  "SO₂": "dióxido de azufre",
+  "NO₂": "dióxido de nitrógeno",
+  NO: "monóxido de nitrógeno",
+  "O₃": "ozono",
+  "PM₁": "material particulado ≤ 1 µm",
+  "PM₂.₅": "material particulado fino ≤ 2,5 µm",
+  "PM₁₀": "material particulado ≤ 10 µm",
+};
+
+const SCENARIO_GROUPS = [
+  { label: "Contaminantes atmosféricos gaseosos", items: ["CO", "SO₂", "NO₂", "O₃"] },
+  { label: "Material particulado", items: ["PM₁", "PM₂.₅", "PM₁₀"] },
+];
+
+const INGREDIENT_GROUPS = [
+  { label: "Contaminantes atmosféricos gaseosos", group: "gas" },
+  { label: "Material particulado", group: "partícula" },
+  { label: "Meteorología", group: "meteorología" },
 ];
 
 const FEATURE_LABELS: Record<string, string> = {
@@ -256,6 +279,23 @@ function compactNumber(value: number, digits = 1) {
   return new Intl.NumberFormat("es-EC", {
     maximumFractionDigits: digits,
   }).format(value);
+}
+
+function trafficEmissionPosition(rate: number, min: number, max: number) {
+  const safeMin = Math.max(0.001, min);
+  const safeMax = Math.max(safeMin + 0.001, max);
+  return Math.max(0, Math.min(1, (Math.log1p(rate) - Math.log1p(safeMin)) / (Math.log1p(safeMax) - Math.log1p(safeMin))));
+}
+
+function historicalLabel(slice: HistorySlice | undefined, dimension: "annual" | "seasonal" | "monthly" | "weekly") {
+  if (!slice || dimension !== "seasonal") return slice?.label ?? "—";
+  const months: Record<string, string> = {
+    Verano: "Dic–Feb",
+    Otoño: "Mar–May",
+    Invierno: "Jun–Ago",
+    Primavera: "Sep–Nov",
+  };
+  return `${slice.label} · ${months[slice.label] ?? ""}`.trim();
 }
 
 function featureLabel(feature: string) {
@@ -343,6 +383,9 @@ function interpretMixture(ingredients: string[], fallback: Pollutant | undefined
 
   if (selected.has("NO₂") && (selected.has("Luz solar") || selected.has("Radiación global"))) {
     mechanisms.push("fotólisis de NO₂ y potencial de formación de O₃");
+  }
+  if (selected.has("NO") && selected.has("O₃")) {
+    mechanisms.push("titulación de O₃ por NO y regeneración de NO₂");
   }
   if (selected.has("SO₂") && (selected.has("Humedad") || selected.has("Precipitación"))) {
     mechanisms.push("oxidación acuosa y formación potencial de sulfato");
@@ -469,6 +512,7 @@ function MapCanvas({
   windDirection,
   showTraffic,
   showTrafficEmissions,
+  selectedTrafficEmission,
   showMonitoring,
   showPlumes,
   mapStyle,
@@ -476,6 +520,7 @@ function MapCanvas({
   historyFactor,
   onViewChange,
   onSelectSite,
+  onSelectTrafficEmission,
 }: {
   sites: IndustrialSite[];
   monitoring: GenericRow[];
@@ -487,6 +532,7 @@ function MapCanvas({
   windDirection: number;
   showTraffic: boolean;
   showTrafficEmissions: boolean;
+  selectedTrafficEmission: { index: number; rate: number } | null;
   showMonitoring: boolean;
   showPlumes: boolean;
   mapStyle: keyof typeof TILE_SOURCES;
@@ -494,10 +540,12 @@ function MapCanvas({
   historyFactor: number;
   onViewChange: (view: MapView) => void;
   onSelectSite: (site: IndustrialSite) => void;
+  onSelectTrafficEmission: (selection: { index: number; rate: number }) => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particles = useRef<Particle[]>([]);
   const hits = useRef<{ site: IndustrialSite; x: number; y: number; r: number }[]>([]);
+  const trafficHits = useRef<{ index: number; rate: number; x: number; y: number; r: number }[]>([]);
   const tiles = useRef<Map<string, HTMLImageElement>>(new Map());
   const drag = useRef<{ pointerId: number; x: number; y: number; worldX: number; worldY: number } | null>(null);
   const suppressClick = useRef(false);
@@ -586,7 +634,7 @@ function MapCanvas({
     const trafficEmissionStyle = (rate: number) => {
       const min = Math.max(0.001, geography.aermodStats.min);
       const max = Math.max(min + 0.001, geography.aermodStats.max);
-      const normalized = Math.max(0, Math.min(1, (Math.log1p(rate) - Math.log1p(min)) / (Math.log1p(max) - Math.log1p(min))));
+      const normalized = trafficEmissionPosition(rate, min, max);
       const low = [246, 239, 142];
       const middle = [255, 159, 67];
       const high = [255, 77, 87];
@@ -676,6 +724,7 @@ function MapCanvas({
       });
       ctx.restore();
 
+      trafficHits.current = [];
       if (showTrafficEmissions && geography.aermodProfile.length) {
         ctx.save();
         ctx.globalCompositeOperation = mapStyle === "streets" ? "multiply" : "screen";
@@ -702,6 +751,14 @@ function MapCanvas({
           ctx.arc(pos.x, pos.y, 1.3 + normalized * 3.4, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(${rgb.join(",")},${(0.44 + normalized * 0.48) * pulse})`;
           ctx.fill();
+          trafficHits.current.push({ index, rate, x: pos.x, y: pos.y, r: 7 });
+          if (selectedTrafficEmission?.index === index) {
+            ctx.beginPath();
+            ctx.arc(pos.x, pos.y, 8.5 + Math.sin(frame * 0.08) * 1.2, 0, Math.PI * 2);
+            ctx.strokeStyle = "rgba(255,255,255,.96)";
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+          }
         });
         ctx.restore();
       }
@@ -936,7 +993,7 @@ function MapCanvas({
       cancelAnimationFrame(animation);
       observer.disconnect();
     };
-  }, [sites, monitoring, geography, selectedSite, selectedPollutant, hour, windSpeed, windDirection, showTraffic, showTrafficEmissions, showMonitoring, showPlumes, mapStyle, view, historyFactor]);
+  }, [sites, monitoring, geography, selectedSite, selectedPollutant, hour, windSpeed, windDirection, showTraffic, showTrafficEmissions, selectedTrafficEmission, showMonitoring, showPlumes, mapStyle, view, historyFactor]);
 
   const handleClick = (event: ReactMouseEvent<HTMLCanvasElement>) => {
     if (suppressClick.current) {
@@ -946,6 +1003,14 @@ function MapCanvas({
     const rect = event.currentTarget.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
+    const trafficMatch = showTrafficEmissions ? trafficHits.current
+      .map((hit) => ({ ...hit, distance: Math.hypot(hit.x - x, hit.y - y) }))
+      .filter((hit) => hit.distance <= hit.r)
+      .sort((a, b) => a.distance - b.distance)[0] : undefined;
+    if (trafficMatch) {
+      onSelectTrafficEmission({ index: trafficMatch.index, rate: trafficMatch.rate });
+      return;
+    }
     const match = hits.current
       .map((hit) => ({ ...hit, distance: Math.hypot(hit.x - x, hit.y - y) }))
       .filter((hit) => hit.distance <= hit.r)
@@ -998,7 +1063,7 @@ function MapCanvas({
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
-      aria-label="Mapa atmosférico interactivo del Parque Industrial de Cuenca"
+      aria-label="Mapa atmosférico interactivo del Parque Industrial de Cuenca; los puntos de SO₂ de tráfico se pueden seleccionar"
     />
   );
 }
@@ -1053,6 +1118,7 @@ export default function Home() {
   const [historyB, setHistoryB] = useState("2");
   const [selectedPollutantLabel, setSelectedPollutantLabel] = useState("PM₂.₅");
   const [selectedSiteId, setSelectedSiteId] = useState<number | null>(null);
+  const [selectedTrafficEmission, setSelectedTrafficEmission] = useState<{ index: number; rate: number } | null>(null);
   const [inputs, setInputs] = useState<Record<string, number>>({});
   const [ingredients, setIngredients] = useState<string[]>(["NO₂", "Luz solar"]);
 
@@ -1123,22 +1189,20 @@ export default function Home() {
     [model, inputs, hour],
   );
   const band = riskBand(probability ?? 0);
-  const referenceProbability = useMemo(() => {
-    if (!model || !data?.recentSeries.length) return null;
-    const reference = data.recentSeries[data.recentSeries.length - 1];
-    const referenceInputs: Record<string, number> = {};
-    for (const [key, value] of Object.entries(reference)) {
-      const numeric = Number(value);
-      if ((key.startsWith("CONT_") || key.startsWith("MET_")) && Number.isFinite(numeric)) referenceInputs[key] = numeric;
-    }
-    const referenceHour = new Date(String(reference.Fecha)).getHours();
-    return predictForest(model, referenceInputs, referenceHour);
-  }, [data, model]);
-  const referenceBand = riskBand(referenceProbability ?? 0);
   const hourProfile = useMemo(
     () => data?.hourlyProfile.find((row) => Number(row.HORA) === hour),
     [data, hour],
   );
+  const referenceProbability = useMemo(() => {
+    if (!model || !hourProfile) return null;
+    const referenceInputs: Record<string, number> = {};
+    for (const [key, value] of Object.entries(hourProfile)) {
+      const numeric = Number(value);
+      if ((key.startsWith("CONT_") || key.startsWith("MET_")) && Number.isFinite(numeric)) referenceInputs[key] = numeric;
+    }
+    return predictForest(model, referenceInputs, hour);
+  }, [hour, hourProfile, model]);
+  const referenceBand = riskBand(referenceProbability ?? 0);
   const historySlices = data?.historical[historyDimension] ?? [];
   const historyPrimary = historySlices.find((slice) => slice.key === historyA) ?? historySlices[0];
   const historyComparison = historySlices.find((slice) => slice.key === historyB) ?? historySlices[1] ?? historySlices[0];
@@ -1149,6 +1213,9 @@ export default function Home() {
     ? Math.max(0.45, Math.min(2.25, historyPrimaryValue / Math.max(selectedPollutant?.median ?? 1, 0.001)))
     : 1;
   const mixResult = useMemo(() => interpretMixture(ingredients, selectedPollutant), [ingredients, selectedPollutant]);
+  const trafficMarkerPercent = selectedTrafficEmission
+    ? trafficEmissionPosition(selectedTrafficEmission.rate, data?.geography.aermodStats.min ?? 0, data?.geography.aermodStats.max ?? 1) * 100
+    : null;
 
   const toggleIngredient = useCallback((ingredient: string) => {
     setIngredients((current) => {
@@ -1235,6 +1302,7 @@ export default function Home() {
                 windDirection={windDirection}
                 showTraffic={showTraffic}
                 showTrafficEmissions={showTrafficEmissions}
+                selectedTrafficEmission={selectedTrafficEmission}
                 showMonitoring={showMonitoring}
                 showPlumes={showPlumes}
                 mapStyle={mapStyle}
@@ -1242,6 +1310,7 @@ export default function Home() {
                 historyFactor={historyFactor}
                 onViewChange={setMapView}
                 onSelectSite={(site) => setSelectedSiteId(site.id)}
+                onSelectTrafficEmission={setSelectedTrafficEmission}
               />
 
               <div className="map-tools" aria-label="Capas del mapa">
@@ -1270,9 +1339,17 @@ export default function Home() {
                   <div className="traffic-context-stat"><strong>{data.geography.passThroughEntryPct}%</strong><span>del tráfico de paso entra por Cornelio Vintimilla, conectado con Ricaurte.</span></div>
                   {showTrafficEmissions ? (
                     <div className="traffic-emission-key">
-                      <div><span>SO₂ tráfico · escala logarítmica</span><b>{compactNumber(data.geography.aermodStats.min, 2)}—{compactNumber(data.geography.aermodStats.max, 2)} g/s</b></div>
-                      <i aria-hidden="true" />
-                      <small>{data.geography.aermodStats.points} puntos AERMOD · inventario 2008–2012 · simulación, no sensor vial.</small>
+                      <div><span>SO₂ tráfico · escala logarítmica</span><b>{data.geography.aermodStats.points} puntos AERMOD</b></div>
+                      <div className="traffic-emission-bar" aria-hidden="true">
+                        {trafficMarkerPercent !== null ? <i style={{ left: `${trafficMarkerPercent}%` }} /> : null}
+                      </div>
+                      <div className="traffic-emission-ticks" aria-hidden="true">{[0, 5, 10, 15, 20, 25, 30].map((tick) => <span key={tick} style={{ left: `${trafficEmissionPosition(tick, data.geography.aermodStats.min, data.geography.aermodStats.max) * 100}%` }}>{tick}</span>)}</div>
+                      <small className="traffic-emission-unit">Tasa de emisión (g/s)</small>
+                      <strong className="traffic-emission-selection" aria-live="polite">
+                        {selectedTrafficEmission
+                          ? `Punto ${selectedTrafficEmission.index + 1} · ${compactNumber(selectedTrafficEmission.rate, 2)} g/s`
+                          : "Selecciona un punto del mapa"}
+                      </strong>
                     </div>
                   ) : null}
                 </aside>
@@ -1355,10 +1432,11 @@ export default function Home() {
                     setHistoryA(options[Math.max(0, options.length - 1)]?.key ?? "");
                     setHistoryB(options[0]?.key ?? "");
                   }}><option value="annual">Año</option><option value="seasonal">Trimestre</option><option value="monthly">Mes</option><option value="weekly">Día</option></select></label>
-                  <label>Lectura<select value={historyPrimary?.key} onChange={(event) => setHistoryA(event.target.value)}>{historySlices.map((slice) => <option key={slice.key} value={slice.key}>{slice.label}</option>)}</select></label>
+                  <label>Lectura<select value={historyPrimary?.key} onChange={(event) => setHistoryA(event.target.value)}>{historySlices.map((slice) => <option key={slice.key} value={slice.key}>{historicalLabel(slice, historyDimension)}</option>)}</select></label>
                   <span className="history-versus">vs</span>
-                  <label>Comparar<select value={historyComparison?.key} onChange={(event) => setHistoryB(event.target.value)}>{historySlices.map((slice) => <option key={slice.key} value={slice.key}>{slice.label}</option>)}</select></label>
-                  <div className="history-result"><strong>{compactNumber(historyPrimaryValue, selectedPollutant.label === "CO" ? 2 : 1)} {selectedPollutant.unit}</strong><span>{historyDelta >= 0 ? "+" : ""}{compactNumber(historyDelta, 0)}% frente a {historyComparison?.label}</span></div>
+                  <label>Comparar<select value={historyComparison?.key} onChange={(event) => setHistoryB(event.target.value)}>{historySlices.map((slice) => <option key={slice.key} value={slice.key}>{historicalLabel(slice, historyDimension)}</option>)}</select></label>
+                  <div className="history-result"><strong>{compactNumber(historyPrimaryValue, selectedPollutant.label === "CO" ? 2 : 1)} {selectedPollutant.unit}</strong><span>{historyDelta >= 0 ? "+" : ""}{compactNumber(historyDelta, 0)}% frente a {historicalLabel(historyComparison, historyDimension)}</span></div>
+                  {historyDimension === "seasonal" ? <p className="seasonal-context">Cuenca está en el hemisferio sur. Las estaciones afectan la dispersión de contaminantes y la actividad industrial.</p> : null}
                 </div>
               )}
               <div className="weather-sliders">
@@ -1381,9 +1459,9 @@ export default function Home() {
               <div className="gauge-block is-reference">
                 <span className="gauge-caption">Estado actual histórico</span>
                 <div className="risk-gauge" style={{ "--risk": `${Math.round((referenceProbability ?? 0) * 360)}deg`, "--risk-color": referenceBand.color } as React.CSSProperties}>
-                  <div><small>fijo</small><strong>{referenceProbability === null ? "—" : `${Math.round(referenceProbability * 100)}%`}</strong><span>{referenceBand.label}</span></div>
+                  <div><small>mediana</small><strong>{referenceProbability === null ? "—" : `${Math.round(referenceProbability * 100)}%`}</strong><span>{referenceBand.label}</span></div>
                 </div>
-                <small>Corte {data.meta.periodEnd}</small>
+                <small>2022–2026 · {String(hour).padStart(2, "0")}:00</small>
               </div>
               <div className="gauge-arrow">→</div>
               <div className="gauge-block">
@@ -1394,7 +1472,7 @@ export default function Home() {
                 <small>Interactivo</small>
               </div>
             </div>
-            <p className="risk-note"><i style={{ background: band.color }} />{band.note}</p>
+            <p className="risk-note"><i style={{ background: band.color }} />{band.note}<span> Referencia histórica: mediana de cada hora entre 2022 y 2026.</span></p>
 
             <div className="scenario-inputs">
               <div className="scenario-title"><span>Escenario atmosférico</span><button onClick={() => {
@@ -1403,19 +1481,29 @@ export default function Home() {
                 defaults.MET_TEMP = 15.4; defaults.MET_HUM = 69.4; defaults.MET_PRES = 75645;
                 setInputs(defaults);
               }}>Restablecer</button></div>
-              {data.pollutants.map((pollutant) => (
-                <label key={pollutant.feature}>
-                  <span>{pollutant.label}<b>{compactNumber(inputs[pollutant.feature] ?? pollutant.median, pollutant.label === "CO" ? 2 : 1)} {pollutant.unit}</b></span>
-                  <input
-                    type="range"
-                    min={pollutant.min}
-                    max={pollutant.max}
-                    step={(pollutant.max - pollutant.min) / 100}
-                    value={inputs[pollutant.feature] ?? pollutant.median}
-                    onChange={(event) => setInputs((current) => ({ ...current, [pollutant.feature]: Number(event.target.value) }))}
-                    style={{ "--range-color": pollutant.color } as React.CSSProperties}
-                  />
-                </label>
+              {SCENARIO_GROUPS.map((group) => (
+                <details className="scenario-group" key={group.label} open>
+                  <summary><span>{group.label}</span><small>{group.items.length}</small></summary>
+                  <div className="scenario-group-controls">
+                    {group.items.map((label) => data.pollutants.find((pollutant) => pollutant.label === label)).filter((pollutant): pollutant is Pollutant => Boolean(pollutant)).map((pollutant) => (
+                      <label key={pollutant.feature}>
+                        <span><strong>{pollutant.label} — {POLLUTANT_NAMES[pollutant.label]}</strong><b>{compactNumber(inputs[pollutant.feature] ?? pollutant.median, pollutant.label === "CO" ? 2 : 1)} {pollutant.unit}</b></span>
+                        <input
+                          type="range"
+                          min={pollutant.min}
+                          max={pollutant.max}
+                          step={(pollutant.max - pollutant.min) / 100}
+                          value={inputs[pollutant.feature] ?? pollutant.median}
+                          onChange={(event) => setInputs((current) => ({ ...current, [pollutant.feature]: Number(event.target.value) }))}
+                          style={{ "--range-color": pollutant.color } as React.CSSProperties}
+                        />
+                      </label>
+                    ))}
+                    {group.label.startsWith("Contaminantes") ? (
+                      <div className="scenario-unmodeled"><strong>NO — monóxido de nitrógeno</strong><small>Contexto químico; no existe una serie independiente para controlarlo en este modelo RF.</small></div>
+                    ) : null}
+                  </div>
+                </details>
               ))}
               <div className="weather-input-grid">
                 <label><span>Temperatura<b>{compactNumber(inputs.MET_TEMP ?? 15.4)} °C</b></span><input type="range" min="4" max="29" step="0.1" value={inputs.MET_TEMP ?? 15.4} onChange={(event) => setInputs((current) => ({ ...current, MET_TEMP: Number(event.target.value) }))} /></label>
@@ -1448,10 +1536,17 @@ export default function Home() {
           <div className="ingredient-bank">
             <div className="module-head"><span>Variables disponibles</span><small>sin límite artificial</small></div>
             <div className="ingredient-list">
-              {INGREDIENTS.map((ingredient) => (
-                <button key={ingredient.label} className={ingredients.includes(ingredient.label) ? "is-selected" : ""} onClick={() => toggleIngredient(ingredient.label)}>
-                  <i /><span className="ingredient-name">{ingredient.label}<small>{ingredient.group}</small></span><span>{ingredients.includes(ingredient.label) ? "−" : "+"}</span>
-                </button>
+              {INGREDIENT_GROUPS.map((section) => (
+                <details className="ingredient-group" key={section.label} open>
+                  <summary><span>{section.label}</span><small>{INGREDIENTS.filter((ingredient) => ingredient.group === section.group).length}</small></summary>
+                  <div>
+                    {INGREDIENTS.filter((ingredient) => ingredient.group === section.group).map((ingredient) => (
+                      <button key={ingredient.label} className={ingredients.includes(ingredient.label) ? "is-selected" : ""} onClick={() => toggleIngredient(ingredient.label)}>
+                        <i /><span className="ingredient-name"><strong>{ingredient.label}{POLLUTANT_NAMES[ingredient.label] ? ` — ${POLLUTANT_NAMES[ingredient.label]}` : ""}</strong></span><span>{ingredients.includes(ingredient.label) ? "−" : "+"}</span>
+                      </button>
+                    ))}
+                  </div>
+                </details>
               ))}
             </div>
             <div className="lab-note"><span>Regla del laboratorio</span><p>Las reacciones son explicaciones causales simplificadas; el modelo de alerta y la química visual son capas distintas.</p></div>
