@@ -168,6 +168,7 @@ type Particle = {
 };
 
 type AcademicReferenceId = "who2021" | "parra2022" | "hu2022" | "mainka2022" | "vilcassim2023";
+type MixtureReportKind = "science" | "origin" | "impact";
 
 type HealthProfile = {
   category: "Contaminante atmosférico gaseoso" | "Material particulado" | "Variable meteorológica";
@@ -674,6 +675,132 @@ function AcademicReferenceList({ ids }: { ids: AcademicReferenceId[] }) {
         })}
       </ol>
     </div>
+  );
+}
+
+function MixtureReportPage({
+  kind,
+  ingredients,
+  mixResult,
+  healthResult,
+  onClose,
+}: {
+  kind: MixtureReportKind;
+  ingredients: string[];
+  mixResult: ReturnType<typeof interpretMixture>;
+  healthResult: ReturnType<typeof interpretHealthEvidence>;
+  onClose: () => void;
+}) {
+  const titles: Record<MixtureReportKind, string> = {
+    science: "Explicación científica completa",
+    origin: "Origen local y efecto en salud",
+    impact: "Impacto integrado de la mezcla",
+  };
+  const subtitles: Record<MixtureReportKind, string> = {
+    science: "Interpretación físico-química del escenario seleccionado",
+    origin: "Informe variable por variable para el entorno industrial de Cuenca",
+    impact: "Lectura sanitaria conjunta y límites de interpretación",
+  };
+
+  return (
+    <section className="mixture-report-page" role="dialog" aria-modal="true" aria-labelledby="mixture-report-title">
+      <header className="report-toolbar">
+        <button type="button" onClick={onClose} autoFocus><span>←</span> Volver a Mezcla de variables</button>
+        <div><b>Aire Cuenca</b><span>Informe técnico del laboratorio</span></div>
+      </header>
+      <div className="report-scroll">
+        <article className="report-sheet">
+          <header className="report-title-block">
+            <p>Laboratorio químico visual · Informe {kind === "science" ? "01" : kind === "origin" ? "02" : "03"}</p>
+            <h1 id="mixture-report-title">{titles[kind]}</h1>
+            <h2>{subtitles[kind]}</h2>
+            <div className="report-context">
+              <span><b>Resultado conceptual</b>{mixResult.product}</span>
+              <span><b>Variables seleccionadas</b>{ingredients.length || "Ninguna"}</span>
+              <span><b>Alcance</b>Interpretación educativa</span>
+            </div>
+          </header>
+
+          {kind === "science" ? (
+            <div className="report-body">
+              <section>
+                <p className="report-section-label">01 · Lectura principal</p>
+                <h3>{mixResult.product}</h3>
+                <p className="report-lead">{mixResult.explanation}</p>
+                <code className="report-equation">{mixResult.equation}</code>
+              </section>
+              <section>
+                <p className="report-section-label">02 · Desarrollo científico</p>
+                <h3>Qué ocurre en el sistema atmosférico</h3>
+                <p>{mixResult.detail}</p>
+              </section>
+              <section>
+                <p className="report-section-label">03 · Procesos reconocidos</p>
+                <h3>Mecanismos activados por la selección</h3>
+                <ol className="report-numbered-list">
+                  {mixResult.mechanisms.map((mechanism, index) => <li key={mechanism}><span>{String(index + 1).padStart(2, "0")}</span><p>{mechanism}</p></li>)}
+                </ol>
+              </section>
+              <aside className="report-notice">
+                <b>Límite de esta explicación</b>
+                <p>Esta lectura describe relaciones causales plausibles. No sustituye una corrida cinética, termodinámica o de dispersión validada, ni calcula concentraciones finales sin datos de entrada suficientes.</p>
+              </aside>
+            </div>
+          ) : null}
+
+          {kind === "origin" ? (
+            <div className="report-body">
+              <section>
+                <p className="report-section-label">Criterio de lectura</p>
+                <p className="report-lead">Cada variable se presenta por separado y en el orden elegido. “Origen local” identifica fuentes plausibles para el Parque Industrial y su entorno; no atribuye una emisión a una instalación concreta sin medición e inventario.</p>
+              </section>
+              {healthResult.profiles.length ? (
+                <div className="report-variable-list">
+                  {healthResult.profiles.map(({ ingredient, profile }, index) => (
+                    <section key={ingredient} className="report-variable-card">
+                      <header><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{ingredient}</h3><p>{profile.category}</p></div></header>
+                      <div className="report-finding"><h4>{profile.category === "Variable meteorológica" ? "Naturaleza de la variable" : "Origen probable en el contexto local"}</h4><p>{profile.origin}</p></div>
+                      <div className="report-finding"><h4>Papel atmosférico</h4><p>{profile.role}</p></div>
+                      <div className="report-finding"><h4>Efecto en salud</h4><p>{profile.health}</p></div>
+                      <p className="report-inline-citations">{profile.references.map((id) => <a key={id} href={ACADEMIC_REFERENCES[id].url} target="_blank" rel="noreferrer">{ACADEMIC_REFERENCES[id].short}</a>)}</p>
+                    </section>
+                  ))}
+                </div>
+              ) : <p className="report-empty">No hay variables seleccionadas. Vuelve al laboratorio y añade al menos una para generar el informe.</p>}
+              <AcademicReferenceList ids={healthResult.referenceIds} />
+            </div>
+          ) : null}
+
+          {kind === "impact" ? (
+            <div className="report-body">
+              {ingredients.length ? <div className="report-tags">{ingredients.map((ingredient) => <span key={ingredient}>{ingredient}</span>)}</div> : null}
+              <section>
+                <p className="report-section-label">01 · Síntesis de la selección</p>
+                <h3>Cómo interpretar la exposición conjunta</h3>
+                <p className="report-lead">{healthResult.summary}</p>
+              </section>
+              <section>
+                <p className="report-section-label">02 · Salud</p>
+                <h3>Vías y sistemas compartidos</h3>
+                <ul className="report-bullet-list">{healthResult.pathways.map((pathway) => <li key={pathway}>{pathway}</li>)}</ul>
+              </section>
+              <section>
+                <p className="report-section-label">03 · Atmósfera</p>
+                <h3>Modulación meteorológica</h3>
+                <p>{healthResult.meteorologyNote}</p>
+              </section>
+              <aside className="report-notice warning">
+                <b>Límite científico</b>
+                <p>{healthResult.limitation}</p>
+              </aside>
+              <AcademicReferenceList ids={healthResult.referenceIds} />
+            </div>
+          ) : null}
+
+          <footer className="report-footer"><span>Aire Cuenca · Laboratorio atmosférico</span><button type="button" onClick={onClose}>Cerrar informe y volver</button></footer>
+        </article>
+      </div>
+    </section>
   );
 }
 
@@ -1352,6 +1479,7 @@ export default function Home() {
   const [selectedTrafficEmission, setSelectedTrafficEmission] = useState<{ index: number; rate: number } | null>(null);
   const [inputs, setInputs] = useState<Record<string, number>>({});
   const [ingredients, setIngredients] = useState<string[]>(["NO₂", "Luz solar"]);
+  const [activeMixtureReport, setActiveMixtureReport] = useState<MixtureReportKind | null>(null);
 
   useEffect(() => {
     fetch("/app-data.json")
@@ -1406,6 +1534,20 @@ export default function Home() {
     const timer = window.setInterval(() => setHour((value) => (value + 1) % 24), 1150);
     return () => window.clearInterval(timer);
   }, [playing]);
+
+  useEffect(() => {
+    if (!activeMixtureReport) return;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActiveMixtureReport(null);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [activeMixtureReport]);
 
   const selectedPollutant = useMemo(
     () => data?.pollutants.find((item) => item.label === selectedPollutantLabel) ?? data?.pollutants[0],
@@ -1807,52 +1949,11 @@ export default function Home() {
               <div><span>Permanencia</span><b>{windSpeed < 1.5 ? "alta" : "moderada"}</b></div>
               <div><span>Hora</span><b>{String(hour).padStart(2, "0")}:00</b></div>
             </div>
-            <details className="reaction-detail">
-              <summary>Explicación científica completa <span>＋</span></summary>
-              <div>
-                <p>{mixResult.detail}</p>
-                <strong>Mecanismos activados</strong>
-                <ul>{mixResult.mechanisms.map((mechanism) => <li key={mechanism}>{mechanism}</li>)}</ul>
-                <small>Lectura conceptual: no sustituye una corrida cinética, termodinámica o de dispersión validada.</small>
-              </div>
-            </details>
-            <details className="reaction-detail evidence-detail">
-              <summary>Origen local y efecto en salud <span>＋</span></summary>
-              <div>
-                <p className="evidence-intro">Lectura variable por variable, en el orden de selección. “Origen local” indica fuentes plausibles para el entorno industrial de Cuenca; no atribuye emisiones a una instalación sin medición.</p>
-                {healthResult.profiles.length ? (
-                  <div className="origin-health-list">
-                    {healthResult.profiles.map(({ ingredient, profile }) => (
-                      <article key={ingredient}>
-                        <header><b>{ingredient}</b><span>{profile.category}</span></header>
-                        <dl>
-                          <div><dt>{profile.category === "Variable meteorológica" ? "Naturaleza" : "Origen probable"}</dt><dd>{profile.origin}</dd></div>
-                          <div><dt>Papel atmosférico</dt><dd>{profile.role}</dd></div>
-                          <div><dt>Efecto en salud</dt><dd>{profile.health}</dd></div>
-                        </dl>
-                        <p className="inline-citations">
-                          {profile.references.map((id) => <a key={id} href={ACADEMIC_REFERENCES[id].url} target="_blank" rel="noreferrer">{ACADEMIC_REFERENCES[id].short}</a>)}
-                        </p>
-                      </article>
-                    ))}
-                  </div>
-                ) : <p className="empty-evidence">Añade cualquiera de las 15 variables para generar su explicación individual.</p>}
-                <AcademicReferenceList ids={healthResult.referenceIds} />
-              </div>
-            </details>
-            <details className="reaction-detail evidence-detail mixture-health-detail">
-              <summary>Impacto integrado de la mezcla <span>＋</span></summary>
-              <div>
-                {ingredients.length ? <div className="evidence-tags">{ingredients.map((ingredient) => <span key={ingredient}>{ingredient}</span>)}</div> : null}
-                <p className="mixture-summary">{healthResult.summary}</p>
-                <strong>Vías y sistemas compartidos</strong>
-                <ul className="health-pathways">{healthResult.pathways.map((pathway) => <li key={pathway}>{pathway}</li>)}</ul>
-                <strong>Modulación meteorológica</strong>
-                <p>{healthResult.meteorologyNote}</p>
-                <aside className="evidence-caution"><b>Límite científico</b><p>{healthResult.limitation}</p></aside>
-                <AcademicReferenceList ids={healthResult.referenceIds} />
-              </div>
-            </details>
+            <div className="report-links" aria-label="Informes de la mezcla">
+              <button type="button" onClick={() => setActiveMixtureReport("science")}><span><small>Informe 01</small><b>Explicación científica completa</b></span><i aria-hidden="true">→</i></button>
+              <button type="button" onClick={() => setActiveMixtureReport("origin")}><span><small>Informe 02</small><b>Origen local y efecto en salud</b></span><i aria-hidden="true">→</i></button>
+              <button type="button" onClick={() => setActiveMixtureReport("impact")}><span><small>Informe 03</small><b>Impacto integrado de la mezcla</b></span><i aria-hidden="true">→</i></button>
+            </div>
             <button className="primary-action" onClick={() => {
               setSelectedPollutantLabel(mixResult.mapPollutant);
               document.getElementById("laboratorio")?.scrollIntoView({ behavior: "smooth" });
@@ -1998,6 +2099,7 @@ export default function Home() {
         <p>Simulación educativa y analítica. No sustituye una alerta oficial de calidad del aire.</p>
         <a href="#laboratorio">Volver al mapa ↑</a>
       </footer>
+      {activeMixtureReport ? <MixtureReportPage kind={activeMixtureReport} ingredients={ingredients} mixResult={mixResult} healthResult={healthResult} onClose={() => setActiveMixtureReport(null)} /> : null}
     </main>
   );
 }
