@@ -1,0 +1,110 @@
+[
+  {
+    "source_id": "01_oms_2021_guias_aire",
+    "variables": "PM2.5|PM10|O3|NO2|SO2|CO",
+    "dimension": "salud",
+    "finding": "La evidencia sanitaria sustenta guías para PM2.5, PM10, O3, NO2, SO2 y CO; la exposición debe interpretarse según concentración, duración y población susceptible.",
+    "location": "Resumen ejecutivo y capítulos de contaminantes",
+    "cita_apa": "World Health Organization. (2021). WHO global air quality guidelines: Particulate matter (PM2.5 and PM10), ozone, nitrogen dioxide, sulfur dioxide and carbon monoxide. https://iris.who.int/handle/10665/345329",
+    "url": "https://www.who.int/publications/i/item/9789240034228"
+  },
+  {
+    "source_id": "01_oms_2021_guias_aire",
+    "variables": "PM2.5|PM10",
+    "dimension": "salud",
+    "finding": "El material particulado se asocia con efectos respiratorios y cardiovasculares; el tamaño aerodinámico modifica la penetración y deposición en el aparato respiratorio.",
+    "location": "Capítulo de material particulado",
+    "cita_apa": "World Health Organization. (2021). WHO global air quality guidelines: Particulate matter (PM2.5 and PM10), ozone, nitrogen dioxide, sulfur dioxide and carbon monoxide. https://iris.who.int/handle/10665/345329",
+    "url": "https://www.who.int/publications/i/item/9789240034228"
+  },
+  {
+    "source_id": "01_oms_2021_guias_aire",
+    "variables": "O3|NO2|SO2|CO",
+    "dimension": "salud",
+    "finding": "Los gases regulados tienen perfiles sanitarios distintos; no deben agruparse como si toxicidad, estado gaseoso y condición de contaminante fueran sinónimos.",
+    "location": "Capítulos de contaminantes gaseosos",
+    "cita_apa": "World Health Organization. (2021). WHO global air quality guidelines: Particulate matter (PM2.5 and PM10), ozone, nitrogen dioxide, sulfur dioxide and carbon monoxide. https://iris.who.int/handle/10665/345329",
+    "url": "https://www.who.int/publications/i/item/9789240034228"
+  },
+  {
+    "source_id": "02_parra_2022_cuenca_pm25",
+    "variables": "PM2.5",
+    "dimension": "origen_local",
+    "finding": "En Cuenca, el tránsito diésel, las fuentes industriales del noreste y otras combustiones locales son antecedentes plausibles de PM2.5 primario; la atribución puntual requiere inventario y medición.",
+    "location": "Introduction; Study area and emissions",
+    "cita_apa": "Parra, R., Saud, C., & Espinoza, C. (2022). Simulating PM2.5 concentrations during New Year in Cuenca, Ecuador: Effects of advancing the time of burning activities. Toxics, 10(5), 264. https://doi.org/10.3390/toxics10050264",
+    "url": "https://doi.org/10.3390/toxics10050264"
+  },
+  {
+    "source_id": "02_parra_2022_cuenca_pm25",
+    "variables": "Temperatura|Radiación global|Luz solar|Inversión térmica",
+    "dimension": "meteorologia",
+    "finding": "La estabilidad, la inversión y una capa de mezcla somera favorecen la acumulación; el calentamiento y la convección diurna pueden mejorar la dispersión.",
+    "location": "Results and discussion: meteorology and PBL",
+    "cita_apa": "Parra, R., Saud, C., & Espinoza, C. (2022). Simulating PM2.5 concentrations during New Year in Cuenca, Ecuador: Effects of advancing the time of burning activities. Toxics, 10(5), 264. https://doi.org/10.3390/toxics10050264",
+    "url": "https://doi.org/10.3390/toxics10050264"
+  },
+  {
+    "source_id": "02_parra_2022_cuenca_pm25",
+    "variables": "PM1|PM2.5",
+    "dimension": "origen_local",
+    "finding": "La red local descrita mide fracciones finas, lo que permite contextualizar PM1 y PM2.5 sin asumir que una fracción equivale químicamente a la otra.",
+    "location": "Study area and monitoring network",
+    "cita_apa": "Parra, R., Saud, C., & Espinoza, C. (2022). Simulating PM2.5 concentrations during New Year in Cuenca, Ecuador: Effects of advancing the time of burning activities. Toxics, 10(5), 264. https://doi.org/10.3390/toxics10050264",
+    "url": "https://doi.org/10.3390/toxics10050264"
+  },
+  {
+    "source_id": "03_hu_2022_pm1_salud",
+    "variables": "PM1",
+    "dimension": "salud",
+    "finding": "PM1 puede alcanzar regiones profundas del tracto respiratorio; el metaanálisis encontró asociaciones con algunos desenlaces respiratorios, con resultados no uniformes entre desenlaces.",
+    "location": "Abstract; Results; Discussion",
+    "cita_apa": "Hu, Y., Wu, M., Li, Y., & Liu, X. (2022). Influence of PM1 exposure on total and cause-specific respiratory diseases: A systematic review and meta-analysis. Environmental Science and Pollution Research, 29, 15117–15126. https://doi.org/10.1007/s11356-021-16536-0",
+    "url": "https://doi.org/10.1007/s11356-021-16536-0"
+  },
+  {
+    "source_id": "03_hu_2022_pm1_salud",
+    "variables": "PM1",
+    "dimension": "limitacion",
+    "finding": "La base epidemiológica para PM1 sigue siendo pequeña y heterogénea, con sesgo de publicación señalado; no corresponde describirla como una estimación universal o determinista.",
+    "location": "Publication bias; Limitations; Conclusion",
+    "cita_apa": "Hu, Y., Wu, M., Li, Y., & Liu, X. (2022). Influence of PM1 exposure on total and cause-specific respiratory diseases: A systematic review and meta-analysis. Environmental Science and Pollution Research, 29, 15117–15126. https://doi.org/10.1007/s11356-021-16536-0",
+    "url": "https://doi.org/10.1007/s11356-021-16536-0"
+  },
+  {
+    "source_id": "04_mainka_zak_2022_mezclas",
+    "variables": "NO2|PM2.5",
+    "dimension": "mezcla",
+    "finding": "La coexposición a NO2 y PM2.5 no produce una única respuesta universal: según desenlace y diseño, las interacciones reportadas pueden ser sinérgicas, antagónicas o no concluyentes.",
+    "location": "Results and conclusions",
+    "cita_apa": "Mainka, A., & Żak, M. (2022). Synergistic or antagonistic health effects of long- and short-term exposure to ambient NO2 and PM2.5: A review. International Journal of Environmental Research and Public Health, 19(21), 14079. https://doi.org/10.3390/ijerph192114079",
+    "url": "https://doi.org/10.3390/ijerph192114079"
+  },
+  {
+    "source_id": "04_mainka_zak_2022_mezclas",
+    "variables": "NO2|PM2.5",
+    "dimension": "limitacion",
+    "finding": "Los modelos de un solo contaminante no describen por completo una atmósfera multipolutante; tampoco es válido sumar riesgos individuales sin un modelo de interacción y exposición.",
+    "location": "Introduction; Discussion",
+    "cita_apa": "Mainka, A., & Żak, M. (2022). Synergistic or antagonistic health effects of long- and short-term exposure to ambient NO2 and PM2.5: A review. International Journal of Environmental Research and Public Health, 19(21), 14079. https://doi.org/10.3390/ijerph192114079",
+    "url": "https://doi.org/10.3390/ijerph192114079"
+  },
+  {
+    "source_id": "05_vilcassim_thurston_2023_brechas",
+    "variables": "Todos",
+    "dimension": "limitacion",
+    "finding": "La composición, la fuente, la escala espacial, el tiempo y la susceptibilidad condicionan los efectos; la evaluación multipolutante conserva brechas metodológicas importantes.",
+    "location": "Research gaps and future directions",
+    "cita_apa": "Vilcassim, R., & Thurston, G. D. (2023). Gaps and future directions in research on health effects of air pollution. eBioMedicine, 93, 104668. https://doi.org/10.1016/j.ebiom.2023.104668",
+    "url": "https://doi.org/10.1016/j.ebiom.2023.104668"
+  },
+  {
+    "source_id": "05_vilcassim_thurston_2023_brechas",
+    "variables": "PM1|PM2.5|PM10",
+    "dimension": "salud",
+    "finding": "El tamaño, la composición y el origen de las partículas importan para la toxicidad y la exposición; una etiqueta de tamaño no identifica por sí sola la mezcla química.",
+    "location": "Particulate matter research gaps",
+    "cita_apa": "Vilcassim, R., & Thurston, G. D. (2023). Gaps and future directions in research on health effects of air pollution. eBioMedicine, 93, 104668. https://doi.org/10.1016/j.ebiom.2023.104668",
+    "url": "https://doi.org/10.1016/j.ebiom.2023.104668"
+  }
+]

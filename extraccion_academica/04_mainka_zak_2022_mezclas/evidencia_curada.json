@@ -1,0 +1,20 @@
+[
+  {
+    "source_id": "04_mainka_zak_2022_mezclas",
+    "variables": "NO2|PM2.5",
+    "dimension": "mezcla",
+    "finding": "La coexposición a NO2 y PM2.5 no produce una única respuesta universal: según desenlace y diseño, las interacciones reportadas pueden ser sinérgicas, antagónicas o no concluyentes.",
+    "location": "Results and conclusions",
+    "cita_apa": "Mainka, A., & Żak, M. (2022). Synergistic or antagonistic health effects of long- and short-term exposure to ambient NO2 and PM2.5: A review. International Journal of Environmental Research and Public Health, 19(21), 14079. https://doi.org/10.3390/ijerph192114079",
+    "url": "https://doi.org/10.3390/ijerph192114079"
+  },
+  {
+    "source_id": "04_mainka_zak_2022_mezclas",
+    "variables": "NO2|PM2.5",
+    "dimension": "limitacion",
+    "finding": "Los modelos de un solo contaminante no describen por completo una atmósfera multipolutante; tampoco es válido sumar riesgos individuales sin un modelo de interacción y exposición.",
+    "location": "Introduction; Discussion",
+    "cita_apa": "Mainka, A., & Żak, M. (2022). Synergistic or antagonistic health effects of long- and short-term exposure to ambient NO2 and PM2.5: A review. International Journal of Environmental Research and Public Health, 19(21), 14079. https://doi.org/10.3390/ijerph192114079",
+    "url": "https://doi.org/10.3390/ijerph192114079"
+  }
+]

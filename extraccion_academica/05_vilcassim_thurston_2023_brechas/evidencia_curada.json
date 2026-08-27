@@ -1,0 +1,20 @@
+[
+  {
+    "source_id": "05_vilcassim_thurston_2023_brechas",
+    "variables": "Todos",
+    "dimension": "limitacion",
+    "finding": "La composición, la fuente, la escala espacial, el tiempo y la susceptibilidad condicionan los efectos; la evaluación multipolutante conserva brechas metodológicas importantes.",
+    "location": "Research gaps and future directions",
+    "cita_apa": "Vilcassim, R., & Thurston, G. D. (2023). Gaps and future directions in research on health effects of air pollution. eBioMedicine, 93, 104668. https://doi.org/10.1016/j.ebiom.2023.104668",
+    "url": "https://doi.org/10.1016/j.ebiom.2023.104668"
+  },
+  {
+    "source_id": "05_vilcassim_thurston_2023_brechas",
+    "variables": "PM1|PM2.5|PM10",
+    "dimension": "salud",
+    "finding": "El tamaño, la composición y el origen de las partículas importan para la toxicidad y la exposición; una etiqueta de tamaño no identifica por sí sola la mezcla química.",
+    "location": "Particulate matter research gaps",
+    "cita_apa": "Vilcassim, R., & Thurston, G. D. (2023). Gaps and future directions in research on health effects of air pollution. eBioMedicine, 93, 104668. https://doi.org/10.1016/j.ebiom.2023.104668",
+    "url": "https://doi.org/10.1016/j.ebiom.2023.104668"
+  }
+]

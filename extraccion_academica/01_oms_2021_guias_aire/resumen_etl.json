@@ -1,0 +1,39 @@
+{
+  "source_id": "01_oms_2021_guias_aire",
+  "pdf": "fuentes_academicas/01_oms_2021_guias_aire/OMS_2021_AQG_resumen.pdf",
+  "sha256": "32f3bf1470e20803decb63ab1ee5babf289b4182bc8af94d62b7a5b998642353",
+  "pages": 300,
+  "characters_raw": 5109654,
+  "characters_clean": 5109641,
+  "evidence_records": 3,
+  "term_profile": [
+    {
+      "termino": "PM2.5",
+      "apariciones": 0
+    },
+    {
+      "termino": "PM10",
+      "apariciones": 0
+    },
+    {
+      "termino": "ozone",
+      "apariciones": 0
+    },
+    {
+      "termino": "nitrogen dioxide",
+      "apariciones": 0
+    },
+    {
+      "termino": "sulfur dioxide",
+      "apariciones": 0
+    },
+    {
+      "termino": "carbon monoxide",
+      "apariciones": 0
+    },
+    {
+      "termino": "health",
+      "apariciones": 0
+    }
+  ]
+}

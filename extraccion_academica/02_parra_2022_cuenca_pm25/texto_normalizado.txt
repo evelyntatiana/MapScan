@@ -1,0 +1,921 @@
+Citation: Parra, R.; Saud, C.;
+Espinoza, C. Simulating PM2.5
+Concentrations during New Year in
+Cuenca, Ecuador: Effects of
+Advancing the Time of Burning
+Activities. T oxics2022, 10, 264.
+https://doi.org/10.3390/toxics10050264
+Academic Editors: Matthias Karl and
+Yuan Cheng
+Received: 30 March 2022
+Accepted: 17 May 2022
+Published: 19 May 2022
+Publisher’s Note: MDPI stays neutral
+with regard to jurisdictional claims in
+published maps and institutional afﬁliations.
+Copyright: © 2022 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed under the terms and
+conditions of the Creative Commons
+Attribution (CC BY) license (https://
+creativecommons.org/licenses/by/
+4.0/).
+toxics
+Article
+Simulating PM2.5 Concentrations during New Year in Cuenca,
+Ecuador: Effects of Advancing the Time of Burning Activities
+René Parra 1,*
+ , Claudia Saud 1 and Claudia Espinoza 2
+1 Instituto de Simulación Computacional (ISC-USFQ), Colegio de Ciencias e Ingenierías,
+Universidad San Francisco de Quito USFQ, Quito 170901, Ecuador; csaud@usfq.edu.ec
+2 Red de Monitoreo de Calidad del Aire de Cuenca, Empresa Pública de Movilidad,
+Tránsito y Transporte de Cuenca, EMOV EP , Cuenca 010206, Ecuador; cespinoza@emov.gob.ec
+* Correspondence: rrparra@usfq.edu.ec
+Abstract: Fine particulate matter (PM2.5) is dangerous to human health. At midnight on 31 December,
+in Ecuadorian cities, people burn puppets and ﬁreworks, emitting high amounts of PM 2.5. On
+1 January 2022, concentrations between 27.3 and 40.6 µg m−3 (maximum mean over 24 h) were
+measured in Cuenca, an Andean city located in southern Ecuador; these are higher than 15 µg m−3,
+the current World Health Organization guideline. We estimated the corresponding PM2.5 emissions
+and used them as an input to the Weather Research and Forecasting with Chemistry (WRF-Chem 3.2)
+model to simulate the change in PM2.5 concentrations, assuming these emissions started at 18:00 LT
+or 21:00 LT on 31 December 2021. On average, PM2.5 concentrations decreased by 51.4% and 33.2%.
+Similar modeling exercises were completed for 2016 to 2021, providing mean decreases between
+21.4% and 61.0% if emissions started at 18:00 LT. Lower mean reductions, between 2.3% and 40.7%,
+or even local increases, were computed for emissions beginning at 21:00 LT. Reductions occurred
+through better atmospheric conditions to disperse PM 2.5 compared to midnight. Advancing the
+burning time can help reduce the health effects of PM2.5 emissions on 31 December.
+Keywords: WRF-Chem; air quality modeling; ﬁne particles; planetary boundary layer;
+atmospheric stability
+1. Introduction
+Fireworks to welcome in the new year are customary across different parts of the
+world [1,2]. Around midnight on 31 December in Ecuador, it is also a tradition to burn the
+“años viejos”, cloth dolls ﬁlled with sawdust or paper. Both the ﬁreworks and the burning
+of puppets take place in a festive environment amid social and family connections [ 3].
+The use of ﬁreworks results in raising short-term particulate matter concentrations [ 4],
+which affects public health and visibility [ 5], reaching levels that typically exceed both
+national regulations and the guidelines of the World Health Organization (WHO). Most of
+the particles aerosolized by burning ﬁreworks consist of metals and compounds in colorful
+ﬁrework displays [2].
+PM2.5 produces health effects after both short-term and long-term exposure. The WHO
+guideline does not guarantee complete protection against PM2.5 effects [6], requiring the
+lowest concentrations to be achieved. Short-term exposure promotes cardiovascular and
+respiratory effects [7]. The International Agency for Research on Cancer (IARC) classiﬁed
+particulate matter and outdoor air pollution as carcinogenic to humans [ 8,9]. Moreover,
+in terms of effects on the brain, particulate matter appears to be the most concerning air
+pollutant [10]. PM2.5 accumulates in the reproductive organs, disrupting hormone levels
+and affecting fertility [11]. Moreover, pyrotechnic ﬁreworks introduce signiﬁcant quantities
+of toxic metals into the atmosphere, affecting mammalian cells and lungs [12]. PM2.5 affects
+red blood cell counts, monocyte counts, and hemoglobin concentration [13]. Fireworks have
+increased health problems, particularly in infants, women (including pregnant women),
+T oxics2022, 10, 264. https://doi.org/10.3390/toxics10050264 https://www.mdpi.com/journal/toxics
+
+T oxics2022, 10, 264 2 of 21
+the elderly, and fetuses. Children suffer from an increased risk of diseases due to exposure
+to heavy metals emitted by pyrotechnics [14]. Short-term exposure to PM2.5 was recently
+associated with an increased risk of and mortality associated with myocardial infarction
+in patients with acute coronary syndromes and angina [15]. Comparatively, exposure to
+PM1 exhibited a higher risk for emergent department visits than PM2.5 [16], and PM1 may
+be more hazardous to children’s respiratory systems than PM2.5 exposure [17]. Although
+air pollution from New Year’s emissions occurs once a year, it can be a potential risk,
+especially for people with pre-existing diseases [18]. Therefore, particulate matter levels
+in the atmosphere, both at short- and long-term concentrations, need to be controlled
+worldwide.
+Particulate matter (PM) concentrations in ambient air are the result of a complex twoway interaction between emissions and atmospheric physical–chemical processes [19,20].
+The dynamic of the planetary boundary layer (PBL)—the turbulent bottom layer of the
+atmosphere, which experiences a daily cycle of depth, temperature, wind, and pollution
+variations—directly inﬂuences air pollutant concentrations. If the atmosphere shows unstable conditions, as at sunny middays, PBL depth will be high, promoting PM dispersion [21].
+On the other hand, if the atmosphere is stable, as it is during strong thermal inversion, PBL
+depth will be shallow, and particulate matter will remain concentrated. Radiation, cloud
+cover, wind speed, and direction also inﬂuence the behavior of air quality [ 22,23]. Other
+processes, such as accumulation, condensation, fragmentation, and sedimentation, also
+inﬂuence PM concentrations [19,24–26].
+Emissions from ﬁreworks, ﬁrecrackers, and puppet burning are typically highest
+during the ﬁrst hours of a new year. In Cuenca (Ecuador), typically the PM2.5 concentrations
+at the beginning of the year are higher than the WHO’s guidelines (e.g., [27–29]), implying
+the effects on public health reported in the literature [5,7,12,14,15], and therefore, the need
+to reduce PM2.5 concentrations. Recently, the air quality network from Cuenca began to
+measure both PM2.5 and PM1, which is valuable information for improving understanding
+of the air quality problems in this city and how atmospheric pollution is affecting public
+health.
+Although the direct way to control PM 2.5 levels is to reduce emissions by limiting
+combustion sources, implementing ﬁrework prohibition policies during the Chinese Lunar
+New Year’s celebrations did not result in clear air quality beneﬁts [30]. Another option is
+to manage the corresponding emission factors (the amount of PM 2.5 emitted per unit of
+pollutant activity), promoting the use of environmentally friendly ﬁreworks. However, this
+alternative must be accompanied by strict control of the number of used ﬁreworks [ 31].
+Due to these limitations, it is necessary to study other options to reduce air pollution by
+New Year’s emissions. We did not ﬁnd dedicated studies for this purpose in Ecuador,
+and therefore, exploring alternatives to reduce PM2.5 levels at the beginning of the year is
+necessary.
+At midnight, the temperature and wind speeds in Cuenca usually present lower
+values compared with the preceding hours. Low temperature and wind speed values are
+associated with low PBL depths [ 21] and stronger atmospheric stability [ 32]. Although
+weather conditions cannot be controlled, another novel option could be to advance the
+burning of ﬁreworks and puppets to a time when, compared with midnight, the atmosphere
+presents better conditions to disperse air pollutants. Hence, this study reports the PM 1
+and PM2.5 records on 31 December 2021 and 1 January 2022. Moreover, we performed
+numerical experiments to estimate the changes in PM 2.5 concentrations to answer the
+following questions:
+• Are there reductions in PM2.5 concentrations if the emission activities associated with
+the arrival of a new year in Cuenca occur some hours before midnight?
+• What is the magnitude of these changes?
+
+T oxics2022, 10, 264 3 of 21
+2. Materials and Methods
+2.1. Primary Sources and Past PM 2.5 Concentrations in Cuenca
+Cuenca (2500 m.a.s.l.), an Andean city located in southern Ecuador (Figure 1), has
+a complex topography, with altitudes ranging from 1000 to 4000 m.a.s.l. This city has
+approximately 640,000 inhabitants, representing approximately 3.6% of the Ecuadorian
+population [33]. This territory has diverse land-use categories. The primary sources of PM2.5
+are diesel vehicles, industries at the northeast zone of the city, and a power facility located
+in the northeast of the urban area (Figure 1d). Moreover, irregular PM2.5 emissions come
+from artisanal brick production in the northwest of the urban region, due to the combustion
+of biomass [34]. More information about the magnitude of the emission sources in Cuenca
+are described in Parra (2018) [35] and Parra and Espinoza (2020) [36].
+Toxics 2022, 10, x FOR PEER REVIEW 3 of 24 
+ 
+ 
+2. Materials and Methods 
+2.1. Primary Sources and Past PM2.5 Concentrations in Cuenca 
+Cuenca (2500 m.a.s.l.), an Andean city loca ted in southern Ecuador (Figure 1), has a 
+complex topography, with altitudes ranging from 1000 to 4000 m.a.s.l. This city has approximately 640,000 inhabitants, representing approximately 3.6% of the Ecuadorian population [33]. This territory has diverse land-use categories. The primary sources of PM 2.5 
+are diesel vehicles, industries at the northeast zone of the city, and a power facility located 
+in the northeast of the urban area (Figure 1d). Moreover, irregular PM 2.5 emissions come 
+from artisanal brick production in the northwest of the urban region, due to the combustion of biomass [34]. More information about the magnitude of the emission sources in 
+Cuenca are described in Parra (2018) [35] and Parra and Espinoza (2020) [36]. 
+ 
+(a) ( b) ( c) 
+ 
+(d) 
+Figure 1. Location of: (a) Ecuador; (b,c) Cuenca; (d) urban area of Cuenca and the air quality stations 
+(red dots) with PM2.5 sensors (name, nomenclature): Colegio Carlos Arízaga, CCA; Terminal Terrestre, TET; Municipio, MUN; Condamine, CON, Cebollar, CEB; Escuela Ignacio Escandón, EIE. Orange dots indicate industries. 
+During the first hours of 2016 to 2021, the air quality network in the MUN (Municipio) station measured maximum hourly PM2.5 concentrations between 55.8 and 182.1 µg 
+m−3. The MUN station has been operating since 2012, measuring both meteorological parameters and air quality. Some years later, the Colegio Carlos Arízaga (CCA) and Escuela 
+Ignacio Escandón (EIE) stations were installed to monitor air quality in the zones of the 
+industrial park and in the southwest of the city (Figure 1d). In the last weeks of 2021, three 
+Figure 1. Location of: (a) Ecuador; (b,c) Cuenca; (d) urban area of Cuenca and the air quality stations
+(red dots) with PM2.5 sensors (name, nomenclature): Colegio Carlos Arízaga, CCA; Terminal Terrestre,
+TET; Municipio, MUN; Condamine, CON, Cebollar, CEB; Escuela Ignacio Escandón, EIE. Orange
+dots indicate industries.
+During the ﬁrst hours of 2016 to 2021, the air quality network in the MUN (Municipio)
+station measured maximum hourly PM2.5 concentrations between 55.8 and 182.1 µg m−3.
+The MUN station has been operating since 2012, measuring both meteorological parameters
+and air quality. Some years later, the Colegio Carlos Arízaga (CCA) and Escuela Ignacio
+Escandón (EIE) stations were installed to monitor air quality in the zones of the industrial
+park and in the southwest of the city (Figure 1d). In the last weeks of 2021, three new stations
+were installed (Condamine, CON; Terminal Terrestre, TER; Cebollar, CEB), equipped with
+
+T oxics2022, 10, 264 4 of 21
+sensors to record PM2.5 and PM1. The air quality network is operated by the Municipality
+of Cuenca, the entity accredited by the National Environmental Authority.
+2.2. Estimation of PM2.5 Emissions through Burning Activities Associated with the Arrival of 2022
+In general, emission inventories have high levels of uncertainty . This feature is especially
+critical when estimating New Year’s emissions. After exploring different approaches, we
+estimated the total PM2.5 emissions at the beginning of 1 January 2022 as the contribution of
+the use of fireworks and the burning of puppets, through the basic emission model:
+PM2.5 Emission = Activity× Emission Factor (1)
+Activity: amount of ﬁreworks or puppets burned during the New Year’s festivities.
+Emission factor: amount of PM2.5 emitted by each ﬁrework or puppet burned.
+2.2.1. Emissions Due to the Use of Fireworks
+Firstly, we estimated the amount of ﬁreworks used in Cuenca, through the following
+approach.
+Based on information about the amount of money spent for the importation of ﬁreworks in 2021 [ 37,38], we estimated that in Cuenca, approximately USD 112,000 was
+allocated for the purchase of ﬁreworks in December. We identiﬁed the pyrotechnic cake
+with 30 shots, which has approximately 500 g of net explosive content (NEC), as the most
+consumed product. Using an average price of USD 24 per cake, we estimated that there
+was 3497 kg NEC in the amount of ﬁreworks legally sold. Moreover, we considered the
+additional amount of ﬁreworks from illegal sales by non-controlled producers or importers.
+Based on information about illegal ﬁreworks [ 39] and an assumed percentage of noncontrolled sales, we estimated a 3279 kg NEC as a result of these sales. Therefore, the total
+amount of ﬁreworks were estimated to equal 6776 kg NEC.
+Then, we selected the average emission factor of 200 g PM 2.5 NEC−1 proposed by
+Keller and Schragen (2021) [40] for common pyrotechnic articles. Applying Equation (1),
+the corresponding emission was 1.36 t PM2.5.
+2.2.2. Emissions Due to the Burning of Puppets
+The amount of puppets burned was estimated through the following approach.
+The Municipality of Cuenca determined 369 authorized points for selling puppets,
+with an average amount of 25 units sold per day [ 41]. Considering the number of sales
+over two days, an average weight of 2 kg per unit, and an increase of 25% due to domestic
+production and non-authorized sales, we estimated 46.1 t as the amount of biomass contained in the puppets. Although in recent years authorities have disincentivized the use
+of sawdust, it is still used for ﬁlling puppets. Therefore, we selected the average emission
+factor of 8.10 g PM2.5 per kg of biomass, proposed for wood waste in the European emission
+factor database [42]. Therefore, the estimated emission due to the burning of puppets was
+0.37 t PM2.5.
+The total estimated emission due to the burning of fireworks and puppets was1.73 t PM2.5,
+corresponding to an average emission factor of 2.7 g PM2.5 per inhabitant. We distributed
+the total emission over 1 January 2022 at 00:00 LT, 1 January 2022 at 01:00 LT, and 1 January
+2022 at 02:00 LT, assuming percentages of 40%, 32%, and 28%, respectively. Then, the
+hourly emissions were spatially distributed in the modeling grid (Section 2.3), based on
+the population density map and index of unsatisﬁed needs [33]. The black component of
+Figure 2a indicates the total PM2.5 hourly emissions associated with the use of ﬁreworks and
+puppets burning, starting on 1 January at 00:00 LT. Figure 2b indicates the PM2.5 gridded
+emissions on 1 January 2022 at 00:00 LT. Figure 2a also indicates the hourly emissions
+from on-road trafﬁc, industries, and the power facility, as background PM2.5 sources for
+modeling. Figure 2b,c depict the gridded emissions on 1 January 2022 at 00:00 LT from
+background sources and from New Year’s burning activities, respectively.
+
+T oxics2022, 10, 264 5 of 21
+Toxics 2022, 10, x FOR PEER REVIEW 6 of 24 
+ 
+ 
+ 
+(a) 
+ 
+(b) 
+ 
+(c) 
+Figure 2. (a) Hourly emissions from 31 December 2020 to 1 January 2022 from background sources 
+(on-road traffic, industries, and power faci lity) and New Year’s burning activities. ( b) Gridded 
+Figure 2. (a) Hourly emissions from 31 December 2020 to 1 January 2022 from background sources
+(on-road trafﬁc, industries, and power facility) and New Year’s burning activities. ( b) Gridded
+emissions on 1 January 2022 at 00:00 LT from background sources. (c) Gridded emissions on 1 January
+2022 at 00:00 LT from background sources and New Year’s burning activities.
+
+T oxics2022, 10, 264 6 of 21
+2.3. Approach for Modeling the Dispersion of PM 2.5
+We used the 3D Eulerian Weather Research and Forecasting with Chemistry (WRFChem 3.2) [43] to model meteorology and PM 2.5 dispersion in Cuenca on 31 December
+2021 and 1 January 2022. WRF-Chem is a last-generation non-hydrostatic model used for
+numerical modeling and solving equations of atmospheric motion from global to local
+scales. Meteorological simulations were performed through a master domain of 70× 70 cells
+(27 km each) and 3 nested subdomains. The cells of the third domain (100× 82) have 1 km
+of resolution and cover the region of Cuenca (Figure 1c). For the third subdomain, hourly
+PM2.5 emissions were applied to WRF-Chem. As background sources, we used the PM2.5
+emissions from on-road trafﬁc, industries, and the power facility in the northeast of the city
+corresponding to a festival day, the hourly emissions of which are indicated in Figure 2a.
+The PM2.5 emissions on 1 January 2022 totaled 2.8 t d−1, corresponding with the 1.7 t d−1
+(Section 2.2), 0.6 t d−1, 0.3 t d−1, and 0.1 t d−1 of the New Year’s combustion activities,
+on-road trafﬁc, power facility, and industries, respectively. Background emissions were
+obtained from the last emission inventory from Cuenca. Initial and boundary conditions
+were generated from the ﬁnal NCEP FNL operational global analysis data [ 44]. Table 1
+summarizes the options selected for modeling.
+First, we assessed the performance for modeling the hourly temperature and wind
+speeds at the surface through the following metrics:
+GE = 1
+N ∑
+N
+i=1|Pi− Oi|, (2)
+BI AS = Pm− Om, (3)
+RMSE =
+√
+1
+N ∑
+N
+i=1(Pi− Oi)2, (4)
+GE: gross error; RMSE: root-mean-square error; N: number of values; Pm: mean
+modeled value; Om: mean observed value; Pi: modeled value; Oi: observed value. Table 2
+indicates the benchmark values for these indicators.
+Table 1. Options for modeling the dispersion of PM2.5 in Cuenca (WRF-Chem 3.2).
+Component Option Scheme/Model and Reference
+Microphysics (mp_physics) 2 Lin et al. [45]
+Longwave Radiation (ra_lw_physics) 1 RRTM [46]
+Shortwave Radiation (ra_sw_physics) 2 Goddard [47]
+Surface Layer (sf_clay_physics) 1 MM5 similarity [48]
+Land Surface (sf_surface_physics) 2 Noah Land Surface Model [49]
+Planetary boundary layer (bl_pbl_physics) 1 Yonsei University [50]
+Cumulus parameterization (cu_physics) 0 Without parameterization
+Table 2. Metrics for modeling temperature and wind speed (WRF-Chem 3.2) [51].
+Parameter Indicator Benchmark
+Hourly surface temperature GE <2 ◦C
+BIAS < ±0.5◦C
+Hourly wind speed at 10 m above the surface RMSE <2 m s−1
+BIAS <±0.5 m s−1
+According to the WHO guidelines, we obtained the maximum mean PM2.5 concentrations during 24 consecutive hours from 31 December 2021 to 1 January 2022, using the
+records provided by each of the six stations currently measuring PM2.5 (Figure 1d). Then,
+the modeling values at the location of each station were compared with the corresponding
+records. We considered that the model captured the observed records if the difference was
+less than 50%.
+
+T oxics2022, 10, 264 7 of 21
+After we assessed the inﬂuence of advancing the time of burning activities, assuming
+these emissions began on 31 December 2021 at 21:00 LT and on 31 December 2021 at
+18:00 LT. The results of these two scenarios were compared with the modeled values of the
+reference scenario, corresponding to the New Year’s emissions beginning on 1 January 2022
+at 00:00 LT. In addition, using the emissions estimated for 31 December 2021 and 1 January
+2022, we conducted similar simulations for the previous ﬁve years (2016–2017, 2017–2018,
+2018–2019, 2019–2020, and 2020–2021).
+3. Results and Discussion
+3.1. PM 1 and PM2.5 Records on 31 December 2021 and 1 January 2022
+Figure 3 depicts the views of Cuenca during the afternoon of 31 December 2021, at
+approximately midnight, and after the ﬁrst 30 min of 1 January 2022. In addition, Figure 3
+shows the hourly PM1 and PM2.5 concentrations. The maximum PM2.5 hourly concentrations ranged between 63.7 and 201 µg m−3. The highest PM 2.5 level (201.0 µg m−3) was
+measured by the CEB station on 1 January 2022 at 01:00 LT. On average, on 1 January 2022,
+the ratio between PM 1 and PM2.5 at the CEB, CON, and TER stations ranged from 0.84
+to 0.88. This ratio is similar to the value (0.89) obtained from the PM1 and PM2.5 records
+reported by Majumdar et al. (2017) in relation to a ﬁrecracker bursting episode during
+Diwali (India) [52]. The maximum 24 h mean PM 2.5 concentrations measured in the six
+stations ranged between 27.3 and 40.6 µg m−3. These concentrations were higher than
+15.0 µg m−3, the current recommended value by the WHO [ 53]. From 2016 to 2021, the
+MUN station measured 8.1 to 37.8 µg m−3. For comparison purposes, from 2016 to 2020,
+the maximum 24 h mean PM2.5 concentrations on 1 January measured in Quito, the capital
+of Ecuador, ranged between 13.4 and 121.5 µg m−3 [54], indicating that air pollution due to
+New Year’s emissions was of a higher magnitude there than in Cuenca.
+3.2. Modeling PM 2.5 Dispersion on 31 December and 1 January
+3.2.1. Period from 31 December 2021 to 1 January 2022
+Appendix A and Figure A1 indicate the assessment of modeled temperature and wind
+speed. Figure 4 shows the model maps of PM 2.5 from 31 December 2021 at 23:00 LT to
+1 January 2022 at 03:00 LT. The inﬂuence of emissions at 00:00 LT, with modeled concentrations up to 250 µg m−3 in the urban area, is clear. Modeled levels began to decrease on
+1 January 2022 at 03:00 LT, while PM2.5 was dispersed toward the south and southwest
+at concentrations of up to 50 µg m−3. Figure 5 compares the hourly PM 2.5 records with
+the corresponding modeling levels at the six stations. In general, the modeled values
+captured the trend of records. Figure 6 compares the PM2.5 (maximum 24 h mean) records
+and the corresponding computed values at each station. Differences between records and
+modeled values ranged between 0.3% and 13.9%. The linear ﬁt reached a value of 0.89
+for the coefﬁcient of determination, highlighting the strength of the relationship between
+records and modeled values [ 54]. These metrics indicated that the simulation of PM 2.5
+dispersion was properly performed.
+Although it was a component with a high level of uncertainty, the results indicated
+that the total PM2.5 emissions were acceptable, both in magnitude and in their temporal
+and spatial distribution. Therefore, it is feasible that these emissions were used for the
+numerical experiment to simulate the effects of PM2.5 levels, in case the emissions started
+before midnight on 31 December 2021, and to estimate the changes in PM2.5 concentrations
+for the meteorological conditions corresponding to 31 December and 1 January of the
+previous years.
+
+T oxics2022, 10, 264 8 of 21
+Toxics 2022, 10, x FOR PEER REVIEW 9 of 24 
+ 
+ 
+ 
+(a) ( b) ( c) 
+ 
+(d) ( e) ( f) 
+ 
+(g) 
+Figure 3. View of the city of Cuenca: ( a) during the afternoon of 31 December 2021; ( b) approximately 5 min before the midnight of 31 December 2021; ( c) after the first 30 min of 1 January 2022. 
+Hourly PM1 and PM2.5 concentrations on 31 December 2021 and 1 January 2022 measured at the CEB 
+(d), CON (e), and TER (f) stations. (g) Hourly PM2.5 concentrations on 31 December 2021 and 1 January 2022. 
+3.2. Modeling PM2.5 Dispersion on 31 December and 1 January 
+Figure 3. View of the city of Cuenca: (a) during the afternoon of 31 December 2021; (b) approximately
+5 min before the midnight of 31 December 2021; (c) after the ﬁrst 30 min of 1 January 2022. Hourly PM1
+and PM2.5 concentrations on 31 December 2021 and 1 January 2022 measured at the CEB (d), CON (e),
+and TER (f) stations. (g) Hourly PM2.5 concentrations on 31 December 2021 and 1 January 2022.
+
+T oxics2022, 10, 264 9 of 21
+Toxics 2022, 10, x FOR PEER REVIEW 11 of 24 
+ 
+ 
+ 
+ 
+ 
+Figure 4. Modeled maps of hourly PM 2.5 concentrations from 31 December 2021 at 22:00 LT to 1 
+January 2022 at 03:00 LT. Reference scenario: New Year’s emissions beginning on 1 January 2022 at 
+00:00 LT. 
+Figure 4. Modeled maps of hourly PM 2.5 concentrations from 31 December 2021 at 22:00 LT to
+1 January 2022 at 03:00 LT. Reference scenario: New Year’s emissions beginning on 1 January 2022 at
+00:00 LT.
+
+T oxics2022, 10, 264 10 of 21
+Toxics 2022, 10, x FOR PEER REVIEW 12 of 24 
+ 
+ 
+ 
+(a) ( b) 
+ 
+(c) ( d) 
+ 
+(e) ( f) 
+Figure 5. Hourly PM2.5 records and modeled concentrations from 31 December 2021 to 1 January 
+2022: the (a) CCA, (b) CEB, (c) TER, (d) MUN, (e) CON, and (f) EIE stations. 
+Figure 5. Hourly PM2.5 records and modeled concentrations from 31 December 2021 to1 January 2022:
+the (a) CCA, (b) CEB, (c) TER, (d) MUN, (e) CON, and (f) EIE stations.
+
+T oxics2022, 10, 264 11 of 21
+Toxics 2022, 10, x FOR PEER REVIEW 13 of 24 
+ 
+ 
+ 
+Figure 6. Maximum 24 h mean PM 2.5 records and modeled concentrations from 31 December 2021 
+to 1 January 2022. Dots and nomenclature correspond to the six stations measuring PM2.5 concentrations. The black line indicates th e linear fit between records and modeled values. The red line corresponds to a perfect fit. 
+3.2.2. Modeling the Effect of Advancing the Time of Burning Activities 
+Figures A2 and A3 (Append ix B) depict the modeled maps of hourly PM 2.5 concentrations on 31 December 2021 to 1 January 2022, assuming that emissions began on 31 
+December 2021 at 21:00 LT and 31 December 2021 at 18:00. For the scenario with emissions 
+at 21:00, the maximum modeled values at 21:00, 22:00, and 23:00 LT were up to 150 µg m−3. 
+For the scenario with emissions at 18:00, maximum concentrations were up to 100 µg m−3. 
+Figure 7 indicates the modeled temperature and PBL maps for 31 December at 18:00 
+LT, 31 December at 21:00 LT, and 1 January 2022 at 00:00 LT. At 18:00, the temperature in 
+the urban area varied between 15 and 20 °C (Figure 7a). At 21:00, values between 13 and 
+15 °C were computed around the historic center (Figure 8c). At 00:00, the temperature 
+ranged between 13 and 15 °C in almost all of the urban area (Figure 7e). The decrease in 
+temperature accompanied decreases in PBL. At 18:00, the PBL over the urban area ranged 
+between 800 and 1200 m (Figure 7b); and by 21:00, it decreased to 800 m. At 00:00, the PBL 
+dropped to 300 and 400 m. The higher PBL depths at 18:00 and 21:00 on 31 December 
+imply larger volumes of the atmosphere to disperse the PM
+2.5 emissions, compared with 
+the condition at 00:00, therefore explaining why lower concentrations were computed 
+with emissions beginning at 18:00 and 21:00. 
+Table 3 shows the mode led maximum 24 h PM 2.5 levels for the reference scenario 
+(emissions on 1 January at 00:00 LT) and for the scenario with emissions on 31 December 
+at 21:00 LT. Results cover the last six years. Mean values for the reference scenario at the 
+six stations ranged between 32.1 and 70.9 µg m −3. For emissions on 31 December at 21:00 
+LT, values ranged between 19.6 and 37.9 µg m −3. Mean reductions ranged between 2.3% 
+(2.6 µg m−3) and 40.7% (33.0 µg m−3). This range of reductions is directly related to different 
+atmospheric conditions to disperse the emissions of PM2.5. 
+Table 4 shows the modeled maximum PM2.5 levels for the reference scenario and for 
+the alternative with emissions on 31 December at 18:00 LT. For this alternative, mean values ranged between 15.3 and 31.9 µg m
+−3. Mean reductions compared with the reference 
+scenario ranged between 21.4% (8.5 µg m −3) and 61.0% (50.0 µg m −3). The results of the 
+simulations for 2016 to 2021 indicated clear benefits for the scenario with emissions starting at 18:00. The benefits were lower, or even minimal (2020–2021), for the scenario that 
+considers emissions beginning at 21:00. 
+Applying the decrease of 0.65% in mortality per 10 µg m−3 decrease in PM2.5 concentrations [53,55], the emissions on 31 December at 21:00 implied reductions between 0.17% 
+Figure 6. Maximum 24 h mean PM2.5 records and modeled concentrations from 31 December 2021 to
+1 January 2022. Dots and nomenclature correspond to the six stations measuring PM2.5 concentrations.
+The black line indicates the linear ﬁt between records and modeled values. The red line corresponds
+to a perfect ﬁt.
+3.2.2. Modeling the Effect of Advancing the Time of Burning Activities
+Figures A2 and A3 (Appendix B) depict the modeled maps of hourly PM2.5 concentrations on 31 December 2021 to 1 January 2022, assuming that emissions began on 31
+December 2021 at 21:00 LT and 31 December 2021 at 18:00. For the scenario with emissions
+at 21:00, the maximum modeled values at 21:00, 22:00, and 23:00 LT were up to 150 µg m−3.
+For the scenario with emissions at 18:00, maximum concentrations were up to 100 µg m−3.
+Figure 7 indicates the modeled temperature and PBL maps for 31 December at18:00 LT,
+31 December at 21:00 LT, and 1 January 2022 at 00:00 LT. At 18:00, the temperature in the
+urban area varied between 15 and 20 ◦C (Figure 7a). At 21:00, values between 13 and
+15◦C were computed around the historic center (Figure 8c). At 00:00, the temperature
+ranged between 13 and 15◦C in almost all of the urban area (Figure 7e). The decrease in
+temperature accompanied decreases in PBL. At 18:00, the PBL over the urban area ranged
+between 800 and 1200 m (Figure 7b); and by 21:00, it decreased to 800 m. At 00:00, the
+PBL dropped to 300 and 400 m. The higher PBL depths at 18:00 and 21:00 on 31 December
+imply larger volumes of the atmosphere to disperse the PM2.5 emissions, compared with
+the condition at 00:00, therefore explaining why lower concentrations were computed with
+emissions beginning at 18:00 and 21:00.
+Table 3 shows the modeled maximum 24 h PM 2.5 levels for the reference scenario
+(emissions on 1 January at 00:00 LT) and for the scenario with emissions on 31 December
+at 21:00 LT. Results cover the last six years. Mean values for the reference scenario at
+the six stations ranged between 32.1 and 70.9 µg m−3. For emissions on 31 December at
+21:00 LT, values ranged between 19.6 and 37.9µg m−3. Mean reductions ranged between
+2.3% (2.6 µg m−3) and 40.7% (33.0 µg m−3). This range of reductions is directly related to
+different atmospheric conditions to disperse the emissions of PM2.5.
+Table 4 shows the modeled maximum PM 2.5 levels for the reference scenario and
+for the alternative with emissions on 31 December at 18:00 LT. For this alternative, mean
+values ranged between 15.3 and 31.9µg m−3. Mean reductions compared with the reference
+scenario ranged between 21.4% (8.5 µg m−3) and 61.0% (50.0 µg m−3). The results of the
+simulations for 2016 to 2021 indicated clear beneﬁts for the scenario with emissions starting
+at 18:00. The beneﬁts were lower, or even minimal (2020–2021), for the scenario that
+considers emissions beginning at 21:00.
+
+T oxics2022, 10, 264 12 of 21
+Toxics 2022, 10, x FOR PEER REVIEW 14 of 24 
+ 
+ 
+and 2.15% in all non-accidental mortality. The emissions on 31 December at 18:00 resulted 
+in decreases between 0.55% and 3.25%. 
+ 
+(a) ( b) 
+ 
+(c) ( d) 
+ 
+(e) ( f) 
+Figure 7. Modeled maps of temperature and planetary boundary layer (PBL) depth for selected 
+hours: 31 December 2021 at 18:00 LT ( a,b), 31 December 2021 21:00 LT ( c,d), and 1 January 2022 at 
+00:00 LT (e,f). 
+Figure 7. Modeled maps of temperature and planetary boundary layer (PBL) depth for selected
+hours: 31 December 2021 at 18:00 LT (a,b), 31 December 2021 21:00 LT (c,d), and 1 January 2022 at
+00:00 LT (e,f).
+
+T oxics2022, 10, 264 13 of 21
+Toxics 2022, 10, x FOR PEER REVIEW 15 of 24 
+ 
+ 
+ 
+(a) ( b) 
+ 
+(c) ( d) 
+Figure 8. Modeled maps of PM 2.5 and planetary boundary layer (P BL) depth. Reference scenario: 
+New Year’s emissions starting on 1 January 2021 at 00:00 LT ( a,b). Scenario with New Year’s emissions starting on 31 December 2020 at 21:00 LT (c,d). 
+ 
+Figure 8. Modeled maps of PM2.5 and planetary boundary layer (PBL) depth. Reference scenario:
+New Year’s emissions starting on 1 January 2021 at 00:00 LT (a,b). Scenario with New Year’s emissions
+starting on 31 December 2020 at 21:00 LT (c,d).
+Table 3. Effect of advancing the time of burning puppets and fireworks. Scenario 1 January at00:00 LT
+vs. 31 December at 21:00 LT.
+Station 2016–2017 2017–2018 2018–2019 2019–2020 2020–2021 2021–2022
+(A) Scenario 1 January at 00:00 LT: Modeled maximum PM 2.5 levels (µg m−3) during 24 h
+MUN 119.6 47.8 48.1 42.7 45.9 35.6
+EIE 38.2 35.5 25.0 12.2 33.2 27.5
+CCA 58.4 43.2 74.0 46.6 26.4 30.2
+CON 76.4 45.1 35.0 37.3 43.5 31.6
+CEB 21.6 34.9 32.7 23.8 23.6 40.2
+TER 111.0 36.2 33.1 33.7 34.8 27.3
+Mean 70.9 40.5 41.3 32.7 34.6 32.1
+(B) Scenario 31 December at 21:00 LT: Modeled maximum PM 2.5 concentrations (µg m−3) during 24 h
+MUN 55.8 37.3 37.4 23.9 38.7 22.4
+EIE 27.4 20.6 25.6 11.5 19.2 14.8
+CCA 44.5 44.0 42.6 35.5 38.1 21.7
+CON 39.5 31.5 34.9 18.9 36.3 20.9
+CEB 14.8 35.3 33.6 19.6 32.8 19.0
+TER 45.3 32.9 23.3 20.2 27.0 18.8
+Mean 37.9 33.6 32.9 21.6 32.0 19.6
+
+T oxics2022, 10, 264 14 of 21
+Table 3. Cont.
+Station 2016–2017 2017–2018 2018–2019 2019–2020 2020–2021 2021–2022
+Difference: (B)− (A), (µg m−3)
+MUN −63.8 −10.5 −10.7 −18.8 −7.2 −13.2
+EIE −10.7 −14.9 0.6 −0.7 −14.0 −12.7
+CCA −13.8 0.8 −31.4 −11.1 11.6 −8.6
+CON −36.9 −13.6 −0.1 −18.4 −7.1 −10.7
+CEB −6.8 0.4 0.8 −4.2 9.2 −21.1
+TER −65.7 −3.4 −9.8 −13.5 −7.8 −8.5
+Mean −33.0 −6.9 −8.5 −11.1 −2.6 −12.5
+Percentage of difference: ((B)− (A)/(A))× 100, (%)
+MUN −53.3 −21.9 −22.3 −44.1 −15.7 −37.1
+EIE −28.1 −42.0 2.2 −5.8 −42.1 −46.3
+CCA −23.7 1.9 −42.5 −23.8 44.0 −28.3
+CON −48.3 −30.2 −0.3 −49.4 −16.4 −33.8
+CEB −31.4 1.1 2.6 −17.7 38.8 −52.6
+TER −59.2 −9.4 −29.7 −40.1 −22.5 −31.2
+Mean −40.7 −16.7 −15.0 −30.1 −2.3 −33.2
+Applying the decrease of 0.65% in mortality per 10 µg m−3 decrease in PM2.5 concentrations [53,55], the emissions on 31 December at 21:00 implied reductions between 0.17%
+and 2.15% in all non-accidental mortality. The emissions on 31 December at 18:00 resulted
+in decreases between 0.55% and 3.25%.
+The results of 31 December 2020 (2020–2021) with emissions at 21:00 show an average
+decrease of 2.6 µg m−3. At the EIE station, the model indicated an average decrease of
+14.0 µg m−3, although an increase of 11.6 µg m−3 was obtained at the CCA station (Table 3).
+These results deserve speciﬁc analysis. Figure 8 presents the modeling results of PM 2.5
+concentrations and the corresponding PBL heights on 1 January 2021 at 00:00 LT (reference
+scenario) and on 31 December 2020 at 21:00 LT (scenario of New Year’s emissions starting
+at 21:00). The ﬁgure details the urban area results and includes surface wind vectors.
+For the reference scenario, on 1 January 2021 at 00:00 LT, wind was mainly generated
+from the northeast, transporting the pollutants to the southwest. In addition, in most of
+the urban area, PBL heights between 100 and 500 m were modeled, with values greater
+than 200 m in the historic center, an area in which concentrations of up to 300 µg m−3 were
+obtained. In the northern part of the urban area, concentrations between 10 and100 µg m−3
+were modeled.
+For the scenario with New Year’s emissions starting at 21:00 LT, the wind moved
+from the south in the urban area, transporting emissions to the north. The PBL presented
+values greater than 200 m in a larger area than the values on 1 January 2021 at 00:00 LT.
+However, concentrations of up to 200 µg m−3 were obtained in the northern part of the
+urban area. This increase was modeled in the coverage areas of the CCA and CEB stations.
+The numerical experiment indicates that wind transports the emissions to the north of
+the historic center. Although the greater heights of the PBL at the CCA and CEB stations
+allow for more efﬁcient dispersion, the transport of PM2.5 from the historic center has a
+more signiﬁcant effect and, consequently, higher concentrations than the reference scenario.
+This particular result highlights the complexity of the interaction between emissions and
+meteorological conditions, and indicates that wind direction can promote local increases
+in PM2.5 levels, despite the greater height of the PBL. Although the model’s performance
+in capturing the temperature and wind speed for 31 December 2021 and 1 January 2022
+was evaluated in this study, this result highlights the need to include the evaluation of
+the modeled wind direction in the future. It also highlights the importance of carrying
+out speciﬁc evaluations for other regions or cities due to their topographic conditions,
+geographic location, and the temporal/spatial conﬁguration of their emissions.
+
+T oxics2022, 10, 264 15 of 21
+Table 4. Effect of advancing the time of burning puppets and fireworks. Scenario 1 January at00:00 LT
+vs. 31 December at 18:00 LT.
+Station 2016–2017 2017–2018 2018–2019 2019–2020 2020–2021 2021–2022
+(A) Scenario 1 January at 00:00 LT: Modeled maximum PM 2.5 levels (µg m−3) during 24 h
+MUN 119.6 47.8 48.1 42.7 45.9 35.6
+EIE 38.2 35.5 25.0 12.2 33.2 27.5
+CCA 58.4 43.2 74.0 46.6 26.4 30.2
+CON 76.4 45.1 35.0 37.3 43.5 31.6
+CEB 21.6 34.9 32.7 23.8 23.6 40.2
+TER 111.0 36.2 33.1 33.7 34.8 27.3
+Mean 70.9 40.5 41.3 32.7 34.6 32.1
+(B) Scenario 31 December at 18:00 LT: Modeled maximum PM 2.5 concentrations (µg m−3) during 24 h
+MUN 22.8 36.6 20.8 21.2 22.5 15.7
+EIE 15.0 18.2 12.7 10.2 11.7 15.7
+CCA 33.1 45.1 33.3 27.5 27.9 19.6
+CON 21.6 30.6 19.8 20.3 20.2 14.5
+CEB 16.5 27.0 14.6 22.2 17.0 13.4
+TER 16.0 34.2 13.6 15.0 19.3 12.7
+Mean 20.8 31.9 19.1 19.4 19.8 15.3
+Difference: (B)− (A), (µg m−3)
+MUN −96.8 −11.3 −27.3 −21.5 −23.4 −19.9
+EIE −23.1 −17.3 −12.3 −2.1 −21.4 −11.8
+CCA −25.3 1.9 −40.7 −19.1 1.5 −10.7
+CON −54.9 −14.5 −15.2 −17.0 −23.2 −17.1
+CEB −5.1 −7.9 −18.1 −1.6 −6.6 −26.7
+TER −95.0 −2.1 −19.5 −18.7 −15.5 −14.6
+Mean −50.0 −8.5 −22.2 −13.3 −14.8 −16.8
+Percentage of difference: ((B)− (A)/(A))× 100, (%)
+MUN −80.9 −23.6 −56.8 −50.3 −50.9 −55.9
+EIE −60.7 −48.7 −49.2 −17.0 −64.7 −42.8
+CCA −43.3 4.4 −55.0 −41.0 5.6 −35.4
+CON −71.8 −32.1 −43.5 −45.5 −53.4 −54.1
+CEB −23.5 −22.6 −55.3 −6.8 −28.0 −66.6
+TER −85.5 −5.7 −59.0 −55.4 −44.5 −53.5
+Mean −61.0 −21.4 −53.1 −36.0 −39.2 −51.4
+In future, the competent authority could start with the generation and delivery of
+the forecasted PM2.5 concentrations, considering that emissions will occur on 1 January at
+00:00 LT. This information will act as a warning and recommendation for preventive measures to reduce exposure, especially for vulnerable populations or people with pre-existing
+diseases. Suppose the forecast indicates atmospheric conditions with high stability and,
+therefore, high PM2.5 concentrations. In that case, the competent authority could request
+that citizens avoid or reduce emissions arising from the use of ﬁreworks, ﬁrecrackers, and
+burning puppets and limit the time they spend outdoors.
+Based on forecasted PM2.5 levels, the competent authority could also inform citizens
+about the beneﬁts of advancing emission activities before midnight on 31 December. In
+this sense, this information can promote the collaboration of at least part of the population.
+Implementing a forecasting system based on the approach described in this study is
+challenging. For this purpose, it is necessary to have trained personnel and sufﬁcient
+computational resources to have the modeled results sufﬁciently in advance.
+In future, the performance of numerical models to capture unusual conditions, such
+as situations of strong atmospheric stability, should be investigated. The inﬂuence of the
+initial conditions also deserves dedicated research, because the performance of numerical
+
+T oxics2022, 10, 264 16 of 21
+models for meteorological forecasting tends to gradually degrade after a speciﬁc time scale
+(time after the initial conditions) [21]. Weather forecasting at small scales, as in the case
+of Cuenca, deteriorates more rapidly than at larger scales. In addition, the ﬁrst hours of a
+weather forecast are relatively useless while the numerical model adjusts to imbalances in
+the initial conditions.
+3.3. Limitations of This Study and Future Activities
+Our estimation of the New Year’s emissions (1.73 t PM2.5) represents approximately
+0.2% of the total PM 2.5 emissions (907 t per year) reported in the emission inventory of
+Cuenca for 2014 [34]. This value is consistent with the criteria of the Environment Agency
+of Austria [56], an entity which indicated that on New Year’s Eve, ﬁreworks account for
+less than 0.6% of the annual PM2.5 emissions. However, we highlight the uncertainty of
+the emissions, and the limitation or lack of information in Ecuador to characterize the
+corresponding emission activities through a bottom-up approach. Likewise, the use of
+emission factors taken from the literature contribute to uncertainty, as values could differ for
+the altitude of Cuenca (2500 m.a.s.l.), in which the availability of oxygen in the atmosphere
+is 25% lower compared to sea levels [57].
+We assumed that the emissions generated by the use of ﬁreworks and the burning of
+puppets occurred during the ﬁrst three hours of 1 January 2022. However, it was observed
+that the use of ﬁreworks mainly occurs at 00:00 LT, and although the burning of puppets
+also mostly begins at 00:00, its emissions can last for several hours. The estimation of
+PM2.5 emissions must be improved by collecting information that allows for the better
+characterization of activity levels and emission factors. This is a challenging task because
+emissions can differ year to year, both in magnitude and even location. Particulate material
+composition must also be characterized in terms of heavy metals, black, and elemental
+carbon, and monitoring the levels of particulate matter in the number of particles per
+unit volume. In addition, it is necessary to study the inﬂuence of relevant PM 2.5 sources,
+as industries with permanent and signiﬁcant emissions are simultaneous with emissions
+associated with the arrival of a new year.
+The Andean Ecuadorian region has poor coverage of radiosonde observations. This
+limitation implies an incomplete description of the atmospheric conditions for meteorological and air quality parameters. Although in Cuenca atmospheric monitoring has improved,
+the air quality network was predominantly designed to satisfy national regulation requirements, covering only surface measurements. Vertical observations need to be promoted to
+improve our understanding of atmospheric conditions and their interaction with air pollutants. This information will allow for more complete studies about modeling performance
+and improved results for air quality management.
+We explored a novel and promising approach for controlling the effects of PM 2.5
+emissions due to New Year’s burning activities, in an Andean city with complex topography.
+Other ways of reducing PM2.5 emissions, such as limiting or controlling the sale of ﬁreworks
+and the burning of puppets, should be assessed. These options have been analyzed in other
+regions (e.g., [31,58]). However, we did not ﬁnd studies based on the approach used in this
+study.
+Animated .gif files of the modeled PM2.5 dispersion for emissions on 1 January at00:00 LT
+(Figure S1), and for the alternatives on 31 December 2021 at 21:00 LT (Figure S2) and
+31 December 2021at 18:00 LT (Figure S3), are available in the Supplementary Materials. These
+files were created using the integrated data viewer tool [59].
+4. Conclusions and Summary
+We modeled the dispersion of PM2.5 emitted into the atmosphere, due to the use of
+ﬁreworks and other combustion activities associated with the arrival of a new year in an
+Andean Ecuadorian city. Our numerical experiments indicated that one way to reduce
+the effects on air quality is advancing the time of emissions to hours before midnight
+on 31 December. Our modeling approach applied to the last six years and provided
+
+T oxics2022, 10, 264 17 of 21
+mean decreases between 2.3% and 40.7% in the 24 h mean PM 2.5 concentrations, if the
+emissions begin on 31 December at 21:00 LT. The decrease ranged between 21.4% and 61.0%
+if emissions began on 31 December at 18:00 LT. The reduction in concentrations is produced
+by better atmospheric conditions to disperse PM2.5. Higher beneﬁts can be obtained if the
+emissions take place at times of higher planetary boundary layer depths, when atmospheric
+conditions promote the pollutant’s dispersion. This approach can be applied to assess the
+beneﬁts of advancing New Year’s emissions in other regions, based on their topographic
+conditions, geographic location, and the temporal/spatial conﬁguration of their emissions.
+In the future, the performance of numerical models to capture unusual conditions,
+such as situations of strong atmospheric stability, should be investigated. Moreover, the
+inﬂuence of the initial conditions deserves a dedicated study. The particulate material
+composition must be characterized in terms of heavy metals, black and elemental carbon
+contents. Monitoring should cover the levels of particulate matter in the number of particles
+per unit volume. In addition, it is necessary to have a dedicated study investigating the
+inﬂuence of relevant PM 2.5 sources in industries with permanent and signiﬁcant emissions, with the emissions associated with the arrival of a new year. Vertical observations
+need to be promoted in the Andean Ecuadorian region, to improve understanding of
+atmospheric conditions and their interaction with air pollutants. The estimation of New
+Year’s PM2.5 emissions must be improved by collecting information that allows for better
+characterization of the activity levels and emission factors.
+Supplementary Materials: The following supporting information can be downloaded at: https:
+//www.mdpi.com/article/10.3390/toxics10050264/s1, Figure S1: Modeled PM 2.5 dispersion on
+31 December 2021–1 January 2022. Emission beginning on 1 January 2022 at 00:00 LT. Figure S2:
+Modeled PM2.5 dispersion on 31 December 2021–1 January 2022. Emission beginning on 31 December
+2021 at 21:00 LT. Figure S3: Modeled PM2.5 dispersion on 31 December 2021–1 January 2022. Emission
+beginning on 31 December 2021 at 18:00 LT.
+Author Contributions: Conceptualization, R.P .; methodology, R.P . and C.S.; monitoring, C.E.; emissions, C.S. and R.P .; formal analysis and modeling, R.P .; data curation, C.S., C.E. and R.P .; writing—
+review and editing, R.P .; visualization, C.S. and R.P . All authors have read and agreed to the published
+version of the manuscript.
+Funding: This research received no external funding.
+Institutional Review Board Statement: Not applicable.
+Informed Consent Statement: Not applicable.
+Data Availability Statement: Not applicable.
+Acknowledgments: This research is part of the project “Emisiones y Contaminaci ón Atmosférica
+en el Ecuador 2021–2022”. Simulations were done at the High Performance Computing system at
+the USFQ. Publication of this article was funded by the Universidad San Francisco de Quito USFQ
+Research Publication Fund.
+Conﬂicts of Interest: The authors declare no conﬂict of interest.
+Appendix A
+Figure A1 compares the observed and modeled temperatures at the MUN station. The
+modeled values captured the trend of records, which indicate higher levels (approximately
+22◦C) two hours after midday, and the minimum (11◦C) on 1 January 2022 at 06:00 LT. The
+values of the GE and BIAS metrics were 1.0 and 0.18◦C, respectively; both values were in
+the corresponding benchmark ranges (Table 2). Figure 4 compares the hourly records and
+modeled values of wind speed. The highest records (3 m s−1) were measured at midday.
+The minimum record (0.4 m s−1) was measured on 1 January 2022 at 01:00 LT. The RMSE
+and BIAS metrics were 0.8 and 0.4 m s −1, respectively, which are in the corresponding
+benchmark ranges. Therefore, these meteorological parameters were captured by model-
+
+T oxics2022, 10, 264 18 of 21
+ing, implying the dynamic of PBL depths and atmospheric stability was also acceptably
+modeled.
+Toxics 2022, 10, x FOR PEER REVIEW 20 of 24 
+ 
+ 
+Year’s PM2.5 emissions must be improved by collecting information that allows for better 
+characterization of the activity levels and emission factors. 
+Supplementary Materials: The following supporting information can be downloaded at: 
+www.mdpi.com/xxx/s1, Figure S1: Modeled PM2.5 dispersion on 31 December 2021–1 January 2022. 
+Emission beginning on 1 January 2022 at 00:00 LT. Figure S2: Modeled PM 2.5 dispersion on 31 December 2021–1 January 2022. Emission beginning on 31 December 2021 at 21:00 LT. Figure S3: Modeled PM2.5 dispersion on 31 December 2021–1 January 2022. Emission beginning on 31 December 
+2021 at 18:00 LT. 
+Author Contributions: Conceptualization, R.P.; methodology, R.P. and C.S.; monitoring, C.E.; emissions, C.S. and R.P.; formal analysis and modeling, R.P.; data curation, C.S., C.E. and R.P.; writing—
+review and editing, R.P.; visualization, C.S. and R.P. All authors have read and agreed to the published version of the manuscript. 
+Funding: This research received no external funding. 
+Institutional Review Board Statement: Not applicable. 
+Informed Consent Statement: Not applicable. 
+Data Availability Statement: Not applicable. 
+Acknowledgments: This research is part of the project “Emisiones y Contaminación Atmosférica 
+en el Ecuador 2021-2022”. Simulations were done at the High Performance Computing system at 
+the USFQ. Publication of this article was funded by the Universidad San Francisco de Quito USFQ 
+Research Publication Fund. 
+Conflicts of Interest: The authors declare no conflict of interest. 
+Appendix A 
+Figure A1 compares the observed and modeled temperatures at the MUN station. 
+The modeled values captured the trend of records, which indicate higher levels (approximately 22 °C) two hours after midday, and the minimum (11 °C) on 1 January 2022 at 
+06:00 LT. The values of the GE and BIAS metrics were 1.0 and 0.18 °C, respectively; both 
+values were in the corresponding benchmark ranges (Table 2). Figure 4 compares the 
+hourly records and modeled values of wind speed. The highest records (3 m s −1) were 
+measured at midday. The minimum record (0.4 m s−1) was measured on 1 January 2022 at 
+01:00 LT. The RMSE and BIAS metrics were 0.8 and 0.4 m s −1, respectively, which are in 
+the corresponding benchmark ranges. Therefor e, these meteorologic al parameters were 
+captured by modeling, implying the dynamic of PBL depths and atmospheric stability 
+was also acceptably modeled. 
+ 
+(a) ( b) 
+Figure A1. Hourly meteorological records versus modeled values on 31 December 2021 and 1 January
+2022 (MUN station): (a) temperature and (b) wind speed.
+Appendix B
+Toxics 2022, 10, x FOR PEER REVIEW 21 of 24 
+ 
+ 
+Figure A1. Hourly meteorological records versus modeled values on 31 December 2021 and 1 January 2022 (MUN station): (a) temperature and (b) wind speed. 
+Appendix B 
+ 
+ 
+ 
+Figure A2. Modeled maps of hourly PM 2.5 concentrations from 31 December 2021 at 19:00 LT to 1 
+January 2022 at 00:00 LT. Scenario assuming that New Year’s emissions began on 31 December 20221 
+at 21:00 LT. 
+Figure A2. Cont.
+
+T oxics2022, 10, 264 19 of 21
+Toxics 2022, 10, x FOR PEER REVIEW 21 of 24 
+ 
+ 
+Figure A1. Hourly meteorological records versus modeled values on 31 December 2021 and 1 January 2022 (MUN station): (a) temperature and (b) wind speed. 
+Appendix B 
+ 
+ 
+ 
+Figure A2. Modeled maps of hourly PM 2.5 concentrations from 31 December 2021 at 19:00 LT to 1 
+January 2022 at 00:00 LT. Scenario assuming that New Year’s emissions began on 31 December 20221 
+at 21:00 LT. 
+Figure A2. Modeled maps of hourly PM 2.5 concentrations from 31 December 2021 at 19:00 LT to
+1 January 2022 at 00:00 LT. Scenario assuming that New Year’s emissions began on 31 December
+20221 at 21:00 LT.
+Toxics 2022, 10, x FOR PEER REVIEW 22 of 24 
+ 
+ 
+ 
+ 
+ 
+Figure A3. Modeled maps of hourly PM2.5 concentrations from 31 December 2021 at 16:00 LT to 31 
+December 2021 at 21:00 LT. Scenario assuming th at New Year’s emissions began on 31 December 
+20221 at 18:00 LT. 
+References 
+1. Greven, F.E.; Vonk, J.M.; Fischer, P.; Duijm, F.; Vink, N.M.; Brunekreef, B. Air Pollution during New Year’s Fireworks and Daily 
+Mortality in the Netherlands. Sci. Rep. 2019, 9, 5735. https://doi.org/10.1038/s41598-019-42080-6. 
+2. Tanda, S.; Li čbinský, R.; Hegrová, J.; Goessler, W. Impact of New Year’s Eve Fireworks on the Size Resolved Element 
+Distributions in Airborne Particles. Environ. Int. 2019, 128, 371–378. https://doi.org/10.1016/j.envint.2019.04.071. 
+3. FlacsoAndes. Los Años Viejos . Available online: https://biblio.flacsoandes.ed u.ec/libros/106617-opac (accessed on 13 March 
+2022). 
+4. Brimblecombe, P.; Lai, Y. Effect of Fireworks, Chinese New Year and the COVID-19 Lockdown on Air Pollution and Public 
+Attitudes. Aerosol Air Qual. Res. 2020, 20, 2318–2331. https://doi.org/10.4209/aaqr.2020.06.0299. 
+Figure A3. Modeled maps of hourly PM 2.5 concentrations from 31 December 2021 at 16:00 LT to
+31 December 2021 at 21:00 LT. Scenario assuming that New Year’s emissions began on 31 December
+20221 at 18:00 LT.
+
+T oxics2022, 10, 264 20 of 21
+References
+1. Greven, F.E.; Vonk, J.M.; Fischer, P .; Duijm, F.; Vink, N.M.; Brunekreef, B. Air Pollution during New Year’s Fireworks and Daily
+Mortality in the Netherlands. Sci. Rep. 2019, 9, 5735. [CrossRef] [PubMed]
+2. Tanda, S.; Liˇ cbinský, R.; Hegrová, J.; Goessler, W. Impact of New Year’s Eve Fireworks on the Size Resolved Element Distributions
+in Airborne Particles. Environ. Int. 2019, 128, 371–378. [CrossRef] [PubMed]
+3. FlacsoAndes. Los Años Viejos. Available online: https://biblio.flacsoandes.edu.ec/libros/106617-opac (accessed on 13 March 2022).
+4. Brimblecombe, P .; Lai, Y. Effect of Fireworks, Chinese New Year and the COVID-19 Lockdown on Air Pollution and Public
+Attitudes. Aerosol Air Qual. Res. 2020, 20, 2318–2331. [CrossRef]
+5. Singh, A.; Pant, P .; Pope, F.D. Air Quality during and after Festivals: Aerosol Concentrations, Composition and Health Effects.
+Atmos. Res. 2019, 227, 220–232. [CrossRef]
+6. World Health Organization. Air Quality Guidelines: Global Update 2005: Particulate Matter, Ozone, Nitrogen Dioxide, and Sulfur
+Dioxide; World Health Organization: Copenhagen, Denmark, 2006.
+7. Song, Y.; Huang, B.; He, Q.; Chen, B.; Wei, J.; Mahmood, R. Dynamic Assessment of PM 2.5 Exposure and Health Risk Using
+Remote Sensing and Geo-Spatial Big Data. Environ. Pollut. 2019, 253, 288–296. [CrossRef]
+8. IARC. Outdoor Air Pollution; World Health Organization: Geneva, Switzerland, 2013.
+9. Loomis, D.; Grosse, Y.; Lauby-Secretan, B.; Ghissassi, F.E.; Bouvard, V .; Benbrahim-Tallaa, L.; Guha, N.; Baan, R.; Mattock, H.;
+Straif, K. The Carcinogenicity of Outdoor Air Pollution. Lancet Oncol. 2013, 14, 1262–1263. [CrossRef]
+10. Peeples, L. News Feature: How Air Pollution Threatens Brain Health. Proc. Natl. Acad. Sci. USA 2020, 117, 13856–13860.
+[CrossRef]
+11. Wang, L.; Luo, D.; Liu, X.; Zhu, J.; Wang, F.; Li, B.; Li, L. Effects of PM2.5 Exposure on Reproductive System and Its Mechanisms.
+Chemosphere 2021, 264, 128436. [CrossRef]
+12. Hickey, C.; Gordon, C.; Galdanes, K.; Blaustein, M.; Horton, L.; Chillrud, S.; Ross, J.; Yinon, L.; Chen, L.C.; Gordon, T. Toxicity of
+Particles Emitted by Fireworks. Part. Fibre T oxicol. 2020, 17, 28. [CrossRef]
+13. Li, Z.; Li, X.; Song, H.; Tao, B.; Qiu, B.; Tian, D.; Zhan, M.; Wu, Z.; Wu, J.; Zhang, Q.; et al. Effects of Short-Term Ambient PM2.5
+Exposure on the Blood Cell Count and Hemoglobin Concentration among 82,431 People in Eastern China. Sci. T otal Environ. 2021,
+776, 146046. [CrossRef]
+14. Fu, H.; Yang, Z.; Liu, Y.; Shao, P . Ecological and Human Health Risk Assessment of Heavy Metals in Dust Affected by Fireworks
+during the Spring Festival in Beijing. Air Qual. Atmos. Health 2021, 14, 139–148. [CrossRef]
+15. Cecconi, A.; Navarrete, G.; Garcia-Guimaraes, M.; Vera, A.; Blanco-Dominguez, R.; Sanz-Garcia, A.; Lozano-Prieto, M.; LopezMelgar, B.; Rivero, F.; Martin, P .; et al. Inﬂuence of Air Pollutants on Circulating Inﬂammatory Cells and MicroRNA Expression in
+Acute Myocardial Infarction. Sci. Rep. 2022, 12, 5350. [CrossRef] [PubMed]
+16. Wang, H.; Lu, F.; Guo, M.; Fan, W.; Ji, W.; Dong, Z. Associations between PM1 Exposure and Daily Emergency Department Visits
+in 19 Hospitals, Beijing. Sci. T otal Environ. 2021, 755, 142507. [CrossRef] [PubMed]
+17. Yang, M.; Guo, Y.-M.; Bloom, M.S.; Dharmagee, S.C.; Morawska, L.; Heinrich, J.; Jalaludin, B.; Markevychd, I.; Knibbsf, L.D.; Lin,
+S.; et al. Is PM1 Similar to PM2.5? A New Insight into the Association of PM1 and PM2.5 with Children’s Lung Function. Environ.
+Int. 2020, 145, 106092. [CrossRef]
+18. Lin, C.-C. A Review of the Impact of Fireworks on Particulate Matter in Ambient Air. J. Air Waste Manag. Assoc. 2016, 66,
+1171–1182. [CrossRef]
+19. Sokhi, R.S.; Moussiopoulos, N.; Baklanov, A.; Bartzis, J.; Coll, I.; Finardi, S.; Friedrich, R.; Geels, C.; Grönholm, T.; Halenka, T.;
+et al. Advances in Air Quality Research—Current and Emerging Challenges. Atmos. Chem. Phys. 2022, 22, 4615–4703. [CrossRef]
+20. Baklanov, A.; Schlünzen, K.; Suppan, P .; Baldasano, J.; Brunner, D.; Aksoyoglu, S.; Carmichael, G.; Douros, J.; Flemming, J.; Forkel,
+R.; et al. Online Coupled Regional Meteorology Chemistry Models in Europe: Current Status and Prospects. Atmos. Chem. Phys.
+2014, 14, 317–398. [CrossRef]
+21. Stull, R.B.; Ahrens, C.D. Meteorology for Scientists and Engineers ; Brooks/Cole: Salt Lake City, UT, USA, 2000.
+22. Pleim, J.; Ran, L. Surface Flux Modeling for Air Quality Applications. Atmosphere 2011, 2, 271–302. [CrossRef]
+23. Baklanov, A.; Brunner, D.; Carmichael, G.; Flemming, J.; Freitas, S.; Gauss, M.; Hov, Ø.; Mathur, R.; Schlünzen, K.H.; Seigneur,
+C.; et al. Key Issues for Seamless Integrated Chemistry–Meteorology Modeling. Bull. Am. Meteorol. Soc. 2017, 98, 2285–2292.
+[CrossRef]
+24. Boucher, O. Atmospheric Aerosols: Properties and Climate Impacts ; Springer: Berlin/Heidelberg, Germany, 2015.
+25. Fuzzi, S.; Gilardoni, S.; Kokhanovsky, A.A.; Di Nicolantonio, W.; Mukai, S.; Sano, I.; Nakata, M.; Tomasi, C.; Lanconelli, C. Aerosol
+and Air Quality. In Atmospheric Aerosols; John Wiley & Sons: Hoboken, NJ, USA, 2017; pp. 553–596.
+26. Tomasi, C.; Lupi, A. Coagulation, Condensation, Dry and Wet Deposition, and Cloud Droplet Formation in the Atmospheric
+Aerosol Life Cycle. In Atmospheric Aerosols; John Wiley & Sons: Hoboken, NJ, USA, 2017; pp. 115–182.
+27. Calidad del Aire. 2018. Available online: https://www.researchgate.net/publication/336266246_CALIDAD_DEL_AIRE_2018
+(accessed on 6 May 2022).
+28. Informe Calidad del Aire. 2019. Available online: https://www.researchgate.net/publication/342601125_Informe_Calidad_del_
+Aire_2019 (accessed on 6 March 2022).
+29. Informe de Calidad del Aire Cuenca. 2020. Available online: https://www.researchgate.net/publication/354010604_Informe_
+de_calidad_del_aire_Cuenca_2020 (accessed on 6 March 2022).
+
+T oxics2022, 10, 264 21 of 21
+30. Zhang, X.; Shen, H.; Li, T.; Zhang, L. The Effects of Fireworks Discharge on Atmospheric PM2.5 Concentration in the Chinese
+Lunar New Year. Int. J. Environ. Res. Public Health 2020, 17, 9333. [CrossRef]
+31. Fan, S.; Li, Y.; Liu, C. Are Environmentally Friendly Fireworks Really “Green” for Air Quality? A Study from the 2019 National
+Day Fireworks Display in Shenzhen. Environ. Sci. T echnol. 2021, 55, 3520–3529. [CrossRef] [PubMed]
+32. De Visscher, A. Air Dispersion Modeling: Foundations and Applications ; John Wiley & Sons: Hoboken, NJ, USA, 2014.
+33. Instituto Nacional de Estadíscticas y Censos. Ecuador. Available online: https://www.ecuadorencifras.gob.ec/estadisticas/
+(accessed on 23 March 2022).
+34. Parra, R. Inventario de Emisiones Atmosf éricas del Cantón Cuenca 2014; Technical Report; EMOV EP: Cuenca, Ecuador, 2016; p. 88.
+35. Parra, R. Performance Studies of Planetary Boundary Layer Schemes in WRF-Chem for the Andean Region of Southern Ecuador.
+Atmos. Pollut. Res. 2018, 9, 411–428. [CrossRef]
+36. Parra, R.; Espinoza, C. Insights for Air Quality Management from Modeling and Record Studies in Cuenca, Ecuador. Atmosphere
+2020, 11, 998. [CrossRef]
+37. ECUAPASS. Available online: https://portal.aduana.gob.ec/ (accessed on 19 March 2022).
+38. Aguinaga Iturralde, D.F. Plan de Negocio para la Creación de una Empresa de Importación, Comercialización y Encendido de
+Fuegos Artiﬁciales de Venta Libre y Profesionales, en la Ciudad de Quito. Bachelor’s Thesis, Pontiﬁcia Universidad Católica del
+Ecuador, Quito, Ecuador, 2015.
+39. Telégrafo, E. GIR Decomisó 152 Toneladas de Pirotecnia en 13 Años. Available online: https://www.eltelegrafo.com.ec/noticias/
+judicial/12/gir-decomiso-toneladas-pirotecnia-13-anos (accessed on 19 March 2022).
+40. Keller, F.; Schragen, C. Determination of Particulate Matter Emission Factors of Common Pyrotechnic Articles. Prop. Explos.
+Pyrotech. 2021, 46, 825–842. [CrossRef]
+41. Campoverde, J.P . Puntos Autorizados para la Venta de Monigotes en Cuenca. La Voz del Tomebamba. Available online:
+https://www.lavozdeltomebamba.com/2019/12/27/puntos-autorizados-para-la-venta-de-monigotes-en-cuenca/ (accessed on
+19 March 2022).
+42. EMEP/EEA Air Pollutant Emission Inventory. Available online: http://efdb.apps.eea.europa.eu/?source=%7B%22query%22%3
+A%7B%22match_all%22%3A%7B%7D%7D%2C%22display_type%22%3A%22tabular%22%7D (accessed on 27 March 2022).
+43. WRF-Chem. Available online: https://ruc.noaa.gov/wrf/wrf-chem/ (accessed on 2 March 2021).
+44. NCEP FNL Operational Model Global T ropospheric Analyses, Continuing from July 1999 ; National Centers for Environmental Prediction/National Weather Service: Boulder, CO, USA, 2000.
+45. Lin, Y.-L.; Farley, R.D.; Orville, H.D. Bulk Parameterization of the Snow Field in a Cloud Model. J. Clim. Appl. Meteorol. 1983, 22,
+1065–1092. [CrossRef]
+46. Mlawer, E.J.; Taubman, S.J.; Brown, P .D.; Iacono, M.J.; Clough, S.A. Radiative Transfer for Inhomogeneous Atmospheres: RRTM, a
+Validated Correlated-k Model for the Longwave. J. Geophys. Res. 1997, 102, 16663–16682. [CrossRef]
+47. Chou, M.-D.; Suarez, M.J. A Solar Radiation Parameterization (CLIRAD-SW) for Atmospheric Studies ; NASA Goddard Space Flight
+Center: Greenbelt, MD, USA, 1999; p. 48.
+48. Paulson, C.A. The Mathematical Representation of Wind Speed and Temperature Proﬁles in the Unstable Atmospheric Surface
+Layer. J. Appl. Meteorol. Climatol. 1970, 9, 857–861. [CrossRef]
+49. Tewari, M.; Chen, F.; Wang, W.; Dudhia, J.; LeMone, M.A.; Gayno, G.; Wegiel, J.; Cuenca, R.H. Implementation and Veriﬁcation
+of the Uniﬁed Noah Land Surface Model in the WRF Model. In Proceedings of the 20th Conference on Weather Analysis and
+Forecasting/16th Conference on Numerical Weather Prediction ; American Meteorological Society: Seattle, WA, USA, 2004; p. 14.2A.
+50. Hong, S.-Y.; Noh, Y.; Dudhia, J. A New Vertical Diffusion Package with an Explicit Treatment of Entrainment Processes.Mon.
+Weather. Rev. 2006, 134, 2318–2341. [CrossRef]
+51. European Environment Agency. The Application of Models under the European Union’s Air Quality Directive: A T echnical Reference
+Guide; Technical Report; Publications Ofﬁce: Luxembourg, 2011.
+52. Majumdar, D.; Gavane, A.G. Perturbation of Background Atmospheric Black Carbon/PM1 Ratio during Firecracker Bursting
+Episode. Asian J. Atmos. Environ. 2017, 8, 322–329. [CrossRef]
+53. World Health Organization. WHO Global Air Quality Guidelines: Particulate Matter (PM2.5 and PM10), Ozone, Nitrogen Dioxide,
+Sulfur Dioxide and Carbon Monoxide. Available online: https://www.who.int/publications-detail-redirect/9789240034228
+(accessed on 20 March 2022).
+54. Simon, H.; Baker, K.R.; Phillips, S. Compilation and Interpretation of Photochemical Model Performance Statistics Published
+between 2006 and 2012. Atmos. Environ. 2012, 61, 124–139. [CrossRef]
+55. Liu, C.; Chen, R.; Sera, F.; Vicedo-Cabrera, A.M.; Guo, Y.; Tong, S.; Coelho, M.S.Z.S.; Saldiva, P .H.N.; Lavigne, E.; Matus, P .; et al.
+Ambient Particulate Air Pollution and Daily Mortality in 652 Cities. N. Engl. J. Med. 2019, 381, 705–715. [CrossRef] [PubMed]
+56. Environmental Effects of New Year’s Eve Fireworks. Available online: https://www.umweltbundesamt.at/en/news211217en
+(accessed on 27 March 2022).
+57. Molina, M.J.; Molina, L.T. Megacities and Atmospheric Pollution. J. Air Waste Manag. Assoc. 2004, 54, 37. [CrossRef] [PubMed]
+58. Yao, L.; Wang, D.; Fu, Q.; Qiao, L.; Wang, H.; Li, L.; Sun, W.; Li, Q.; Wang, L.; Yang, X.; et al. The Effects of Firework Regulation on
+Air Quality and Public Health during the Chinese Spring Festival from 2013 to 2017 in a Chinese Megacity. Environ. Int. 2019, 126,
+96–106. [CrossRef] [PubMed]
+59. Unidata. IDV . Available online: https://www.unidata.ucar.edu/software/idv/ (accessed on 25 March 2022).

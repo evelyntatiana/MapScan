@@ -167,6 +167,16 @@ type Particle = {
   source: number;
 };
 
+type AcademicReferenceId = "who2021" | "parra2022" | "hu2022" | "mainka2022" | "vilcassim2023";
+
+type HealthProfile = {
+  category: "Contaminante atmosférico gaseoso" | "Material particulado" | "Variable meteorológica";
+  origin: string;
+  role: string;
+  health: string;
+  references: AcademicReferenceId[];
+};
+
 const CHEMISTRY = [
   {
     ingredients: ["NO₂", "Luz solar"],
@@ -252,6 +262,142 @@ const POLLUTANT_NAMES: Record<string, string> = {
   "PM₁": "material particulado ≤ 1 µm",
   "PM₂.₅": "material particulado fino ≤ 2,5 µm",
   "PM₁₀": "material particulado ≤ 10 µm",
+};
+
+const ACADEMIC_REFERENCES: Record<AcademicReferenceId, { short: string; apa: string; url: string }> = {
+  who2021: {
+    short: "OMS, 2021",
+    apa: "World Health Organization. (2021). WHO global air quality guidelines: Particulate matter (PM2.5 and PM10), ozone, nitrogen dioxide, sulfur dioxide and carbon monoxide.",
+    url: "https://www.who.int/publications/i/item/9789240034228",
+  },
+  parra2022: {
+    short: "Parra et al., 2022",
+    apa: "Parra, R., Saud, C., & Espinoza, C. (2022). Simulating PM2.5 concentrations during New Year in Cuenca, Ecuador: Effects of advancing the time of burning activities. Toxics, 10(5), 264.",
+    url: "https://doi.org/10.3390/toxics10050264",
+  },
+  hu2022: {
+    short: "Hu et al., 2022",
+    apa: "Hu, Y., Wu, M., Li, Y., & Liu, X. (2022). Influence of PM1 exposure on total and cause-specific respiratory diseases: A systematic review and meta-analysis. Environmental Science and Pollution Research, 29, 15117–15126.",
+    url: "https://doi.org/10.1007/s11356-021-16536-0",
+  },
+  mainka2022: {
+    short: "Mainka y Żak, 2022",
+    apa: "Mainka, A., & Żak, M. (2022). Synergistic or antagonistic health effects of long- and short-term exposure to ambient NO2 and PM2.5: A review. International Journal of Environmental Research and Public Health, 19(21), 14079.",
+    url: "https://doi.org/10.3390/ijerph192114079",
+  },
+  vilcassim2023: {
+    short: "Vilcassim y Thurston, 2023",
+    apa: "Vilcassim, R., & Thurston, G. D. (2023). Gaps and future directions in research on health effects of air pollution. eBioMedicine, 93, 104668.",
+    url: "https://doi.org/10.1016/j.ebiom.2023.104668",
+  },
+};
+
+const HEALTH_PROFILES: Record<string, HealthProfile> = {
+  "NO₂": {
+    category: "Contaminante atmosférico gaseoso",
+    origin: "Se forma sobre todo cuando el NO emitido por combustión a alta temperatura se oxida en el aire. En el entorno industrial son plausibles el tránsito diésel y a gasolina, calderas, hornos y otros equipos de combustión; identificar una fuente concreta exige medición e inventario.",
+    role: "Es parte de los NOx —grupo que incluye especialmente NO y NO₂— y participa, junto con radiación y compuestos orgánicos volátiles, en la química que puede formar O₃ troposférico.",
+    health: "La exposición puede inflamar las vías respiratorias, agravar el asma y aumentar la susceptibilidad a síntomas e infecciones respiratorias, según nivel y duración de exposición.",
+    references: ["who2021", "parra2022"],
+  },
+  "O₃": {
+    category: "Contaminante atmosférico gaseoso",
+    origin: "No suele emitirse directamente. Se forma en la atmósfera cuando NOx y compuestos orgánicos volátiles reaccionan bajo luz solar; por ello, su máximo puede aparecer lejos o después de las fuentes precursoras.",
+    role: "Es un oxidante fotoquímico secundario. El NO puede consumirlo localmente y regenerar NO₂, mientras la radiación y otros precursores controlan su balance neto.",
+    health: "Puede irritar e inflamar las vías respiratorias, reducir temporalmente la función pulmonar y agravar asma y otros síntomas, especialmente durante actividad al aire libre.",
+    references: ["who2021", "vilcassim2023"],
+  },
+  "SO₂": {
+    category: "Contaminante atmosférico gaseoso",
+    origin: "Se asocia con la combustión de combustibles que contienen azufre y con ciertos procesos industriales. En un parque industrial son plausibles calderas, hornos y chimeneas, pero el combustible y el control de emisiones determinan la contribución real.",
+    role: "Es un gas soluble que puede oxidarse y contribuir a sulfatos del PM₂.₅; humedad, oxidantes y tiempo de residencia modifican ese proceso.",
+    health: "Las exposiciones breves pueden provocar broncoconstricción, tos e irritación, con mayor sensibilidad en personas con asma.",
+    references: ["who2021", "parra2022"],
+  },
+  "CO": {
+    category: "Contaminante atmosférico gaseoso",
+    origin: "Proviene de combustión incompleta. Son fuentes plausibles los motores, flotas antiguas o mal mantenidas, calderas, hornos y quemas; su presencia no identifica por sí sola qué equipo lo produjo.",
+    role: "Es relativamente estable a escala urbana y funciona como trazador de combustión y acumulación cuando la dispersión es débil. No es equivalente a CO₂ ni a todos los gases de combustión.",
+    health: "Al unirse a la hemoglobina reduce el transporte de oxígeno. A concentraciones elevadas puede causar cefalea, mareo y efectos cardiovasculares o neurológicos; el riesgo depende de dosis y tiempo.",
+    references: ["who2021", "parra2022"],
+  },
+  "NO": {
+    category: "Contaminante atmosférico gaseoso",
+    origin: "Se emite principalmente en combustiones a alta temperatura de motores, calderas y hornos. Cerca de la fuente suele ser una fracción importante de los NOx y después se transforma con rapidez.",
+    role: "Reacciona con O₃ para formar NO₂ y O₂. La evidencia sanitaria ambiental suele evaluar NO₂ o NOx; por eso NO no se usa aquí como sustituto automático de NO₂.",
+    health: "Su principal lectura en esta herramienta es como precursor y marcador de emisiones de combustión. No se asigna un riesgo sanitario independiente sin concentración, duración y especiación de NOx.",
+    references: ["who2021", "vilcassim2023"],
+  },
+  "PM₁": {
+    category: "Material particulado",
+    origin: "Puede proceder de combustión diésel y gasolina, hornos, calderas y procesos que generan aerosol fino, además de formación secundaria. La red descrita para Cuenca incluye medición de fracciones finas.",
+    role: "Es la fracción con diámetro aerodinámico ≤ 1 µm; no equivale a una composición química única ni debe confundirse automáticamente con partículas ultrafinas.",
+    health: "Puede depositarse profundamente en el tracto respiratorio. La revisión disponible observa asociaciones con algunos desenlaces respiratorios, pero advierte evidencia limitada, heterogeneidad y sesgo de publicación.",
+    references: ["hu2022", "parra2022", "vilcassim2023"],
+  },
+  "PM₂.₅": {
+    category: "Material particulado",
+    origin: "Puede ser primario —tránsito diésel, combustión industrial y otras quemas— o secundario, por conversión de gases como SO₂ y NOx. El estudio local identifica tránsito e industria entre los antecedentes relevantes de Cuenca.",
+    role: "Agrupa partículas ≤ 2,5 µm con composición variable. Puede permanecer suspendido y transportarse; humedad, lluvia y estabilidad modifican su masa, remoción y dispersión.",
+    health: "Penetra en regiones profundas del pulmón y se asocia con efectos respiratorios y cardiovasculares; el riesgo cambia con concentración, composición, exposición y susceptibilidad.",
+    references: ["who2021", "parra2022", "mainka2022"],
+  },
+  "PM₁₀": {
+    category: "Material particulado",
+    origin: "En el contexto industrial puede provenir de polvo vial resuspendido, desgaste, construcción, trituración, manejo de materiales y fracciones de combustión. La asignación a una fuente requiere análisis de composición y viento.",
+    role: "Incluye partículas inhalables ≤ 10 µm y contiene a las fracciones más finas; seleccionar PM₁, PM₂.₅ y PM₁₀ no representa tres masas independientes que puedan sumarse.",
+    health: "Puede depositarse en vías respiratorias y asociarse con síntomas y exacerbaciones respiratorias; su composición y distribución de tamaños influyen en el efecto.",
+    references: ["who2021", "vilcassim2023"],
+  },
+  "Humedad": {
+    category: "Variable meteorológica",
+    origin: "Es una propiedad del aire, no una emisión industrial ni un contaminante. Depende del ciclo meteorológico local y del contenido de vapor de agua.",
+    role: "Puede favorecer crecimiento higroscópico del aerosol y química acuosa; también modifica visibilidad, deposición y algunas mediciones de partículas.",
+    health: "No se le atribuye la toxicidad de un contaminante en esta lectura. Su efecto sanitario es indirecto: puede cambiar la concentración, el tamaño y la persistencia de aquello que se inhala.",
+    references: ["parra2022", "vilcassim2023"],
+  },
+  "Precipitación": {
+    category: "Variable meteorológica",
+    origin: "Es un proceso meteorológico, no una sustancia emitida por una fuente. Su intensidad y duración controlan cuánto material puede retirar.",
+    role: "Captura partículas y gases solubles dentro y debajo de las nubes, reduciendo a menudo la carga suspendida y transfiriendo parte de ella al suelo o al agua.",
+    health: "Modifica indirectamente la exposición al limpiar temporalmente el aire; no convierte por sí sola una mezcla en inocua ni elimina todos los contaminantes.",
+    references: ["parra2022", "vilcassim2023"],
+  },
+  "Presión atmosférica": {
+    category: "Variable meteorológica",
+    origin: "Describe el estado de la masa de aire; no procede de chimeneas, vehículos ni procesos industriales.",
+    role: "Debe leerse junto con temperatura, estabilidad y viento. Ciertos patrones persistentes pueden acompañar ventilación débil o condiciones favorables a acumulación, pero la presión aislada no determina la calidad del aire.",
+    health: "En el laboratorio actúa como modificador indirecto de exposición. No se le asigna un efecto tóxico atribuible a contaminación.",
+    references: ["parra2022", "vilcassim2023"],
+  },
+  "Temperatura": {
+    category: "Variable meteorológica",
+    origin: "Es una condición térmica ambiental, no un contaminante. Cambia por hora, nubosidad, superficie, altitud y circulación atmosférica.",
+    role: "Controla estabilidad, convección y velocidades de reacción. El calentamiento diurno puede profundizar la capa de mezcla; ciertos escenarios cálidos y soleados favorecen fotoquímica.",
+    health: "Modifica indirectamente la dosis inhalada al cambiar dispersión y química. El estrés térmico es un riesgo distinto y no se suma aquí como toxicidad del aire.",
+    references: ["parra2022", "vilcassim2023"],
+  },
+  "Radiación global": {
+    category: "Variable meteorológica",
+    origin: "Es la energía solar total recibida por la superficie; no es una emisión ni un contaminante.",
+    role: "Aporta energía a la fotoquímica y al calentamiento superficial. Puede favorecer convección y, si existen precursores, procesos que generan O₃ secundario.",
+    health: "Su papel sanitario en esta mezcla es indirecto: puede modificar formación y dispersión. No se interpreta como dosis de radiación sobre personas.",
+    references: ["parra2022", "who2021"],
+  },
+  "Luz solar": {
+    category: "Variable meteorológica",
+    origin: "Es una condición de iluminación natural; no procede de procesos industriales y no es un contaminante atmosférico.",
+    role: "La fracción fotoquímicamente activa impulsa la fotólisis de NO₂ y participa en ciclos de formación y consumo de O₃, siempre condicionados por precursores y tiempo.",
+    health: "Afecta indirectamente la exposición al modificar la química del aire. La herramienta no equipara luz solar con toxicidad ni con concentración de O₃.",
+    references: ["who2021", "parra2022"],
+  },
+  "Inversión térmica": {
+    category: "Variable meteorológica",
+    origin: "Es una estructura vertical de temperatura en la que aire más cálido queda sobre aire frío cercano al suelo; no es una emisión.",
+    role: "Reduce la convección y puede formar una capa de mezcla somera. Con viento débil, los contaminantes se diluyen menos y permanecen cerca de las fuentes.",
+    health: "No es tóxica por sí misma, pero puede elevar la exposición simultánea a gases y partículas al concentrarlos en el aire respirado.",
+    references: ["parra2022", "vilcassim2023"],
+  },
 };
 
 const SCENARIO_GROUPS = [
@@ -444,6 +590,91 @@ function interpretMixture(ingredients: string[], fallback: Pollutant | undefined
       ?? fallback?.label
       ?? "PM₂.₅",
   };
+}
+
+function interpretHealthEvidence(ingredients: string[]) {
+  const profiles = ingredients
+    .map((ingredient) => ({ ingredient, profile: HEALTH_PROFILES[ingredient] }))
+    .filter((item): item is { ingredient: string; profile: HealthProfile } => Boolean(item.profile));
+  const pollutants = profiles.filter(({ profile }) => profile.category !== "Variable meteorológica");
+  const meteorology = profiles.filter(({ profile }) => profile.category === "Variable meteorológica");
+  const particles = pollutants.filter(({ profile }) => profile.category === "Material particulado");
+  const gases = pollutants.filter(({ profile }) => profile.category === "Contaminante atmosférico gaseoso");
+
+  let summary = "Selecciona una o más variables para construir una lectura sanitaria trazable.";
+  if (profiles.length === 1 && pollutants.length === 1) {
+    summary = `La selección contiene una sola exposición, ${profiles[0].ingredient}. Se explica su vía principal sin presentarla como mezcla ni calcular un riesgo individual.`;
+  } else if (pollutants.length === 0 && meteorology.length) {
+    summary = `La selección contiene ${meteorology.length === 1 ? "una condición meteorológica" : `${meteorology.length} condiciones meteorológicas`}, no contaminantes. Estas variables modifican el transporte, la transformación o la remoción de una contaminación que tendría que medirse por separado.`;
+  } else if (pollutants.length === 1 && meteorology.length) {
+    summary = `La selección combina ${pollutants[0].ingredient} con ${meteorology.length === 1 ? "un modificador meteorológico" : `${meteorology.length} modificadores meteorológicos`}. La condición atmosférica puede aumentar o reducir la dosis inhalada, pero no crea una suma automática de riesgos.`;
+  } else if (pollutants.length > 1) {
+    summary = `La selección representa una coexposición a ${pollutants.length} contaminantes${meteorology.length ? ` bajo ${meteorology.length} condiciones meteorológicas` : ""}. Comparten tiempo y espacio de exposición, aunque cada sustancia o fracción conserva fuentes, transformación y toxicidad propias.`;
+  }
+
+  const pathways: string[] = [];
+  if (gases.some(({ ingredient }) => ["NO₂", "O₃", "SO₂"].includes(ingredient))) {
+    pathways.push("Irritación e inflamación de las vías respiratorias, con sensibilidad especial en personas con asma.");
+  }
+  if (particles.length) {
+    pathways.push("Depósito de partículas en el aparato respiratorio; las fracciones finas pueden alcanzar regiones más profundas y relacionarse con respuestas respiratorias y cardiovasculares.");
+  }
+  if (gases.some(({ ingredient }) => ingredient === "CO")) {
+    pathways.push("Reducción del transporte de oxígeno por CO cuando la dosis es suficiente, una vía distinta de la irritación respiratoria.");
+  }
+  if (gases.some(({ ingredient }) => ["NO", "NO₂", "O₃"].includes(ingredient))) {
+    pathways.push("Química acoplada de NO, NO₂ y O₃: cambia la mezcla respirada, pero no permite deducir una concentración final sin mediciones y un modelo fotoquímico.");
+  }
+  if (!pathways.length) {
+    pathways.push("Sin contaminantes seleccionados no se puede atribuir una vía tóxica; solo se describe cómo la meteorología alteraría una exposición medida.");
+  }
+
+  const meteorologyEffects = meteorology.map(({ ingredient }) => ({
+    Humedad: "la humedad puede hacer crecer partículas higroscópicas y favorecer química acuosa",
+    Precipitación: "la precipitación puede retirar partículas y gases solubles",
+    "Presión atmosférica": "la presión aporta contexto sinóptico, pero aislada no determina acumulación",
+    Temperatura: "la temperatura modifica estabilidad, convección y velocidades de reacción",
+    "Radiación global": "la radiación global aporta energía a la convección y la fotoquímica",
+    "Luz solar": "la luz solar activa ciclos fotoquímicos como la fotólisis de NO₂",
+    "Inversión térmica": "la inversión térmica restringe la mezcla vertical y puede concentrar emisiones",
+  }[ingredient])).filter(Boolean);
+
+  const meteorologyNote = meteorologyEffects.length
+    ? `En esta selección, ${meteorologyEffects.join("; ")}. El efecto neto también depende de viento, nubosidad, intensidad y duración del episodio.`
+    : "No se seleccionaron variables meteorológicas; por eso esta lectura no infiere ventilación, remoción ni estabilidad del episodio.";
+
+  const references = new Set<AcademicReferenceId>();
+  profiles.forEach(({ profile }) => profile.references.forEach((reference) => references.add(reference)));
+  if (pollutants.length) references.add("who2021");
+  if (pollutants.length > 1) {
+    references.add("mainka2022");
+    references.add("vilcassim2023");
+  }
+  if (meteorology.length) references.add("parra2022");
+
+  return {
+    profiles,
+    summary,
+    pathways,
+    meteorologyNote,
+    referenceIds: Array.from(references),
+    limitation: "Interpretación cualitativa, no diagnóstico ni estimación cuantitativa de riesgo. Los riesgos individuales no se suman de forma directa: las interacciones pueden ser aditivas, sinérgicas, antagónicas o estar confundidas. El resultado real depende de concentración, composición, duración, momento, susceptibilidad y coexposiciones.",
+  };
+}
+
+function AcademicReferenceList({ ids }: { ids: AcademicReferenceId[] }) {
+  if (!ids.length) return null;
+  return (
+    <div className="academic-reference-block">
+      <strong>Fuentes académicas · APA 7</strong>
+      <ol>
+        {ids.map((id) => {
+          const reference = ACADEMIC_REFERENCES[id];
+          return <li key={id}><a href={reference.url} target="_blank" rel="noreferrer">{reference.apa}</a></li>;
+        })}
+      </ol>
+    </div>
+  );
 }
 
 const TILE_SIZE = 256;
@@ -1213,6 +1444,7 @@ export default function Home() {
     ? Math.max(0.45, Math.min(2.25, historyPrimaryValue / Math.max(selectedPollutant?.median ?? 1, 0.001)))
     : 1;
   const mixResult = useMemo(() => interpretMixture(ingredients, selectedPollutant), [ingredients, selectedPollutant]);
+  const healthResult = useMemo(() => interpretHealthEvidence(ingredients), [ingredients]);
   const trafficMarkerPercent = selectedTrafficEmission
     ? trafficEmissionPosition(selectedTrafficEmission.rate, data?.geography.aermodStats.min ?? 0, data?.geography.aermodStats.max ?? 1) * 100
     : null;
@@ -1582,6 +1814,43 @@ export default function Home() {
                 <strong>Mecanismos activados</strong>
                 <ul>{mixResult.mechanisms.map((mechanism) => <li key={mechanism}>{mechanism}</li>)}</ul>
                 <small>Lectura conceptual: no sustituye una corrida cinética, termodinámica o de dispersión validada.</small>
+              </div>
+            </details>
+            <details className="reaction-detail evidence-detail">
+              <summary>Origen local y efecto en salud <span>＋</span></summary>
+              <div>
+                <p className="evidence-intro">Lectura variable por variable, en el orden de selección. “Origen local” indica fuentes plausibles para el entorno industrial de Cuenca; no atribuye emisiones a una instalación sin medición.</p>
+                {healthResult.profiles.length ? (
+                  <div className="origin-health-list">
+                    {healthResult.profiles.map(({ ingredient, profile }) => (
+                      <article key={ingredient}>
+                        <header><b>{ingredient}</b><span>{profile.category}</span></header>
+                        <dl>
+                          <div><dt>{profile.category === "Variable meteorológica" ? "Naturaleza" : "Origen probable"}</dt><dd>{profile.origin}</dd></div>
+                          <div><dt>Papel atmosférico</dt><dd>{profile.role}</dd></div>
+                          <div><dt>Efecto en salud</dt><dd>{profile.health}</dd></div>
+                        </dl>
+                        <p className="inline-citations">
+                          {profile.references.map((id) => <a key={id} href={ACADEMIC_REFERENCES[id].url} target="_blank" rel="noreferrer">{ACADEMIC_REFERENCES[id].short}</a>)}
+                        </p>
+                      </article>
+                    ))}
+                  </div>
+                ) : <p className="empty-evidence">Añade cualquiera de las 15 variables para generar su explicación individual.</p>}
+                <AcademicReferenceList ids={healthResult.referenceIds} />
+              </div>
+            </details>
+            <details className="reaction-detail evidence-detail mixture-health-detail">
+              <summary>Impacto integrado de la mezcla <span>＋</span></summary>
+              <div>
+                {ingredients.length ? <div className="evidence-tags">{ingredients.map((ingredient) => <span key={ingredient}>{ingredient}</span>)}</div> : null}
+                <p className="mixture-summary">{healthResult.summary}</p>
+                <strong>Vías y sistemas compartidos</strong>
+                <ul className="health-pathways">{healthResult.pathways.map((pathway) => <li key={pathway}>{pathway}</li>)}</ul>
+                <strong>Modulación meteorológica</strong>
+                <p>{healthResult.meteorologyNote}</p>
+                <aside className="evidence-caution"><b>Límite científico</b><p>{healthResult.limitation}</p></aside>
+                <AcademicReferenceList ids={healthResult.referenceIds} />
               </div>
             </details>
             <button className="primary-action" onClick={() => {

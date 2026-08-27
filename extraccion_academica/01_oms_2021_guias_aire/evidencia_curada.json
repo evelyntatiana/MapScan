@@ -1,0 +1,29 @@
+[
+  {
+    "source_id": "01_oms_2021_guias_aire",
+    "variables": "PM2.5|PM10|O3|NO2|SO2|CO",
+    "dimension": "salud",
+    "finding": "La evidencia sanitaria sustenta guías para PM2.5, PM10, O3, NO2, SO2 y CO; la exposición debe interpretarse según concentración, duración y población susceptible.",
+    "location": "Resumen ejecutivo y capítulos de contaminantes",
+    "cita_apa": "World Health Organization. (2021). WHO global air quality guidelines: Particulate matter (PM2.5 and PM10), ozone, nitrogen dioxide, sulfur dioxide and carbon monoxide. https://iris.who.int/handle/10665/345329",
+    "url": "https://www.who.int/publications/i/item/9789240034228"
+  },
+  {
+    "source_id": "01_oms_2021_guias_aire",
+    "variables": "PM2.5|PM10",
+    "dimension": "salud",
+    "finding": "El material particulado se asocia con efectos respiratorios y cardiovasculares; el tamaño aerodinámico modifica la penetración y deposición en el aparato respiratorio.",
+    "location": "Capítulo de material particulado",
+    "cita_apa": "World Health Organization. (2021). WHO global air quality guidelines: Particulate matter (PM2.5 and PM10), ozone, nitrogen dioxide, sulfur dioxide and carbon monoxide. https://iris.who.int/handle/10665/345329",
+    "url": "https://www.who.int/publications/i/item/9789240034228"
+  },
+  {
+    "source_id": "01_oms_2021_guias_aire",
+    "variables": "O3|NO2|SO2|CO",
+    "dimension": "salud",
+    "finding": "Los gases regulados tienen perfiles sanitarios distintos; no deben agruparse como si toxicidad, estado gaseoso y condición de contaminante fueran sinónimos.",
+    "location": "Capítulos de contaminantes gaseosos",
+    "cita_apa": "World Health Organization. (2021). WHO global air quality guidelines: Particulate matter (PM2.5 and PM10), ozone, nitrogen dioxide, sulfur dioxide and carbon monoxide. https://iris.who.int/handle/10665/345329",
+    "url": "https://www.who.int/publications/i/item/9789240034228"
+  }
+]

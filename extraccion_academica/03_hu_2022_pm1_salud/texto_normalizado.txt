@@ -1,0 +1,722 @@
+RESEARCH ARTICLE
+Influence of PM1 exposure on total and cause-specific respiratory
+diseases: a systematic review and meta-analysis
+Yaoyu Hu 1 & Mengqiu Wu1 & Yutong Li 1 & Xiangtong Liu1,2
+Received: 16 July 2021 / Accepted: 10 September 2021
+# The Author(s) 2021
+Abstract
+An increasing number of studies examined the potential effects of PM 1 (submicronic particulate matter with an aerodynamic
+diameter ≤ 1 μm) on the risk of respiratory diseases; however, the results have been inconclusive. This study aimed to determine
+the overall association between PM1 with total and cause-specific respiratory diseases. A systematic review and meta-analysis
+was conducted with 68 related articles retrieved, and six articles met the full inclusion criteria for the final analysis. For a 10μg/
+m3 increase in PM1, the pooled odds ratio (OR) was 1.05 (95% CI 0.98–1.12) for total respiratory diseases, 1.25 (95% CI 1.00–
+1.56) for asthma, and 1.07 (95% CI 1.04 –1.10) for pneumonia with the I2 value of 87%, 70%, and 0%, respectively. Subgroup
+analyses showed that long-term exposure to PM1 was associated with increased risk of asthma (OR 1.47, 95% CI 1.33–1.63) with
+an I2 value of 0%, while short-term exposure to PM 1 was not associated with asthma ( OR 1.07, 95% CI 0.89–1.27) with the I2
+value of 0%. Egger’s test showed that publication bias existed ( P = 0.041); however, the funnel plot was symmetrical with the
+inclusion of the moderator. In conclusion, elevated levels of PM1 may increase morbidity in total and cause-specific respiratory
+diseases in the population.
+Keywords Air pollution . PM1 . Respiratory disease . Asthma . Pneumonia . Meta-analysis
+Introduction
+Respiratory diseases are the leading causes of morbidity and
+mortality worldwide (GBD 2019 Diseases and Injuries
+Collaborators 2020). In recent decades, chronic respiratory
+diseases, such as chronic obstructive pulmonary disease
+(COPD) and asthma, have attr acted increasing attention
+(Wang et al. 2018; Huang et al. 2019). In 2019, the numbers
+of people with COPD and asthma were 212 million and 262
+million worldwide, respectively (GBD 2019 Diseases and
+Injuries Collaborators 2020). Therefore, further study on the
+risk factors is necessary to minimize the morbidity of respiratory diseases and to improve prevention and guidelines for
+treating respiratory diseases.
+Ambient particulate matter pollution has been a severe public health issue worldwide (Kim et al. 2019;W a n ge ta l .
+2021a). Although there has been improvement in air quality
+over recent decades in some countries, more than 90% of the
+global population lives in areas with air quality exceeding
+guidelines (Evangelopoulos et al. 2020). In 2019, ambient
+particulate matter pollution led about 1.4 million deaths in
+China (GBD 2019 Diseases and Injuries Collaborators
+2020). The acute and long-term effects of ambient air pollution on human health are well known. Some epidemiological
+studies showed that the degree of exposure to ambient particulate matter (PM) is associated with daily mortality, mainly
+from cardiovascular and respiratory diseases (Liu et al.2019a;
+Tian et al. 2020). Previous epidemiological studies have
+Yaoyu Hu and Mengqiu Wu contributed equally to this work.
+Responsible Editor: Lotfi Aleya
+* Xiangtong Liu
+xiangtongl@ccmu.edu.cn
+Yaoyu Hu
+huyaoyu499@163.com
+Mengqiu Wu
+qiuwm00@163.com
+Yutong Li
+15210355177@163.com
+1 Department of Epidemiology and Health Statistics, School of Public
+Health, Capital Medical University, No. 10 Xitoutiao, Youanmen,
+Fengtai District, Beijing 100069, China
+2 Beijing Municipal Key Laboratory of Clinical Epidemiology,
+Beijing 100069, China
+https://doi.org/10.1007/s11356-021-16536-0
+/ Published online: 9 October 2021
+Environmental Science and Pollution Research (2022) 29:15117–15126
+
+focused on the adverse effects of fine particulate matter
+(PM2.5, particulate matter with an aerodynamic diameter ≤
+2.5 μm) and inhalable particulate matter (PM 10, particulate
+matter with an aerodynamic diameter ≤ 10 μm) (Doiron
+et al. 2019;Y a n ge ta l .2020). Exposure to PM 2.5 and PM10
+has been proven to be associated with respiratory diseases
+(Yao et al. 2020;G u r u n ge ta l .2017; Pun et al. 2017; Sicard
+et al. 2019; Cao et al. 2021).
+The most recent research indicated that PM 1 (submicronic
+particulate matter with an aerodynamic diameter≤ 1 μm) contributed 77–86% of the PM 2.5 concentration in China (Chen
+et al. 2018). However, it remains unknown whether PM 1 or
+PM1-2.5 induced the adverse effects of PM2.5. It has been stated that the size of PM has a negative correlation with the level
+of its toxicity in the lungs, which means that PM
+1 provide
+more detrimental effects than PM 2.5 (Hamra et al. 2014;
+Valavanidis et al. 2008). However, limited evidence was
+found for the association between particulate matter and respiratory diseases, especially on PM
+1.
+According to previous epidemiological studies, the exposure to PM 1 contributing to the development of respiratory
+diseases remains uncertain (Zhang et al. 2021). To assess the
+effects of exposure to PM 1 quantitatively and accurately on
+the respiratory diseases, we conducted a systematic review
+and meta-analysis on all relevant studies published thus far.
+Methods
+Literature search strategy
+This review was conducted according to the Preferred
+Reporting Items for Systematic Reviews and Meta-Analyses
+(PRISMA) statement and the Meta-analysis of Observational
+Studies in Epidemiology (MOOSE) guidelines (Moher et al.
+2009; Stroup et al. 2000). Three authors systematically
+searched PubMed (1966 to Apr 2021), Embase (1950 to
+Apr 2021), and the Cochrane Library (2000 to Apr 2021) for
+studies on the associations between PM
+1 and respiratory diseases. The full search strategies are described in the supplementary data (Appendix 1). We also examined the references
+of the selected papers and reviews for additional pertinent
+data.
+Inclusion and exclusion criteria
+The flowchart of studies through the review process is shown
+in Fig. 1. Studies included in this meta-analysis met the following criteria: (1) epidemiological studies investigated the
+association between exposure to PM
+1 and morbidity of respiratory diseases; (2) the subjects of the study were the general
+human population, regardless of age, geographical areas, and
+occupations of the population; (3) studies that quantitatively
+showed the results of estimation of exposure to ambient outdoor PM1; (4) respiratory diseases in relation to exposure to
+PM1 were selected according to the 10th Revision of the
+International Classification of Diseases: total respiratory diseases (ICD-10: J00-J99) and cause-specific diseases including
+upper respiratory tract infections (URTI, J00-J06), pneumonia
+(J18), obstructive pulmonary diseases (COPD, J40-J44 and
+J47), and asthma (J45-J46); (5) provided the effect size of
+prevalence, hospital admission or emergency visit of respiratory diseases per 10 or interquartile range (IQR) μg/m
+3 increase in PM 1 concentration: regression coefficient, percentage change (PR), excess rate (ER), risk ratio (RR), hazard ratio
+(HR) and odds ratio ( OR), standard error ( SE), and/or 95%
+confidence interval (CI); and (6) were published in English
+with full text. The exclusion criteria were as follows: (1) did
+not conform to the inclusion criteria or (2) reviews, commentaries, or communications; or (3) the subjects of the study were
+patients with comorbid diseases. If studies were published
+based on overlapping data, the most recent article with comprehensive data was included.
+Risk of bias and quality assessment
+The methodological quality and risk of bias of individual studies were assessed independently by two authors (Yaoyu Hu
+and Mengqiu Wu) using the criteria recommended by BioMed
+Central for study assessment (Luong et al.2019). This recommendation contains 20 items for several study designs. The
+details of the score are as follows:
+1. Overall, scores higher than 75% are considered high quality, and scores lower than 50% are not included.
+2. Single questions: (1) there are only two options (yes or
+no): 1 is high quality, and 0 is low quality; (2) there is a
+problem if there are two high-quality studies and one lowquality study; (3) if there are three problems, the highest
+one is high quality, the middle one is medium quality, and
+the second one is low quality. In addition, we used RoB
+(Risk of Bias) for all quality evaluations.
+Data extraction
+The data extraction process was independently conducted by
+two researchers. The extracted data included citation information (name of the first author, publication year, and location in
+which the study was carried out); study setting (study design,
+time span, sample size, age of population, and percentages of
+males); exposure (pollutants, exposure type, mean concentration, and method used to estimate air pollutant levels); and
+outcome (health outcome/diagnosis, day lags of the effect,
+unit of concentrations of PM
+1, confounding factors that were
+adjusted for and study results). The short-term effect was
+15118 Environ Sci Pollut Res (2022) 29:15117–15126
+
+defined as < 7 days. For short-term exposure studies with
+multiple lag estimates, we used an a priori lag selection protocol devised by Atkinson et al. to select one estimate for
+preventing the overrepresentation of a single study in this
+meta-analysis (Atkinson et al. 2014).
+Statistical analysis
+We used OR with 95% CI in the prevalence/hospital admission/emergency visit of respiratory diseases as a measure of
+effect size. All estimates were transformed to a 10 μg/m
+3
+increase in PM 1 concentration to pool results. We used Qstatistics to conduct heterogeneity tests, where P <0 . 1 0w a s
+considered to be statistically significant. The I2 statistics were
+calculated to represent the percentage of variation observed in
+studies caused by heterogeneity. An I2 value < 50% was generally regarded as low moderate heterogeneity between studies, indicating a fixed-effect model to pool the estimates. I
+2
+values > 50%, representing high heterogeneity, indicated a
+random-effect model. We used forest plots to graphically display results. We assessed publication bias using funnel plots,
+contour-enhanced meta-analysis funnel plots, Begg’s test, and
+Egger’sw e i g h t e dl i n e a rr e g r e s s i o n .
+A subgroup analysis based on the exposure type of PM 1
+(short term and long term) was conducted. All tests were twosided, and P < 0.05 was considered statistically significant,
+except in the heterogeneity test (P < 0.10). Transformation of
+effect size and meta-analysis was performed using MATLAB
+version 2018 and R version 4.0.5, respectively.
+Results
+Search findings and study characteristics
+Sixty-eight studies were identified through the literature
+search, and 21 studies were eligible for full-text evaluation.
+Among them, 6 studies (Zhang et al.2021;W a n ge ta l .2021b;
+Zhang et al. 2020;Y ue ta l .2020; Luong et al. 2016;M i c h a u d
+et al. 2004), published between 2004 and 2021, met our full
+inclusion criteria and were finally analyzed. The flowchart of
+this review shows the detailed process of selection (Fig. 1).
+The basic characteristics of the literature in the meta-analysis
+are summarized in Table 1. The included studies were performed in various regions (China, 4; Vietnam, 1; America, 1),
+including cross-sectional, time series, and case-crossover
+studies. In the included studies, PM
+1 was defined as fine particulate matter with an aerodynamic diameter ≤ 1 μm. The
+daily mean concentrations of PM 1 across the 6 studies were
+26.9 μg/m3. The outcomes of respiratory diseases included
+Fig. 1 Meta-analysis flowchart of
+our study
+15119Environ Sci Pollut Res (2022) 29:15117–15126
+
+asthma (Zhang et al. 2021; Zhang et al. 2020;Y ue ta l . 2020;
+Michaud et al. 2004), pneumonia (Wang et al. 2021b;Z h a n g
+et al. 2020), and total respiratory diseases (Zhang et al. 2020;
+Luong et al. 2016). Four studies used ICD-10 to define the
+outcome, one based on incidence data, one based on emergency department visit data, and three based on hospital admission data. The estimated risk of outcome was reported as OR,
+HR, and PC.
+Risk of bias and quality assessment
+According to our bias assessment, the six included studies all
+had a low risk of bias (Fig. 2, Fig. S1). Table S1 shows the
+detailed assessment process.
+Meta-analysis results
+The pooled effect sizes of the association between exposure to
+PM
+1 and respiratory diseases are presented in Fig. 3. The
+degree of heterogeneity ( I2) in this meta-analysis was large
+in pooled estimates for total respiratory diseases (87%) and
+asthma (70%) and low for pneumonia (0%). We revealed that
+the pooled effect of a 10 μg/m
+3 increase in PM 1 on total
+respiratory diseases was not statistically significant ( OR
+1.05, 95% CI 0.98–1.12, Fig. 3a). There was a marginal association between a 10 μg/m3 increase in PM1 and asthma (OR
+1.25, 95% CI 1.00 –1.56, Fig. 3b). A 10 μg/m3 increase in
+PM1 was positively associated with pneumonia ( OR 1.07,
+95% CI 1.04–1.10, Fig. 3c).
+The subgroup analysis demonstrated that the pooled acute
+effect of short-term exposure to PM1 on asthma was not statistically significant (OR 1.07, 95% CI 0.89–1.27, Fig.4a), and longterm exposure to PM1 was positively associated with increased
+risk of asthma (OR 1.47, 95% CI 1.33–1.63, Fig.4b).
+Publication bias
+The funnel plot was found to be asymmetric (Fig. 5), and
+publication bias was observed with Egger ’st e s t(P =0 . 0 4 1 ) .
+Trim and fill analyses were conducted to investigate the impact of this bias (Fig. 6). With the inclusion of the moderator
+(study design), the funnel plot was symmetrical.
+Discussion
+This is the first meta-analysis to evaluate the impact of PM1 on
+respiratory diseases and provide an estimate of the impact. We
+found positive associations between PM1 and total and causespecific respiratory diseases. PM1 is a health-damaging particle because it has chemical components and can penetrate
+deep inside the lungs to aggravate existing asthma or contribute to chronic bronchitis development (Fuertes et al. 2014;
+Table 1: Summary of six articles included in the systematic review.
+Study citation information and setting Exposure Outcome
+ID Authors(year) Location Study design,
+Time-span
+Study
+Size
+Population
+(years old)
+Mean/median
+concentration
+Unit of increment
+(μg/m
+3)
+Exposure
+type
+Health
+outcome
+Outcome level Effect (95%
+CI)
+Controlled
+variables
+1W a n g e t a l .
+(2021b)
+Hefei,
+China
+Time series,
+2016–2018
+15683 0-17 31.00 10.00 Short-term, lag 0 Pneumonia Hospital admission,
+ICD-10
+6.82(3.85–9.88)
+*
+Yes
+2 Zhang et al.
+(2021)
+Wuhan,
+China
+Cross-sectional,
+2014–2018
+5788 3-5 37.40 10.00 Long-term Asthma Incidence 1.54(0.82–2.90)
+**
+Yes
+3 Zhang et al.
+(2020)
+Shenzhen,
+China
+Case-crossover,
+2015–2016
+6078 All 19.00 10.00 Short-term,
+lag0-2
+TRD Hospital admission,
+ICD-10
+1.09(1.04–1.14)
+***
+Yes
+147 All 19.00 10.00 Short-term,
+lag0-2
+Asthma Hospital admission,
+ICD-10
+1.12(0.85–1.47)
+***
+Yes
+1661 All 19.00 10.00 Short-term,
+lag0-2
+Pneumonia Hospital admission,
+ICD-10
+1.12(1.02–1.22)
+***
+Yes
+4Y u e t a l . ( 2020) Liaoning,
+China
+Cross-sectional,
+2012–2013
+59754 2-17 44.90 11.40 Long-term,
+2009-2012
+Current
+asthma
+Prevalence 1.55(1.38–1.75)
+***
+Yes
+5 Luong et al.
+(2016)
+Hanoi,
+Vietnam
+Case-crossover,
+2010–2011
+8934 0-5 54.00 42.00 Short-term, lag
+0 TRD Hospital admission,
+ICD-10
+1.03(1.01–1.04)
+***
+Yes
+6 Michaud et al.
+(2004)
+Hawaii,
+America
+Time series,
+1997–2001
+4339 NA 1.97 10.00 Short-term, lag0 Asthma Emergency department
+visit, ICD-9
+1.03(0.90–1.42)
+****
+Yes
+* PC; ** :HR; *** OR; **** Effect; TRD total respiratory diseases, PCpercentage change, OR odds ratio, HR hazards ratio.
+15120 Environ Sci Pollut Res (2022) 29:15117–15126
+
+Ostro et al. 2009). Luong et al. found that an increase in PM1
+concentration would decrease pulmonary function (Luong
+et al. 2016). In addition, our meta-analyses showed that asthma was most strongly associated with PM 1, which was consistent with the limited literature available on fine particles
+(Liu et al. 2020;H a s s a n v a n de ta l .2015). We found that the
+funnel graph was asymmetric, and Egger ’s test observed
+publication bias. However, with the addition of a moderator,
+we found that the funnel diagram is symmetrical. This indicates that most of the heterogeneity comes from different
+types of research designs.
+It is not easy to assess the long-term impact of PM
+1 on
+human health because long-term prospective observation
+and research require many resources and much effort.
+Fig. 2 Assessment of the risk of
+bias in the included studies
+Fig. 3 Forest plots for the
+association between PM1 and
+respiratory diseases
+15121Environ Sci Pollut Res (2022) 29:15117–15126
+
+Special techniques are needed to measure and estimate the
+exposure level of air pollutants over a wide range of areas.
+The few available studies identified through our literature
+search reflect considerable difficulties in designing such a
+study to investigate the impact of PM
+1 on respiratory diseases.
+In addition, the results of insufficient research proved to be
+inconsistent. Therefore, we believe that systematic review and
+meta-analysis would be a good choice for a more reliable
+estimation of the long-term effects of PM
+1 on respiratory
+diseases.
+Despite growing experimental evidence on the toxicity of
+PM1, whether they truly contribute to the development of
+clinically manifested respiratory diseases is another question.
+A previous analysis showed a significant correlation between
+PM
+1 exposure and the incidence of respiratory diseases (Yang
+et al. 2018). However, regarding respiratory diseases, whether
+PM1 exposure can lead to the development of the disease has
+been controversial. Several reports have shown a higher
+prevalence of acute exacerbation of respiratory diseases, and
+odds have reported conflicting results. Previous studies on the
+long-term effects of PM
+1 on respiratory diseases produced
+inconsistent results (Zhang et al. 2021). This inconsistency
+of previous studies may be based on differences in host factors
+that are difficult to quantify. For example, host susceptibility
+to air pollutants can vary widely due to genetic factors or other
+environmental factors, such as tobacco smoking status (WardCaviness 2019; Lyall et al. 2017).
+The main finding of our study was a significant association
+between the incidence of respiratory diseases and exposure to
+PM
+1. However, the explanation for this result is limited because the funnel diagram is asymmetric. This is not only because of the small research influence but also because more
+than 10,000 participants were involved in the research, which
+showed relatively wide confidence intervals (Zhang et al.
+2021; Wang et al. 2021b). Furthermore, the asymmetry in
+the funnel plot may be due to the type of study design.
+Fig. 4 Forest plots of subgroup
+analysis for association between
+PM1 exposure and asthma
+Fig. 5 Funnel plot showing
+publication biases of studies on
+PM1
+15122 Environ Sci Pollut Res (2022) 29:15117–15126
+
+Although the trim-and-fill analysis showed that the pooled OR
+was not significantly influenced by this funnel plot asymmetry, further well-designed observational studies are still needed to better clarify the association between PM 1 and respiratory disease development.
+The issue of heterogeneity between the studies must be
+addressed to appreciate our results more precisely. First, these
+studies have different follow-up times and durations according to different study designs. Second, different studies focus
+on different regions, which may lead to more significant. In
+addition, although there is a lack of knowledge regarding how
+long it takes for respiratory diseases to develop from exposure
+to PM
+1, it is assumed that more prolonged exposure may be
+more harmful (Yu et al.2020;G u a ne ta l .2016). This is in line
+with a study showing that the duration of tobacco smoking has
+a more substantial effect than the daily amount of cigarette
+consumption on the development of COPD (Bhatt et al.
+2018). The lengths of the follow-up period of each study
+may influence the evaluation of the effect. In addition, there
+are differences in the methods used to estimate air pollutant
+levels, including ground-based monitoring stations or the
+space-time extremely randomized trees model. A recently
+adopted method uses satellite data to estimate air quality to
+improve the spatial and temporary resolution of air quality
+modeling (Wang et al. 2019). With satellite-based data, future
+research is expected to make it easier and more accurate to
+evaluate the health impact of PM
+1.
+Even though the exact biological mechanism for the association between PM1 and respiratory diseases are not entirely
+clear, several studies suggested that inhalation of PM may
+result in inflammation and oxidative stress (Zou et al. 2020;
+Wang et al. 2020; Valavanidis et al. 2008). Small particles,
+especially PM 1, can more easily enter and deposit in the
+deeper respiratory tract. After internalized by respiratory epithelial cells, PM
+1 can trigger oxidative stress and inflammatory responses (Valavanidis et al. 2008;Y a n ge ta l . 2017).
+Existing research indicates that the pro-inflammatory response
+may play important roles in the effect of PM
+1 on lung function
+(Mazzarella et al. 2012).
+One of our study ’s strengths is the efforts made throughout the design and the systematic review to ensure its validity, including the incorporating risk of bias assessment.
+Another strength is to search all relevant literature and to
+make an in-depth, transparent, and repeatable evaluation of
+the evidence from studies focused on PM
+1 e x p o s u r e sa sa
+potential cause of respiratory diseases. It is a timely contribution to a rapidly evolving field that could inform future research's focus and design to improve its utility.
+However, the present study has limitations. First, the number of included studies was small, and they did not cover
+all countries in the world. This limitation requires further
+research worldwide to assess the impact of PM
+1 on respiratory diseases, which would c ontribute to an updated systematic review and meta-analysis. Second, most of the
+studies included in the meta -analysis were conducted in
+China, with fewer studies in high-income developed countries and low-income developing countries. Studies have
+shown that countries with diffe rent incomes have different
+air pollutant levels (Quansah et al. 2017;L i ue ta l . 2019b;
+Baumgartner et al. 2020;N a i d j ae ta l .2018). Therefore, we
+need more national data to understand the health effects of
+PM
+1 more clearly. Finally, our meta-analysis is based on
+different observational research designs, including crosssectional, case-crossover, and t ime series. Therefore, individual studies may be affected by uncontrolled timevarying deviations, which we could not test.
+Fig. 6 Trimmed and filled funnel
+plot of studies on PM1
+15123Environ Sci Pollut Res (2022) 29:15117–15126
+
+Conclusion
+The present systematic review and meta-analysis demonstrated that the pooled effect of a 10 μg/m3 increase in PM 1 on
+total respiratory diseases was not statistically significant ( OR
+1.05, 95% CI 0.98 –1.12). There was a marginal association
+between a 10 μg/m3 increase in PM 1 and asthma ( OR 1.25,
+95% CI 1.00 –1.56). A 10 μg/m3 increase in PM 1 was positively associated with pneumonia ( OR 1.07, 95% CI 1.04 –
+1.10). Our research helps evaluate the current literature to
+understand the public health impact better worldwide.
+However, the amount of research conducted globally is still
+minimal, so more research needs to be carried out in different
+regions.
+Supplementary Information The online version contains supplementary
+material available at https://doi.org/10.1007/s11356-021-16536-0.
+Author contribution Conceptualization: Mengqiu Wu. Methodology:
+Yaoyu Hu. Literature search: Yaoyu Hu; Mengqiu Wu; Yutong Li.
+Formal data analysis and investigation: Yaoyu Hu; Mengqiu Wu.
+Writing — original draft preparation: Yaoyu Hu; Mengqiu Wu. Writing
+— critically revised the work: Yaoyu Hu; Mengqiu Wu; Yutong Li;
+Xiangtong Liu. Funding acquisitio n: Xiangtong Liu. Resources:
+Xiangtong Liu. Supervision: Xiangtong Liu
+Funding This study was supported by National Natural Science
+Foundation of China (No. 82003559), Nature Science Foundation of
+Capital Medical University (No. PYZ2018046), and Beijing Municipal
+Training Project of Excellent Talents. The funding was neither used for
+the study design nor data collection but to cover for the publication fees.
+Data availability Not applicable
+Declarations
+Ethics approval Not applicable
+Consent to participate Not applicable
+Consent for publication All listed authors have approved the manuscript before submission, including the names and order of authors.
+Competing interests The authors declare no competing interests.
+Open Access This article is licensed under a Creative Commons
+Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as
+you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if changes were
+made. The images or other third party material in this article are included
+in the article's Creative Commons licence, unless indicated otherwise in a
+credit line to the material. If material is not included in the article's
+Creative Commons licence and your intended use is not permitted by
+statutory regulation or exceeds the permitted use, you will need to obtain
+permission directly from the copyright holder. To view a copy of this
+licence, visit http://creativecommons.org/licenses/by/4.0/.
+References
+Atkinson RW, Kang S, Anderson HR, Mills IC, Walton HA (2014)
+Epidemiological time series studies of PM2.5 and daily mortality
+and hospital admissions: a systematic review and meta-analysis.
+Thorax 69:660 –665. https://doi.org/10.1136/thoraxjnl-2013204492
+Baumgartner J, Brauer M, Ezzati M (2020) The role of cities in reducing
+the cardiovascular impacts of environmental pollution in low- and
+middle-income countries. BMC Med 18:39 –39. https://doi.org/10.
+1186/s12916-020-1499-y
+Bhatt SP, Kim YI, Harrington KF, Hokanson JE, Lutz SM, Cho MH,
+DeMeo DL, Wells JM, Make BJ, Rennard SI, Washko GR,
+Foreman MG, Tashkin DP, Wise RA, Dransfield MT, Bailey WC
+(2018) Smoking duration alone provides stronger risk estimates of
+chronic obstructive pulmonary disease than pack-years. Thorax 73:
+414–421. https://doi.org/10.1136/thoraxjnl-2017-210722
+Cao D, Li D, Wu Y, Qian ZM, Liu Y, Liu Q, Sun J, Guo Y, Zhang S, Jiao
+G, Yang X, Wang C, McMillin SE, Zhang X, Lin H (2021) Ambient
+PM(2.5) exposure and hospital cost and length of hospital stay for
+respiratory diseases in 11 cities in Shanxi Province, China. Thorax
+76:815–820. https://doi.org/10.1136/thoraxjnl-2020-215838
+Chen G, Knibbs LD, Zhang W, Li S, Cao W, Guo J, Ren H, Wang B,
+Wang H, Williams G, Hamm NAS, Guo Y (2018) Estimating spatiotemporal distribution of PM(1) concentrations in China with satellite remote sensing, meteorology, and land use information.
+Environ Pollut 233:1086 –1094. https://doi.org/10.1016/j.envpol.
+2017.10.011
+Doiron D, de Hoogh K, Probst-Hensch N, Fortier I, Cai Y, De Matteis S,
+Hansell AL (2019) Air pollution, lung function and COPD: results
+from the population-based UK Biobank study. Eur Respir J 54:
+1802140. https://doi.org/10.1183/13993003.02140-2018
+Evangelopoulos D, Perez-Velasco R, Walton H, Gumy S, Williams M,
+Kelly FJ, Künzli N (2020) The role of burden of disease assessment
+in tracking progress towards achieving WHO global air quality
+guidelines. Int J Public Health 65:1455 –1465. https://doi.org/10.
+1007/s00038-020-01479-z
+Fuertes E, MacIntyre E, Agius R, Beelen R, Brunekreef B, Bucci S,
+Cesaroni G, Cirach M, Cyrys J, Forastiere F, Gehring U, Gruzieva
+O, Hoffmann B, Jedynska A, Keuken M, Klümper C, Kooter I,
+Korek M, Krämer U, Mölter A, Nieuwenhuijsen M, Pershagen G,
+Porta D, Postma DS, Simpson A, Smit HA, Sugiri D, Sunyer J,
+Wang M, Heinrich J (2014) Associations between particulate matter
+elements and early-life pneumonia in seven birth cohorts: results
+from the ESCAPE and TRANSPHORM projects. Int J Hyg
+Environ Health 217:819 –829. https://doi.org/10.1016/j.ijheh.2014.
+05.004
+GBD 2019 Diseases and Injuries Collaborators (2020) Global burden of
+369 diseases and injuries in 204 countries and territories, 19902019: a systematic analysis for the Global Burden of Disease
+Study 2019. Lancet 396:1204 –1222. https://doi.org/10.1016/
+s0140-6736(20)30925-9
+Guan WJ, Zheng XY, Chung KF, Zhong NS (2016) Impact of air pollution on the burden of chronic respiratory diseases in China: time for
+urgent action. Lancet 388:1939 –1951. https://doi.org/10.1016/
+s0140-6736(16)31597-5
+Gurung A, Son JY, Bell ML (2017) Particulate matter and risk of hospital
+admission in the Kathmandu valley, Nepal: a case-crossover study.
+Am J Epidemiol 186:573–580. https://doi.org/10.1093/aje/kwx135
+Hamra GB, Guha N, Cohen A, Laden F, Raaschou-Nielsen O, Samet JM,
+Vineis P, Forastiere F, Saldiva P, Yorifuji T, Loomis D (2014)
+Outdoor particulate matter exposure and lung cancer: a systematic
+review and meta-analysis. Environ Health Perspect 122:906 –911.
+https://doi.org/10.1289/ehp/1408092
+15124 Environ Sci Pollut Res (2022) 29:15117–15126
+
+Hassanvand MS, Naddafi K, Faridi S, Nabizadeh R, Sowlat MH,
+Momeniha F, Gholampour A, Arhami M, Kashani H, Zare A,
+Niazi S, Rastkari N, Nazmara S, Ghani M, Yunesian M (2015)
+Characterization of PAHs and metals in indoor/outdoor
+PM10/PM2.5/PM1 in a retirement home and a school dormitory.
+Sci Total Environ 527-528:100 –110. https://doi.org/10.1016/j.
+scitotenv.2015.05.001
+Huang K, Yang T, Xu J, Yang L, Zhao J, Zhang X, Bai C, Kang J, Ran P,
+Shen H, Wen F, Chen Y, Sun T, Shan G, Lin Y, Xu G, Wu S, Wang
+C, Wang R, Shi Z, Xu Y, Ye X, Song Y, Wang Q, Zhou Y, Li W,
+Ding L, Wan C, Yao W, Guo Y, Xiao F, Lu Y, Peng X, Zhang B,
+Xiao D, Wang Z, Chen Z, Bu X, Zhang H, Zhang X, An L, Zhang S,
+Zhu J, Cao Z, Zhan Q, Yang Y, Liang L, Tong X, Dai H, Cao B, Wu
+T, Chung KF, He J, Wang C (2019) Prevalence, risk factors, and
+management of asthma in China: a national cross-sectional study.
+Lancet 394:407 –418. https://doi.org/10.1016/s0140-6736(19)
+31147-x
+Kim JJ, Hann T, Lee SJ (2019) Effect of flow and humidity on indoor
+deposition of particulate matter. Environ Pollut 255:113263.https://
+doi.org/10.1016/j.envpol.2019.113263
+Liu C, Chen R, Sera F, Vicedo-Cabrera AM, Guo Y, Tong S, Coelho M,
+Saldiva PHN, Lavigne E, Matus P, Valdes Ortega N, Osorio Garcia
+S, Pascal M, Stafoggia M, Scortichini M, Hashizume M, Honda Y,
+Hurtado-Díaz M, Cruz J, Nunes B, Teixeira JP, Kim H, Tobias A,
+Íñiguez C, Forsberg B, Åström C, Ragettli MS, Guo YL, Chen BY,
+Bell ML, Wright CY, Scovronick N, Garland RM, Milojevic A,
+Kyselý J, Urban A, Orru H, Indermitte E, Jaakkola JJK, Ryti NRI,
+Katsouyanni K, Analitis A, Zanobetti A, Schwartz J, Chen J, Wu T,
+Cohen A, Gasparrini A, Kan H (2019a) Ambient particulate air
+pollution and daily mortality in 652 cities. N Engl J Med 381:
+705–715. https://doi.org/10.1056/NEJMoa1817364
+Liu F, Chen G, Huo W, Wang C, Liu S, Li N, Mao S, Hou Y, Lu Y,
+Xiang H (2019b) Associations between long-term exposure to ambient air pollution and risk of type 2 diabetes mellitus: a systematic
+review and meta-analysis. Environ Pollut 252:1235 –1245. https://
+doi.org/10.1016/j.envpol.2019.06.033
+Liu K, Li S, Qian Z, Dharmage SC, Bloom MS, Heinrich J, Jalaludin B,
+Markevych I, Morawska L, Knibbs LD, Hinyard L, Xian H, Liu S,
+Lin S, Leskinen A, Komppula M, Jalava P, Roponen M, Hu L-W,
+Zeng X-W, Hu W, Chen G, Yang B-Y, Guo Y, Dong G-H (2020)
+Benefits of influenza vaccination on the associations between ambient air pollution and allergic respiratory diseases in children and
+adolescents: new insights from the seven northeastern cities study
+in China. Environ Pollut 256:113434. https://doi.org/10.1016/j.
+envpol.2019.113434
+Luong LM, Phung D, Sly PD, Morawska L, Thai PK (2016) The association between particulate air pollution and respiratory admissions
+among young children in Hanoi, Vietnam. Sci Total Environ 578:
+249–255. https://doi.org/10.1016/j.scitotenv.2016.08.012
+Luong LMT, Sly PD, Thai PK, Phung D (2019) Impact of ambient air
+pollution and wheeze-associated disorders in children in Southeast
+Asia: a systematic review and meta-analysis. Rev Environ Health
+34:125–139. https://doi.org/10.1515/reveh-2018-0079
+Lyall K, Croen L, Daniels J, Fallin MD, Ladd-Acosta C, Lee BK, Park
+BY, Snyder NW, Schendel D, Volk H, Windham GC, Newschaffer
+C (2017) The changing epidemiology of autism spectrum disorders.
+Annu Rev Public Health 38:81 –102. https://doi.org/10.1146/
+annurev-publhealth-031816-044318
+Mazzarella G, Esposito V, Bianco A, Ferraraccio F, Prati MV, Lucariello
+A, Manente L, Mezzogiorno A, De Luca A (2012) Inflammatory
+effects on human lung epithelial cells after exposure to diesel exhaust micron sub particles (PM
+1.0) and pollen allergens. Environ
+Pollut 161:64–69. https://doi.org/10.1016/j.envpol.2011.09.046
+Michaud JP, Grove JS, Krupitsky D (2004) Emergency department visits
+and "vog"-related air quality in Hilo, Hawai'i. Environ Res 95:11 –
+19. https://doi.org/10.1016/s0013-9351(03)00122-1
+Moher D, Liberati A, Tetzlaff J, Altman DG, Group P (2009) Preferred
+reporting items for systematic reviews and meta-analyses: the
+PRISMA statement. Bmj 339:b2535. https://doi.org/10.1136/bmj.
+b2535
+Naidja L, Ali-Khodja H, Khardi S (2018) Sources and levels of particulate matter in North African and sub-Saharan cities: a literature review. Environ Sci Pollut Res Int 25:12303 –12328. https://doi.org/
+10.1007/s11356-018-1715-x
+Ostro B, Roth L, Malig B, Marty M (2009) The effects of fine particle
+components on respiratory hospital admissions in children. Environ
+Health Perspect 117:475–480. https://doi.org/10.1289/ehp.11848
+Pun VC, Kazemiparkouhi F, Manjourides J, Suh HH (2017) Long-term
+PM2.5 exposure and respiratory, cancer, and cardiovascular mortality in older US adults. Am J Epidemiol 186:961 –969. https://doi.
+org/10.1093/aje/kwx166
+Quansah R, Semple S, Ochieng CA, Juvekar S, Armah FA, Luginaah I,
+Emina J (2017) Effectiveness of interventions to reduce household
+air pollution and/or improve health in homes using solid fuel in lowand-middle income countries: a systematic review and meta-analysis. Environ Int 103:73 –90. https://doi.org/10.1016/j.envint.2017.
+03.010
+Sicard P, Khaniabadi YO, Perez S, Gualtieri M, De Marco A (2019)
+Effect of O(3), PM(10) and PM(2.5) on cardiovascular and respiratory diseases in cities of France, Iran and Italy. Environ Sci Pollut
+Res Int 26:32645 –32665. https://doi.org/10.1007/s11356-01906445-8
+Stroup DF, Berlin JA, Morton SC, Olkin I, Williamson GD, Rennie D,
+Moher D, Becker BJ, Sipe TA, Thacker SB (2000) Meta-analysis of
+observational studies in epidemiology: a proposal for reporting.
+meta-analysis of observational studies in epidemiology (MOOSE)
+group. Jama 283:2008 –2012. https://doi.org/10.1001/jama.283.15.
+2008
+Tian F, Qi J, Wang L, Yin P, Qian ZM, Ruan Z, Liu J, Liu Y, McMillin
+SE, Wang C, Lin H, Zhou M (2020) Differentiating the effects of
+ambient fine and coarse particles on mortality from cardiopulmonary diseases: a nationwide multicity study. Environ Int 145:
+106096. https://doi.org/10.1016/j.envint.2020.106096
+Valavanidis A, Fiotakis K, Vlachogianni T (2008) Airborne particulate
+matter and human health: toxicological assessment and importance
+of size and composition of particles for oxidative damage and carcinogenic mechanisms. J Environ Sci Health C Environ Carcinog
+Ecotoxicol Rev 26:339– 362. https://doi.org/10.1080/
+10590500802494538
+Wang C, Xu J, Yang L, Xu Y, Zhang X, Bai C, Kang J, Ran P, Shen H,
+Wen F, Huang K, Yao W, Sun T, Shan G, Yang T, Lin Y, Wu S,
+Zhu J, Wang R, Shi Z, Zhao J, Ye X, Song Y, Wang Q, Zhou Y,
+Ding L, Yang T, Chen Y, Guo Y, Xiao F, Lu Y, Peng X, Zhang B,
+Xiao D, Chen CS, Wang Z, Zhang H, Bu X, Zhang X, An L, Zhang
+S, Cao Z, Zhan Q, Yang Y, Cao B, Dai H, Liang L, He J (2018)
+Prevalence and risk factors of chronic obstructive pulmonary disease
+in China (the China pulmonary health [CPH] study): a national
+cross-sectional study. Lancet 391:1706 –1717. https://doi.org/10.
+1016/s0140-6736(18)30841-9
+Wang W, Mao F, Zou B, Guo J, Wu L, Pan Z, Zang L (2019) Two-stage
+model for estimating the spatiotemporal distribution of hourly
+PM1.0 concentrations over cent ral and east China. Sci Total
+Environ 675:658–666. https://doi.org/10.1016/j.scitotenv.2019.04.
+134
+Wang J, Li Y, Zhao P, Tian Y, Liu X, He H, Jia R, Oliver BG, Li J (2020)
+Exposure to air pollution exacerbates inflammation in rats with
+preexisting COPD. Mediat Inflamm 2020:4260204. https://doi.org/
+10.1155/2020/4260204
+Wang HL, Sun J, Qian ZM, Gong YQ, Zhong JB, Yang RD, Wan CL,
+Zhang SQ, Ning DF, Xian H, Chang JJ, Wang CJ, Shacham E,
+Wang JQ, Lin HL (2021a) Association between air pollution and
+atopic dermatitis in Guangzhou, China: modification by age and
+15125Environ Sci Pollut Res (2022) 29:15117–15126
+
+season. Br J Dermatol 184:1068–1076. https://doi.org/10.1111/bjd.
+19645
+Wang X, Xu Z, Su H, Ho HC, Song Y, Zheng H, Hossain MZ, Khan MA,
+Bogale D, Zhang H, Wei J, Cheng J (2021b) Ambient particulate
+matter (PM1, PM2.5, PM10) and childhood pneumonia: the smaller
+particle, the greater short-term impact? Sci Total Environ 772:
+145509. https://doi.org/10.1016/j.scitotenv.2021.145509
+Ward-Caviness CK (2019) A review of gene-by-air pollution interactions
+for cardiovascular disease, risk factors, and biomarkers. Hum Genet
+138:547–561. https://doi.org/10.1007/s00439-019-02004-w
+Yang D, Yang X, Deng F, Guo X (2017) Ambient air pollution and
+biomarkers of health effect. In: Dong G-H (ed) Ambient Air pollution and health impact in China. Springer Singapore, Singapore, pp
+59–102
+Yang M, Chu C, Bloom MS, Li S, Chen G, Heinrich J, Markevych I,
+Knibbs LD, Bowatte G, Dharmage SC, Komppula M, Leskinen A,
+Hirvonen MR, Roponen M, Jalava P, Wang SQ, Lin S, Zeng XW,
+Hu LW, Liu KK, Yang BY, Chen W, Guo Y, Dong GH (2018) Is
+smaller worse? New insights about associations of PM(1) and respiratory health in children and adolescents. Environ Int 120:516–524.
+https://doi.org/10.1016/j.envint.2018.08.027
+Yang Y, Qi J, Ruan Z, Yin P, Zhang S, Liu J, Liu Y, Li R, Wang L, Lin H
+(2020) Changes in life expectancy of respiratory diseases from
+attaining daily PM2.5 Standard in China: a nationwide observational
+study. Innovation 1:100064. https://doi.org/10.1016/j.xinn.2020.
+100064
+Yao C, Wang Y, Williams C, Xu C, Kartsonaki C, Lin Y, Zhang P, Yin P,
+Lam KBH (2020) The association between high particulate matter
+pollution and daily cause-specific hospital admissions: a time-series
+study in Yichang, China. Environ Sci Pollut Res Int 27:5240–5250.
+https://doi.org/10.1007/s11356-019-06734-2
+Yu H, Guo Y, Zeng X, Gao M, Yang BY, Hu LW, Yu Y, Dong GH
+(2020) Modification of caesarean section on the associations between air pollution and childhood asthma in seven Chinese cities.
+Environ Pollut 267:115443. https://doi.org/10.1016/j.envpol.2020.
+115443
+Zhang Y, Ding Z, Xiang Q, Wang W, Huang L, Mao F (2020) Short-term
+effects of ambient PM(1) and PM(2.5) air pollution on hospital
+admission for respiratory diseases: case-crossover evidence from
+Shenzhen, China. Int J Hyg Environ Health 224:113418. https://
+doi.org/10.1016/j.ijheh.2019.11.001
+Zhang Y, Wei J, Shi Y, Quan C, Ho HC, Song Y, Zhang L (2021) Earlylife exposure to submicron particulate air pollution in relation to
+asthma development in Chinese preschool children. J Allergy Clin
+Immunol S0091-6749:00359–00356. https://doi.org/10.1016/j.jaci.
+2021.02.030
+Zou W, Wang X, Hong W, He F, Hu J, Sheng Q, Zhu T, Ran P (2020)
+PM2.5 Induces the expression of inflammatory cytokines via the
+Wnt5a/Ror2 pathway in human bronchial epithelial cells. Int J
+Chron Obstruct Pulmon Dis 15:2653 –2662. https://doi.org/10.
+2147/copd.S270762
+Publisher’sn o t eSpringer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+15126 Environ Sci Pollut Res (2022) 29:15117–15126

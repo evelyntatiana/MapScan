@@ -1,0 +1,1168 @@
+Citation: Mainka, A.; ˙Zak, M.
+Synergistic or Antagonistic Health
+Effects of Long- and Short-Term
+Exposure to Ambient NO2 and PM2.5:
+A Review. Int. J. Environ. Res. Public
+Health 2022, 19, 14079. https://
+doi.org/10.3390/ijerph192114079
+Academic Editors: Nuno Canha,
+Marta Almeida and Evangelia
+Diapouli
+Received: 30 September 2022
+Accepted: 26 October 2022
+Published: 28 October 2022
+Publisher’s Note: MDPI stays neutral
+with regard to jurisdictional claims in
+published maps and institutional afﬁliations.
+Copyright: © 2022 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed under the terms and
+conditions of the Creative Commons
+Attribution (CC BY) license (https://
+creativecommons.org/licenses/by/
+4.0/).
+International Journal of 
+Environmental Research
+and Public Health
+Review
+Synergistic or Antagonistic Health Effects of Long- and
+Short-Term Exposure to Ambient NO2 and PM2.5: A Review
+Anna Mainka *
+ and Magdalena ˙Zak
+Department of Air Protection, Silesian University of Technology, 22B Konarskiego St., 44-100 Gliwice, Poland
+* Correspondence: anna.mainka@polsl.pl; Tel.: +48-322371060
+Abstract: Studies on adverse health effects associated with air pollution mostly focus on individual
+pollutants. However, the air is a complex medium, and thus epidemiological studies face many
+challenges and limitations in the multipollutant approach. NO 2 and PM2.5 have been selected as
+both originating from combustion processes and are considered to be the main pollutants associated
+with trafﬁc; moreover, both elicit oxidative stress responses. An answer to the question of whether
+synergistic or antagonistic health effects of combined pollutants are demonstrated by pollutants
+monitored in ambient air is not explicit. Among the analyzed studies, only a few revealed statistical
+signiﬁcance. Exposure to a single pollutant (PM 2.5 or NO2) was mostly associated with a small
+increase in non-accidental mortality (HR:1.01–1.03). PM2.5 increase of <10 µg/m3 adjusted for NO2
+as well as NO2 adjusted for PM2.5 resulted in a slightly lower health risk than a single pollutant. In
+the case of cardiovascular heart disease, mortality evoked by exposure to PM 2.5 or NO2 adjusted
+for NO2 and PM2.5, respectively, revealed an antagonistic effect on health risk compared to the
+single pollutant. Both short- and long-term exposure to PM2.5 or NO2 adjusted for NO2 and PM2.5,
+respectively, revealed a synergistic effect appearing as higher mortality from respiratory diseases.
+Keywords: air pollutants; NO2; PM2.5; multi-pollutant approach; mortality; morbidity
+1. Introduction
+Recently, there has been a signiﬁcant increase in publications on air pollution and
+human health [1]. As an example, Sun and Zhu [2] in a scoping review analyzed 361 articles
+covering studies on both short- and long-term health consequences of exposure to various
+ambient air pollutants. Among ambient air pollutants most commonly investigated are
+particulate matter (PM) with diameters < 10 µm and <2.5 µm (PM2.5, PM10), as well as
+nitrogen dioxide (NO2). To a lesser extent, studies included general air pollution of gases
+such as ozone (O3), sulfur dioxide (SO2), and carbon monoxide (CO), as well as hazardous
+air pollutants (HAPs) such as metals and volatile organic compounds (VOC) [3–16]. Health
+effects are analyzed in a wide range. Dominski et al. [1] ranked the most frequently studied
+health effects, starting with (1) respiratory diseases including asthma, respiratory infections,
+respiratory disorders, and chronic obstructive pulmonary disease (COPD). Following
+this were (2) cardiovascular diseases including hypertension, heart rate variability, heart
+attack, cardiopulmonary disease, ischemic heart disease, blood coagulation, deep vein
+thrombosis, and stroke; (3) other diseases such as DNA methylation changes, neurobehavioral disfunctions, inﬂammatory disease, skin disease, and disability; (4) pregnancy
+and children characterized by such parameters as birth weight, infant death, infantile
+eczema, preterm birth, fertility, pregnancy-induced hypertension, and other diseases;
+(5) mental disorders: Alzheimer’s disease, Parkinson’s disease, depression and stress,
+annoyance, autism spectrum disorder (ASD), and reduced cognitive function; (6) all causes,
+when there are no speciﬁc causes of disease, including morbidity, hospital admissions,
+outpatient visits, emergency room visits, and mortality; (7) chronic diseases: diabetes and
+Int. J. Environ. Res. Public Health 2022, 19, 14079. https://doi.org/10.3390/ijerph192114079 https://www.mdpi.com/journal/ijerph
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 2 of 20
+chronic respiratory diseases; (8) general health outcomes; and (9) cancer, including bladder
+cancer, brain tumor, breast cancer, liver cancer, lung cancer, and unspeciﬁed cancer.
+Thus far, we have learned much about the relationships between air pollution and
+health. In last year’s updated World Health Organization (WHO) air quality guidelines [17],
+the limit values were signiﬁcantly decreased (Table 1). We know that the majority of
+health effects present a positive correlation to air pollution levels and that the harmful
+outcomes are evident. The plausibility of these associations is supported by results from
+experimental exposures to humans, animals, and cells [18]. For some pollutants, the results
+are ambiguous, there is more than one interpretation, or only limited evidence is available
+for harmful health effects. Moreover, for some pollutants, especially those characterized by
+levels below the reference concentration, no health effects are to be expected [19].
+There are signiﬁcant statistical associations between concentrations of individual pollutants and population health outcomes. A single-pollutant approach to air pollution
+management and research was partly motivated by the Clean Air Act [20], which identiﬁes
+six criteria air pollutants (CO, tropospheric O3, lead—Pb, nitrogen oxides (NO x), PM, and
+SO2), that are the motivation of air quality regulations based on monitored air concentrations. WHO air quality guidelines [17] point out that among priorities for policy-relevant
+scientiﬁc questions such as “how, why and for whom do the health effects of air pollution
+exist?” there has been a call to move from a single-pollutant to a multi-pollutant approach.
+An amendment from the single-pollutant approach requires a shift in air pollution health
+research to provide a sound basis for multi-pollutant air quality management.
+Table 1. EU limit values and WHO Air Quality Guidelines (AQG) for considered air pollutants.
+Air Pollutant
+EU Limit Values [21] WHO AQG [17]
+Annual a Annual Daily
+PM2.5, µg/m3 25 5 15
+NO2, µg/m3 40 10 25
+n.a.—not applicable; a daily values are not available.
+WHO guidelines [17] point out that studies of multi-pollutant exposures including
+the examination of additive, synergistic (greater than additive), or antagonistic (less than
+additive) effects play an important role. The Environmental Protection Agency USA provided deﬁnitions for terms that describe various types of toxicologic interactions, including
+forms of additivity, antagonism, inhibition, masking, potentiation, synergism, and other
+toxicologic phenomena [18,22], deﬁned below:
+(1) Additivity is when the “effect” of the combination is estimated by the sum of the
+exposure levels or the effects of the individual chemicals. The effect may refer to the
+measured response or the incidence of adversely affected animals. The sum may be a
+weighted sum (the sum of component doses scaled by their toxic potency relative to
+the index chemical) or a conditional sum (when the toxic response from the chemical
+mixture is equal to the sum of independent component responses).
+(2) Antagonism is when the effect of the combination is less than that suggested by the
+component’s toxic effects. Antagonism must be deﬁned in the context of the deﬁnition
+of “no interaction”, which is usually dose or response addition.
+(3) Inhibition is when one substance does not have a toxic effect on a certain organ system,
+but when added to a toxic chemical, it makes the latter less toxic.
+(4) Masking is when the compounds produce opposite or functionally competing effects
+at the same site or sites so that the effects produced by the combination are less than
+suggested by the component’s toxic effects.
+(5) Potentiation is when one substance does not have a toxic effect on a certain organ or
+system, but when added to a toxic chemical, it makes the latter more toxic.
+(6) Synergism is when the effect of the combination is greater than that suggested by the
+component’s toxic effects. Synergism must be deﬁned in the context of the deﬁnition
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 3 of 20
+of “no interaction”, when neither compound by itself produces an effect, and no effect
+is seen when they are administered together.
+(7) Confounding is another cause of concern in studies of air pollution. If not adequately
+addressed, cofounding may either increase the apparel effect of air pollution. Confounding occurs when a confounder, a risk predictor for the outcome of concern,
+co-varies with the air pollutant being investigated.
+A fundamental aspect of the multi-pollutant approach to air pollution epidemiology
+is that the air pollutant concept is being replaced by a common source perspective. To
+assess the multi-index analysis of ecological risks from the source perspective, a geographic
+information system (GIS) and remote sensing (RS) can be used. Among indicators reﬂecting
+environmental risks, the pressure from urban expansion, land use, and degradation as
+well as cropland proportion can be included [23]. One of the sources identiﬁed as being
+responsible for adverse health effects is transport. For automobile trafﬁc, the characteristic
+pollutants are NO2 and PM2.5. Both are derived from combustion processes and increase
+oxidative stress [24]. NO2 is often treated as a surrogate for PM [25,26]; on the other hand,
+14% to 27% of the measured secondary PM2.5 is generated from NOx set of reactions [27,28].
+Nevertheless, NO2 or PM2.5 alone are not sufﬁcient to fully characterize the toxicity of the
+atmospheric mixture or to fully explain the risk of mortality and morbidity associated with
+exposure to ambient air pollution [6].
+Other factors, besides ambient air quality, that determine the length and quality of life
+is a healthy lifestyle including both dietary habits [29,30] and physical activity [31].
+This paper aims to synthesize worldwide evidence on the health effects of short-term
+and long-term exposure to both NO2 and PM2.5 on all-cause and/or cause-speciﬁc mortality
+and morbidity. As most of the studies focus on single pollutants, we aim to present the
+knowledge gaps in the multi-pollutant approach.
+Our intention is to provide an illustrative overview of the available health research performed with respect to the concurrent NO2 and PM2.5 exposure and should be considered
+rather in a narrative context, not as a systematic review. To identify publications reporting
+results from studies on the impact of NO 2 and PM2.5 on health effects, we conducted a
+broad search of the online databases, particularly with articles published during the last
+10 years. Both research articles and literature reviews on the relationship between simultaneous NO2 and PM2.5 exposure and physical and/or mental health effects were included.
+Inclusion criteria were (1) cohort studies; (2) long-term exposure metrics, i.e., annual or
+multi-year averages; (3) mean daily or monthly exposure metrics (short-term exposure);
+(4) cross-sectional, case–control studies. A good example is the systematic review published by Mills et al. [32], presenting the results of 60 articles that provided estimates of
+both (1) NO2 as a single-pollutant and (2) a two-pollutant model including NO2 adjusted
+for PM and to a lesser extent PM meta-analyses for NO 2 adjusted. However, within a
+study [32], PM10 was the most used metric (67%). Orellano et al. [10] presented evidence on
+the physical health effects of short-term exposure to PM10 and PM2.5, NO2, and ozone (O3)
+on all-cause mortality, and PM10 and PM2.5 on cardiovascular, respiratory, and cerebrovascular mortality. A highly valuable work covering both the physical and mental health
+effects with respect to NOx exposure available risk ratios was included in the review of
+Shaw and Heyst [33].
+The results presented here do not represent an exhaustive list of the literature on
+physical and/or mental health, but rather offer an illustration of ﬁndings in this area,
+particularly studies presenting statistic parameters: risk, odds, or hazard ratios. It is
+worth underlining that risk ratios (RR), odds ratios (OR), and hazard ratios (HR) are three
+common, but often misused, statistical measures, especially in clinical research, or are
+misunderstood in their interpretation of a study’s results [34].
+Risk ratio (RR) is also known as relative risk. The deﬁnition from the Dictionary of
+Environmental Health [35] states that RR is an expression of the occurrence (such as either
+a percentage or ratio) of the particular phenomenon in an exposed population compared to
+the appearance of the same phenomenon in a population that has not been exposed. A RR
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 4 of 20
+of 1 means that the probability or risk of an event occurring in either population when
+compared to the other is even, and therefore both groups have the same amount of risk. If
+the risk is doubled, the RR is 2, and if it is halved, it is 0.5.
+Odds ratio (OR) is a statistical technique used in epidemiological case–control studies
+derived by dividing the odds of an event happening in the exposed group by the odds of
+the same event happening in the control group [35]. OR provides a measure of the strength
+of association between two variables on a scale, with 1 being no association, above 1 being
+a positive association, and below 1 being a negative association. While risk reports the
+number of events of interest in relation to the total number of trials, odds report the number
+of events of interest in relation to the number of events not of interest. Stated differently, it
+reports the number of events to nonevents. For example, the risk of ﬂipping a coin to be
+heads is 1:2 or 50%; the odds of ﬂipping a coin to be heads is 1:1, as there is one desired
+outcome (event), and one undesired outcome (nonevent). Misreporting of the OR as the
+RR, then, can often exaggerate data. It is important to remember that OR is a relative
+measure just as RR, and thus sometimes a large OR can correspond with a small difference
+between odds [36].
+Hazard ratio (HR) is a similar but distinct measure. It concerns rates of change as a comparison of two hazards. It can present how quickly two survivorship curves diverge through
+comparison of the slopes of the curves. An HR of 1 indicates no divergence—within both
+curves, the likelihood of the event was equally likely at any given time. An HR not equal to
+1 indicates that two events are not occurring at an equal rate, and the risk of an individual
+in one group is different than the risk of an individual in another at any given time interval.
+An important aspect of HRs is the proportional hazard assumption. To report a singular
+hazard ratio, it must be assumed that the two hazard rates are constant [36]. Regardless of
+the value of RR/OR/HR, the interpretation should only be made after determining whether
+the result provides statistically signiﬁcant evidence towards a conclusion (veriﬁed by a
+p-value < 0.05 or 95% conﬁdence interval). Keeping these principles and the RR/OR/HR
+framework in mind minimizes bias and prevents erroneous conclusions being drawn from
+the results of a published study on different samples. Table 2 shows the characteristics of
+RR/OR/HR ratios along with correct and incorrect use.
+Table 2. Risk ratio (RR) vs. odds ratio (OR) vs. hazard ratio (HR) [36].
+Parameter RR OR HR
+Aim
+Determination of
+relationships in risk
+potential based on
+some variable.
+Identify the relationship
+between two variables.
+Determine how one group
+changes relative to
+the other.
+Usage Informs how an
+intervention changes risk.
+Informs whether there
+is a relationship
+between the
+intervention and the
+risk; estimates how this
+relationship occurs.
+Informs how intervention
+changes the rate at which
+an event is experienced.
+Limitations
+Only applicable if the
+study design is
+representative of the
+population. Cannot be
+used for case–control
+studies.
+It can generally be used
+anywhere but is not
+always a useful statistic
+on its own. It
+exaggerates the risks.
+In order to be typically
+useful, the rate of change
+within the two groups
+should be
+relatively consistent.
+Timeline Static. Summarizes an
+overall study.
+Static. Summarizes an
+overall study.
+Dynamic. Provides
+information about the way
+a study progresses
+over time.
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 5 of 20
+Table 2. Cont.
+Parameter RR OR HR
+Correct
+Most useful and often
+preferred statistic.
+Most intuitive and easiest
+to understand.
+Can be more widely
+used.
+Can sometimes
+approximate relative
+risk in rare cases.
+Does not require a
+random sampling.
+Useful for logistic
+regression and
+case–control studies.
+Allows a member of
+association in outcomes in
+survivorship curves.
+Incorrect
+Must assume causal
+direction (change in an
+independent variable
+changes the outcome
+variable).
+Only effective and useful
+with randomized
+something.
+Less intuitive and can
+seem to exaggerate data.
+Only shows correlation,
+not causation.
+Requires proportional
+hazards assumption (all
+data groups must show a
+roughly linear relationship
+between number of events
+and time).
+Should be reported with
+median time-to-event.
+2. Considerations and Discussion
+Air pollution has an impact on various health effects. The simplest division includes
+mortality and morbidity. Mortality reﬂects the reduction of life expectancy, while morbidity
+relates to illness occurrence. Mortality is the most studied health endpoint in association
+with air pollution [37]. The analysis includes all-cause and cause-speciﬁc mortality. Other
+terms used for this indicator are premature death, additional mortality, and death postponed. In all of these metrics, the health effect is expressed by the number of deaths [38].
+Morbidity indicator estimates changes in new or existing diseases in a target population [39].
+Low air pollution levels can impact on the health of susceptible and sensitive groups, especially with already fragile immune systems (e.g., immunodeﬁciency, asthma, malnutrition,
+old age, infancy) [40].
+Studies showed a relationship between air pollutants and adverse health effects that
+appear after short-term (acute) or long-term (chronic) exposure [ 41]. Short-term exposure to air pollutants is closely related to COPD, cough, shortness of breath, wheezing,
+asthma, respiratory disease, and high rates of hospitalization (a measurement of morbidity). The long-term effects connected with exposure to air pollution are chronic asthma,
+pulmonary insufﬁciency, cardiovascular diseases, and cardiovascular mortality. According
+to a Swedish cohort study [42], diabetes seems to be induced after long-term air pollution
+exposure. Moreover, air pollution appears to have various malign health effects in early
+human life, such as respiratory, cardiovascular, mental, and perinatal disorders, leading
+to infant mortality or chronic disease in adult age [ 43]. Exposure to pollutants in utero
+increases the risk of neuro-developmental delay. Childhood exposure has been inversely
+associated with neuro-developmental outcomes in younger children, as well as with academic achievement and neurocognitive performance in older children. In older adults, air
+pollution is associated with accelerated cognitive decline [44].
+There is also emerging evidence that air pollutants may adversely affect cognitive
+development [45], cognitive performance [15,44–47], and stress [48] and psychological wellbeing [49,50]. Air pollution impairs verbal tests, and the effect becomes stronger as people
+age. Cognitive decline or impairment are risk factors for Alzheimer’s disease and other
+forms of dementia, especially for elderly persons [47,51]. The wide-ranging impacts of air
+pollutants on brain health and functioning may support the hypothesis of an association
+with clinically relevant mental health outcomes [9].
+Acute and long-term effects are partly interrelated; however, long-term effects are
+not the sum of short-term effects [26]. The effects of long-term exposure are much greater
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 6 of 20
+than those observed for short-term exposure, suggesting that effects are not just due to
+exacerbations, but maybe also could be due to the progression of underlying diseases.
+On the other hand, the effects of continued short-term exposure may contribute to the
+initiation or exacerbation of the chronic disease, and those affected by the acute exposures may reﬂect a distinct, susceptible subgroup with underlying or existing disease or
+unrecognized vulnerability [26].
+2.1. Health Effects of PM 2.5
+PM is a widespread air pollutant, consisting of a mixture of solid and liquid particles
+suspended in the air, covering a wide range of sizes and chemical compositions [ 52].
+PM is considered so hazardous that in 2016, the WHO and the International Agency for
+Research on Cancer (IARC) classiﬁed ambient PM as Group 1—compounds carcinogenic
+to humans. The authors of the IARC monograph [ 53] underline that PM exposure from
+different sources features mutagenic and carcinogenic effects in people. Unfortunately,
+the number of air monitoring ground stations is limited, and the spatial distribution is
+discontinuous, and thus to obtain a ﬁne-grained spatiotemporal distribution of PM2.5, a
+retrieval model can be used [54]. In an estimation of future global mortality from changes
+in air pollution, Silva et al. [55] predicted 55,600 (−34,300 to 164,000) deaths in 2030 and
+215,000 (−76,100 to 595,000) in 2100 due to PM2.5 worldwide (countering by 16% the global
+decrease in PM2.5-related mortality.
+Fine particles with a diameter < 2.5 µm (PM2.5) are considered one of the leading
+environmental health risk factors due to the potential penetration of particles deeper
+into the lungs [ 56]. Total lung deposition of PM 2.5 particles is about 60% for ultraﬁne
+particles and 20% for ﬁne particles [ 57]. In adults at rest, the nasal deposition of PM 2.5
+is about 20% and increases to 30–40% during exercise. Lower values (about 10–20%) are
+reached in children aged 5–15 years [58]. Once deposited in the lung, most particles are
+removed through several clearance mechanisms. Insoluble particles deposited on ciliated
+airways are generally removed from the respiratory tract by mucociliary activity within
+24–48 h [57]. Several PM 2.5 can also be absorbed into the bloodstream through alveolar
+capillaries, causing lung and systemic inﬂammation [ 59–61]. The inﬂammatory reactions of
+the lungs and bronchi are due to oxidative stress produced by increased levels of reactive
+oxygen species (ROS) that responsible for many of the cardiovascular and respiratory
+health effects [62]. Among the mechanisms related to cardiovascular outcomes, the most
+inﬂuential is the release of pro-oxidative and proinﬂammatory mediators from the lungs
+into the circulation and autonomic nervous system imbalance [63].
+2.1.1. Short-Term Exposure to PM2.5
+Short-term exposure to PM 2.5 evidences a positive relationship with hospital admissions or emergency room visits for cardiovascular outcomes or respiratory effects,
+increasing from a 0.5 to 3.4% per 10 µg/m3 rise in PM2.5 levels [37]. Signiﬁcant associations
+between short-term (averaging time over 2 or 24 h) PM2.5 concentrations and myocardial
+infarction [27,64] cardiac arrhythmias as well as ischemic stroke [65] were observed. Studies
+on speciﬁc cardiovascular diseases indicate that ischemic heart disease, and congestive
+heart failure may be inﬂuential for the observed associations. Although estimates from
+studies of cerebrovascular diseases are less precise and consistent, ischemic diseases are
+more strongly associated with PM2.5 compared to hemorrhagic stroke. The available evidence suggests that cerebrovascular effects occur at short lags (approximately 1 day), while
+effects at longer legs are rarely evaluated. Cardiovascular hospital admissions are especially
+reported in areas with concentrations ranging from 7 to 18 µg/m3 [22,27]. Toxicological
+studies associated with PM2.5 exposure show reduced myocardial blood ﬂow during ischemia and altered vascular reactivity, providing myocardial ischemia. In addition to
+ischemia, plausible biological mechanisms include increased right ventricular pressure and
+decreased myocardial contractility in the association between PM2.5 and congestive heart
+failure. Additionally, systemic inﬂammation and oxidative stress are cited [55,66,67].
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 7 of 20
+In a meta-analysis of 33 studies from China addressing the short-term effects of air
+pollution, a 10 µg/m3 increase in PM 2.5 was associated with a 0.38% increase in total
+mortality [68]. Han et al. [ 69], on the basis of the measurements conducted from 2015
+to 2019 in 296 cities across China, estimated that long-term exposure to PM 2.5 levels
+exceeding current WHO guidelines (5 µg/m3) was associated with 17% average all-cause
+mortality. Data for China are relevant to analysis performed, for example, in Poland, as
+PM concentrations in China are far higher than the Western European or North American
+averages but comparable to results from Poland [68]. The estimated short-term effects of
+daily PM2.5 concentrations on mortality were even more profound than in Western Europe
+or China. In the short-term exposure to PM2.5, the number of emergency hospitalizations
+for pneumonia increased by 1.7% per 10µg/m3 of PM2.5 [70]. In contrast, the increase in the
+number of deaths for Tricity and Warsaw (Poland) were 2.1% and 2.6% per 10µg/m3 PM2.5,
+respectively [71]. Several lines of evidence suggest that PM2.5 promotes and exacerbates
+allergic disease, which often underlies asthma [ 72]. A burst of reactive oxygen species
+induced by PM 2.5 was found in the neutrophils of asthmatic patients [ 73]. Braithwaite
+et al. [9] in a systematic review included 11 studies on short-term (<6 months) associations
+between eligible mental health outcomes and PM2.5.
+2.1.2. Long-Term Exposure to PM2.5
+Longer-term effects of PM2.5 exposure could be greater than the immediate ones [71].
+PM2.5 is recognized as a key air pollutant signiﬁcantly related to premature mortality
+attributed to cardiovascular diseases and lung cancer [74,75]. The results of the European
+Study of Cohorts for Air Pollution Effects (ESCAPE) showed higher overall mortality due
+to long-term PM2.5 exposure, with statistically signiﬁcant associations also reported for individuals exposed to PM2.5 concentrations below the European threshold of 25 µg/m3 [76].
+Data from many European cohorts found an association between long-term exposure to
+PM2.5 and lung and kidney cancer [77–83]. At concentrations exceeding the threshold value,
+pediatric PM2.5 exposures deliver health interventions before the development of obesity
+and identify and mitigate environmental factors inﬂuencing obesity and Alzheimer’s disease. Braithwaite et al. [9], through the analysis of nine articles, support the hypothesis of
+an association between long-term (≥6 months) PM2.5 exposure and depression, as well as
+anxiety. Calderón-Garcidueñas et al. [84] pointed to diffuse neuroinﬂammation, damage to
+the neurovascular unit, and the production of autoantibodies to neural and tight-junction
+proteins as the worrisome ﬁndings in children chronically exposed to concentrations above
+PM2.5 current standards, potentially constituting signiﬁcant risk factors for the development of Alzheimer’s disease later in life. The results of the REVIHAAP (Review of Evidence
+on Health Aspects of Air Pollution) project [26] point to additional systemic health effects
+beyond the respiratory and cardiovascular systems—for example, effects on the central
+nervous system, the progression of Alzheimer’s and Parkinson’s diseases, developmental
+outcomes in children, and reproductive health outcomes such as low birth weight.
+2.1.3. PM2.5 Health Effect Mechanism
+There are different mechanisms of effect considering both short- and long-term exposure. The health effects of PM 2.5, as well as the mechanisms underlying these effects,
+were investigated by Feng et al. [85] in 132 articles published from 2005 to 2015. The central
+mechanisms of harmful effects of PM 2.5 are oxidative stress (intracellular), mutagenicity/genotoxicity, and inﬂammation [ 85]. Initially, across the absorption of PM 2.5 by the
+targeting cells, toxic effects ensue due to the release of organic chemicals from the pollutant,
+which is metabolically activated by enzyme systems. Oxidative stress through free radicals
+and activation of inﬂammatory cells is an important mechanism [ 86]. Furthermore, impairment of the antioxidant system is an adverse effect and could be a mechanism for damage.
+Some organic extracts from PM2.5, such as polycyclic aromatic hydrocarbons (PAHs), are
+responsible for mutagenicity, including DNA damage responses, promoting changes in the
+biochemistry and physiology of cells. However, one of the main mechanisms of almost all
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 8 of 20
+the adverse health effects of PM2.5 is inﬂammation. Systemic inﬂammation seen through
+bio-markers (e.g., C-reactive protein) is a consequence induced by PM2.5. Moreover, several
+studies have shown a decrease in immune function caused by PM2.5 [85]. The modiﬁcations
+in physiological and biochemical functions, as well as damage to some tissues and organs,
+are factors that can lead to the development of several negative consequences, including
+cardiovascular diseases [85].
+2.2. Health Effects of NO 2
+NO2 has low water solubility (0.037 cm 3/cm3 H2O at 35 ◦C), and therefore a large
+fraction of inhaled NO 2 could be deposited in the peripheral airways. Inhaled NO 2, or
+a component or reaction product of NO 2, could subsequently be delivered via tissue
+absorption and transfer across the blood–gas interface to the blood; therefore, systemic
+effects are possible [87]. It is absorbed along the entire respiratory tract, but exposure studies
+indicate that the major target site for the action of NO2 is the terminal bronchioles. Despite
+laboratory, clinical, and epidemiological research, the health effects of NO2 exposure on
+humans are not well understood. The toxicological evidence suggests that increased
+susceptibility to infection; functional deﬁcits from effects on airways; and deterioration
+of the status of persons with chronic respiratory conditions, including asthmatics, are of
+potential concern [88].
+2.2.1. Short-Term Exposure to NO2
+In the short-term exposure, a 0.3% increase in total daily mortality was reported
+per 10 µg/m3 NO2 increase [88]. The strongest short-term effects of NO 2 exposition are
+respiratory hospital admissions (all ages), and the following are all-cause mortality (all
+ages). Adebayo-Ojo et al. [ 4] point to a signiﬁcant increase in hospital admissions for
+respiratory disease per lower increase in NO 2 concentration (interquartile range IQR of
+7.3 µg/m3). A positive association among all ages was 2.3; however, among children under
+15 years old, the estimate increased to 3.1%. Cardiovascular hospital admissions are also
+included; however, a sensitivity analysis showed that in the case of cardiovascular effects,
+PM is more indicative. The study in Poland [71] showed that the acute health outcomes
+associated with NO2 exposure might be worse than anticipated [76].
+Tsai and Yang [89] found a signiﬁcant association between hospital admissions for
+pneumonia and PM 2.5 in Taipei, Taiwan. Polish ﬁndings highlight the prominent impact of NO 2 on pneumonia-related hospitalizations. Pneumonia is an important cause
+of death, especially in the sensitive groups of young children and the elderly. In 2017,
+worldwide, 15% of all deaths of children under 5 were caused by pneumonia [ 90]. In
+patients with asthma, NO 2 potentiates bronchial responsiveness [ 91] and triggers both
+allergen-dependent [92] and -independent [93] eosinophilic inﬂammation. At concentrations ≥ 2 ppm, NO2 disrupts the tracheobronchial epithelial monolayer [94] and modiﬁes
+the severity of viral infections [95]. In the Polish study [71], the greatest immediate effect
+on pneumonia-related hospitalizations in all investigated agglomerations had NO2, and
+a NO2 increase of 10 µg/m3 was associated with up to an 11% increase in the number of
+daily pneumonia-related hospitalizations.
+2.2.2. Long-Term Exposure to NO2
+In the ESCAPE project [96], the long-term effect of NO 2 on natural-cause mortality
+was not shown. On the other hand, Faustini et al. [ 96], in a meta-analysis of 19 studies,
+demonstrated that an annual increase in NO 2 of 10 µg/m3 was associated with a 4.1%
+increase in natural mortality. The magnitude of NO 2 effects on mortality was similar to
+that of PM2.5 [96]. Two large cohort studies [97,98] examined the relationship between lung
+function growth in children and long-term exposure to NO2. Although in California [98]
+the mean NO2 concentrations were rather low (from 7.5 to 71.4 µg/m3), and in Mexico
+City [97] were rather high (51–80 µg/m3), both demonstrated deﬁcits in lung function
+growth in children associated with NO2 exposition. In Norway and Sweden, exposure to
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 9 of 20
+NO2 from trafﬁc was associated with decreased lung function in children 9–10 years old in
+Oslo [99] and 8 years old in Stockholm [100].
+2.2.3. NO2 Health Effect Mechanism
+The main mechanism of NO2 toxicity has been suggested to involve lipid peroxidation in cell membranes and various actions of free radicals on structural and functional
+molecules. The concentrations over 0.2 ppm produce the above-mentioned adverse effects
+in humans, while concentrations higher than 2.0 ppm affect the cytotoxic T lymphocytes
+(CD8+ T cells) and natural killer cells (NK cells) that produce our immune response [41].
+Associations between NO2 pollution and mortality [71,101], as well as the exacerbation
+of asthma [102], enhance the allergic response to inhaled allergens [103,104], manifesting
+as respiratory viral infection and its associated inﬂammation. Spannhake et al. [ 95] investigated the interactive effects of human rhinovirus type 16 (RV16) and the NO2 on markers
+of proinﬂammatory activity in human bronchial and nasal epithelial cells. Dose–response
+experiments for NO2 indicated that 3 h exposure to concentrations from 1.0 to 3.0 ppm
+induced cytokine release from bronchial epithelial cells in a dose-dependent manner with a
+minimal effect on cell viability. Additionally, the authors of [95] analyzed the interaction
+between asthmatic symptoms and viral infection within their common epithelial cell targets
+in the upper and lower respiratory tracks. The results demonstrated that the expression and
+release of IL-8 (interleukin 8, a pro-inﬂammatory cytokine that has a role in neutrophil activation and has been identiﬁed within the pathogenesis and progression of the disease [105])
+in response to combined infection and NO2 exposure was signiﬁcantly higher than the sum
+of release from the cells that underwent only infection or only NO2 exposure.
+NO2 damages the lung and proteins vital to its function. The mechanism includes
+exposure of α-1-proteinase inhibitor (α1PI) to NO2, which resulted in a 50% loss of immunoreactivity with either monoclonal or polyclonal antibodies in an enzyme-linked
+immunosorbent assay at molar ratios of NO: α12PI of 100:1 and greater. Additionally,
+the results of parallel O-phthalaldehyde and bicinchoninic acid protein assays as well as
+amino acid analysis on control and NO2-exposed α1PI suggested a reactivity of NO2 with
+lysine residues [106].
+2.3. PM 2.5 and NO2
+The epidemiological evidence has consistently shown that the NO2 associations do
+not reﬂect adverse effects of NO 2 itself but rather the health effects of other air pollutants,
+mainly PM or other components of the complex mixture of trafﬁc-related air pollutants [32].
+Predominantly, this is due to the strong correlations between NO2 and other combustionderived air pollutants, especially PM. Many studies [7,14,26,107–114] underline a positive
+correlation between NO2 and PM2.5. In some studies, NO2 has been proposed as a surrogate
+for PM [115,116]; in others, the confounding effects of PM2.5 are also underlined [88,117].
+Based on 7 years of air pollutant measurements in Iran, analyzed by the AirQ+ model,
+Naghan et al. [101] observed that the short-term effects of PM 2.5 on health were greater
+than those of NO2. However, the long-term effects of NO2 were greater than PM2.5.
+A number of studies conﬁrm the relationship between multiple pollutants. For example, in 17 Chinese cities (characterized by average NO 2 levels of 26–67 µg/m3), each
+short-term 10 µg/m3 increase in NO2 corresponded to a 1.63% increase in mortality [118].
+The association stayed signiﬁcant when adjusted for PM [118]. In comparison with Chinese
+ﬁndings [118], research performed in Poland [71] showed an increase in daily mortality of
+1.7% in Cracow and of 3.9% in the Tricity per 10µg/m3 NO2 increase; however, the effect of
+NO2 was independent of other air pollutants including PM2.5. In a Dutch birth cohort, NO2
+and PM2.5 were highly correlated (0.93), and a regression model conﬁrmed the association
+with some outcomes of asthma and allergy during the ﬁrst 4 years of life [119]. Interestingly,
+NO2 is likely a potential modiﬁer for the association between PM2.5 and the risk of inhaled
+allergies because the risk estimates for PM2.5 in higher NO2 (≥42.0, µg/m3) are statistically
+different from those in lower NO 2 levels (p = 0.046) [120]. However only a few articles
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 10 of 20
+have investigated the relationship between PM 2.5 and NO2, and our analysis identiﬁed
+only eight publications with speciﬁc data on RR, OR, or HR (Table 3). In our review, only
+three articles [16,114,121] covered concentration ranges exceeding EU guidelines (Table 1)
+for both pollutants.
+Table 3. Risk ratio (RR), odds ratio (OR), and hazard ratio (HR), and health effects linked to PM2.5
+and NO2 exposure.
+Health
+Outcomes
+Exposure
+Duration OR/HR/RR Mean (Min.-Max.) Concentration µg/m3
+References
+PM2.5 NO2
+Non-Accidental Cause Mortality
+Nonaccidental
+causes
+Chronic
+HR: 1.01 (95% CI 0.99–1.02)
+10 µg/m3 PM2.5 adjusted for NO2
+HR: 1.02 (95% CI 1.01–1.03)
+10 µg/m3 NO2 adjusted for PM2.5
+23.0 (7.2–32.1) 43.6 (13.0–75.2) [110]
+Chronic
+HR: 1.02 (95% CI 1.00–1.04)
+2.8 µg/m3 PM2.5 (IQR) adjusted for NO2
+HR: 1.03 (95% CI 1.01–1.05)
+12.5 µg/m3 NO2 (IQR) adjusted for PM2.5
+5.9 (0.4–17.2) 8.6 (0.0–69.1) [122]
+Natural cause Chronic
+HR: 1.06 (95% CI 0.98–1.15)
+5 µg/m3 PM2.5 adjusted for NO2
+HR: 1.01 (95% CI 0.97–1.05)
+10 µg/m3 NO2 adjusted for PM2.5
+6.6–31 5.2–59.8 [76]
+All-cause
+mortality
+Chronic
+RR: 1.015 (95% CI 0.980–1.050)
+5.03 µg/m3 PM2.5 (IQR) adjusted for NO2
+RR: 1.015 (95% CI 0.098–1.050)
+7.74 µg/m3 NO2 (IQR) adjusted for PM2.5
+14.1 (4.3–25.1) 12.3 (3.0–21.9) [123]
+Chronic
+OR: 1.023 (95% CI 0.814–1.279)
+35.6 µg/m3 PM2.5 (IQR) adjusted for NO2
+OR: 1.457 (95% CI 1.076–2.152)
+16.9 µg/m3 NO2 (IQR) adjusted for PM2.5
+80.7 (37.0–142.4) 49.7 (33.6–68.1) [16]
+Short term
+(1 h-days)
+RR: 1.0004 (95% CI 0.9926–1.0082)
+10 µg/m3 PM2.5 adjusted for NO2
+5.7–176.7
+18.4–99.2
+(24-h average)
+40.0–161.2 (1 h max.)
+[10]
+Cardiovascular Disease Mortality
+Cardiovascular
+Chronic
+RR: 1.043 (95% CI 0.989–1.101)
+5.03 µg/m3 PM2.5 (IQR) adjusted for NO2
+RR: 1.030 (95% CI 0.987–1.075)
+7.74 µg/m3 NO2 (IQR) adjusted for PM2.5
+14.1 (4.3–25.1) 12.3 (3.0–21.9) [123]
+Short term
+(1 h-days)
+RR: 1.0092 (95% CI 0.9945–1.0241)
+10 µg/m3 PM2.5 adjusted for NO2
+5.7–176.7
+18.4–99.2
+(24-h average)
+40.0–161.2 (1 h max.)
+[10]
+Congenital
+heart diseases Chronic
+OR: 1.267 (95% CI 0.643–2.404)
+35.6 µg/m3 PM2.5 (IQR) adjusted for NO2
+OR: 1.667 (95% CI 1.011–2.738)
+16.9 µg/m3 NO2 (IQR) adjusted for PM2.5
+80.7 (37.0–142.4) 49.7
+(33.6–68.1) [16]
+Ischemic heart
+disease Chronic
+RR: 1.090 (95% CI 1.015–1.170)
+5.03 µg/m3 PM2.5 (IQR) adjusted for NO2
+RR: 1.029 (95% CI 0.972–1.090)
+7.74 µg/m3 NO2 (IQR) adjusted for PM2.5
+14.1 (4.3–25.1) 12.3 (3.0–21.9) [123]
+Out-ofhospital
+cardiac arrest
+Chronic OR: 1.07 (95% CI 1.03–1.11)
+10 µg/m3 PM2.5 adjusted for NO2
+76.0 (5.0–476.0) 51.7 (7.8–136.2) [114]
+Respiratory Disease Mortality
+Respiratory
+Short term
+(1h-days)
+RR: 1.0135 (95% CI 1.0008–1.0263)
+10 µg/m3 PM2.5 adjusted for NO2
+5.7–176.7
+18.4–99.2
+(24-h average)
+40.0–161.2 (1 h max.)
+[10]
+Chronic
+RR: 1.064 (95% CI 0.954–1.185)
+5.03 µg/m3 PM2.5 (IQR) adjusted for NO2
+RR: 0.973 (95% CI 0.891–1.063)
+7.74 µg/m3 NO2 (IQR) adjusted for PM2.5
+14.1 (4.3–25.1) 12.3 (3.0–21.9) [123]
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 11 of 20
+Table 3. Cont.
+Health
+Outcomes
+Exposure
+Duration OR/HR/RR Mean (Min.-Max.) Concentration µg/m3
+References
+PM2.5 NO2
+Pneumoniarelated Chronic
+OR: 0.961 (95% CI 0.754–1.145)
+35.6 µg/m3 PM2.5 (IQR) adjusted for NO2
+OR: 1.781 (95% CI 1.011–2.738)
+16.9 µg/m3 NO2 (IQR) adjusted for PM2.5
+80.7 (37.0–142.4) 49.7
+(33.6–68.1) [16]
+Lung cancer Chronic
+RR: 0.985 (95% CI 0.867–1.119)
+5.03 µg/m3 PM2.5 (IQR) adjusted for NO2
+RR: 1.118 (95% CI 1.010–1.236)
+7.74 µg/m3 NO2 (IQR) adjusted for PM2.5
+14.1 (4.3–25.1) 12.3 (3.0–21.9) [123]
+Cerebrovascular Disease Mortality
+Stroke Chronic
+RR: 1.019 (95% CI 0.934–1.112)
+5.03 µg/m3 PM2.5 (IQR) adjusted for NO2
+RR: 1.070 (95% CI 0.998–1.147)
+7.74 µg/m3 NO2 (IQR) adjusted for PM2.5
+14.1 (4.3–25.1) 12.3 (3.0–21.9) [123]
+Chronic Diseases
+Chronic kidney
+diseases Chronic
+HR: 1.43 (95% CI 0.98–2.09)
+10 µg/m3 PM2.5 adjusted for NO2
+HR: 1.05 (95% CI 0.97–1.14)
+10 µg/m3 NO2 adjusted for PM2.5
+26.6 44.8 [121]
+IQR—interquartile range.
+The health outcomes have been grouped among non-accidental mortality
+[10,16,76,110,122,123], cardiovascular disease mortality [ 10,16,114,123], respiratory disease mortality [10,16,123], and additionally stroke [123] and chronic kidney diseases [121].
+Tables 4 and 5 present the comparison of RR, OR, and HR between NO2 (Table 4) and PM2.5
+(Table 5) adjusted for PM2.5 and NO2, respectively. Generally, the highest risk of mortality
+is connected with congenital heart diseases (cardiovascular mortality) and pneumonia
+(pneumonia), both reported in [ 16]. Wang et al. [ 16] analyzed the associations between
+ambient air pollution and the number of deaths among children under 5 years old. The authors found that the associations between pollutants and infant deaths in Beijing (between
+January 2014 and September 2014) were more pronounced than those in children aged
+1–5 years at lag1–lag2 and lag01–lag02. In the case of NO2 in the multi-pollutant analysis,
+the OR was higher at all-cause mortality and pneumonia-related mortality than for a single
+pollutant. However, in the case of mortality caused by congenital heart diseases, the adjustment of PM2.5 brought an antagonistic effect in comparison to NO2 alone. An antagonistic
+relationship was also found for PM2.5 exposure adjusted for NO2, for all-cause mortality,
+congenital heart diseases, and pneumonia-related mortality; however, PM2.5 exposure was
+not statistically signiﬁcant. As presented in Tables 3–5, for congenital heart disease, OR
+were 1.267 (95% CI 0.643–2.404) for PM2.5 adjusted for NO2 and 1.667 (95% CI 1.011–2.738)
+for NO2 adjusted for PM2.5, while for single pollutants were 1.155 (95% CI 0.953–1.390) and
+1.383 (95% CI 1.113–1.718) for PM2.5 and NO2, respectively. Since the conﬁdence interval
+(CI) included the value 1, we cannot be sure that the inﬂuence of the PM 2.5 increase was
+statistically signiﬁcant. Statistically signiﬁcant positive associations were observed for NO2.
+Moreover, the pneumonia-related associations of NO2 were stronger than those observed
+for overall death.
+Jerret et al. [123] in California cohort studies including 73,711 subjects used land use
+regression (LUR) models to evaluate the association between air pollution, including PM2.5
+and NO2 and several causes of death, such as cardiovascular disease, ischemic heart disease,
+stroke, respiratory disease, and lung cancer. In models that included both PM2.5 and NO2,
+the PM2.5 associations with mortality from all causes were reduced to about half the size of
+those in the single-pollutant models, and the estimates became insigniﬁcant. The increase in
+NO2 and PM2.5 concentration on cardiovascular disease mortality revealed the highest risk
+among the analyzed results. PM2.5 exposition caused a signiﬁcantly higher risk of death
+due to congenital heart diseases and ischemic heart diseases, but the effects of PM2.5 were
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 12 of 20
+attenuated with NO2. PM2.5 had elevated but insigniﬁcant risk estimates for respiratory
+deaths, whereas neither of the other pollutants was associated with respiratory mortality.
+For lung cancer, NO2 consistently elevated risks in two-pollutant models.
+Table 4. Risk ratio (RR), odds ratio (OR), and hazard ratio (HR) with corresponding health effects
+linked to NO2 exposure alone and adjusted for PM2.5.
+Health Outcomes Exposure
+Duration
+NO2
+Adjusted for PM2.5
+NO2 Synergistic (+)
+Antagonistic (−)
+No Signiﬁcant Difference (0)
+Reference
+HR OR RR HR OR RR
+Non-Accidental Cause Mortality
+Non-accidental
+causes
+Chronic 1.02 1.01 + [110]
+Chronic 1.03 1.03 0 [122]
+Natural cause Chronic 1.01 1.01 0 [76]
+All-cause mortality
+Chronic 1.025 1.031 − [123]
+Chronic 1.457 1.383 + [16]
+Cardiovascular Disease Mortality
+Cardiovascular Chronic 1.03 1.048 − [123]
+Congenital heart
+diseases Chronic 1.667 2.103 − − [16]
+Ischemic heart
+disease Chronic 1.029 1.066 − [123]
+Respiratory Disease Mortality
+Respiratory Chronic 0.973 0.999 − [123]
+Pneumonia-related Chronic 1.781 1.74 + [16]
+Lung cancer Chronic 1.118 1.111 + [123]
+Cerebrovascular Disease Mortality
+Stroke Chronic 1.07 1.078 − [123]
+Chronic Diseases
+Chronic kidney
+diseases Chronic 1.05 1.07 − [121]
+p > 0.05 no signiﬁcant association. Statistically signiﬁcant risks values are in bold.
+The inﬂuence of the increase in NO 2 and PM2.5 concentration on non-accidental mortality was featured as 1–3% of health risk increase [110,122]. The adjustment for PM2.5 in
+NO2 increase pointing towards small synergy or no inﬂuence was observed, while adjustment for NO2 in PM2.5 increase revealed a small antagonistic effect. Cesaroni et al. [110]
+analyzed cause-speciﬁc mortality of adults in Rome in accordance with two GIS indicators of trafﬁc exposure (distance to heavy trafﬁc roads with >10,000 vehicles per day, and
+trafﬁc intensity in 150 m); however, these associations were evaluated separately for NO2
+and PM2.5. In the two-pollutant model, long-term exposure to both NO2 and PM2.5 were
+analyzed only in the aspect of non-accidental mortality with HR: 1.02 (95% CI 1.01–1.03)
+per 10 µg/m3 of NO2 adjusted for PM2.5, and HR: 1.01 (95% CI 0.99–1.02) per 10 µg/m3 of
+PM2.5 adjusted for NO2.
+The single pollutant estimations point to similar non-accidental mortality risk for PM2.5
+and NO2, with HRs of 1.01 (95% CI 1.00–1.02) and 1.01 (95% CI 1.00–1.01), respectively. In
+the two-pollutant model, the associations were similar to single-pollutant risks; however,
+PM2.5 adjusted for NO2 were not statistically signiﬁcant. Christidis et al. [122] analyzed the
+data from 1981 to 2016 in a cohort of Canadian communities exposed to low concentrations
+of PM2.5 (average 5.9 µg/m3). The unadjusted model had a HR: 0.96 (95% CI 0.92–1.00),
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 13 of 20
+which increased to 1.11 (95% CI 1.04–1.18) when adjusted by the socio-economic, behavioral,
+and contextual covariates. The authors evaluated the impact of individual-level behavioral
+risk factors on the PM 2.5 mortality association relationship. The inclusion of behavioral
+covariates in a model including socioeconomic and ecological covariates lowered the PM2.5
+hazard ratio by 2% (from 1.13 to 1.11). This modest change in the hazard ratio can indicate
+that the behavioral covariates were being adequately controlled for by the socio-economic
+and ecological covariates in the established relationship between PM2.5 exposure and nonaccidental mortality. In the two-pollutant model, the estimated effect of an increase in NO2
+on mortality was independent from the PM2.5 adjustment, while the HR associated with an
+increase in PM2.5 concentration in the adjustment for NO2 was only slightly lower than the
+HR of a single pollutant (HR: 1.03, 95% CI 1.01–1.05, and HR: 1.03, 95% CI 1.02–1.05 for
+PM2.5 and NO2, respectively).
+Table 5. Risk ratio (RR), odds ratio (OR), and hazard ratio (HR) with corresponding health effects
+linked to PM2.5 exposure alone and adjusted for NO2.
+Health Outcomes Exposure
+Duration
+PM2.5
+Adjusted for NO2
+PM2.5 Synergistic (+)
+Antagonistic (−)
+No Signiﬁcant Difference (0)
+Reference
+HR OR RR HR OR RR
+Non-Accidental Cause Mortality
+Non-accidental
+causes
+Chronic 1.01 1.01 0 [110]
+Chronic 1.02 1.03 − [122]
+Natural cause Chronic 1.06 1.07 − [76]
+All-cause mortality
+Chronic 1.015 1.032 − [123]
+Chronic 1.023 1.155 − [16]
+Short term
+(1 h-days) 1.00 1.0065 − [10]
+Cardiovascular Disease Mortality
+Cardiovascular
+Chronic 1.043 1.064 − [123]
+Short term
+(1 h-days) 1.009 1.0092 0 [10]
+Congenital heart
+diseases Chronic 1.267 1.653 − − [16]
+Ischemic heart
+disease Chronic 1.09 1.111 − [123]
+Out-of-hospital
+cardiac arrest Chronic 1.07 1.07 0 [114]
+Respiratory Disease Mortality
+Respiratory
+Short term
+(1 h-days) 1.014 1.0073 + [10]
+Chronic 1.064 1.046 + [123]
+Pneumonia-related Chronic 0.961 1.171 − − [16]
+Lung cancer Chronic 0.985 1.062 − [123]
+Cerebrovascular Disease Mortality
+Stroke Chronic 1.019 1.065 − [123]
+Chronic Diseases
+Chronic kidney
+diseases Chronic 1.43 1.53 − − [121]
+p > 0.05 non-signiﬁcant association. Statistically signiﬁcant risks values are in bold.
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 14 of 20
+In the article on all-cause mortality by Beelen et al. [ 76], the authors analyzed the
+data from 22 European cohorts recruited mainly in the 1990s. Exposure to PM 2.5 and
+NO2 as separate pollutants resulted in HR: 1.07 (95% CI 1.02–1.13) and 1.01 (95% CI
+0.99–1.03), respectively, for a 5µg/m3 increase in PM2.5 concentration and 10 µg/m3 for
+NO2. However, the health risk of the increase in NO2 concentration was not statistically
+signiﬁcant (CI includes value 1). In the two-pollutant model, the health effect estimates
+either for PM 2.5 adjusted for NO 2 (HR: 1.06, 95% CI 0.98–1.15) or for NO 2 adjusted for
+PM2.5 (HR: 1.01, 95% CI 0.97–1.05) did not differ from the single-pollutant model.
+The development of chronic kidney disease and conﬁrmed long-term exposure to
+ambient PM2.5 and NO2 was examined by Guo et al. [ 121]. Every 10 µg/m3 increase in
+PM2.5 or NO 2 concentrations was associated with a higher risk of developing chronic
+kidney disease. The increase in PM2.5 concentration resulted in a higher risk of developing
+chronic kidney disease than the increase in NO2 concentration. HR for PM2.5 alone was
+1.53 (95% CI 1.07–2.2), while for NO 2, the risk was eightfold lower (HR: 1.07, 95% CI
+1.00–1.15). The adjustment for PM2.5 or NO2 appeared to be antagonistic in comparison to
+single-pollutant risk. However, the results were not statistically signiﬁcant.
+In one study [114], the authors analyzed the increase in out-of-hospital cardiac arrest
+and calculated the ORs per 10 µg/m3 increase in NO2 levels. Furthermore, they statistically
+compared the concentrations on control days with the daily average concentrations on
+the onset day (Lag 0) and on days 1–5 before onset (Lags 1, 2, 3, 4, and 5). In a multipollutant model including NO2 adjusted for PM2.5, the estimated effect was comparable
+to a single-pollutant risk. For PM 2.5, OR was 1.07 (95% CI 1.04–1.10), and for NO 2, it
+was 1.05 (95% CI 0.98–1.11); however, the calculated OR for PM 2.5 adjustment was not
+statistically signiﬁcant.
+Only one study included short-term exposition. Orellano [10], in an extensive review
+including 196 articles, reported evidence of a positive association between short-term
+(1 h do 1 day) exposure to air pollutants and all-cause mortality. In the case of single
+pollutants, the relative risk levels were 1.0065 (95% CI 1.0044–1.0086) and 1.072 (95% CI
+1.0059–1.0085) for PM2.5 and NO2, respectively. As can be seen (Tables 3–5), the association
+values were higher for NO2 adjustment in comparison to a single-pollutant model in the
+case of respiratory diseases and were lower in the case of all-cause mortality; however, in
+the later, the statistical signiﬁcance was irrespective.
+3. Conclusions
+A literature review of the health effects of the co-interactions of the pollutants under
+consideration (PM2.5 and NO2) showed that it depended on the type of pollutant, the cause
+of death/disease, and the magnitude of the increase in its concentration.
+The increased risk of non-accidental mortality was observed with higher NO 2 and
+PM2.5 concentrations. NO 2 was signiﬁcantly associated with mortality when adjusted
+for PM2.5; however, the estimated effect of PM2.5 was no longer signiﬁcant. With a small
+increase in concentration, the risk for all-cause mortality was raised from 1 to 3%. NO 2
+exposure adjusted for PM 2.5 at a high concentration of ambient PM 2.5 was particularly
+inﬂuential, revealing signiﬁcant synergy between both pollutants. PM 2.5 was associated
+more with cardiovascular disease mortality, whereas NO2 exposure was associated more
+with respiratory mortality. Regardless of which pollutant was major or adjusted, in cardiovascular mortality, the adjustment resulted in a rather antagonistic effect, while in
+respiratory disease mortality, particularly by pneumonia and lung cancer, NO2 exposure
+adjusted for PM2.5 revealed a synergistic effect, and conversely, PM2.5 exposure adjusted
+for NO2 brought about an antagonistic effect.
+The high correlations between pollutants were associated with serious limitations in
+the use of multi-pollutant models. Because of this, the health effects of many pollutants
+are still not fully known. To better understand the health effects of many pollutants, more
+research needs to be conducted on biological mechanisms, preferably grouping pollutants
+according to their mode of action.
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 15 of 20
+Author Contributions: Conceptualization A.M. and M ˙Z.; investigation A.M. and M. ˙Z.; data curation, M. ˙Z.; writing—original draft preparation, A.M.; writing—review and editing A.M. and M. ˙Z.;
+visualization, A.M. and M. ˙Z.; funding acquisition A.M. and M. ˙Z. All authors have read and agreed
+to the published version of the manuscript.
+Funding: Research funded by the statutory research by the Faculty of Energy and Environmental
+Engineering, Silesian University of Technology.
+Conﬂicts of Interest: The authors declare no conﬂict of interest.
+References
+1. Dominski, F.H.; Lorenzetti Branco, J.H.; Buonanno, G.; Stabile, L.; Gameiro da Silva, M.; Andrade, A. Effects of Air Pollution on
+Health: A Mapping Review of Systematic Reviews and Meta-Analyses. Environ. Res. 2021, 201, 111487. [CrossRef] [PubMed]
+2. Sun, Z.; Zhu, D. Exposure to Outdoor Air Pollution and Its Human-Related Health Outcomes: An Evidence Gap Map. BMJ Open
+2019, 9, e031312. [CrossRef] [PubMed]
+3. Adebayo-Ojo, T.C.; Wichmann, J.; Arowosegbe, O.O.; Probst-Hensch, N.; Schindler, C.; Künzli, N. Short-Term Effects of PM10,
+NO2, SO2 and O3 on Cardio-Respiratory Mortality in Cape Town, South Africa, 2006–2015. Int. J. Environ. Res. Public Health 2022,
+19, 8078. [CrossRef] [PubMed]
+4. Adebayo-Ojo, T.C.; Wichmann, J.; Arowosegbe, O.O.; Probst-Hensch, N.; Schindler, C.; Künzli, N. Short-Term Joint Effects of
+PM10, NO2 and SO2 on Cardio-Respiratory Disease Hospital Admissions in Cape Town, South Africa. Int. J. Environ. Res. Public
+Health 2022, 19, 495. [CrossRef]
+5. Chen, T.M.; Gokhale, J.; Shofer, S.; Kuschner, W.G. Outdoor Air Pollution: Nitrogen Dioxide, Sulfur Dioxide, and Carbon
+Monoxide Health Effects. Am. J. Med. Sci. 2007, 333, 249–256. [CrossRef]
+6. Crouse, D.L.; Peters, P .A.; Hystad, P .; Brook, J.R.; van Donkelaar, A.; Martin, R.V .; Villeneuve, P .J.; Jerrett, M.; Goldberg, M.S.;
+Arden Pope, C.; et al. Ambient PM2.5, O3, and NO2 Exposures and Associations with Mortality over 16 Years of Follow-up in the
+Canadian Census Health and Environment Cohort (CanCHEC). Environ. Health Perspect. 2015, 123, 1180–1186. [CrossRef]
+7. Riches, N.O.; Gouripeddi, R.; Payan-Medina, A.; Facelli, J.C. K-Means Cluster Analysis of Cooperative Effects of CO, NO2, O3,
+PM2.5, PM10, and SO2 on Incidence of Type 2 Diabetes Mellitus in the US. Environ. Res. 2022, 212, 113259. [CrossRef]
+8. Jo, S.; Kim, Y.-J.; Park, K.W.; Hwang, Y.S.; Lee, S.H.; Kim, B.J.; Chung, S.J. Association of NO2 and Other Air Pollution Exposures
+With the Risk of Parkinson Disease. JAMA Neurol. 2021, 78, 800–808. [CrossRef]
+9. Braithwaite, I.; Zhang, S.; Kirkbride, J.B.; Osborn, D.P .J.; Hayes, J.F. Air Pollution (Particulate Matter) Exposure and Associations
+with Depression, Anxiety, Bipolar, Psychosis and Suicide Risk: A Systematic Review and Meta-Analysis. Environ. Health Perspect.
+2019, 127, 126002. [CrossRef]
+10. Orellano, P .; Reynoso, J.; Quaranta, N.; Bardach, A.; Ciapponi, A. Short-Term Exposure to Particulate Matter (PM10 and PM2.5),
+Nitrogen Dioxide (NO2), and Ozone (O3) and All-Cause and Cause-Speciﬁc Mortality: Systematic Review and Meta-Analysis.
+Environ. Int. 2020, 142, 105876. [CrossRef]
+11. Li, S.; Wang, H.; Hu, H.; Wu, Z.; Chen, K.; Mao, Z. Effect of Ambient Air Pollution on Premature SGA in Changzhou City,
+2013-2016: A Retrospective Study. BMC Public Health 2019, 19, 705. [CrossRef] [PubMed]
+12. Zhao, N.; Smargiassi, A.; Hatzopoulou, M.; Colmegna, I.; Hudson, M.; Fritzler, M.J.; Awadalla, P .; Bernatsky, S. Long-Term
+Exposure to a Mixture of Industrial SO2, NO2, and PM2.5 and Anti-Citrullinated Protein Antibody Positivity. Environ. Health
+2020, 19, 86. [CrossRef] [PubMed]
+13. Litchﬁeld, I.J.; Ayres, J.G.; Jaakkola, J.J.K.; Mohammed, N.I. Is Ambient Air Pollution Associated with Onset of Sudden Infant
+Death Syndrome: A Case-Crossover Study in the UK. BMJ Open 2018, 8, e018341. [PubMed]
+14. Ma, T.; Yazdi, M.D.; Schwartz, J.; Réquia, W.J.; Di, Q.; Wei, Y.; Chang, H.H.; Vaccarino, V .; Liu, P .; Shi, L. Long-Term Air Pollution
+Exposure and Incident Stroke in American Older Adults: A National Cohort Study. Glob. Epidemiol. 2022, 4, 100073. [CrossRef]
+15. Hu, X.; Nie, Z.; Ou, Y.; Qian, Z.; McMillin, S.E.; Aaron, H.E.; Zhou, Y.; Dong, G.; Dong, H. Air Quality Improvement and Cognitive
+Function Beneﬁt: Insight from Clean Air Action in China. Environ Res 2022, 214, 114200. [CrossRef]
+16. Wang, J.; Cao, H.; Sun, D.; Qi, Z.; Guo, C.; Peng, W.; Sun, Y.; Xie, Y.; Liu, X.; Li, B.; et al. Associations between Ambient Air
+Pollution and Mortality from All Causes, Pneumonia, and Congenital Heart Diseases among Children Aged under 5 Years in
+Beijing, China: A Population-Based Time Series Study. Environ. Res. 2019, 176, 108531. [CrossRef]
+17. WHO. Global Air Quality Guidelines: Particulate Matter (PM2.5 and PM10), Ozone, Nitrogen Dioxide, Sulfur Dioxide and
+Carbon Monoxide. Available online: https://apps.who.int/iris/handle/10665/345329 (accessed on 28 September 2022).
+18. Mauderly, J.L.; Burnett, R.T.; Castillejos, M.; Özkaynak, H.; Samet, J.M.; Stieb, D.M.; Vedal, S.; Wyzga, R.E. Is the Air Pollution
+Health Research Community Prepared to Support a Multipollutant Air Quality Management Framework? Inhal. T oxicol.2010, 22,
+1–19. [CrossRef]
+19. De Leeuw, F.; Horálek, J. Quantifying the Health Impacts of Ambient Air Pollution: Methodology and Input Data ; ETC/ACM: Bilthoven,
+The Netherlands, 2016.
+20. Regulatory and Guidance Information by Topic: Air|US EPA. Available online: https://www.epa.gov/regulatory-informationtopic/regulatory-and-guidance-information-topic-air#criteriapollutants (accessed on 9 September 2022).
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 16 of 20
+21. Union, P .Directive 2008/50/EC of the European Parliament and of the Council of 21 May 2008 on Ambient Air Quality and Cleaner Air for
+Europe; Ofﬁcial Journal of the European Union: Aberdeen, UK, 2008.
+22. US EPA. Supplementary Guidance for Conducting Health Risk Assessment of Chemical Mixtures ; EPA: Washington, DC, USA, 2000.
+23. Gao, L.; Tao, F.; Liu, R.; Wang, Z.; Leng, H.; Zhou, T. Multi-Scenario Simulation and Ecological Risk Analysis of Land Use Based
+on the PLUS Model: A Case Study of Nanjing. Sustain. Cities Soc. 2022, 85, 104055. [CrossRef]
+24. Huang, Y.C.T.; Rappold, A.G.; Graff, D.W.; Ghio, A.J.; Devlin, R.B. Synergistic Effects of Exposure to Concentrated Ambient Fine
+Pollution Particles and Nitrogen Dioxide in Humans. Inhal. T oxicol.2012, 24, 790–797. [CrossRef]
+25. Ashmore, M.R.; Dimitroulopoulou, C. Personal Exposure of Children to Air Pollution. Atmos. Environ. 2009, 43, 128–141.
+[CrossRef]
+26. WHO. Review of Evidence on Health Aspects of Air Pollution—REVIHAAP Project ; World Health Organization: Geneva,
+Switzerland, 2013.
+27. Zhao, Z.; Lv, S.; Zhang, Y.; Zhao, Q.; Shen, L.; Xu, S.; Yu, J.; Hou, J.; Jin, C. Characteristics and Source Apportionment of PM2.5 in
+Jiaxing, China. Environ. Sci. Pollut. Res. Int. 2019, 26, 7497–7511. [CrossRef] [PubMed]
+28. Cheng, M.; Tang, G.; Lv, B.; Li, X.; Wu, X.; Wang, Y.; Wang, Y. Source Apportionment of PM2.5 and Visibility in Jinan, China.
+J. Environ. Sci. 2021, 102, 207–215. [CrossRef]
+29. Scicchitano, P .; Cameli, M.; Maiello, M.; Modesti, P .A.; Muiesan, M.L.; Novo, S.; Palmiero, P .; Saba, P .S.; Pedrinelli, R.;
+Ciccone, M.M. Nutraceuticals and Dyslipidaemia: Beyond the Common Therapeutics. J. Funct. Foods 2014, 6, 11–32. [CrossRef]
+30. Afshin, A.; Sur, P .J.; Fay, K.A.; Cornaby, L.; Ferrara, G.; Salama, J.S.; Mullany, E.C.; Abate, K.H.; Abbafati, C.; Abebe, Z.; et al.
+Health Effects of Dietary Risks in 195 Countries, 1990–2017: A Systematic Analysis for the Global Burden of Disease Study 2017.
+Lancet 2019, 393, 1958–1972. [CrossRef]
+31. Zhao, M.; Veeranki, S.P .; Magnussen, C.G.; Xi, B. Recommended Physical Activity and All Cause and Cause Speciﬁc Mortality in
+US Adults: Prospective Cohort Study. BMJ 2020, 370, 2031. [CrossRef] [PubMed]
+32. Mills, I.C.; Atkinson, R.W.; Anderson, H.R.; Maynard, R.L.; Strachan, D.P . Distinguishing the Associations between Daily Mortality
+and Hospital Admissions and Nitrogen Dioxide from Those of Particulate Matter: A Systematic Review and Meta-Analysis. BMJ
+Open 2016, 6, e010751. [CrossRef]
+33. Shaw, S.; van Heyst, B. An Evaluation of Risk Ratios on Physical and Mental Health Correlations Due to Increases in Ambient
+Nitrogen Oxide (NOx) Concentrations. Atmosphere 2022, 13, 967. [CrossRef]
+34. Simon, S.D. Understanding the Odds Ratio and the Relative Risk. J. Androl. 2001, 22, 533–536.
+35. Worthington, D. Dictionary of Environmental Health ; Routledge, Taylor and Francis Group: New York, NY, USA, 2020;
+ISBN 9780367578572.
+36. George, A.; Stead, T.S.; Ganti, L. What’s the Risk: Differentiating Risk Ratios, Odds Ratios, and Hazard Ratios? Cureus 2020, 12,
+6–13. [CrossRef]
+37. Costa, S.; Ferreira, J.; Silveira, C.; Costa, C.; Lopes, D.; Relvas, H.; Borrego, C.; Roebeling, P .; Miranda, A.I.; Paulo Teixeira, J.
+Integrating Health on Air Quality Assessment-Review Report on Health Risks of Two Major European Outdoor Air Pollutants:
+PM and NO2. J. T oxicol. Environ. Health Part B 2014, 17, 307–340. [CrossRef]
+38. Krewski, D.; Burnett, R.; Jerrett, M.; Pope, C.A.; Rainham, D.; Calle, E.; Thurston, G.; Thun, M. Mortality and Long-Term Exposure
+to Ambient Air Pollution: Ongoing Analyses Based on the American Cancer Society Cohort. J. T oxicol. Environ. Health Part A
+2006, 68, 1093–1109. [CrossRef] [PubMed]
+39. Viegi, G.; Maio, S.; Pistelli, F.; Baldacci, S.; Carrozzi, L. Epidemiology of Chronic Obstructive Pulmonary Disease: Health Effects
+of Air Pollution. Respirology 2006, 11, 523–532. [CrossRef] [PubMed]
+40. Utell, M.J.; Frank, R. Susceptibility to Inhaled Pollutants ; ASTM: Balimore, MD, USA, 1989.
+41. Manisalidis, I.; Stavropoulou, E.; Stavropoulos, A.; Bezirtzoglou, E. Environmental and Health Impacts of Air Pollution: A Review.
+Front. Public Health 2020, 8, 14. [CrossRef] [PubMed]
+42. Eze, I.C.; Schaffner, E.; Fischer, E.; Schikowski, T.; Adam, M.; Imboden, M.; Tsai, M.; Carballo, D.; von Eckardstein, A.; Künzli,
+N.; et al. Long-Term Air Pollution Exposure and Diabetes in a Population-Based Swiss Cohort. Environ. Int. 2014, 70, 95–105.
+[CrossRef] [PubMed]
+43. Kelishadi, R.; Poursafa, P . Air Pollution and Non-Respiratory Health Hazards for Children. Arch. Med. Sci. 2010, 6, 483–495.
+[CrossRef]
+44. Clifford, A.; Lang, L.; Chen, R.; Anstey, K.J.; Seaton, A. Exposure to Air Pollution and Cognitive Functioning across the Life
+Course—A Systematic Literature Review. Environ. Res. 2016, 147, 383–398. [CrossRef]
+45. Zhang, X.; Chen, X.; Zhang, X. The Impact of Exposure to Air Pollution on Cognitive Performance. Proc. Natl. Acad. Sci. USA
+2018, 115, 9193–9197. [CrossRef]
+46. Freire, C.; Ramos, R.; Puertas, R.; Lopez-Espinosa, M.J.; Julvez, J.; Aguilera, I.; Cruz, F.; Fernandez, M.F.; Sunyer, J.; Olea, N.
+Association of Trafﬁc-Related Air Pollution with Cognitive Development in Children.J. Epidemiol. Community Health 2010, 64,
+223–228. [CrossRef]
+47. Wang, J.N.; Wang, Q.; Li, T.T.; Shi, X.M. Association between Air Pollution and Cognitive Function in the Elderly.Zhonghua Yu
+Fang Yi Xue Za Zhi 2017, 51, 364–368. [CrossRef]
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 17 of 20
+48. Mehta, A.J.; Kubzansky, L.D.; Coull, B.A.; Kloog, I.; Koutrakis, P .; Sparrow, D.; Spiro, A.; Vokonas, P .; Schwartz, J. Associations
+between Air Pollution and Perceived Stress: The Veterans Administration Normative Aging Study. Environ. Health 2015, 14, 10.
+[CrossRef]
+49. Lim, Y.H.; Kim, H.; Kim, J.H.; Bae, S.; Park, H.Y.; Hong, Y.C. Air Pollution and Symptoms of Depression in Elderly Adults.
+Environ. Health Perspect. 2012, 120, 1023–1028. [CrossRef] [PubMed]
+50. Qiu, X.; Danesh-Yazdi, M.; Weisskopf, M.; Kosheleva, A.; Spiro, A.S.; Wang, C.; Coull, B.A.; Koutrakis, P .; Schwartz, J.D.
+Associations between Air Pollution and Psychiatric Symptoms in The Normative Aging Study. Environ. Res. Lett. 2022, 17, 034004.
+[CrossRef] [PubMed]
+51. Chen, H.; Kwong, J.C.; Copes, R.; Hystad, P .; van Donkelaar, A.; Tu, K.; Brook, J.R.; Goldberg, M.S.; Martin, R.V .; Murray, B.J.; et al.
+Exposure to Ambient Air Pollution and the Incidence of Dementia: A Population-Based Cohort Study. Environ. Int. 2017, 108,
+271–277. [CrossRef] [PubMed]
+52. Ghio, A.J.; Carraway, M.S.; Madden, M.C. Composition of Air Pollution Particles and Oxidative Stress in Cells, Tissues, and
+Living Systems. J. T oxicol. Environ. Health B 2012, 15, 1–21. [CrossRef] [PubMed]
+53. IARC. Monographs on the Evaluation of Carcinogenic Risks to Humans ; International Agency for Research on Cancer: Lyon, France,
+2010; Volume 96.
+54. Ma, P .; Tao, F.; Gao, L.; Leng, S.; Yang, K.; Zhou, T. Retrieval of Fine-Grained PM2.5 Spatiotemporal Resolution Based on Multiple
+Machine Learning Models. Remote Sens. 2022, 14, 599. [CrossRef]
+55. Silva, R.A.; West, J.J.; Lamarque, J.F.; Shindell, D.T.; Collins, W.J.; Faluvegi, G.; Folberth, G.A.; Horowitz, L.W.; Nagashima, T.;
+Naik, V .; et al. Future Global Mortality from Changes in Air Pollution Attributable to Climate Change.Nat. Clim. Chang. 2017, 7,
+647–651. [CrossRef] [PubMed]
+56. Fiordelisi, A.; Piscitelli, P .; Trimarco, B.; Coscioni, E.; Iaccarino, G.; Sorriento, D. The Mechanisms of Air Pollution and Particulate
+Matter in Cardiovascular Diseases. Heart Fail. Rev. 2017, 22, 337–347. [CrossRef]
+57. Schlesinger, R.B. The Interaction of Inhaled Toxicants with Respiratory Tract Clearance Mechanisms.Crit. Rev. T oxicol. 2008, 20,
+257–286. [CrossRef]
+58. Becquemin, M.H.; Swift, D.L.; Bouchikhi, A.; Roy, M.; Teillac, A. Particle Deposition and Resistance in the Noses of Adults and
+Children. Eur. Respir. J. 1991, 4, 694–702.
+59. Brook, R.D.; Franklin, B.; Cascio, W.; Hong, Y.; Howard, G.; Lipsett, M.; Luepker, R.; Mittleman, M.; Samet, J.; Smith, S.C.; et al.
+Air Pollution and Cardiovascular Disease: A Statement for Healthcare Professionals from the Expert Panel on Population and
+Prevention Science of the American Heart Association. Circulation 2004, 109, 2655–2671. [CrossRef]
+60. Miller, M.R.; Shaw, C.A.; Langrish, J.P . From Particles to Patients: Oxidative Stress and the Cardiovascular Effects of Air Pollution.
+Future Cardiol. 2012, 8, 577–602. [CrossRef]
+61. Ni, L.; Chuang, C.C.; Zuo, L. Fine Particulate Matter in Acute Exacerbation of COPD. Front. Physiol. 2015, 6, 294. [CrossRef]
+[PubMed]
+62. Esworthy, R. Air Quality: EP A’s 2013 Changes to the Particulate Matter (PM) Standard ; Library of Congress: Washington, DC, USA;
+Congressional Research Service: Washington, DC, USA, 2013.
+63. Brook, R.D. Cardiovascular Effects of Air Pollution. Clin. Sci. 2008, 115, 175–187. [CrossRef] [PubMed]
+64. Chang, C.C.; Kuo, C.C.; Liou, S.H.; Yang, C.Y. Fine Particulate Air Pollution and Hospital Admissions for Myocardial Infarction
+in a Subtropical City: Taipei, Taiwan. J. T oxicol. Environ. Health Part A 2013, 76, 440–448. [CrossRef] [PubMed]
+65. Chiu, H.F.; Tsai, S.S.; Weng, H.H.; Yang, C.Y. Short-Term Effects of Fine Particulate Air Pollution on Emergency Room Visits for
+Cardiac Arrhythmias: A Case-Crossover Study in Taipei. J. T oxicol. Environ. Health Part A 2013, 76, 614–623. [CrossRef]
+66. Brocato, J.; Sun, H.; Shamy, M.; Kluz, T.; Alghamdi, M.A.; Khoder, M.I.; Chen, L.C.; Costa, M. Particulate Matter From Saudi
+Arabia Induces Genes Involved in Inﬂammation, Metabolic Syndrome and Atherosclerosis. J. T oxicol. Environ. Health Part A 2014,
+77, 751–766. [CrossRef]
+67. Brook, R.D.; Rajagopalan, S.; Pope, C.A.; Brook, J.R.; Bhatnagar, A.; Diez-Roux, A.V .; Holguin, F.; Hong, Y.; Luepker, R.V .;
+Mittleman, M.A.; et al. Particulate Matter Air Pollution and Cardiovascular Disease: An Update to the Scientiﬁc Statement from
+the American Heart Association. Circulation 2010, 121, 2331–2378. [CrossRef]
+68. Shang, Y.; Sun, Z.; Cao, J.; Wang, X.; Zhong, L.; Bi, X.; Li, H.; Liu, W.; Zhu, T.; Huang, W. Systematic Review of Chinese Studies of
+Short-Term Exposure to Air Pollution and Daily Mortality.Environ. Int. 2013, 54, 100–111. [CrossRef]
+69. Han, C.; Xu, R.; Ye, T.; Xie, Y.; Zhao, Y.; Liu, H.; Yu, W.; Zhang, Y.; Li, S.; Zhang, Z.; et al. Mortality Burden Due to Long-Term
+Exposure to Ambient PM2.5 above the New WHO Air Quality Guideline Based on 296 Cities in China. Environ. Int. 2022,
+166, 107331. [CrossRef]
+70. Qiu, H.; Tian, L.W.; Pun, V .C.; Ho, K.F.; Wong, T.W.; Yu, I.T.S. Coarse Particulate Matter Associated with Increased Risk of
+Emergency Hospital Admissions for Pneumonia in Hong Kong. Thorax 2014, 69, 1027–1033. [CrossRef]
+71. D ˛ abrowiecki, P .; Badyda, A.; Chciałowski, A.; Czechowski, P .O.; Wrotek, A. Inﬂuence of Selected Air Pollutants on Mortality and
+Pneumonia Burden in Three Polish Cities over the Years 2011–2018.J. Clin. Med. 2022, 11, 3084. [CrossRef] [PubMed]
+72. Wu, J.-Z.; Ge, D.-D.; Zhou, L.-F.; Hou, L.-Y.; Zhou, Y.; Li, Q.-Y. Effects of Particulate Matter on Allergic Respiratory Diseases.
+Chronic. Dis. T ransl. Med. 2018, 4, 95–102. [CrossRef] [PubMed]
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 18 of 20
+73. Deng, X.; Rui, W.; Zhang, F.; Ding, W. PM2.5 Induces Nrf2-Mediated Defense Mechanisms against Oxidative Stress by Activating
+PIK3/AKT Signaling Pathway in Human Lung Alveolar Epithelial A549 Cells. Cell Biol. T oxicol. 2013, 29, 143–157. [CrossRef]
+[PubMed]
+74. Cohen, A.J.; Brauer, M.; Burnett, R.; Anderson, H.R.; Frostad, J.; Estep, K.; Balakrishnan, K.; Brunekreef, B.; Dandona, L.;
+Dandona, R.; et al. Estimates and 25-Year Trends of the Global Burden of Disease Attributable to Ambient Air Pollution:
+An Analysis of Data from the Global Burden of Diseases Study 2015. Lancet 2017, 389, 1907–1918. [CrossRef]
+75. Health Effects Institute. State of Global Air 2020 ; Health Effects Institute: Boston, MA, USA, 2020.
+76. Beelen, R.; Raaschou-Nielsen, O.; Stafoggia, M.; Andersen, Z.J.; Weinmayr, G.; Hoffmann, B.; Wolf, K.; Samoli, E.; Fischer,
+P .; Nieuwenhuijsen, M.; et al. Effects of Long-Term Exposure to Air Pollution on Natural-Cause Mortality: An Analysis of
+22 European Cohorts within the Multicentre ESCAPE Project. Lancet 2014, 383, 785–795. [CrossRef]
+77. Raaschou-Nielsen, O.; Pedersen, M.; Stafoggia, M.; Weinmayr, G.; Andersen, Z.J.; Galassi, C.; Sommar, J.; Forsberg, B.; Olsson, D.;
+Oftedal, B.; et al. Outdoor Air Pollution and Risk for Kidney Parenchyma Cancer in 14 European Cohorts. Int. J. Cancer 2017, 140,
+1528–1537. [CrossRef]
+78. Pyo, J.-S.; Kim, N.Y.; Kang, D.-W. Impacts of Outdoor Particulate Matter Exposure on the Incidence of Lung Cancer and Mortality.
+Medicina 2022, 58, 1159. [CrossRef]
+79. Raaschou-Nielsen, O.; Andersen, Z.J.; Beelen, R.; Samoli, E.; Stafoggia, M.; Weinmayr, G.; Hoffmann, B.; Fischer, P .; Nieuwenhuijsen, M.J.; Brunekreef, B.; et al. Air Pollution and Lung Cancer Incidence in 17 European Cohorts: Prospective Analyses from the
+European Study of Cohorts for Air Pollution Effects (ESCAPE). Lancet Oncol. 2013, 14, 813–822. [CrossRef]
+80. Hamra, G.B.; Guha, N.; Cohen, A.; Laden, F.; Raaschou-Nielsen, O.; Samet, J.M.; Vineis, P .; Forastiere, F.; Saldiva, P .;
+Yorifuji, T.; et al. Outdoor Particulate Matter Exposure and Lung Cancer: A Systematic Review and Meta-Analysis. Environ.
+Health Perspect. 2014, 122, 906–911. [CrossRef]
+81. Yorifuji, T.; Kashima, S. Air Pollution: Another Cause of Lung Cancer. Lancet Oncol. 2013, 14, 788–789. [CrossRef]
+82. Sax, S.N.; Zu, K.; Goodman, J.E. Air Pollution and Lung Cancer in Europe. Lancet Oncol. 2013, 14, e439–e440. [CrossRef]
+83. Oh, J.; Ye, S.; Kang, D.H.; Ha, E. Association between Exposure to Fine Particulate Matter and Kidney Function: Results from the
+Korea National Health and Nutrition Examination Survey. Environ. Res. 2022, 212, 113080. [CrossRef] [PubMed]
+84. Calderón-Garcidueñas, L.; Leray, E.; Heydarpour, P .; Torres-Jardón, R.; Reis, J. Air Pollution, a Rising Environmental Risk Factor
+for Cognition, Neuroinﬂammation and Neurodegeneration: The Clinical Impact on Children and Beyond. Rev. Neurol. 2016, 172,
+69–80. [CrossRef] [PubMed]
+85. Feng, S.; Gao, D.; Liao, F.; Zhou, F.; Wang, X. The Health Effects of Ambient PM2.5 and Potential Mechanisms. Ecotoxicol. Environ.
+Saf. 2016, 128, 67–74. [CrossRef] [PubMed]
+86. Xing, Y.F.; Xu, Y.H.; Shi, M.H.; Lian, Y.X. The Impact of PM2.5 on the Human Respiratory System.J. Thorac. Dis. 2016, 8, E69–E74.
+[CrossRef]
+87. Solomon, C.; Christian, D.; Chen, L.; Welch, B.; Kleinman, M.; Dunham, E.; Erle, D.; Balmes, J. Effect of Serial-Day Exposure to
+Nitrogen Dioxide on Airway and Blood Leukocytes and Lymphocyte Subsets. Eur. Respir. J. 2000, 15, 922–928. [CrossRef]
+88. Samoli, E.; Aga, E.; Touloumi, G.; Nisiotis, K.; Forsberg, B.; Lefranc, A.; Pekkanen, J.; Wojtyniak, B.; Schindler, C.; Niclu, E.; et al.
+Short-Term Effects of Nitrogen Dioxide on Mortality: An Analysis within the APHEA Project. Eur. Respir. J. 2006, 27, 1129–1137.
+[CrossRef]
+89. Tsai, S.S.; Yang, C.Y. Fine Particulate Air Pollution and Hospital Admissions for Pneumonia in a Subtropical City: Taipei, Taiwan.
+J. T oxicol. Environ. Health A 2014, 77, 192–201. [CrossRef]
+90. World Health Organization. Pneumonia. Available online: https://www.who.int/health-topics/pneumonia#tab=tab_1 (accessed
+on 28 September 2022).
+91. Brown, J.S. Nitrogen Dioxide Exposure and Airway Responsiveness in Individuals with Asthma. Inhal. T oxicol.2015, 27, 1–14.
+[CrossRef]
+92. Barck, C.; Lundahl, J.; Halldén, G.; Bylin, G. Brief Exposures to NO2 Augment the Allergic Inﬂammation in Asthmatics. Environ.
+Res. 2005, 97, 58–66. [CrossRef]
+93. Ezratty, V .; Guillossou, G.; Neukirch, C.; Dehoux, M.; Koscielny, S.; Bonay, M.; Cabanes, P .A.; Samet, J.M.; Mure, P .;Ropert, L.; et al.
+Repeated Nitrogen Dioxide Exposures and Eosinophilic Airway Inﬂammation in Asthmatics: A Randomized Crossover Study.
+Environ. Health Perspect. 2014, 122, 850–855. [CrossRef] [PubMed]
+94. Robison, T.W.; Kwang-Jin, K. Dual Effect of Nitrogen Dioxide on Barrier Properties of Guinea Pig Tracheobronchial Epithelial
+Monolayers Cultured in an Air Interface. J. T oxicol. Environ. Health 2009, 44, 57–71. [CrossRef] [PubMed]
+95. William Spannhake, E.; Reddy, S.P .M.; Jacoby, D.B.; Yu, X.Y.; Saatian, B.; Tian, J. Synergism between Rhinovirus Infection and
+Oxidant Pollutant Exposure Enhances Airway Epithelial Cell Cytokine Production. Environ. Health Perspect. 2002, 110, 665–670.
+[CrossRef]
+96. Faustini, A.; Rapp, R.; Forastiere, F. Nitrogen Dioxide and Mortality: Review and Meta-Analysis of Long-Term Studies. Eur.
+Respir. J. 2014, 44, 744–753. [CrossRef]
+97. Rojas-Martinez, R.; Perez-Padilla, R.; Olaiz-Fernandez, G.; Mendoza-Alvarado, L.; Moreno-Macias, H.; Fortoul, T.; McDonnell, W.;
+Loomis, D.; Romieu, I. Lung Function Growth in Children with Long-Term Exposure to Air Pollutants in Mexico City. Am. J.
+Respir. Crit. Care Med. 2007, 176, 377–384. [CrossRef] [PubMed]
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 19 of 20
+98. Gauderman, W.J.; Vora, H.; McConnell, R.; Berhane, K.; Gilliland, F.; Thomas, D.; Lurmann, F.; Avol, E.; Kunzli, N.;Jerrett, M.; et al.
+Effect of Exposure to Trafﬁc on Lung Development from 10 to 18 Years of Age: A Cohort Study. Lancet 2007, 369, 571–577.
+[CrossRef]
+99. Oftedal, B.; Brunekreef, B.; Nystad, W.; Madsen, C.; Walker, S.E.; Nafstad, P . Residential Outdoor Air Pollution and Lung Function
+in Schoolchildren. Epidemiology 2008, 19, 129–137. [CrossRef] [PubMed]
+100. Schultz, E.S.; Gruzieva, O.; Bellander, T.; Bottai, M.; Hallberg, J.; Kull, I.; Svartengren, M.; Mele ´ n, E.; Pershagen, G. Trafﬁc-Related
+Air Pollution and Lung Function in Children at 8 Years of Age: A Birth Cohort Study. Am. J. Respir. Crit. Care Med. 2012, 186,
+1286–1291. [CrossRef]
+101. Naghan, D.J.; Neisi, A.; Goudarzi, G.; Dastoorpoor, M.; Fadaei, A.; Angali, K.A. Estimation of the Effects PM 2.5, NO 2, O 3
+Pollutants on the Health of Shahrekord Residents Based on AirQ+ Software during (2012–2018).T oxicol. Rep.2022, 9, 842–847.
+[CrossRef]
+102. Kelly, F.J.; Fussell, J.C. Air Pollution and Airway Disease. Clin. Exp. Allergy 2011, 41, 1059–1071. [CrossRef]
+103. Tunnicliffe, W.S.; Burge, P .S.; Ayres, J.G. Effect of Domestic Concentrations of Nitrogen Dioxide on Airway Responses to Inhaled
+Allergen in Asthmatic Patients. Lancet 1994, 344, 1733–1736. [CrossRef]
+104. Strand, V .; Svartengren, M.; Rak, S.; Barck, C.; Bylin, G. Repeated Exposure to an Ambient Level of NO2 Enhances Asthmatic
+Response to a Nonsymptomatic Allergen Dose. Eur. Respir. J. 1998, 12, 6–12. [CrossRef] [PubMed]
+105. Cesta, M.C.; Zippoli, M.; Marsiglia, C.; Gavioli, E.M.; Mantelli, F.; Allegretti, M.; Balk, R.A. The Role of Interleukin-8 in Lung
+Inﬂammation and Injury: Implications for the Management of COVID-19 and Hyperinﬂammatory Acute Respiratory Distress
+Syndrome. Front. Pharmacol. 2022, 12, 808797. [CrossRef] [PubMed]
+106. Hood, D.B.; Gettins, P .; Johnson, D.A. Nitrogen Dioxide Reactivity with Proteins: Effects on Activity and Immunoreactivity with
+α-1-Proteinase Inhibitor and Implications for NO2-Mediated Peptide Degradation. Arch. Biochem. Biophys. 1993, 304, 17–26.
+[CrossRef]
+107. Dominici, F.; Peng, R.D.; Barr, C.D.; Bell, M.L. Protecting Human Health from Air Pollution: Shifting from a Single-Pollutant to a
+Multipollutant Approach. Epidemiology 2010, 21, 187–194. [CrossRef]
+108. Siddika, N.; Rantala, A.K.; Antikainen, H.; Balogun, H.; Amegah, A.K.; Ryti, N.R.I.; Kukkonen, J.; Soﬁev, M.; Jaakkola, M.S.;
+Jaakkola, J.J.K. Short-Term Prenatal Exposure to Ambient Air Pollution and Risk of Preterm Birth—A Population-Based Cohort
+Study in Finland. Environ. Res. 2020, 184, 109290. [CrossRef]
+109. Szyszkowicz, M. An Approach to Represent a Combined Exposure to Air Pollution. Int. J. Occup. Med. Environ. Health 2015, 28,
+823–830. [CrossRef]
+110. Cesaroni, G.; Badaloni, C.; Gariazzo, C.; Stafoggia, M.; Sozzi, R.; Davoli, M.; Forastiere, F. Long-Term Exposure to Urban Air
+Pollution and Mortality in a Cohort of More than a Million Adults in Rome.Environ. Health Perspect. 2013, 121, 324–331. [CrossRef]
+111. Gass, K.; Klein, M.; Sarnat, S.E.; Winquist, A.; Darrow, L.A.; Flanders, W.D.; Chang, H.H.; Mulholland, J.A.; Tolbert, P .E.;
+Strickland, M.J. Associations between Ambient Air Pollutant Mixtures and Pediatric Asthma Emergency Department Visits in
+Three Cities: A Classiﬁcation and Regression Tree Approach.Environ. Health 2015, 14, 58. [CrossRef]
+112. Evangelopoulos, D.; Katsouyanni, K.; Keogh, R.H.; Samoli, E.; Schwartz, J.; Barratt, B.; Zhang, H.; Walton, H. PM2.5 and NO2
+Exposure Errors Using Proxy Measures, Including Derived Personal Exposure from Outdoor Sources: A Systematic Review and
+Meta-Analysis. Environ. Int. 2020, 137, 105500. [CrossRef]
+113. Public Health England. The Effects of Long-T erm Exposure to Ambient Air Pollution on Cardiovascular Morbidity: Mechanistic Evidence.
+A Report by the Committee on the Medical Effects of Air Pollutants ; Public Health England: London, UK, 2018.
+114. Xia, R.; Zhou, G.; Zhu, T.; Li, X.; Wang, G. Ambient Air Pollution and Out-of-Hospital Cardiac Arrest in Beijing, China. Int. J.
+Environ. Res. Public Health 2017, 14, 423. [CrossRef] [PubMed]
+115. Seaton, A.; Dennekamp, M. Hypothesis: III Health Associated with Low Concentrations of Nitrogen Dioxide—An Effect of
+Ultraﬁne Particles? Thorax 2003, 58, 1012–1015. [CrossRef] [PubMed]
+116. Brook, J.R.; Burnett, R.T.; Dann, T.F.; Cakmak, S.; Goldberg, M.S.; Fan, X.; Wheeler, A.J. Further Interpretation of the Acute Effect
+of Nitrogen Dioxide Observed in Canadian Time-Series Studies. J. Expo. Sci. Environ. Epidemiol. 2007, 17, S36–S44. [CrossRef]
+[PubMed]
+117. Sarnat, J.A.; Schwartz, J.; Catalano, P .J.; Suh, H.H. Gaseous Pollutants in Particulate Matter Epidemiology: Confounders or
+Surrogates? Environ. Health Perspect. 2001, 109, 1053–1061. [CrossRef]
+118. Chen, R.; Samoli, E.; Wong, C.M.; Huang, W.; Wang, Z.; Chen, B.; Kan, H. Associations between Short-Term Exposure to Nitrogen
+Dioxide and Mortality in 17 Chinese Cities: The China Air Pollution and Health Effects Study (CAPES). Environ. Int. 2012, 45,
+32–38. [CrossRef] [PubMed]
+119. Brauer, M.; Hoek, G.; Smit, H.A.; de Jongste, J.C.; Gerritsen, J.; Postma, D.S.; Kerkhof, M.; Brunekreef, B. Air Pollution and
+Development of Asthma, Allergy and Infections in a Birth Cohort. Eur. Respir. J. 2007, 29, 879–888. [CrossRef]
+120. Hou, X.; Huang, H.; Hu, H.; Wang, D.; Sun, B.; Zhang, X.D. Short-Term Exposure to Ambient Air Pollution and Hospital Visits
+for IgE-Mediated Allergy: A Time-Stratiﬁed Case-Crossover Study in Southern China from 2012 to 2019. eClinicalMedicine 2021,
+37, 100949. [CrossRef]
+121. Guo, C.; Chang, L.Y.; Wei, X.; Lin, C.; Zeng, Y.; Yu, Z.; Tam, T.; Lau, A.K.H.; Huang, B.; Lao, X.Q. Multi-Pollutant Air Pollution
+and Renal Health in Asian Children and Adolescents: An 18-Year Longitudinal Study. Environ. Res. 2022, 214, 114144. [CrossRef]
+
+Int. J. Environ. Res. Public Health 2022, 19, 14079 20 of 20
+122. Christidis, T.; Erickson, A.C.; Pappin, A.J.; Crouse, D.L.; Pinault, L.L.; Weichenthal, S.A.; Brook, J.R.; van Donkelaar, A.; Hystad, P .;
+Martin, R.V .; et al. Low Concentrations of Fine Particle Air Pollution and Mortality in the Canadian Community Health Survey
+Cohort. Environ. Health 2019, 18, 84. [CrossRef]
+123. Jerrett, M.; Burnett, R.T.; Beckerman, B.S.; Turner, M.C.; Krewski, D.; Thurston, G.; Martin, R.V .; van Donkelaar, A.;Hughes, E.;
+Shi, Y.; et al. Spatial Analysis of Air Pollution and Mortality in California. Am. J. Respir. Crit. Care Med. 2013, 188, 593–599.
+[CrossRef]

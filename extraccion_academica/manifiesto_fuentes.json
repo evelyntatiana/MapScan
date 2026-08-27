@@ -1,0 +1,185 @@
+[
+  {
+    "source_id": "01_oms_2021_guias_aire",
+    "pdf": "fuentes_academicas/01_oms_2021_guias_aire/OMS_2021_AQG_resumen.pdf",
+    "sha256": "32f3bf1470e20803decb63ab1ee5babf289b4182bc8af94d62b7a5b998642353",
+    "pages": 300,
+    "characters_raw": 5109654,
+    "characters_clean": 5109641,
+    "evidence_records": 3,
+    "term_profile": [
+      {
+        "termino": "PM2.5",
+        "apariciones": 0
+      },
+      {
+        "termino": "PM10",
+        "apariciones": 0
+      },
+      {
+        "termino": "ozone",
+        "apariciones": 0
+      },
+      {
+        "termino": "nitrogen dioxide",
+        "apariciones": 0
+      },
+      {
+        "termino": "sulfur dioxide",
+        "apariciones": 0
+      },
+      {
+        "termino": "carbon monoxide",
+        "apariciones": 0
+      },
+      {
+        "termino": "health",
+        "apariciones": 0
+      }
+    ]
+  },
+  {
+    "source_id": "02_parra_2022_cuenca_pm25",
+    "pdf": "fuentes_academicas/02_parra_2022_cuenca_pm25/Parra_Saud_Espinoza_2022.pdf",
+    "sha256": "663640774f46c4db3f061b083dae19e7814815e1a066ba569c2f90078154e22c",
+    "pages": 21,
+    "characters_raw": 65393,
+    "characters_clean": 65287,
+    "evidence_records": 3,
+    "term_profile": [
+      {
+        "termino": "Cuenca",
+        "apariciones": 44
+      },
+      {
+        "termino": "PM2.5",
+        "apariciones": 100
+      },
+      {
+        "termino": "diesel",
+        "apariciones": 2
+      },
+      {
+        "termino": "industries",
+        "apariciones": 11
+      },
+      {
+        "termino": "boundary layer",
+        "apariciones": 9
+      },
+      {
+        "termino": "inversion",
+        "apariciones": 1
+      },
+      {
+        "termino": "radiation",
+        "apariciones": 4
+      }
+    ]
+  },
+  {
+    "source_id": "03_hu_2022_pm1_salud",
+    "pdf": "fuentes_academicas/03_hu_2022_pm1_salud/Hu_et_al_2022_PM1.pdf",
+    "sha256": "61431968967ac29782b5fef70572104f3354ef7d62d0a57cbf591eef3108686f",
+    "pages": 10,
+    "characters_raw": 40332,
+    "characters_clean": 40142,
+    "evidence_records": 2,
+    "term_profile": [
+      {
+        "termino": "PM1",
+        "apariciones": 30
+      },
+      {
+        "termino": "respiratory",
+        "apariciones": 57
+      },
+      {
+        "termino": "asthma",
+        "apariciones": 23
+      },
+      {
+        "termino": "pneumonia",
+        "apariciones": 11
+      },
+      {
+        "termino": "heterogeneity",
+        "apariciones": 8
+      },
+      {
+        "termino": "publication bias",
+        "apariciones": 6
+      }
+    ]
+  },
+  {
+    "source_id": "04_mainka_zak_2022_mezclas",
+    "pdf": "fuentes_academicas/04_mainka_zak_2022_mezclas/Mainka_Zak_2022_mezclas.pdf",
+    "sha256": "30afe1e18947318ab98f1804ce7a13b03c49a1fa66ae2667c3d5721cbfdac31e",
+    "pages": 20,
+    "characters_raw": 84379,
+    "characters_clean": 84277,
+    "evidence_records": 2,
+    "term_profile": [
+      {
+        "termino": "NO2",
+        "apariciones": 150
+      },
+      {
+        "termino": "PM2.5",
+        "apariciones": 154
+      },
+      {
+        "termino": "synergistic",
+        "apariciones": 9
+      },
+      {
+        "termino": "antagonistic",
+        "apariciones": 13
+      },
+      {
+        "termino": "mixture",
+        "apariciones": 7
+      },
+      {
+        "termino": "health",
+        "apariciones": 149
+      }
+    ]
+  },
+  {
+    "source_id": "05_vilcassim_thurston_2023_brechas",
+    "pdf": "fuentes_academicas/05_vilcassim_thurston_2023_brechas/Vilcassim_Thurston_2023.pdf",
+    "sha256": "9531bef6f948fdb853a1f9be4afff4ad7a2fc7d8ae090653ae24f3bad260c708",
+    "pages": 10,
+    "characters_raw": 62939,
+    "characters_clean": 62623,
+    "evidence_records": 2,
+    "term_profile": [
+      {
+        "termino": "mixtures",
+        "apariciones": 4
+      },
+      {
+        "termino": "multipollutant",
+        "apariciones": 2
+      },
+      {
+        "termino": "PM1",
+        "apariciones": 13
+      },
+      {
+        "termino": "sources",
+        "apariciones": 13
+      },
+      {
+        "termino": "composition",
+        "apariciones": 22
+      },
+      {
+        "termino": "health effects",
+        "apariciones": 26
+      }
+    ]
+  }
+]

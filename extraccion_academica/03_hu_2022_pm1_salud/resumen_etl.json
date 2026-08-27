@@ -1,0 +1,35 @@
+{
+  "source_id": "03_hu_2022_pm1_salud",
+  "pdf": "fuentes_academicas/03_hu_2022_pm1_salud/Hu_et_al_2022_PM1.pdf",
+  "sha256": "61431968967ac29782b5fef70572104f3354ef7d62d0a57cbf591eef3108686f",
+  "pages": 10,
+  "characters_raw": 40332,
+  "characters_clean": 40142,
+  "evidence_records": 2,
+  "term_profile": [
+    {
+      "termino": "PM1",
+      "apariciones": 30
+    },
+    {
+      "termino": "respiratory",
+      "apariciones": 57
+    },
+    {
+      "termino": "asthma",
+      "apariciones": 23
+    },
+    {
+      "termino": "pneumonia",
+      "apariciones": 11
+    },
+    {
+      "termino": "heterogeneity",
+      "apariciones": 8
+    },
+    {
+      "termino": "publication bias",
+      "apariciones": 6
+    }
+  ]
+}

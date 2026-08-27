@@ -1389,6 +1389,121 @@ input[type="range"]::-webkit-slider-thumb {
 .reaction-detail ul { margin: 9px 0 12px; padding-left: 17px; color: #657474; font-size: 9px; line-height: 1.55; }
 .reaction-detail small { display: block; color: #7d8988; font-size: 8px; line-height: 1.45; }
 
+.evidence-detail > div {
+  max-height: min(68vh, 680px);
+  overflow-y: auto;
+  scrollbar-color: #8ca49e transparent;
+}
+
+.evidence-detail .evidence-intro,
+.evidence-detail .mixture-summary {
+  margin: 14px 0;
+  color: #43595a;
+  font-size: 10px;
+}
+
+.origin-health-list { display: grid; gap: 10px; }
+
+.origin-health-list article {
+  padding: 12px;
+  border: 1px solid rgba(78, 105, 101, .22);
+  background: rgba(255, 255, 255, .36);
+}
+
+.origin-health-list header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid rgba(78, 105, 101, .15);
+}
+
+.origin-health-list header b {
+  color: #173d3a;
+  font: 600 19px/1 Georgia, serif;
+}
+
+.origin-health-list header span {
+  max-width: 62%;
+  color: #6b7b79;
+  font-size: 7px;
+  line-height: 1.35;
+  text-align: right;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.origin-health-list dl { margin: 10px 0 0; }
+.origin-health-list dl div { display: grid; grid-template-columns: 84px 1fr; gap: 9px; padding: 7px 0; border-bottom: 1px solid rgba(78, 105, 101, .12); }
+.origin-health-list dl div:last-child { border-bottom: 0; }
+.origin-health-list dt { color: #3f5c59; font-size: 7px; font-weight: 700; line-height: 1.45; text-transform: uppercase; letter-spacing: .05em; }
+.origin-health-list dd { margin: 0; color: #5d6b6c; font-size: 9px; line-height: 1.55; }
+
+.reaction-detail .inline-citations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 8px 0 0;
+}
+
+.inline-citations a,
+.evidence-tags span {
+  padding: 4px 6px;
+  border: 1px solid rgba(47, 115, 106, .25);
+  color: #2f736a;
+  background: rgba(100, 213, 194, .08);
+  font: 600 7px/1.2 var(--font-geist-mono), monospace;
+  text-decoration: none;
+}
+
+.empty-evidence {
+  padding: 13px;
+  border: 1px dashed rgba(78, 105, 101, .3);
+  text-align: center;
+}
+
+.evidence-tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 14px 0 10px; }
+.evidence-tags span { color: #344849; background: rgba(255, 255, 255, .4); }
+
+.health-pathways { padding-left: 18px !important; }
+.health-pathways li { margin-bottom: 5px; }
+
+.evidence-caution {
+  margin: 13px 0;
+  padding: 11px;
+  border-left: 3px solid #d88d62;
+  background: rgba(216, 141, 98, .1);
+}
+
+.evidence-caution b {
+  color: #89533a;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.evidence-caution p { margin: 5px 0 0; }
+
+.academic-reference-block {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(78, 105, 101, .22);
+}
+
+.academic-reference-block ol {
+  margin: 9px 0 0;
+  padding-left: 17px;
+  color: #657474;
+  font-size: 8px;
+  line-height: 1.55;
+}
+
+.academic-reference-block li { margin-bottom: 7px; padding-left: 3px; }
+.academic-reference-block a { color: inherit; text-underline-offset: 2px; }
+.academic-reference-block a:hover,
+.inline-citations a:hover { color: #173d3a; border-color: currentColor; }
+
 .primary-action {
   width: 100%;
   min-height: 47px;

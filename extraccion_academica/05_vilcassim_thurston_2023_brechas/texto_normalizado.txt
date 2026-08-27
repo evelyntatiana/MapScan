@@ -1,0 +1,1071 @@
+G a p sa n df u t u r ed i r e c t i o n si nr e s e a r c ho nh e a l t he f f e c t so f
+air pollution
+Ruzmyn Vilcassima,∗ and George D. Thurstonb
+aDepartment of Environmental Health Sciences, The University of Alabama at Birmingham, School of Public Health, USA
+bDepartments of Medicine and Population Health, New York University School of Medicine, USA
+Summary
+Despite progress in many countries, air pollution, and especially ﬁne particulate matter air pollution (PM 2.5) remains
+a global health threat: over 6 million premature cardiovascular and respiratory deaths/yr. have been attributed to
+household and outdoor air pollution. In this viewpoint, we identify present gaps in air pollution monitoring
+and regulation, and how they could be strengthened in future mitigation policies to more optimally reduce health
+impacts. We conclude that there is a need to move beyond simply regulating PM
+2.5 particulate matter mass concentrations at central site stations. A greater emphasis is needed on: new portable and affordable technologies to
+measure personal exposures to particle mass; the consideration of a submicron (PM 1) mass air quality standard; and
+further evaluations of effects by particle composition and source. We emphasize the need to enable further studies on
+exposure–health relationships in underserved populations that are disproportionately impacted by air pollution, but
+not suf ﬁciently represented in current studies.
+Copyright © 2023 The Authors. Published by Elsevier B.V. This is an open access article under the CC BY-NC-ND
+license ( http://creativecommons.org/licenses/by-nc-nd/4.0/).
+Keywords: Air pollution; Exposure assessment; Health effects; Gaps; Future directions
+Introduction
+Since the early establishment of air quality regulations
+in the United Kingdom in 1956 and the 1970 Clean Air
+Act in the United States, followed by similar governmental legislations across Europe and the rest of the
+world, air pollution levels have decreased considerably
+in most major cities in high-income countries that used
+to be primary hubs of industrialization and poor air
+quality not so long ago. Six ‘Criteria’ or ‘classical’ air
+pollutants were targeted by the United States Environmental Protection Agency (US EPA) and the World
+Health Organization (WHO): Ground-level ozone (O
+3),
+particulate matter (PM), carbon monoxide (CO), lead,
+sulfur dioxide (SO 2) and nitrogen dioxide (NO 2). Standards and guidelines were imposed for each pollutant 1,2
+initiating mitigatory measures. However, controlling air
+pollution has been more challenging globally, and levels
+of air pollutants have worsened in most large cities in
+low and low-middle income countries,
+3 at times leading
+to historic air pollution episodes in cities such as New
+Delhi, Beijing, and Karachi. 4,5 In addition, as levels have
+declined in high income countries, new evidence has
+documented severe adverse health effects still occur
+even at their now lowered exposure levels. 6,7 Concentrations previously considered ‘healthy’ may now exceed
+the newer more stringent guidelines by the WHO, and
+frequent short-term excursions are observed even in
+usually ‘low-pollution’ cities. Thus, air pollution remains a major global environmental concern impacting
+human health, particularly among vulnerable groups
+and socioeconomically disadvantaged communities. 8,9
+The Lancet Commission ’s 2019 report and the WHO
+have estimated that some 6.7 million premature deaths
+can be attributed to the combined impact of household
+and outdoor air pollution, primarily from increased
+mortality from cardiovascular and respiratory diseases.
+10
+Over the past half century, exposure scientists,
+epidemiologists, and researchers of various related disciplines have made signi ﬁcant contributions in developing methods for monitoring and controlling airborne
+pollutants and investigating the harmful effects of
+exposure to air pollution. However, the chemistry of air
+pollutants, their behavior in the atmosphere/environment, and their interactions with biological systems are
+complex and, despite major strides in research, many
+unknowns persist. In 2010, an international specialty
+conference sponsored by the American Association for
+Aerosol Research (AAAR) titled “Air Pollution and
+Health: Bridging the Gap from Sources to Health Outcomes”
+11 identiﬁed key needs to improve our understanding of air pollution related adverse effects: 1) a
+greater focus on multipollutant science that includes
+studies on mixtures and pollutant sources, 2) a better
+understanding of biological mechanism and associations of various health effects with sub-components of
+PM (e.g., submicron particles, elemental carbon, trace
+*Corresponding author. Department of Environmental Medicine, UAB
+School of Public Health, 1665, University Boulevard, Birmingham, AL,
+USA.
+E-mail address: ruzmyn@uab.edu (R. Vilcassim).
+eBioMedicine
+2023;93: 104668
+Published Online 23 June
+2023
+https://doi.org/10.
+1016/j.ebiom.2023.
+104668
+www.thelancet.com Vol 93 July, 2023 1
+Personal View
+
+elements, and source-speci ﬁc mixtures); 3) a further
+understanding of susceptibility of populations -
+including the role of genetics/epigenetics, the in ﬂuence
+of socioeconomic and other confounding factors, and; 4)
+the addition of new technologies, such as ‘microsensors’, hybrid air quality modeling, and remote (e.g.,
+satellite) sensing data. 11 While there have been signi ﬁcant improvements in addressing some of these concerns, many gaps identi ﬁed at that time still persist.
+Of the various air pollutants, greater importance has
+been attributed to the mass concentration of particulate
+matter (particularly PM with aerodynamic diameters
+smaller than 10 μm and 2.5 μm; PM 10 and PM 2.5), due
+to studies showing stronger links between ﬁne PM
+concentration and adverse health effects. 12 While, even
+to-date, the mass concentration of PM is used as the
+standard and main exposure metric in many studies, the
+AAAR conference attendees raised concerns that mass
+concentration alone does not appear to be a metric
+sufﬁcient to fully and effectively evaluate the health effects of PM exposure: the size, source, and composition
+of PM and other physical properties also need to be
+considered in evaluating health effects. More recently,
+Nicolaou and Chekley (2021)
+13 discussed de ﬁciencies in
+air quality monitoring including, research on the longterm effects of exposure, lack of knowledge in relative
+toxicities from different sources and the joint and independent effects of multipollutant exposures, the impacts of ultra ﬁne particulate matter, and importantly,
+the need for more effort in research in low-and-middleincome countries (LMICs), where exposures are highest, but data are sparse. In addition, attention has been
+drawn to gaps in our understanding of air pollution
+control and health, particularly on diseases spread by
+airborne pathogens.
+14 Thus, most knowledge gaps discussed in the past still persist, although insights into
+some have advanced signi ﬁcantly in recent years, such
+as studies on epigenetic factors associated with air
+pollution exposure,
+15,16 as well as analyses of source
+mixtures and metals more strongly associated with
+health outcomes. 17,18 In addition, improved understanding of the biological mechanisms regarding how
+air pollutants affect various organ systems, including
+cardiovascular, neurological, developmental, and metabolic systems, provide vital insights for other aspects of
+research including identifying susceptibility and
+possible treatments. For example, recent research has
+pointed to oxidative stress from ﬁne PM containing both
+transition metals and acidic sulfates, such as emitted by
+fossil fuel combustion, as a likely important health
+impact causal pathway.
+19
+Therefore, despite a long history of air pollution
+research, there is still much to learn about the interactions between air pollutants and human health
+systems, and the external modifying factors in ﬂuencing
+this relationship. New challenges have emerged, in
+addition to the pre-existing issues and gaps in
+knowledge. In this viewpoint, we identify critical gaps
+in air pollution research/knowledge, and discuss future
+directions and their potential impact on air pollution
+related health risks along the following key themes:
+(1) Air pollution monitoring methods and technological
+limitations e.g. air pollution source and composition,
+number concentration vs. mass concentration, central
+vs. personal monitoring; (2) Exposure assessment uncertainties impacting health outcomes assessed and,
+(3) Regulatory standards and policies.
+Gaps in monitoring methods and technological
+limitations
+PM mass, size, composition, and source
+While the U.S. EPA recognized the key role of ﬁne particulate matter in the health effects of particles when it
+changed the U.S. ambient air quality standard from PM10
+to PM2.5 in 1997,20 further progress has been lagging in its
+regulation to better monitor and focus regulation on those
+ﬁne particles that are most toxic, which varies within PM2.5
+depending on size, composition, and source. The growing
+evidence that the most toxic particles are among the submicron size (e.g., nanoparticles), and from sources emitting the most toxic mix of constituents (e.g. fossil fuel
+combustion), is yet to be addressed in regulations, or in
+most PM air pollution studies.
+21 W h i l es o m eh a v ec a l l e d
+for the conduct of site-speci ﬁc epidemiological studies of
+PM2.5 health effects in every locality to address the variation in PM 2.5 toxicity per unit mass22, the development and
+application of source sector-speci ﬁc and composition-speci ﬁc
+health effect estimates (e.g., for those with the highest risk per
+μg/m3)w o u l dm o r ee fﬁciently allow the derivation of more
+locally appropriate site-speciﬁc health effect coef ﬁcients, based
+on local measurements of PM 2.5 source and composition,
+sidestepping the need for multiple epidemiological studies in
+each locality. Thus, better quantifying source and
+composition-based air pollution associated health impacts
+needs to begin with more detailed particulate matter
+monitoring when evaluating air pollution levels over space
+and time.
+In most countries and cities, air pollution concentrations are obtained via central ﬁxed reference-grade
+ambient monitors. In the U.S., the EPA has established a large network of central ambient monitors,
+mainly to measure and meet federal regulatory NAAQ
+standards, which are based on either hourly, daily
+and/or annual averages of overall mass concentration.
+In addition, the U.S. EPA has established a more limited
+Chemical Speciation Network (CSN) that are useful in
+evaluating variations in PM
+2.5 composition, as well as
+useful for the estimation of source-speci ﬁc exposure
+levels at those sites and at intervening locales using land
+use regression methods (e.g., see Rahman and Thurston, 2021). 23 Such data have proved useful in discriminating the varying health effects of different PM 2.5
+components, but more such composition-based analyses
+Personal View
+2 www.thelancet.com Vol 93 July, 2023
+
+of PM 2.5 samples and their health effects at more sites
+around the world are needed to enable more locationspeciﬁc health effects estimation, enabling more
+health bene ﬁt optimized PM 2.5 mitigation policies. The
+expansion and maintenance of a worldwide CSN will be
+ﬁnancially and technically challenging, added by the
+complexity of chemical compositions of various PM
+components. However, the data generated from such
+methods are key to connect epidemiologic ﬁndings with
+toxicological ﬁndings, as demonstrated in the NPACT
+study in the USA. 18,24 The studies conducted under the
+NPACT initiative were key in identifying source components of PM which have greater potential to cause
+harm, as well as to identify the challenges and complexities that need to be addressed to understand the
+mechanisms of individual component toxicities.
+Since particulate matter derived from sources most
+often associated with the adverse health effects of PM
+2.5
+(e.g., fossil fuel combustion particles) are found in the submicron part of PM 2.5 mass, we also recommend another,
+simpler, approach to focus mitigation on the most toxic
+particle sources: switch from monitoring and regulating
+PM
+2.5 to PM 1 (particles less than 1 μmi na e r o d y n a m i c
+diameter) mass. This is consistent with the past progression
+in particle mass regulation from Total Suspended Particulate Matter (TSP), to inhalable particulate matter (PM10)t o
+ﬁne particulate matter (PM2.5). While this concept has been
+in discussion among air pollution scientists in recent years,
+perhaps the main challenge for implementation of a PM1
+standard was the lack of evidence of associated health beneﬁts in the past. PM1 is not monitored in the U.S. and many
+other major cities, limiting the number of studies that
+investigate associations between PM
+1 levels and health
+outcomes. However, in recent years there has been a
+growing body of epidemiology results ﬁnding stronger
+health associations with PM1 mass than with PM 2.5.F o r
+example, Yang et al. (2020) recently found that“Associations
+with lower lung function were consistently larger for PM1
+than for PM2.5.25 Guo and colleagues (2022) evaluated the
+varying associations of the incidence rate of female lung
+cancer with PM1,P M2.5,a n dP M10 in 436 Chinese cancer
+registries and demonstrated that the association with the
+i n c i d e n c er a t eo ff e m a l el u ng cancer was stronger for PM
+1
+than for PM2.5 or PM10.26 Similarly Hu et al. concluded that
+their mortality studies found greater PM1 effects perμg/m3,
+and that “To effectively reduce the adverse health effects of
+PMs, more attention should be paid to ﬁne and very ﬁne
+particles”.27 Clearly, further air pollution monitoring of PM1,
+and epidemiological studies comparing PM2.5 vs. PM1 associations with adverse health are needed in order to
+conﬁr mt h ec a s ef o rP M1 based air pollution control and
+regulations.
+Monitoring of personal exposures
+While central monitors provide a very useful estimate of
+a region’s typical pollution levels, they are of limited use
+in providing estimates of personal-level exposures.
+• First, the number of residents represented by a
+central monitor can vary signi ﬁcantly within a
+country and between countries. In Europe and North
+America, the estimates are about one monitor per
+100,000–600,000 residents, while in contrast, across
+sub-Saharan Africa one ground-level monitor represents about 15.9 million residents.
+28–30
+• Second, central site monitors do not represent concentrations in varying microenvironments and
+occupational settings, which may be higher. For
+example, it has been found that street level NO
+2 exposures in a city can be signi ﬁcantly higher than
+measured at a regulation air monitoring site located
+just a few stories above.
+31
+• Third, when the interest is to study the health effects
+of smaller targeted populations, including vulnerable
+communities that may live in areas that do not have
+central monitors, they provide little information on
+personal exposure levels in populations that may be
+more strongly linked to health outcomes.
+However, it is important to note that, despite these
+limitations of stationary monitoring, consistent associations have still been found in epidemiological studies
+over large populations using central monitoring data in
+different geographical regions. More focused exposures
+are needed to consider more sensitive subpopulations.
+Advanced modeling of higher spatial resolution exposures using central monitor data as inputs have provided more spatially detailed estimates, such as via Land
+Use Regression (LUR) models, and satellite estimates of
+surface PM concentrations.
+23,32 However, LUR and air
+quality models require extensive monitoring, meteorological data, and built environment information, 33,34, and
+may not be broadly applicable to other locations. Similarly, satellite estimates of PM, while more spatially
+comprehensive, may have errors in the range of 22 –85%
+if they are not cross-validated by ground level monitoring data, and are also impacted by other atmospheric
+conditions and particles in the atmosphere. 28 Due to
+such limitations, accurately estimating air pollution exposures for epidemiological studies still remains a
+challenge, contributing to variations in the estimations
+of health effects per amount of exposure, particularly in
+LMICs and rural areas in high-income countries, where
+central monitor coverage is more sparse.
+This brings us to a more accurate approach for the
+estimation of individual level exposures to air pollutantspersonal monitoring. Personal monitor sampling at
+breathing level provides the most accurate timeintegrated exposures and variations of an individual ’s
+exposure.
+35 For example, van Nunen et al. (2021) successfully employed 24-h personal monitoring of PM 2.5,
+ultraﬁne particles, and soot concentrations to study their
+associations with blood pressure and lung function
+changes.36 Xie et al. (2021) simultaneously obtained PM
+measurements from personal monitors and regulatory
+Personal View
+www.thelancet.com Vol 93 July, 2023 3
+
+monitors to study exposures in individuals with asthma,
+and demonstrated that the portable monitors were better able to capture personalized air quality information
+compared to the traditional method.
+37 However, despite
+these advantages, the wide use of personal monitors for
+exposure studies is limited for several reasons. Personal
+monitors and methods that have been validated and are
+of research grade have been expensive and require
+initial training to use, particularly for monitoring of
+gases and volatile organic compounds (VOCs). Examples for PM personal monitoring methods and devices
+include gravimetric analysis using portable pumps and
+ﬁlters, as well as light scattering-based nephelometric
+devices, which can cost in the range of $7000 - $8000
+per unit. Therefore, monitoring exposure concentrations of a group/population has been limited by the
+number and cost of research-grade personal monitors
+available. Thus, although personal monitoring can provide more accurate estimates of individual and sensitive
+subpopulation exposures, these limitations have prevented them from signi ﬁcantly advancing the ﬁeld of air
+pollution and health studies, as compared to the
+contribution from studies that have used central-site
+monitoring data.
+In recent years, however, the goal of higher spatial
+and time resolution individual level air pollution
+monitoring has been made more attainable by the
+introduction and rapid advancement of low-cost sensors. Low-cost sensors (LCS) are expected to be an
+important development in the future direction of more
+democratized, high resolution, and inter-connected air
+(and health) monitoring, generating ‘big data ’ for complex, but more inclusive, research. In addition to being
+inexpensive, mobile, and light weight, currently available LCS are smartphone compatible, which has greatly
+increased their appeal among concerned citizens and
+environmental non-pro ﬁts, allowing monitoring among
+those who could not previously afford the traditionally
+more expensive personal monitoring equipment. LCS
+are also typically linked via GPS, and are used for
+crowdsourcing and identifying air pollution ‘hotspots’ in
+cities.
+38 Recognizing this, the U.S. EPA has developed a
+comprehensive program to test and validate currently
+available low-cost air monitoring devices against reference grade and/or more advanced instruments, which is
+a major step in testing their capabilities for research.
+39,40
+A signiﬁcant body of research has now been done to test
+and use LCS for personal exposure monitoring,
+demonstrating their potential for use in research, with
+proper quality control.
+38,39,41,42 Importantly, their advantages make low-cost sensors a strong candidate for
+studies in LMIC, where resources for environmental
+monitoring are more scarce.
+Despite the numerous advantages of low-cost air
+monitoring sensors, their accuracy may be limited as
+measurements can be biased by variations in the
+ambient environment, inter-instrument variability,
+limitations in the range of concentrations that can be
+measured, and concentration plateauing due to
+signal saturation above certain levels - typically above
+100 μg/m
+3.41,43 They have also been found to underperform in lower pollution settings, demonstrating poor
+agreement with more advance instruments below 40 μg/
+m3.44 Therefore, they are most accurate and have high
+agreement with reference instruments only within a
+particular range.42,43 Sensor ‘aging’ drift is also a concern.41
+In very high concentration situation LCS may also become
+saturated, and fail to accurately assess extreme concentrations. Therefore, scientists and the U.S. EPA have recommended periodic calibration of low-cost devices with
+more advanced or reference instruments to achieve data
+quality and accuracy.
+39,43,45,46 In addition, prior to use in
+studies, they require continuous development and evaluation of calibration protocols and algorithms, which, if not
+done, can lead to uncertaintie s in obtaining reliable and
+timely air quality data.
+42 Indeed, monitoring data quality
+has been found to improve LCS performance signiﬁcantly
+after calibration.46 Another challenge in LCSs is the lack of
+ap h y s i c a ls i z e‘cut-point’ that are designed into advanced
+i n s t r u m e n t s .S e n s o r se s t i m a t ep a r t i c l es i z eu s i n ga ni n -
+ternal algorithm, which at times have been found to be
+different from reference instruments.
+41 However, overall,
+LCS present a great potential to be a powerful tool for
+augmenting central site air quality monitoring data with
+higher resolution, particularly for research in communities
+in LMIC and other areas that are unable to afford central
+site reference monitors.
+Other developments in methods and technologies
+for personal monitoring that have seen progress in
+recent years and have future potential include, low-cost
+wearable sensors to measure health biometrics,
+47,48 and
+non-invasive health biomarker analysis methods, such
+as breath biopsies.
+49,50 These methods, combined with
+low-cost air monitoring devices, could be used to
+generate high resolution exposure-health metrics for
+scientists and medical professionals in studying and
+mitigating the health impacts of air pollution.
+Exposure assessment uncertainties and
+exposure misclassi ﬁcation due to movement
+between environments with varying
+conditions
+Advancements in monitoring instrument technologies,
+statistical and modeling methods, and high-resolution
+geographical mapping have improved our ability to
+better estimate exposure concentrations of populations
+in regions of interest, such as in communities living
+close to a powerplant, or children exposed to vehicle
+emissions when they live near highways. Recent
+research indicates that epidemiological effect estimates
+of PM
+2.5 health effects are robust to the choice of PM 2.5
+exposure assessment spatial resolution. 51–53 However,
+individuals move between ‘microenvironments’ with
+Personal View
+4 www.thelancet.com Vol 93 July, 2023
+
+varying sources and concentrations, and failing to
+incorporate these variations may still lead to exposure
+misclassiﬁcation and/or exposure estimation errors.
+Exposure estimation errors may be exacerbated among
+those living outside an urban core, or when time is
+spent in microenvironments with higher than average
+air pollution within the urban core.
+54 More epidemiological studies that incorporate study participant
+mobility into exposure assessments are needed, which
+may now be more practical, given the improvements
+and cost reductions in personal particulate matter
+monitoring equipment, and the common availability of
+cell phones for data storage and transmission.
+We particularly note two venues of air pollution
+related health exposures that impact a large number of
+individuals, but have lacked suf ﬁcient attention and
+need further exposure - health effects investigations.
+They are: (a) when traveling to polluted cities abroad
+(particularly international travel) and, (b) when using
+major transit systems, especially in underground subway
+systems.
+Air pollution health risks when travelling
+Until the coronavirus disease (COVID-19) pandemic,
+international tourist arrivals had been steadily
+increasing with approximately 1.4 billion worldwide arrivals in 2019.
+55,56 After a signi ﬁcant drop in 2020 and
+2021, recent estimates show an increasing trend, and
+international tourism climbed to nearly 60% of prepandemic levels in January –July 2022.
+56 During travel,
+a large population of individuals may be exposed to air
+pollution concentrations and compositions that signi ﬁcantly vary from their home city/country, especially
+when they travel to popular destinations in Asia, Africa
+and South America. Megacities in these regions have
+poor air quality which are known to exceed local and
+WHO guidelines by several levels of magnitude.
+4,5,57
+However, although billions of individuals travel internationally, there is very limited research addressing the
+impact of air pollution on travelers ’ health.
+58
+Travelers may experience a large differential in
+ambient exposure concentrations and composition
+within a short time of air travel, increasing their risk of
+air pollution related injury compared to residents who
+are more likely to be adapted to local conditions and
+knowledge. Although limited in number, existing
+studies have indicated that exposure to elevated levels of
+PM
+2.5 in cities abroad can be associated with adverse
+cardiopulmonary health impacts, including a reduction
+in lung function, increase in respiratory symptoms and,
+and impacting quality of life.
+58–60 Importantly, most
+study participants recovered from symptoms after
+returning to home cities. Other studies provide evidence
+of systemic pro-oxidative and proin ﬂammatory effects
+associated with travel-related exposure to air pollution,
+where the elevated levels of biomarkers were interestingly reversed after the participants returned to their
+home city.
+61 In this study, exposure to Polycyclic Aromatic Hydrocarbons (PAHs) in cities traveled to altered
+oxidative metabolism, which can be attributable to
+ambient air pollution exposure.
+In addition to air pollutant exposure related health
+risks, travelers may be unpredictably impacted signi ﬁcantly by climate-related events, which are expected to
+particularly affect vulnerable urban areas in South Asia,
+East Asia and the Paci ﬁc.
+62 Rising global temperatures
+can increase the frequency of ‘extreme events ’ such as
+ﬂoods, heatwaves, dust storms and wild ﬁres, and increases in air or water pollution, thereby elevating health
+risks, and causing population displacement in affected
+regions. Thus, global warming is expected to contribute
+to human mobility, leading to increased migration and
+travel to regions that are perceived to be ‘safer’.
+63 While
+studies on migrant health are emerging, there is a need
+for more studies linking previous and ‘new’ exposures
+of migrant populations to cardiovascular and respiratory
+health outcomes.
+58,63
+Despite these concerns faced by travelers and migrants, insuf ﬁcient studies have further explored short
+and long-term health outcomes associated with visiting
+or temporarily migrating to polluted cities for work,
+safety, education, leisure etc., especially among vulnerable groups such as older, pregnant, and other susceptible travelers.
+58 Adding to the dif ﬁculty of conducting
+such studies is the need to adjust for many confounders,
+such as stress, temperature changes, changes in diet
+and water intake, alterations in sleep and sleep patterns,
+effects of changing altitude, and infectious/transmissible diseases. Studies on physiological outcomes
+and biomarkers that can detect early cardiovascular effects due to air pollution exposure during international
+travel will be important to warn elderly and susceptible
+travelers of risks of traveling to polluted destination
+cities, prior to travel. Given that cities are increasingly
+connected via travel, their residents and visitors present
+dynamic interdependent systems in concert with variable air pollution pro ﬁles. Therefore, we suggest that
+future epidemiological studies that explore ambient PM
+associated all-cause, cardiovascular, and respiratory
+mortality not consider populations in individual cities as
+a static entity, but also strive to consider travel related
+exposures as a potentially signi ﬁcant component of
+disease risk when evaluating such outcomes.
+64
+Air pollution health risks in subways
+Underground subway/metro systems move large
+numbers of people daily, and further growth in such
+systems are expected.
+65,66 Although commuters spend a
+relatively shorter time on subway platforms, daily exposures to peak levels may signi ﬁcantly impact health.
+However, despite several studies documenting very high
+levels of PM exposure in underground systems, especially in North America, Europe,
+65,67–70 we are unaware of
+studies that have yet comprehensively evaluated the
+Personal View
+www.thelancet.com Vol 93 July, 2023 5
+
+h e a l t hr i s k so fi n h a l a t i o no fh i g hl e v e l so fv a r y i n gc o m -
+p o s i t i o n si nt h i su n i q u ee n v i r o n m e n t .S u b w a yP M2.5 levels
+have shown to be elevated several fold over ambient levels
+even in busy cities, and contain higher proportions of iron
+and other metals, such as manganese and chromium.
+65,68
+High elemental carbon levels have also been reported in
+subways that utilize diesel-powered maintenance trains.70
+Except for some studies indicating that exposure to subway particles causes inﬂammation in lung epithelial cells
+and oxidative stress in exposed workers,
+71,72 the health
+implications of repeated relatively brief, but very high,
+pollution exposure levels in subways are largely unknown.
+Further complicating the issue is the ambiguity of classifying the subway environment for regulatory purposes.
+Should outdoor ambient standards apply, and if so who
+has the authority to regulate pollution levels in subways?
+Or is it considered an ‘indoor’ environment? These legal
+questions remain unanswered, limiting our ability to
+evaluate the possible mitigatory options. Pollution mitigation approaches, such as imp roved ventilation in subway
+platforms and cars, and the use of electric/battery powered
+maintenance equipment for system maintenance, are
+suggested, and may also reduce virus transmission risks at
+t h es a m et i m e .
+73,74 Further research on subway air quality
+is needed, especially as a large population of commuters
+around the world is expected to increasingly rely on these
+systems in the future.
+Regulatory standards and policies impacting
+health
+The establishment of ambient air quality standards
+around the world, particularly in North America and
+Europe, has greatly improved air quality in many regions compared to levels before they were established,
+and prompted improvements in air monitoring, technological advancements in emissions control technology, and more environmental friendly practices in
+industry.
+75–77 In the U.S., these gains in air quality
+reduction bene ﬁts were made even as the economy has
+grown.77 Legislation in Europe led to the rapid growth in
+monitoring stations, and progress was made towards
+improving air quality over time, despite some challenges
+such as rising O
+3 levels in many European cities 76 In
+recent years, cities such as Beijing, which had extremely
+poor air quality in the past, has achieved sizable and
+steady declines in ambient air pollution levels due to
+stricter control measures on emissions, and particularly
+on coal burning.
+78 Such signi ﬁcant reductions in PM 2.5
+and PM 10 concentrations in 74 key cities in China (between 2013 and 2016) were shown to be associated with
+substantial reductions in mortality and years of life
+lost.
+79 Thus, air quality regulations and action plans have
+overall reduced air pollutant levels and improved the
+lives of affected populations. However, there is still
+much to do on improving standards and policies,
+particularly considering the emerging knowledge on the
+complexity of particulate air pollutants and recent
+studies demonstrating inequalities in air pollution
+exposure and health disparities among historically
+disadvantaged and vulnerable (due to economic and
+environmental disasters) populations.
+Recent research indicates that there is no known
+threshold of PM and other pollutants ’ health effects
+(e.g., see US EPA, 2019
+80), while reductions will likely
+become more challenging to implement as regulatory
+PM
+2.5 mass concentration limits decrease. As a result,
+the focus on mass without consideration of variations in
+composition toxicity has the potential drawback that the
+ﬁne mass constituents that contribute the most mass
+may become the focus of controls, even if they are not
+the most toxic constituents. For example, some have
+recently recommended focusing on controlling gaseous
+ammonia releases in order to lower PM
+2.5 because it
+reacts with ambient sulfuric and nitric acid to form
+particulate matter, 81 but that step would lead to more
+acidic (less neutralized), and likely much more toxic,
+particulate matter that remains in the air, likely leading
+to increased toxicity per unit mass. 82 Therefore, it would
+likely be more health ef ﬁcient to consider focus additional PM regulation on the most toxic constituents of
+PM2.5, or on the submicron subcomponent, of the mass
+PM1. As discussed above, this concept has been in discussion for many years, 83 but now may well be the time
+for its implementation.
+The issue of varying PM 2.5 composition and toxicity
+also has implications to standard and Air Quality Index
+(AQI) interpretation. In contrast to the setting of a single
+AQI for individual gaseous pollutants, such as ozone,
+which is the same compound everywhere, the setting of a
+single world-wide AQI for particulate matter is less
+defensible, because PM
+2.5 varies widely in its size distribution, composition, and dominant source, and likely in
+its toxicity to humans per μg/m3,f r o mp l a c et op l a c e .
+Thus, the above discussed need for the assessment of
+PM2.5 exposures and health impacts as a function of size,
+composition, and source is directly relevant. Such studies
+would be useful for the setting of locality-speci ﬁcP M 2.5
+AQI values, For example, a re cent study of pollution in
+Dhaka, Bangladesh found that the hospital admissions
+and mortality impacts of fossil-fuel combustion PM2.5 has
+a much larger impact per unit mass than biomass related
+PM
+2.5 in Dhaka.84 Since biomass burning dominates the
+PM2.5 mass in Dhaka, it may be that the overall health
+impacts of PM2.5 are less per μg/m3 than in the developed
+world cities where the WHO guideline studies were primarily conducted, and so it may well be that a higher AQI
+guideline would be appropriate in Bangladesh than in the
+US or Europe. Similarly, windblown sand is a large
+component of the PM
+2.5 i nt h eM i d d l eE a s t ,u n l i k ew h e r e
+PM2.5 epidemiological studies have been conducted. Thus,
+it stands to reason that PM2.5 AQI adjustments need to be
+made, depending on the region and particularly the primary sources of air pollution in that state or nation.
+Personal View
+6 www.thelancet.com Vol 93 July, 2023
+
+Environmental justice considerations make clear that
+the environmental health protection improvements
+suggested here for regulations and policies must most
+pressingly be applied to address those most affected by
+air pollution. Growing evidence has established that the
+burden of air pollution is not equally shared, and socioeconomically disadvantaged populations and certain
+racial and ethnic groups often face higher exposure to
+pollutants and greater responses from air pollution.
+8,85–87
+Thus, future research, education and air pollution control policies should consider their impact on groups
+most affected, and make an effort to mitigate inequities
+during the planning and implementation stages. For
+example, Wang Y et al. (2022) have shown that national
+inequalities in air pollution exposure can be eliminated
+with fewer emission reductions if those reductions
+target the most heavily burdened locations, rather than
+implementing across the board national standards
+(Fig. 1 ).
+88
+The exposome and precision environmental
+health in air pollution research
+Recent scientiﬁc discussions on the future of the ﬁeld of
+environmental health have highlighted the importance
+of integrating knowledge from various related disciplines. Focus has been drawn to utilizing ‘exposomics’
+which is based on the concept of the ‘exposome’-the
+totality of all exposures in an individual ’s life course.
+89
+Although the exposome is not a new concept, the realization that average exposures alone cannot explain
+disease spread or occurrence has highlighted the
+importance of considering the variations and complexities of the pollutants, and their interactions with individual and population characteristics over space and
+time. Thus, the concept is gaining increasing applications in environmental health and toxicology studies.
+Early prediction and avoidance of diseases has gained
+greater importance, combined with a push towards
+more precise individualized treatments for exposure
+associated diseases.
+90
+Precision environmental health, predictive and
+translational toxicology, social justice, and health disparities have been identi ﬁed as key areas for future
+development of environmental health, as well as climate
+change and innovative computational methods for data
+analysis. For example, an expert panel from the National
+Academies sponsored by the National Institutes of
+Environmental Health Sciences (NIEHS) has identi ﬁed
+areas that the biomedical community can use to integrate environmental health science into broader studies
+of human health.
+91 Such integration of exposure data,
+‘omics’ data, and personal health information will
+greatly improve our ability to predict air pollution
+related diseases (i.e. using predictively toxicology approaches) and implement more targeted early prevention strategies. However, for precision medicine to be
+effectively integrated with exposomics and to be utilized
+for predicting and preventing air pollution related diseases, the focus has to be expanded from genetic or
+molecular studies alone to also incorporate environmental factors that determine disease progression.
+Despite the available technologies, researchers have
+expressed concern that environmental or exposure
+related issues are rarely considered in current precision
+medicine programs.
+90 Nevertheless, there is huge potential in integrating exposomics and precision medicine methods in future environmental health research,
+especially when combined with personal wearable
+monitors, advanced analytical methods, and modern
+artiﬁcial intelligence capabilities.
+Discussion
+While acknowledging that the ﬁeld of air pollution and
+associated health effects is robust and ever growing, and
+that scientists throughout the years have greatly contributed to the understanding and betterment of the science,
+we have identi ﬁed key gaps and future directions especially needing attention in current and future studies and
+policies (as summarized inTable 1). Future directions will
+be in ﬂuenced by technological developments and more
+advanced methods of particulate matter air quality
+Fig. 1: PM2.5 exposure-disparity and concentration-reduction
+curves. Each panel compares three approaches to emission reduction: location (green line), sector (blue line), and NAAQS-like (i.e.,
+employing a concentration standard; here, 6 μg/m3; orange line). An
+“equal reduction ” approach, where all emissions are reduced proportionately, would be a straight line (black dotted line). The location approach (green line) can eliminate national disparities with
+modest total emission reductions. Fig. 1 was obtained from 88 with
+permission from the corresponding author.
+Personal View
+www.thelancet.com Vol 93 July, 2023 7
+
+measurement, modeling, analysis, and regulation, such as
+focusing future additional regulation on the most health
+threatening particles, such as PM 1. On the other hand,
+other air pollutants, such as volatile organic compounds,
+nanoparticles, emissions from new technologies and industrial processes, emissions from e-waste disposal and
+burning also need attention and further investigation as to
+how more efﬁciently to mitigate their risks. Occupational
+exposures, medical exposures, and immune responses to
+‘new’ and more toxic pollutants are other areas of research
+(among many others) that would also warrant attention
+and new methodologies for assessment.
+Thus, the present and future of environmental health
+and air pollution research present many challenges,
+such as changing pollution source mixes and characteristics over space and time, but also new opportunities, as technology opens new exposure measurement
+possibilities. Strong international cooperation is needed
+between countries/communities with resources and
+those that do not, for more extensive and advanced
+exposure data collection and dissemination, research
+knowledge, and resource sharing, so that these new
+methods and technologies become accessible in LMICs
+and burdened communities, as well. In this way, there is
+the potential to achieve a world in which scienti ﬁc
+collaborations, using more globally accessible methodssuch as remote and low-cost sensors, open source data
+platforms, and capacity building programs, can greatly
+inﬂuence and mitigate air pollution related health risks,
+enabling better informed, fair, and more equitable
+environmental health solutions for all.
+Contributors
+Both authors (RV and GDT) contributed to the conceptualization,
+preparation of the original draft, and editing of the manuscript. Both
+authors read and approved the ﬁnal version of this manuscript.
+Data sharing statement
+Not applicable.
+Declaration of interests
+The authors declare no completing interests.
+Acknowledgements
+This work was not funded by any speci ﬁc funding agency. RV is partially
+supported by a JPB Environmental Health Fellowship award granted by The
+JPB Foundation and administered through the Harvard T.H. Chan School of
+Public Health. The content is solely the responsibility of the authors and does
+not necessarily represent the ofﬁcial views of any funding agency.
+References
+1 United States Environmental Protection Agency (US-EPA). Criteria
+air pollutants. https://www.epa.gov/criteria-air-pollutants#self;
+2022. Accessed September 30, 2022.
+Gaps/limitations identi ﬁed Current status Suggestions/future directions
+Air pollution monitoring
+-P M2.5 mass concentration determines
+standards.
+- Central ﬁxed monitor-based air
+pollution estimates.
+Current standards are based on only mass concentration, not particle
+characteristics.
+Air pollution exposure of individuals are calculated/modeled based on
+ﬁxed location estimates assuming the population within a particular
+radius is exposed to the calculated concentrations; central monitors
+are limited and primarily located in urban areas.
+Air monitoring coverage in LMICs are needed, but very limited.
+Monitoring, policy analysis, and regulation needed by particle
+composition. Source-sector speci ﬁc health effect estimates are needed, as
+well as submicron, PM1, mass monitoring.
+More extensive personal monitoring using low-cost sensors and
+methods, use of satellite data in combination with sensors for better
+personal estimates, better air pollution exposure models that integrate
+data from various sources, improved software and prediction capabilities.
+Open source databases of air pollution data, including data on LMICs,
+affordable technology, and collaborations between scienti ﬁc resource rich
+and resource de ﬁcient countries.
+Exposure assessment uncertainties
+Examples of interest:
+- Exposure during visits to polluted
+cities.
+- Exposures in underground transit
+systems.
+Disease risks are often based on exposures estimated from central
+monitors, not incorporating variations in microenvironments and
+personal exposure variations.
+Despite over a billion individuals traveling to international destinations
+annually, where air pollution levels vary from their home cities, only
+limited research has explored the health implications of exposure to
+such varying level and compositions.
+Although limited, emerging studies have found very high levels of PM
+in underground systems, particularly high levels of metals; and few
+studies have explored the health effects/risks.
+Personal monitoring with low-cost devices; factoring in study participant
+mobility; consider the total exposures (Exposome), and apply data for
+precision medicine to identify and mitigate health outcomes.
+Further studies and understanding of the physiological changes
+associated with exposure to varying air pollution during travel, studies on
+travel health - future travel and migration is expected to increase; early
+warnings for vulnerable populations.
+Studies on the health risks commuters and workers face due to being
+exposed to high levels of subway air pollution, which may be high in iron
+and black carbon, are warranted.
+Regulatory standards and policies
+Stringent standards and policies in HICs; resources for research and
+policy implementation have yielded signi ﬁcant improvement in HICs.
+In-contrast – although exposed to high levels, data, research and
+standard implementation is very limited in LMICs; increased risk of air
+pollution related cardiovascular mortality.
+Current air quality indices (AQIs) are based on considering PM in all
+regions as equally toxic, despite research to the contrary.
+More interest and resource sharing with LMICs needed, as well with
+underrepresented and socioeconomically disadvantaged communities in
+HICs; local solutions needed for local problems and increase education
+and awareness.
+Considering PM composition and source when setting of locally
+appropriate AQIs could maximize the health bene ﬁts of pollution
+mitigation measures.
+HICs, High-Income Countries; LMICs, Low- and Middle-Income Countries; PM, particulate matter; AQIs, Air Quality Indices.
+Table 1: Summary of gaps and future directions in air pollution research and mitigation.
+Personal View
+8 www.thelancet.com Vol 93 July, 2023
+
+2 World Health Organization. What are the WHO Air quality
+guidelines?. https://www.who.int/about/contact-us; 2021. Accessed
+October 1, 2022.
+3 Collaborators GBDRF. Global burden of 87 risk factors in 204 countries and territories, 1990-2019: a systematic analysis for the Global
+Burden of Disease Study 2019. Lancet. 2020;396(10258):1223–1249.
+4 Marlier ME, Jina AS, Kinney PL, DeFries RS. Extreme air pollution
+in global megacities. Curr Clim Change Rep . 2016;2(1):15 –27.
+5 Molina LT, Zhu T, Wan W, Gurjar BR. Impacts of megacities on air
+quality: challenges and opportunities . Oxford University Press; 2020 .
+6 Dominici F, Zanobetti A, Schwartz J, Braun D, Sabath B, Wu X.
+Assessing adverse health effects of long-term exposure to low levels
+of ambient air pollution: implementation of causal inference
+methods. Res Rep Health Eff Inst . 2022;(211):1 –56.
+7 Hayes RB, Lim C, Zhang Y, et al. PM2.5 air pollution and causespeciﬁc cardiovascular disease mortality. Int J Epidemiol .
+2020;49(1):25–35.
+8 Gwynn RC, Thurston GD. The burden of air pollution: impacts
+among racial minorities. Environ Health Perspect . 2001;109(Suppl
+4):501–506.
+9 Hajat A, Hsia C, O ’Neill MS. Socioeconomic disparities and air
+pollution exposure: a global review. Curr Environ Health Rep .
+2015;2(4):440–450.
+10 Fuller R, Landrigan PJ, Balakrishnan K, et al. Pollution and health:
+a progress update. Lancet Planet Health . 2022;6(6):e535 –e547.
+11 Solomon PA, Costantini M, Grahame TJ, et al. Air pollution and
+health: bridging the gap from sources to health outcomes: conference summary. Air Quality Atmos Health . 2012;5(1):9 –62.
+12 Ozkaynak H, Thurston GD. Associations between 1980 U.S. mortality rates and alternative measures of airborne particle concentration. Risk Anal . 1987;7(4):449 –461.
+13 Nicolaou L, Checkley W. Inequities in air pollution exposure and
+gaps in air quality monitoring. J Allergy Clin Immunol .
+2021;148(1):64–66
+.
+14 Ma Q, Qi Y, Shan Q, Liu S, He H. Understanding the knowledge
+gaps between air pollution controls and health impacts including
+pathogen epidemic. Environ Res . 2020;189:109949 .
+15 Mukherjee S, Dasgupta S, Mishra PK, Chaudhury K. Air pollutioninduced epigenetic changes: disease development and a possible
+link with hypersensitivity pneumonitis. Environ Sci Pollut Res Int .
+2021;28(40):55981–56002.
+16 Rider CF, Carlsten C. Air pollution and DNA methylation: effects of
+exposure in humans. Clin Epigenet . 2019;11(1):131 .
+17 Peng RD, Liu JC, McCormack MC, Mickley LJ, Bell ML. Estimating
+the health effects of environmental mixtures using principal stratiﬁcation. Stat Med . 2022;41(10):1815 –1828.
+18 Thurston GD, Ito K, Lall R, et al. NPACT study 4. Mortality and longterm exposure to PM2.5 and its components in the American cancer
+society’s cancer prevention study II cohort . Boston, MA: Health Effects
+Institute; 2013.
+19 Korsiak J, Lavigne E, You H, et al. Air pollution and pediatric respiratory hospitalizations: effect modi ﬁcation by particle constituents and oxidative potential. Am J Respir Crit Care Med .
+2022;206(11):1370–1378.
+20 United States Environmental Protection Agency (US EPA). In: U.S.
+Federal Register, Vol. 62, No. 133 . 1997 .
+21 Maciejczyk P, Chen L-C, Thurston G. The role of fossil fuel combustion metals in PM2.5 air pollution health associations. Atmosphere. 2021;12(9):1086 .
+22 Li X, Jin L, Kan H. Air pollution: a global problem needs local ﬁxes.
+Nature. 2019;570(7762):437 –439.
+23 Rahman MM, Thurston G. A hybrid satellite and land use regression model of source-speci ﬁc PM2.5 and PM2.5 constituents. Environ Int . 2022;163:107233 .
+24 Lippmann M, Chen LC, Gordon T, Ito K, Thurston GD. National
+Particle Component Toxicity (NPACT) Initiative: integrated epidemiologic and toxicologic studies of the health effects of particulate
+matter components. Res Rep Health Eff Inst . 2013;177:5 –13.
+25 Yang M, Guo YM, Bloom MS, et al. Is PM(1) similar to PM(2.5)? A
+new insight into the association of PM(1) and PM(2.5) with children’
+s lung function. Environ Int . 2020;145:106092 .
+26 Guo H, Li X, Wei J, Li W, Wu J, Zhang Y. Smaller particular matter,
+larger risk of female lung cancer incidence? Evidence from 436
+Chinese counties. BMC Publ Health . 2022;22(1):344 .
+27 Hu K, Guo Y, Hu D, et al. Mortality burden attributable to PM(1) in
+Zhejiang province, China. Environ Int . 2018;121(Pt 1):515 –522.
+28 Alvarado MJ, McVey AE, Hegarty JD, et al. Evaluating the use of
+satellite observations to supplement ground-level air quality data in
+selected cities in low- and middle-income countries. Atmos Environ.
+2019;218:117016.
+29 Pinder RW, Klopp JM, Kleiman G, Hagler GSW, Awe Y, Terry S.
+Opportunities and challenges for ﬁlling the air quality data gap in
+low- and middle-income countries. Atmos Environ . 2019:215 .
+30 Martin RV, Brauer M, van Donkelaar A, Shaddick G, Narain U,
+Dey S. No one knows which city has the highest concentration of
+ﬁne particulate matter. Atmos Environ X . 2019;3:100040 .
+31 Restrepo C, Zimmerman R, Thurston G, et al. A comparison of
+ground-level air quality data with New York State Department of
+Environmental Conservation monitoring stations data in South
+Bronx, New York. Atmos Environ . 2004;38(31):5295 –5304.
+32 van Donkelaar A, Martin RV, Li C, Burnett RT. Regional estimates
+of chemical composition of ﬁne particulate matter using a combined geoscience-statistical method with information from satellites, models, and monitors. Environ Sci Technol . 2019;53(5):
+2595–2611.
+33 Johnson M, Isakov V, Touma JS, Mukerjee S, Özkaynak H. Evaluation of land-use regression models used to predict air quality
+concentrations in an urban area. Atmos Environ . 2010;44(30):
+3660–3668.
+34 Wu P, Song Y. Land use quantile regression modeling of ﬁne
+particulate matter in Australia. Rem Sens . 2022;14(6):1370 .
+35 Brauer M, Brumm J, Vedal S, Petkau AJ. Exposure misclassi ﬁcation
+and threshold concentrations in time series analyses of air pollution
+health effects. Risk Anal . 2002;22(6):1183 –1193.
+36 van Nunen E, Hoek G, Tsai M-Y, et al. Short-term personal and
+outdoor exposure to ultra ﬁne and ﬁ
+ne particulate air pollution in
+association with blood pressure and lung function in healthy adults.
+Environ Res . 2021;194:110579 .
+37 Xie S, Meeker JR, Perez L, et al. Feasibility and acceptability of
+monitoring personal air pollution exposure with sensors for asthma
+self-management. Asthma Res Pract . 2021;7(1):13 .
+38 Lim CC, Kim H, Vilcassim MJR, et al. Mapping urban air quality
+using mobile sampling with low-cost sensors and machine learning
+in Seoul, South Korea. Environ Int . 2019;131:105022 .
+39 Jiao W, Hagler G, Williams R, et al. Community Air Sensor
+Network (CAIRSENSE) project: evaluation of low-cost sensor performance in a suburban environment in the southeastern United
+States. Atmos Meas Tech . 2016;9(11):5281 –5292.
+40 US EPA. Evaluation of emerging air sensor performance. https://
+www.epa.gov/air-sensor-toolbox/e valuation-emergi ng-air-sensorperformance ; 2022. Accessed October 1, 2022.
+41 Anastasiou E, Vilcassim MJR, Adragna J, et al. Feasibility of
+low-cost particle sensor types in long-term indoor air pollution
+health studies after repeated calibration, 2019-2021. Sci Rep .
+2022;12(1):14571.
+42 Liang L. Calibrating low-cost sensors for ambient air monitoring: techniques, trends, and challenges. Environ Res .
+2021;197:111163 .
+43 Giordano MR, Malings C, Pandis SN, et al. From low-cost sensors
+to high-quality data: a summary of challenges and best practices for
+effectively calibrating low-cost particulate matter mass sensors.
+J Aerosol Sci . 2021;158:105833 .
+44 Johnson KK, Bergin MH, Russell AG, Hagler GSW. Field test of
+several low-cost particulate matter sensors in high and low concentration urban environments. Aerosol Air Qual Res .
+2018;18(3):565–578.
+45 Kim J, Shusterman AA, Lieschke KJ, Newman C, Cohen RC. The
+BErkeley Atmospheric CO
+2 Observation Network: ﬁeld calibration
+and evaluation of low-cost air quality sensors. Atmos Meas Tech .
+2018;11(4):1937–1946.
+46 Williams R, Duvall R, Kilaru V, et al. Deliberating performance
+targets workshop: potential paths for emerging PM2.5 and O3 air
+sensor progress. Atmos Environ X . 2019;2:100031 .
+47 Blasco J, Peris-Lopez P. On the feasibility of low-cost
+wearable sensors for multi-modal biometric veri ﬁcation. Sensors.
+2018;18(9).
+48 Ometov A, Shubina V, Klus L, et al. A survey on wearable technology: history, state-of-the-art and current challenges. Comput
+Network. 2021;193:108074 .
+49 Antoniou SX, Gaude E, Ruparel M, et al. The potential of breath
+analysis to improve outcome for patients with lung cancer. J Breath
+Res. 2019;13(3):034002 .
+50 Azim A, Rezwan FI, Barber C, et al. Measurement of exhaled volatile organic compounds as a biomarker for personalised medicine:
+assessment of short-term repeatability in severe asthma. J Personalized Med . 2022;12(10):1635 .
+Personal View
+www.thelancet.com Vol 93 July, 2023 9
+
+51 Crouse DL, Erickson AC, Christidis T, et al. Evaluating the sensitivity of PM2.5-mortality associations to the spatial and temporal
+scale of exposure assessment. Epidemiology. 2020;31(2):168 –176.
+52 Richmond-Bryant J, Long TC. In ﬂuence of exposure measurement
+errors on results from epidemiologic studies of different designs.
+J Expo Sci Environ Epidemiol . 2020;30(3):420 –429.
+53 Wei Y, Qiu X, Yazdi MD, et al. The impact of exposure measurement error on the estimated concentration-response relationship
+between long-term exposure to PM2.5 and mortality. Environ
+Health Perspect . 2022;130(7):77006 .
+54 Tayarani M, Rowangould G. Estimating exposure to ﬁne particulate
+matter emissions from vehicle traf ﬁc: exposure misclassi ﬁcation
+and daily activity patterns in a large, sprawling region. Environ Res .
+2020;182:108999.
+55 UN World Tourism Organization. UNWTO tourism highlights 2017
+edition. World Tourism Organization; 2017 .
+56 UN World Tourism Organization (UNWTO). UNWTO world
+tourism barometer and statistical annex, September 2022 . UNWTO
+World Tourism Barometer (English version). 2022, 20(5): 1-40 .
+57 Cheng Z, Luo L, Wang S, et al. Status and characteristics of
+ambient PM2.5 pollution in global megacities. Environ Int .
+2016;89–90:212–221.
+58 Vilcassim MJR, Callahan AE, Zierold KM. Travelling to polluted
+cities: a systematic review on the harm of air pollution on international travellers ’ health. J Trav Med . 2021;28(4) .
+59 Vilcassim MJR, Gordon T, Sanford CA. Does air pollution
+contribute to travelers ’ illness and deaths?-evidence from a case
+report and need for further studies. J Trav Med . 2018;25(1) .
+60 Vilcassim MJR, Thurston GD, Chen LC, et al. Exposure to air
+pollution is associated with adverse cardiopulmonary health effects
+in international travellers. J Trav Med . 2019;26(5) .
+61 Lin Y, Qiu X, Yu N, Yang Q, Araujo JA, Zhu Y. Urinary metabolites
+of polycyclic aromatic Hydrocarbons and the association with lipid
+peroxidation: a biomarker-based study between los angeles and
+beijing. Environ Sci Technol . 2016;50(7):3738 –3745.
+62 Schwerdtle PN, Bowen K, McMichael C, Sauerborn R. Human
+mobility and health in a warming world.
+J Trav Med . 2019;26(1) .
+63 Semenza JC, Ebi KL. Climate change impact on migration, travel,
+travel destinations and the tourism industry. JT r a vM e d. 2019;26(5).
+64 Vilcassim MJR, Freedman DO, Wilder-Smith A. Ambient air
+pollution and mortality in 652 cities. N Engl J Med .
+2019;381(21):2073–2074.
+65 Luglio DG, Katsigeorgis M, Hess J, et al. PM2.5 concentration and
+composition in subway systems in the northeastern United States.
+Environ Health Perspect . 2021;129(2):27001 .
+66 UITP (Union Internationale des Transports Publics). Statistics brief:
+world metro ﬁgures 2018 . Brussels, Belgium: UITP; 2018 .
+67 Chillrud SN, Epstein D, Ross JM, et al. Elevated airborne exposures
+of teenagers to manganese, chromium, and iron from steel dust
+and New York City ’s subway system. Environ Sci Technol .
+2004;38(3):732–737.
+68 Chillrud SN, Grass D, Ross JM, et al. Steel dust in the New York
+City subway system as a source of manganese, chromium, and iron
+exposures for transit workers. J Urban Health . 2005;82(1):33 –42.
+69 Smith JD, Barratt BM, Fuller GW, et al. PM2.5 on the london
+underground. Environ Int . 2020;134:105188 .
+70 Vilcassim MJ, Thurston GD, Peltier RE, Gordon T. Black carbon
+and particulate matter (PM2.5) concentrations in New York City ’s
+subway stations. Environ Sci Technol . 2014;48(24):14738 –14745.
+71 Karlsson HL, Nilsson L, Moller L. Subway particles are more genotoxic than street particles and induce oxidative stress in cultured
+human lung cells. Chem Res Toxicol . 2005;18(1):19 –23.
+72 Olivero-Verbel R, Moreno T, Fernandez-Arribas J, et al. Organophosphate esters in airborne particles from subway stations. Sci
+Total Environ . 2021;769:145105 .
+73 Ren C, Chen H, Wang J, Feng Z, Cao SJ. Ventilation impacts on
+infection risk mitigation, improvement of environmental quality
+and energy efﬁciency for subway carriages. Build Environ. 2022;222:
+109358.
+74 Shinohara N, Sakaguchi J, Kim H, et al. Survey of air exchange
+rates and evaluation of airborne infection risk of COVID-19 on
+commuter trains. Environ Int . 2021;157:106774
+.
+75 Lu X, Zhang S, Xing J, et al. Progress of air pollution control in
+China and its challenges and opportunities in the ecological civilization era. Engineering. 2020;6(12):1423 –1431.
+76 Sicard P, Agathokleous E, De Marco A, Paoletti E, Calatayud V.
+Urban population exposure to air pollution in Europe over the last
+decades. Environ Sci Eur . 2021;33(1):28 .
+77 US EPA. The beneﬁts and costs of the clean air Act from 1990 to 2020 .
+US Environmental Protection Agency, Of ﬁce of Air and Radiation;
+2011.
+78 Han J, Meng C, Liu J, et al. The impacts of continuous improvements in air quality on mortality in Beijing: a longitudinal
+comparative study. Chemosphere. 2022;291:132893 .
+79 Huang J, Pan X, Guo X, Li G. Health impact of China ’s Air
+Pollution Prevention and Control Action Plan: an analysis of national air quality monitoring and mortality data. Lancet Planet
+Health. 2018;2(7):e313 –e323.
+80 U.S. EPA. Integrated science assessment (ISA) for particulate matter
+(ﬁnal report, Dec 2019) . Washington, DC: U.S. Environmental
+Protection Agency; 2019. EPA/600/R-19/188, 2019 .
+81 Gu B, Zhang L, Van Dingenen R, et al. Abating ammonia is more
+cost-effective than nitrogen oxides for mitigating PM(2.5) air
+pollution. Science. 2021;374(6568):758 –762.
+82 Thurston GD, Chen LC, Campen M. Particle toxicity ’s role in air
+pollution. Science. 2022;375(6580):506 .
+83 Thurston G, Balmes J. We need to "think different" about particulate matter. Am J Respir Crit Care Med . 2017;196(1):6 –7.
+84 Rahman MM, Begum BA, Hopke PK, Nahar K, Newman J,
+Thurston GD. Cardiovascular morbidity and mortality associations
+with biomass- and fossil-fuel-combustion ﬁne-particulate-matter exposures in Dhaka, Bangladesh.Int J Epidemiol. 2021;50(4):1172–1183.
+85 Chambliss SE, Pinon CPR, Messier KP, et al. Local- and regional-scale
+racial and ethnic disparities in air pollution determined by long-term
+mobile monitoring. Proc Natl Acad Sci U S A . 2021;118(37).
+86 Tessum CW, Paolella DA, Chambliss SE, Apte JS, Hill JD,
+Marshall JD. PM(2.5) polluters disproportionately and systemically
+affect people of color in the United States. Sci Adv . 2021;7(18) .
+87 Collins TW, Grineski SE. Racial/ethnic disparities in short-term
+PM2.5 air pollution exposures in the United States. Environ
+Health Perspect . 2022;130(8):87701 .
+88 Wang Y, Apte JS, Hill JD, et al. Location-speci ﬁc strategies for
+eliminating US national racial-ethnic PM 2.5 exposure inequality.
+Proc Natl Acad Sci U S A . 2022;119(44):e2205548119 .
+89 Wild CP. Complementing the genome with an "exposome": the
+outstanding challenge of environmental exposure measurement in
+molecular epidemiology. Cancer Epidemiol Biomarkers Prev .
+2005;14(8):1847–1850.
+90 Zhang P, Carlsten C, Chaleckis R, et al. De ﬁning the scope of
+exposome studies and research needs from a multidisciplinary
+perspective. Environ Sci Technol Lett . 2021;8(10):839 –852.
+91 Harker J. Future research priorities: precision health and predictive
+tox. https://factor.niehs.nih.gov/2022/6/feature/2-feature-future-ofenvironmental-health-sciences; 2022. Accessed October 28, 2022.
+Personal View
+10 www.thelancet.com Vol 93 July, 2023

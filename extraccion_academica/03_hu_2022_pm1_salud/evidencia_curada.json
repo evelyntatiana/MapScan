@@ -1,0 +1,20 @@
+[
+  {
+    "source_id": "03_hu_2022_pm1_salud",
+    "variables": "PM1",
+    "dimension": "salud",
+    "finding": "PM1 puede alcanzar regiones profundas del tracto respiratorio; el metaanálisis encontró asociaciones con algunos desenlaces respiratorios, con resultados no uniformes entre desenlaces.",
+    "location": "Abstract; Results; Discussion",
+    "cita_apa": "Hu, Y., Wu, M., Li, Y., & Liu, X. (2022). Influence of PM1 exposure on total and cause-specific respiratory diseases: A systematic review and meta-analysis. Environmental Science and Pollution Research, 29, 15117–15126. https://doi.org/10.1007/s11356-021-16536-0",
+    "url": "https://doi.org/10.1007/s11356-021-16536-0"
+  },
+  {
+    "source_id": "03_hu_2022_pm1_salud",
+    "variables": "PM1",
+    "dimension": "limitacion",
+    "finding": "La base epidemiológica para PM1 sigue siendo pequeña y heterogénea, con sesgo de publicación señalado; no corresponde describirla como una estimación universal o determinista.",
+    "location": "Publication bias; Limitations; Conclusion",
+    "cita_apa": "Hu, Y., Wu, M., Li, Y., & Liu, X. (2022). Influence of PM1 exposure on total and cause-specific respiratory diseases: A systematic review and meta-analysis. Environmental Science and Pollution Research, 29, 15117–15126. https://doi.org/10.1007/s11356-021-16536-0",
+    "url": "https://doi.org/10.1007/s11356-021-16536-0"
+  }
+]

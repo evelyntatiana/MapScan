@@ -1,0 +1,35 @@
+{
+  "source_id": "04_mainka_zak_2022_mezclas",
+  "pdf": "fuentes_academicas/04_mainka_zak_2022_mezclas/Mainka_Zak_2022_mezclas.pdf",
+  "sha256": "30afe1e18947318ab98f1804ce7a13b03c49a1fa66ae2667c3d5721cbfdac31e",
+  "pages": 20,
+  "characters_raw": 84379,
+  "characters_clean": 84277,
+  "evidence_records": 2,
+  "term_profile": [
+    {
+      "termino": "NO2",
+      "apariciones": 150
+    },
+    {
+      "termino": "PM2.5",
+      "apariciones": 154
+    },
+    {
+      "termino": "synergistic",
+      "apariciones": 9
+    },
+    {
+      "termino": "antagonistic",
+      "apariciones": 13
+    },
+    {
+      "termino": "mixture",
+      "apariciones": 7
+    },
+    {
+      "termino": "health",
+      "apariciones": 149
+    }
+  ]
+}

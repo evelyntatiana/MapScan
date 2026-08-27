@@ -1,0 +1,39 @@
+{
+  "source_id": "02_parra_2022_cuenca_pm25",
+  "pdf": "fuentes_academicas/02_parra_2022_cuenca_pm25/Parra_Saud_Espinoza_2022.pdf",
+  "sha256": "663640774f46c4db3f061b083dae19e7814815e1a066ba569c2f90078154e22c",
+  "pages": 21,
+  "characters_raw": 65393,
+  "characters_clean": 65287,
+  "evidence_records": 3,
+  "term_profile": [
+    {
+      "termino": "Cuenca",
+      "apariciones": 44
+    },
+    {
+      "termino": "PM2.5",
+      "apariciones": 100
+    },
+    {
+      "termino": "diesel",
+      "apariciones": 2
+    },
+    {
+      "termino": "industries",
+      "apariciones": 11
+    },
+    {
+      "termino": "boundary layer",
+      "apariciones": 9
+    },
+    {
+      "termino": "inversion",
+      "apariciones": 1
+    },
+    {
+      "termino": "radiation",
+      "apariciones": 4
+    }
+  ]
+}

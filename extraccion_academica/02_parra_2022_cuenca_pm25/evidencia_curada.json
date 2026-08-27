@@ -1,0 +1,29 @@
+[
+  {
+    "source_id": "02_parra_2022_cuenca_pm25",
+    "variables": "PM2.5",
+    "dimension": "origen_local",
+    "finding": "En Cuenca, el tránsito diésel, las fuentes industriales del noreste y otras combustiones locales son antecedentes plausibles de PM2.5 primario; la atribución puntual requiere inventario y medición.",
+    "location": "Introduction; Study area and emissions",
+    "cita_apa": "Parra, R., Saud, C., & Espinoza, C. (2022). Simulating PM2.5 concentrations during New Year in Cuenca, Ecuador: Effects of advancing the time of burning activities. Toxics, 10(5), 264. https://doi.org/10.3390/toxics10050264",
+    "url": "https://doi.org/10.3390/toxics10050264"
+  },
+  {
+    "source_id": "02_parra_2022_cuenca_pm25",
+    "variables": "Temperatura|Radiación global|Luz solar|Inversión térmica",
+    "dimension": "meteorologia",
+    "finding": "La estabilidad, la inversión y una capa de mezcla somera favorecen la acumulación; el calentamiento y la convección diurna pueden mejorar la dispersión.",
+    "location": "Results and discussion: meteorology and PBL",
+    "cita_apa": "Parra, R., Saud, C., & Espinoza, C. (2022). Simulating PM2.5 concentrations during New Year in Cuenca, Ecuador: Effects of advancing the time of burning activities. Toxics, 10(5), 264. https://doi.org/10.3390/toxics10050264",
+    "url": "https://doi.org/10.3390/toxics10050264"
+  },
+  {
+    "source_id": "02_parra_2022_cuenca_pm25",
+    "variables": "PM1|PM2.5",
+    "dimension": "origen_local",
+    "finding": "La red local descrita mide fracciones finas, lo que permite contextualizar PM1 y PM2.5 sin asumir que una fracción equivale químicamente a la otra.",
+    "location": "Study area and monitoring network",
+    "cita_apa": "Parra, R., Saud, C., & Espinoza, C. (2022). Simulating PM2.5 concentrations during New Year in Cuenca, Ecuador: Effects of advancing the time of burning activities. Toxics, 10(5), 264. https://doi.org/10.3390/toxics10050264",
+    "url": "https://doi.org/10.3390/toxics10050264"
+  }
+]

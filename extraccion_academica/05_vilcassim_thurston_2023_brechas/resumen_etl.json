@@ -1,0 +1,35 @@
+{
+  "source_id": "05_vilcassim_thurston_2023_brechas",
+  "pdf": "fuentes_academicas/05_vilcassim_thurston_2023_brechas/Vilcassim_Thurston_2023.pdf",
+  "sha256": "9531bef6f948fdb853a1f9be4afff4ad7a2fc7d8ae090653ae24f3bad260c708",
+  "pages": 10,
+  "characters_raw": 62939,
+  "characters_clean": 62623,
+  "evidence_records": 2,
+  "term_profile": [
+    {
+      "termino": "mixtures",
+      "apariciones": 4
+    },
+    {
+      "termino": "multipollutant",
+      "apariciones": 2
+    },
+    {
+      "termino": "PM1",
+      "apariciones": 13
+    },
+    {
+      "termino": "sources",
+      "apariciones": 13
+    },
+    {
+      "termino": "composition",
+      "apariciones": 22
+    },
+    {
+      "termino": "health effects",
+      "apariciones": 26
+    }
+  ]
+}
