@@ -10,6 +10,7 @@ import {
   type PointerEvent as ReactPointerEvent,
   type WheelEvent as ReactWheelEvent,
 } from "react";
+import { AnalyticsReportPage, type AnalyticsReportKind } from "./analytics-report";
 
 type GenericRow = Record<string, string | number | boolean | null>;
 
@@ -94,6 +95,7 @@ type AppData = {
   pollutants: Pollutant[];
   hourlyProfile: GenericRow[];
   recentSeries: GenericRow[];
+  dailyAir: GenericRow[];
   historical: Record<"annual" | "seasonal" | "monthly" | "weekly", HistorySlice[]>;
   geography: {
     center: [number, number];
@@ -1083,16 +1085,12 @@ function MapCanvas({
       ctx.restore();
 
       trafficHits.current = [];
-      if (showTrafficEmissions && geography.aermodProfile.length) {
+      if (showTrafficEmissions && geography.aermodPoints.length) {
         ctx.save();
         ctx.globalCompositeOperation = mapStyle === "streets" ? "multiply" : "screen";
-        geography.aermodProfile.forEach((rate, index) => {
-          const roadIndex = index % geography.roads.length;
-          const road = geography.roads[roadIndex];
-          const slots = Math.ceil((geography.aermodProfile.length - roadIndex) / geography.roads.length);
-          const slot = Math.floor(index / geography.roads.length);
-          const progress = Math.max(0.02, Math.min(0.98, (slot + 0.72 + roadIndex * 0.07) / (slots + 0.44)));
-          const pos = pointAlongPath(road.points, progress);
+        geography.aermodPoints.forEach((point, index) => {
+          const rate = point.emissionRate;
+          const pos = project(point.lon, point.lat);
           if (pos.x < -15 || pos.y < -15 || pos.x > width + 15 || pos.y > height + 15) return;
           const { normalized, rgb } = trafficEmissionStyle(rate);
           const pulse = peak ? 0.94 : 0.66 + Math.sin((hour / 24) * Math.PI * 2) * 0.08;
@@ -1380,7 +1378,7 @@ function MapCanvas({
     event.preventDefault();
     const canvas = event.currentTarget;
     const rect = canvas.getBoundingClientRect();
-    const nextZoom = Math.max(13, Math.min(18, view.zoom + (event.deltaY < 0 ? 1 : -1)));
+    const nextZoom = Math.max(9, Math.min(18, view.zoom + (event.deltaY < 0 ? 1 : -1)));
     if (nextZoom === view.zoom) return;
     const offsetX = event.clientX - rect.left - rect.width / 2;
     const offsetY = event.clientY - rect.top - rect.height / 2;
@@ -1480,6 +1478,7 @@ export default function Home() {
   const [inputs, setInputs] = useState<Record<string, number>>({});
   const [ingredients, setIngredients] = useState<string[]>(["NO₂", "Luz solar"]);
   const [activeMixtureReport, setActiveMixtureReport] = useState<MixtureReportKind | null>(null);
+  const [activeAnalyticsReport, setActiveAnalyticsReport] = useState<AnalyticsReportKind | null>(null);
 
   useEffect(() => {
     fetch("/app-data.json")
@@ -1536,10 +1535,13 @@ export default function Home() {
   }, [playing]);
 
   useEffect(() => {
-    if (!activeMixtureReport) return;
+    if (!activeMixtureReport && !activeAnalyticsReport) return;
     const previousOverflow = document.body.style.overflow;
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setActiveMixtureReport(null);
+      if (event.key === "Escape") {
+        setActiveMixtureReport(null);
+        setActiveAnalyticsReport(null);
+      }
     };
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", closeOnEscape);
@@ -1547,7 +1549,7 @@ export default function Home() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", closeOnEscape);
     };
-  }, [activeMixtureReport]);
+  }, [activeMixtureReport, activeAnalyticsReport]);
 
   const selectedPollutant = useMemo(
     () => data?.pollutants.find((item) => item.label === selectedPollutantLabel) ?? data?.pollutants[0],
@@ -1602,11 +1604,10 @@ export default function Home() {
 
   const modalTotal = data.traffic.modal.reduce((sum, row) => sum + Number(row.Porcentaje || 0), 0) || 100;
   const modalColors = ["#64d5c2", "#ef6f4e", "#f7cf65", "#9b8cff", "#48a9e6", "#ff8ca1"];
-  let donutCursor = 0;
-  const donutStops = data.traffic.modal.map((row, i) => {
-    const start = donutCursor;
-    donutCursor += Number(row.Porcentaje || 0) / modalTotal * 100;
-    return `${modalColors[i % modalColors.length]} ${start}% ${donutCursor}%`;
+  const donutStops = data.traffic.modal.map((row, i, rows) => {
+    const start = rows.slice(0, i).reduce((sum, item) => sum + Number(item.Porcentaje || 0), 0) / modalTotal * 100;
+    const end = start + Number(row.Porcentaje || 0) / modalTotal * 100;
+    return `${modalColors[i % modalColors.length]} ${start}% ${end}%`;
   }).join(",");
   const odModes = ["Viajes_Bus", "Viajes_Vehiculo_Privado", "Viajes_Pie", "Viajes_Moto", "Viajes_Bicicleta"];
   const maxOd = Math.max(...data.traffic.od.flatMap((row) => odModes.map((mode) => Number(row[mode] || 0))), 1);
@@ -1729,9 +1730,26 @@ export default function Home() {
                 </aside>
               ) : null}
 
+              <div className="map-extent-actions" aria-label="Vistas analíticas del mapa">
+                <button type="button" onClick={() => {
+                  const longitudes = data.geography.aermodPoints.map((point) => point.lon);
+                  const latitudes = data.geography.aermodPoints.map((point) => point.lat);
+                  setShowTrafficEmissions(true);
+                  setMapView({
+                    lon: (Math.min(...longitudes) + Math.max(...longitudes)) / 2,
+                    lat: (Math.min(...latitudes) + Math.max(...latitudes)) / 2,
+                    zoom: 10,
+                  });
+                }}><span>Campo AERMOD</span><b>{data.geography.aermodStats.points} puntos reales</b></button>
+                <button type="button" onClick={() => {
+                  setActiveMixtureReport(null);
+                  setActiveAnalyticsReport("air");
+                }}><span>Informe atmosférico</span><b>Abrir página ↗</b></button>
+              </div>
+
               <div className="map-navigation" aria-label="Navegación del mapa">
                 <button onClick={() => setMapView((current) => ({ ...current, zoom: Math.min(18, current.zoom + 1) }))} aria-label="Acercar">+</button>
-                <button onClick={() => setMapView((current) => ({ ...current, zoom: Math.max(13, current.zoom - 1) }))} aria-label="Alejar">−</button>
+                <button onClick={() => setMapView((current) => ({ ...current, zoom: Math.max(9, current.zoom - 1) }))} aria-label="Alejar">−</button>
                 <button onClick={() => setMapView({ lon: data.geography.center[0], lat: data.geography.center[1], zoom: data.geography.initialZoom })} aria-label="Centrar mapa">◎</button>
               </div>
 
@@ -1960,6 +1978,31 @@ export default function Home() {
             }}>Proyectar en el mapa <span>↗</span></button>
           </div>
         </div>
+
+        <div className="analytics-launch-block" aria-labelledby="analytics-launch-title">
+          <header>
+            <div><p className="panel-kicker">Biblioteca analítica</p><h3 id="analytics-launch-title">Cuatro informes para explorar sin letra pequeña.</h3></div>
+            <p>Cada opción abre una página secundaria de lectura cómoda. Verás un solo gráfico grande a la vez, controles claros, explicación completa y fuentes verificables.</p>
+          </header>
+          <div className="analytics-launch-grid">
+            {([
+              { kind: "air", number: "04", title: "Gases, partículas y meteorología", detail: "6 módulos · series, distribución, ciclos y correlaciones", accent: "#55bfae" },
+              { kind: "industry", number: "05", title: "Actividad industrial", detail: "7 módulos · inventario, emisiones, métodos y fuentes", accent: "#df7055" },
+              { kind: "traffic", number: "06", title: "Tráfico y movilidad", detail: "4 módulos · huella, diagnóstico, deseos y matriz O–D", accent: "#8e70c6" },
+              { kind: "model", number: "07", title: "Modelo de predicción", detail: "4 módulos · evaluación, variables, umbrales y validación", accent: "#e0b63f" },
+            ] as { kind: AnalyticsReportKind; number: string; title: string; detail: string; accent: string }[]).map((item) => (
+              <button key={item.kind} type="button" style={{ "--analytics-accent": item.accent } as React.CSSProperties} onClick={() => {
+                setActiveMixtureReport(null);
+                setActiveAnalyticsReport(item.kind);
+              }}>
+                <span>{item.number}</span>
+                <strong>{item.title}</strong>
+                <small>{item.detail}</small>
+                <i aria-hidden="true">Abrir informe →</i>
+              </button>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="mobility-section" id="movilidad">
@@ -2100,6 +2143,7 @@ export default function Home() {
         <a href="#laboratorio">Volver al mapa ↑</a>
       </footer>
       {activeMixtureReport ? <MixtureReportPage kind={activeMixtureReport} ingredients={ingredients} mixResult={mixResult} healthResult={healthResult} onClose={() => setActiveMixtureReport(null)} /> : null}
+      {activeAnalyticsReport ? <AnalyticsReportPage kind={activeAnalyticsReport} data={data} onClose={() => setActiveAnalyticsReport(null)} /> : null}
     </main>
   );
 }

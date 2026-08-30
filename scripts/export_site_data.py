@@ -56,6 +56,8 @@ def read_state_csv(name: str) -> pd.DataFrame:
 
 base = read_csv(PROJECT_ROOT / "modelo_original" / "dataset_final_calidad_aire.csv")
 base["Fecha"] = pd.to_datetime(base["Fecha"])
+air_full = read_csv(PROJECT_ROOT / "Metereologia" / "dataset_unificado_calidad_aire.csv")
+air_full["Fecha"] = pd.to_datetime(air_full["Fecha"])
 target = read_csv(PROJECT_ROOT / "modelo_original" / "target_y.csv")
 feature_importance = read_csv(PROJECT_ROOT / "modelo2" / "features_importance_enriquecido.csv")
 enriched = joblib.load(PROJECT_ROOT / "modelo2" / "modelo_deterioro_aire_ENRIQUECIDO.pkl")
@@ -159,6 +161,18 @@ hour_cols = [
 hourly = base.groupby("HORA")[hour_cols].median().reset_index()
 recent = base.sort_values("Fecha").tail(72)[["Fecha", *hour_cols]].copy()
 recent["Fecha"] = recent["Fecha"].dt.strftime("%Y-%m-%dT%H:%M:%S")
+
+# Preserve the full 2016–2026 evidence window without shipping the 79k-row
+# hourly table. One row per day is enough for the interactive long-range
+# series while retaining daily minima and maxima for uncertainty bands.
+daily_air = (
+    air_full.set_index("Fecha")[hour_cols]
+    .resample("D")
+    .agg(["mean", "min", "max"])
+)
+daily_air.columns = [f"{feature}_{stat}" for feature, stat in daily_air.columns]
+daily_air = daily_air.reset_index()
+daily_air["Fecha"] = daily_air["Fecha"].dt.strftime("%Y-%m-%d")
 
 base["Año"] = base["Fecha"].dt.year
 base["Mes"] = base["Fecha"].dt.month
@@ -287,12 +301,8 @@ traffic_accesses = [
     },
 ]
 
-local_aermod = aermod[
-    aermod["Coord_X"].between(723700, 726100)
-    & aermod["Coord_Y"].between(9680500, 9683200)
-].copy()
 aermod_points = []
-for _, row in local_aermod.iterrows():
+for _, row in aermod.iterrows():
     lon, lat = to_wgs.transform(row["Coord_X"], row["Coord_Y"])
     aermod_points.append({
         "lon": round(lon, 7), "lat": round(lat, 7),
@@ -360,6 +370,7 @@ app_data = {
     "pollutants": pollutants,
     "hourlyProfile": records(hourly),
     "recentSeries": records(recent),
+    "dailyAir": records(daily_air),
     "historical": historical,
     "geography": {
         "center": [-78.9771, -2.8767],
