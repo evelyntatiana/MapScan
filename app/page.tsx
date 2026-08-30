@@ -414,16 +414,6 @@ const INGREDIENT_GROUPS = [
   { label: "Meteorología", group: "meteorología" },
 ];
 
-const FEATURE_LABELS: Record<string, string> = {
-  CONT_PM10: "PM₁₀ actual",
-  CONT_PM1: "PM₁ actual",
-  CONT_PM25: "PM₂.₅ actual",
-  CONT_NO2: "NO₂ actual",
-  CONT_OZONE: "O₃ actual",
-  CONT_SO2: "SO₂ actual",
-  CONT_CO: "CO actual",
-};
-
 function compactNumber(value: number, digits = 1) {
   return new Intl.NumberFormat("es-EC", {
     maximumFractionDigits: digits,
@@ -445,19 +435,6 @@ function historicalLabel(slice: HistorySlice | undefined, dimension: "annual" | 
     Primavera: "Sep–Nov",
   };
   return `${slice.label} · ${months[slice.label] ?? ""}`.trim();
-}
-
-function featureLabel(feature: string) {
-  if (FEATURE_LABELS[feature]) return FEATURE_LABELS[feature];
-  return feature
-    .replace("CONT_", "")
-    .replaceAll("_ROLLING_MEAN_", " · media ")
-    .replaceAll("_LAG_", " · rezago ")
-    .replaceAll("_", " ")
-    .replace("PM25", "PM₂.₅")
-    .replace("PM10", "PM₁₀")
-    .replace("PM1", "PM₁")
-    .toLowerCase();
 }
 
 function riskBand(probability: number) {
@@ -1424,23 +1401,6 @@ function MapCanvas({
   );
 }
 
-function SparkBars({ data, activeHour }: { data: GenericRow[]; activeHour: number }) {
-  const values = data.map((row) => Number(row.CONT_PM25));
-  const max = Math.max(...values, 1);
-  return (
-    <div className="spark-bars" aria-label="Perfil histórico mediano de PM2.5 por hora">
-      {values.map((value, hour) => (
-        <div className="spark-column" key={hour} title={`${String(hour).padStart(2, "0")}:00 · ${value.toFixed(1)} µg/m³`}>
-          <span
-            className={hour === activeHour ? "is-current" : ""}
-            style={{ height: `${Math.max(8, (value / max) * 100)}%` }}
-          />
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function AppLoading({ error }: { error: string | null }) {
   return (
     <main className="loading-shell">
@@ -1602,17 +1562,6 @@ export default function Home() {
 
   if (!data || !selectedPollutant) return <AppLoading error={error} />;
 
-  const modalTotal = data.traffic.modal.reduce((sum, row) => sum + Number(row.Porcentaje || 0), 0) || 100;
-  const modalColors = ["#64d5c2", "#ef6f4e", "#f7cf65", "#9b8cff", "#48a9e6", "#ff8ca1"];
-  const donutStops = data.traffic.modal.map((row, i, rows) => {
-    const start = rows.slice(0, i).reduce((sum, item) => sum + Number(item.Porcentaje || 0), 0) / modalTotal * 100;
-    const end = start + Number(row.Porcentaje || 0) / modalTotal * 100;
-    return `${modalColors[i % modalColors.length]} ${start}% ${end}%`;
-  }).join(",");
-  const odModes = ["Viajes_Bus", "Viajes_Vehiculo_Privado", "Viajes_Pie", "Viajes_Moto", "Viajes_Bicicleta"];
-  const maxOd = Math.max(...data.traffic.od.flatMap((row) => odModes.map((mode) => Number(row[mode] || 0))), 1);
-  const highestFeature = data.topFeatures[0]?.Importance || 1;
-
   return (
     <main className="app-shell">
       <header className="topbar">
@@ -1623,8 +1572,6 @@ export default function Home() {
         <nav aria-label="Secciones principales">
           <a href="#laboratorio">Laboratorio</a>
           <a href="#mezclas">Mezclas</a>
-          <a href="#movilidad">Movilidad</a>
-          <a href="#modelo">Modelo</a>
         </nav>
         <div className="top-status">
           <span className="status-pulse" />
@@ -2003,138 +1950,6 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
-
-      <section className="mobility-section" id="movilidad">
-        <div className="section-heading inverted">
-          <div><p className="eyebrow">Movilidad + emisiones</p><h2>La contaminación<br /><em>también llega por carretera.</em></h2></div>
-          <p>El modelo origen-destino conecta 18 zonas con el Parque Industrial. La hora modifica la intensidad visible de las rutas y el contexto de exposición.</p>
-        </div>
-
-        <div className="mobility-dashboard">
-          <article className="od-card">
-            <div className="module-head"><span>Matriz origen—destino</span><small>viajes laborales estimados</small></div>
-            <div className="od-table">
-              <div className="od-header"><span>Zona</span>{["Bus", "Privado", "Pie", "Moto", "Bici"].map((mode) => <span key={mode}>{mode}</span>)}</div>
-              {data.traffic.od.slice(0, 10).map((row) => (
-                <div className="od-row" key={String(row.Zona_Origen)}>
-                  <strong>{row.Zona_Origen}</strong>
-                  {odModes.map((mode) => {
-                    const value = Number(row[mode] || 0);
-                    return <span key={mode} style={{ "--cell-alpha": `${0.08 + value / maxOd * 0.82}` } as React.CSSProperties} title={`${value} viajes`}>{value}</span>;
-                  })}
-                </div>
-              ))}
-            </div>
-            <p className="table-note">El Valle, Monay y Totoracocha concentran los mayores flujos estimados hacia el parque.</p>
-          </article>
-
-          <article className="modal-card">
-            <div className="module-head"><span>Reparto modal</span><small>PMEP 2015–2025</small></div>
-            <div className="donut-wrap">
-              <div className="donut" style={{ background: `conic-gradient(${donutStops})` }}><div><strong>64%</strong><span>bus + privado</span></div></div>
-              <div className="donut-legend">
-                {data.traffic.modal.map((row, i) => <div key={String(row.Modo)}><i style={{ background: modalColors[i % modalColors.length] }} /><span>{row.Modo}</span><b>{row.Porcentaje}%</b></div>)}
-              </div>
-            </div>
-          </article>
-
-          <article className="traffic-impact-card">
-            <div className="module-head"><span>Huella de movilidad</span><small>dinámica + ralentí</small></div>
-            <strong className="big-number">14.699,6 <small>t CO₂/año</small></strong>
-            <div className="rank-bars">
-              {data.traffic.carbon.map((row, i) => <div key={String(row.Empresa)}><span>{row.Empresa}</span><div><i style={{ width: `${Number(row.Porcentaje_CO2)}%`, background: modalColors[(i + 1) % modalColors.length] }} /></div><b>{row.Porcentaje_CO2}%</b></div>)}
-            </div>
-            <div className="traffic-callout"><strong>67%</strong><span>del tráfico del parque es de paso; el trabajo explica el 52% de esos viajes.</span></div>
-          </article>
-        </div>
-      </section>
-
-      <section className="industry-section">
-        <div className="section-heading">
-          <div><p className="eyebrow">Inventario industrial</p><h2>De la chimenea<br /><em>al campo de exposición.</em></h2></div>
-          <p>Las fuentes combinan ubicación, combustible, concentración, altura, diámetro y velocidad de salida para convertir tablas estáticas en una lectura espacial.</p>
-        </div>
-        <div className="industry-grid">
-          <article className="emitter-list">
-            <div className="module-head"><span>Principales tasas de emisión SO₂</span><small>g/s · fuente politécnica</small></div>
-            {[...data.industrial.sites].sort((a, b) => b.emissionRate - a.emissionRate).slice(0, 8).map((site, i) => (
-              <button key={site.id} onClick={() => { setSelectedSiteId(site.id); setSelectedPollutantLabel("SO₂"); document.getElementById("laboratorio")?.scrollIntoView({ behavior: "smooth" }); }}>
-                <span>{String(i + 1).padStart(2, "0")}</span><strong>{site.name}</strong><i><b style={{ width: `${Math.max(3, site.emissionRate / 44.059 * 100)}%` }} /></i><em>{compactNumber(site.emissionRate, 3)}</em>
-              </button>
-            ))}
-          </article>
-          <article className="source-anatomy">
-            <div className="module-head"><span>Anatomía de las fuentes</span><small>47 registros físicos</small></div>
-            <div className="equipment-visual">
-              <div className="factory-silhouette"><span className="chimney c1" /><span className="chimney c2" /><span className="roof r1" /><span className="roof r2" /></div>
-              <div className="equipment-stats">
-                {data.industrial.equipment.slice(0, 4).map((row) => <div key={String(row.Tipo_Fuente)}><span>{row.Tipo_Fuente}</span><strong>{row.Fuentes}</strong><small>fuentes</small></div>)}
-              </div>
-            </div>
-            <div className="aermod-note"><span>AERMOD</span><strong>{data.industrial.aermod.points} puntos</strong><p>Campo de tráfico y dispersión extraído para contextualizar el alcance espacial.</p></div>
-          </article>
-          <article className="fuel-card">
-            <div className="module-head"><span>Consumo documentado</span><small>combustibles industriales</small></div>
-            {data.industrial.fuelConsumption.map((row, i) => <div className="fuel-row" key={String(row.Combustible)}><span>{row.Combustible}</span><strong>{compactNumber(Number(row.Consumo), 0)}</strong><small>{row.Unidad}</small><i style={{ width: `${Math.max(4, Number(row.Consumo) / 11678551 * 100)}%`, background: modalColors[i % modalColors.length] }} /></div>)}
-            <p>Las unidades se conservan tal como fueron publicadas; no se suman kg y galones.</p>
-          </article>
-        </div>
-      </section>
-
-      <section className="model-section" id="modelo">
-        <div className="section-heading inverted">
-          <div><p className="eyebrow">Modelo + trazabilidad</p><h2>Una alerta que<br /><em>puede explicarse.</em></h2></div>
-          <p>El bosque aleatorio se ejecuta realmente con el escenario elegido. El mapa añade contexto industrial y de movilidad sin confundirlo con una medición en vivo.</p>
-        </div>
-
-        <div className="model-grid">
-          <article className="metrics-card">
-            <div className="module-head"><span>Evaluación reportada</span><small>modelo enriquecido</small></div>
-            <div className="metric-big"><strong>{(data.meta.metrics.roc_auc * 100).toFixed(1)}%</strong><span>AUC-ROC</span></div>
-            <div className="metric-pair"><div><span>Accuracy</span><b>{(data.meta.metrics.accuracy * 100).toFixed(1)}%</b></div><div><span>F1</span><b>{(data.meta.metrics.f1_score * 100).toFixed(1)}%</b></div><div><span>OOB</span><b>{(data.meta.metrics.oob_score * 100).toFixed(1)}%</b></div></div>
-            <div className="model-comparison"><span>Base · {Math.round(data.meta.baseMetrics["AUC-ROC"] * 100)}% AUC</span><i><b style={{ width: `${data.meta.baseMetrics["AUC-ROC"] * 100}%` }} /></i><span>Enriquecido · {Math.round(data.meta.metrics.roc_auc * 100)}% AUC</span><i><b className="enriched" style={{ width: `${data.meta.metrics.roc_auc * 100}%` }} /></i></div>
-          </article>
-
-          <article className="importance-card">
-            <div className="module-head"><span>Señales que más pesan</span><small>importancia del bosque</small></div>
-            <div className="importance-list">
-              {data.topFeatures.slice(0, 12).map((feature, i) => <div key={feature.Feature}><span>{String(i + 1).padStart(2, "0")}</span><strong>{featureLabel(feature.Feature)}</strong><i><b style={{ width: `${feature.Importance / highestFeature * 100}%` }} /></i><em>{(feature.Importance * 100).toFixed(2)}%</em></div>)}
-            </div>
-          </article>
-
-          <article className="transparency-card">
-            <p className="panel-kicker">Lectura honesta</p>
-            <h3>Contexto no es lo mismo que señal predictiva.</h3>
-            <p>El modelo enriquecido contiene 97 variables industriales y 89 de tráfico agregadas como constantes globales. Sirven para describir el entorno, pero las variables temporales de sensores dominan la decisión de cada alerta.</p>
-            <div className="transparency-stats"><div><strong>176</strong><span>variables con importancia no nula</span></div><div><strong>184</strong><span>variables contextuales sin variación temporal</span></div></div>
-            <p className="method-warning">Para atribuir una alerta a una empresa concreta harían falta emisiones y tráfico sincronizados por hora. Esta versión evita presentar esa atribución como un hecho.</p>
-          </article>
-        </div>
-
-        <div className="profile-strip">
-          <div>
-            <span>Perfil PM₂.₅ por hora</span>
-            <strong>{compactNumber(Number(hourProfile?.CONT_PM25 || 0))} µg/m³</strong>
-            <small>mediana histórica a las {String(hour).padStart(2, "0")}:00</small>
-          </div>
-          <SparkBars data={data.hourlyProfile} activeHour={hour} />
-        </div>
-      </section>
-
-      <section className="source-section">
-        <div>
-          <p className="eyebrow">Base de conocimiento</p>
-          <h2>Todo el proyecto,<br />sin perder la procedencia.</h2>
-        </div>
-        <div className="source-manifest">
-          <div><span>EDA + ETL</span><strong>{compactNumber(data.meta.sourceRows, 0)}</strong><small>registros de origen descritos</small></div>
-          <div><span>Modelo final</span><strong>{compactNumber(data.meta.modelRows, 0)}</strong><small>filas completas</small></div>
-          <div><span>Actividad estatal</span><strong>{data.meta.sourceBundles.estatal}</strong><small>artefactos procesados</small></div>
-          <div><span>Actividad politécnica</span><strong>{data.meta.sourceBundles.politecnica}</strong><small>artefactos del paquete</small></div>
-          <div><span>Tráfico EMES</span><strong>{data.meta.sourceBundles.trafico}</strong><small>artefactos del paquete</small></div>
-        </div>
-        <p className="source-note">Fuentes integradas por el proyecto: EMOV EP, estaciones Escuela Juan Montalvo / Parque Industrial y tesis de la Universidad de Cuenca y Universidad Politécnica Salesiana. Períodos y unidades se muestran según los archivos analizados.</p>
       </section>
 
       <footer>
