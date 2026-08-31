@@ -356,16 +356,21 @@ a {
   display: grid;
   gap: 4px;
   text-align: right;
+  padding: 8px 14px;
+  background: #12363B;
+  border: 1px solid rgba(46, 111, 109, 0.35);
+  border-radius: 8px;
 }
 
 .map-coordinate span {
-  color: #758b8b;
+  color: #B7C8C5;
   font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 0.13em;
 }
 
 .map-coordinate strong {
+  color: #F4F1E8;
   font: 500 11px/1 var(--font-geist-mono), monospace;
 }
 
@@ -953,8 +958,8 @@ input[type="range"]::-webkit-slider-thumb {
 .model-ready,
 .model-loading {
   padding: 6px 8px;
-  color: var(--mint);
-  border: 1px solid rgba(100, 213, 194, 0.25);
+  color: #2E6F6D;
+  border: 1px solid rgba(46, 111, 109, 0.35);
   font: 600 8px/1 var(--font-geist-mono), monospace;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -1083,11 +1088,12 @@ input[type="range"]::-webkit-slider-thumb {
   display: flex;
   flex-direction: column;
   padding: 20px 22px 18px;
-  background: rgba(244, 241, 232, 0.03);
+  background: #163E43;
+  border-color: rgba(46, 111, 109, 0.35);
 }
 
 .forecast-summary-label {
-  color: var(--panel-text);
+  color: #F4F1E8;
   font: 700 9.5px/1.2 var(--font-geist-mono), monospace;
   text-transform: uppercase;
   letter-spacing: .07em;
@@ -1113,12 +1119,12 @@ input[type="range"]::-webkit-slider-thumb {
 .stat-divider {
   width: 1px;
   align-self: stretch;
-  background: var(--panel-border);
+  background: rgba(46, 111, 109, 0.35);
 }
 
 .stat-caption {
   min-width: 0;
-  color: var(--panel-text-secondary);
+  color: #B7C8C5;
   font-size: 9px;
   line-height: 1.4;
   text-transform: uppercase;
@@ -1126,7 +1132,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .stat-caption b {
-  color: var(--panel-text-secondary);
+  color: #B7C8C5;
   font-weight: 600;
 }
 
@@ -1148,13 +1154,13 @@ input[type="range"]::-webkit-slider-thumb {
   gap: 4px 10px;
   margin: 0;
   padding-top: 14px;
-  border-top: 1px solid var(--panel-border);
-  color: var(--panel-text-secondary);
+  border-top: 1px solid rgba(46, 111, 109, 0.35);
+  color: #B7C8C5;
   font-size: 9.5px;
 }
 
 .forecast-summary-foot b {
-  color: var(--panel-text);
+  color: #F4F1E8;
   font-family: var(--font-geist-mono), monospace;
   font-weight: 600;
 }
