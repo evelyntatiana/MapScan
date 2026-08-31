@@ -459,7 +459,7 @@ const SCENARIO_ADVICE: Record<string, { intro: string; actions: { icon: "mask" |
   },
   Vigilancia: {
     intro:
-      "El escenario muestra señales de vigilancia en la calidad del aire. Conviene moderar las actividades prolongadas al aire libre, en especial cerca de vías con alto tráfico.",
+      "El escenario está en vigilancia. Se recomienda moderar las actividades prolongadas al aire libre y prestar atención a la evolución del escenario.",
     actions: [
       { icon: "mask", text: "Considera usar mascarilla en exteriores" },
       { icon: "activity", text: "Modera el ejercicio intenso al aire libre" },
@@ -468,10 +468,10 @@ const SCENARIO_ADVICE: Record<string, { intro: string; actions: { icon: "mask" |
   },
   Estable: {
     intro:
-      "El escenario no muestra señales fuertes de deterioro en la calidad del aire. Aun así, mantente atento si permaneces cerca de vías con alto tráfico.",
+      "El escenario se mantiene estable, sin señales de deterioro en la calidad del aire. Puedes continuar tus actividades habituales al aire libre y seguir consultando la evolución del escenario.",
     actions: [
-      { icon: "mask", text: "Mascarilla opcional en exteriores" },
-      { icon: "activity", text: "Ejercicio al aire libre sin restricción" },
+      { icon: "mask", text: "Mascarilla no es necesaria por ahora" },
+      { icon: "activity", text: "Actividades habituales al aire libre" },
       { icon: "sensitive", text: "Personas sensibles: sin alertas activas" },
     ],
   },
@@ -1845,8 +1845,9 @@ export default function Home() {
               </div>
             </div>
           </section>
+        </div>
 
-          <aside className="forecast-panel" aria-label="Predicción a seis horas">
+        <section className="explorer-summary-panel" aria-label="Predicción a seis horas">
             {/* Mismos valores/calculos existentes (referenceProbability, probability,
                 referenceBand, band, band.note) -- solo cambia la presentacion: de
                 gauges circulares a tarjetas planas, sin tocar ningun numero. */}
@@ -1854,20 +1855,20 @@ export default function Home() {
               <section className="forecast-compare-card" aria-label="Comparación del escenario">
                 <div className="forecast-summary-label">¿Qué está pasando ahora?</div>
                 <div className="stat-comparison">
-                  <div className="stat-block">
+                  <div className="stat-block" style={{ ["--tone" as string]: referenceBand.color }}>
                     <span className="stat-caption">Estado histórico <b>{String(hour).padStart(2, "0")}:00</b></span>
-                    <strong className="stat-value" style={{ color: referenceBand.color }}>
+                    <strong className="stat-value">
                       {referenceProbability === null ? "—" : `${Math.round(referenceProbability * 100)}%`}
                     </strong>
-                    <span className="stat-state" style={{ color: referenceBand.color }}>{referenceBand.label}</span>
+                    <span className="stat-state">{referenceBand.label}</span>
                   </div>
                   <div className="stat-divider" aria-hidden="true" />
-                  <div className="stat-block">
+                  <div className="stat-block" style={{ ["--tone" as string]: band.color }}>
                     <span className="stat-caption">Escenario próximas 6 h</span>
-                    <strong className="stat-value" style={{ color: band.color }}>
+                    <strong className="stat-value">
                       {probability === null ? "—" : `${Math.round(probability * 100)}%`}
                     </strong>
-                    <span className="stat-state" style={{ color: band.color }}>{band.label}</span>
+                    <span className="stat-state">{band.label}</span>
                   </div>
                 </div>
                 <p className="forecast-summary-foot">
@@ -1951,8 +1952,7 @@ export default function Home() {
                 </div>
               </div>
             </details>
-          </aside>
-        </div>
+        </section>
 
         <div className="hero-facts">
           <div><Layers aria-hidden="true" /><span>Modelo enriquecido</span><strong>{data.meta.enrichedFeatures}</strong><small>variables integradas</small></div>
