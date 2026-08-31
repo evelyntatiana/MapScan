@@ -11,7 +11,7 @@ import {
   type ReactNode,
   type WheelEvent as ReactWheelEvent,
 } from "react";
-import { Cpu, Factory, FileText, Gauge, Layers, Leaf, LineChart, MapPin, Route, Wind } from "lucide-react";
+import { Activity, Factory, Gauge, HeartPulse, Layers, Leaf, MapPin, Route, ShieldAlert, Wind } from "lucide-react";
 import { AnalyticsReportPage, type AnalyticsReportKind } from "./analytics-report";
 
 type GenericRow = Record<string, string | number | boolean | null>;
@@ -446,6 +446,36 @@ function riskBand(probability: number) {
     return { label: "Vigilancia", color: "#f7cf65", note: "El modelo supera el umbral operativo de alerta." };
   return { label: "Estable", color: "#64d5c2", note: "Sin señal fuerte de deterioro en este escenario." };
 }
+
+const SCENARIO_ADVICE: Record<string, { intro: string; actions: { icon: "mask" | "activity" | "sensitive"; text: string }[] }> = {
+  "Alerta alta": {
+    intro:
+      "Se espera un posible deterioro de la calidad del aire en el escenario seleccionado. Se recomienda reducir actividades prolongadas al aire libre y tomar precauciones, especialmente en zonas cercanas a vías con alto tráfico.",
+    actions: [
+      { icon: "mask", text: "Usa mascarilla si permaneces al aire libre" },
+      { icon: "activity", text: "Evita ejercicio intenso al aire libre" },
+      { icon: "sensitive", text: "Personas sensibles deben tomar precauciones" },
+    ],
+  },
+  Vigilancia: {
+    intro:
+      "El escenario muestra señales de vigilancia en la calidad del aire. Conviene moderar las actividades prolongadas al aire libre, en especial cerca de vías con alto tráfico.",
+    actions: [
+      { icon: "mask", text: "Considera usar mascarilla en exteriores" },
+      { icon: "activity", text: "Modera el ejercicio intenso al aire libre" },
+      { icon: "sensitive", text: "Personas sensibles: extrema precaución" },
+    ],
+  },
+  Estable: {
+    intro:
+      "El escenario no muestra señales fuertes de deterioro en la calidad del aire. Aun así, mantente atento si permaneces cerca de vías con alto tráfico.",
+    actions: [
+      { icon: "mask", text: "Mascarilla opcional en exteriores" },
+      { icon: "activity", text: "Ejercicio al aire libre sin restricción" },
+      { icon: "sensitive", text: "Personas sensibles: sin alertas activas" },
+    ],
+  },
+};
 
 function predictForest(
   model: ModelPayload,
@@ -1533,6 +1563,7 @@ export default function Home() {
     [model, inputs, hour],
   );
   const band = riskBand(probability ?? 0);
+  const scenarioAdvice = SCENARIO_ADVICE[band.label] ?? SCENARIO_ADVICE.Estable;
   const hourProfile = useMemo(
     () => data?.hourlyProfile.find((row) => Number(row.HORA) === hour),
     [data, hour],
@@ -1819,27 +1850,24 @@ export default function Home() {
             {/* Mismos valores/calculos existentes (referenceProbability, probability,
                 referenceBand, band, band.note) -- solo cambia la presentacion: de
                 gauges circulares a tarjetas planas, sin tocar ningun numero. */}
-            <div className="forecast-summary-grid">
+            <div className="forecast-summary-stack">
               <section className="forecast-compare-card" aria-label="Comparación del escenario">
                 <div className="forecast-summary-label">¿Qué está pasando ahora?</div>
                 <div className="stat-comparison">
                   <div className="stat-block">
-                    <span className="stat-caption">Estado histórico · {String(hour).padStart(2, "0")}:00</span>
-                    <div className="stat-value-row">
-                      <strong className="stat-value" style={{ color: referenceBand.color }}>
-                        {referenceProbability === null ? "—" : `${Math.round(referenceProbability * 100)}%`}
-                      </strong>
-                      <span className="stat-state" style={{ color: referenceBand.color }}>{referenceBand.label}</span>
-                    </div>
+                    <span className="stat-caption">Estado histórico <b>{String(hour).padStart(2, "0")}:00</b></span>
+                    <strong className="stat-value" style={{ color: referenceBand.color }}>
+                      {referenceProbability === null ? "—" : `${Math.round(referenceProbability * 100)}%`}
+                    </strong>
+                    <span className="stat-state" style={{ color: referenceBand.color }}>{referenceBand.label}</span>
                   </div>
+                  <div className="stat-divider" aria-hidden="true" />
                   <div className="stat-block">
                     <span className="stat-caption">Escenario próximas 6 h</span>
-                    <div className="stat-value-row">
-                      <strong className="stat-value" style={{ color: band.color }}>
-                        {probability === null ? "—" : `${Math.round(probability * 100)}%`}
-                      </strong>
-                      <span className="stat-state" style={{ color: band.color }}>{band.label}</span>
-                    </div>
+                    <strong className="stat-value" style={{ color: band.color }}>
+                      {probability === null ? "—" : `${Math.round(probability * 100)}%`}
+                    </strong>
+                    <span className="stat-state" style={{ color: band.color }}>{band.label}</span>
                   </div>
                 </div>
                 <p className="forecast-summary-foot">
@@ -1848,10 +1876,17 @@ export default function Home() {
               </section>
 
               <section className="scenario-status-card" style={{ ["--status-color" as string]: band.color }} aria-live="polite">
-                <span className="scenario-status-kicker">Estado del escenario</span>
-                <strong className="scenario-status-label">{band.label}</strong>
-                <b className="scenario-status-value">{probability === null ? "—" : `${Math.round(probability * 100)}%`} de probabilidad</b>
-                <p>{band.note}</p>
+                <div className="scenario-status-left">
+                  <span className="scenario-status-kicker">Estado del escenario</span>
+                  <strong className="scenario-status-label">{band.label}</strong>
+                </div>
+                <div className="scenario-status-right">
+                  <span className="scenario-status-percent-label">Probabilidad</span>
+                  <strong className="scenario-status-percent">
+                    {probability === null ? "—" : `${Math.round(probability * 100)}%`}
+                  </strong>
+                  <p>{band.note}</p>
+                </div>
               </section>
             </div>
 
@@ -1860,13 +1895,20 @@ export default function Home() {
                 <span className="scenario-meaning-icon" aria-hidden="true"><Leaf size={16} /></span>
                 <div>
                   <strong>¿Qué significa y qué puedo hacer?</strong>
-                  <p>{band.note} Referencia histórica: mediana de cada hora entre 2022 y 2026.</p>
+                  <p>{scenarioAdvice.intro}</p>
                 </div>
               </div>
               <div className="scenario-meaning-actions" aria-label="Recomendaciones">
-                <div><span aria-hidden="true"><LineChart size={16} /></span><small>Consulta la evolución detallada en Hallazgos</small></div>
-                <div><span aria-hidden="true"><Cpu size={16} /></span><small>Revisa cómo llega el modelo a este resultado en Modelo</small></div>
-                <div><span aria-hidden="true"><FileText size={16} /></span><small>Ante dudas, consulta fuentes oficiales de calidad del aire</small></div>
+                {scenarioAdvice.actions.map((action) => (
+                  <div key={action.text}>
+                    <span aria-hidden="true">
+                      {action.icon === "mask" && <ShieldAlert size={16} />}
+                      {action.icon === "activity" && <Activity size={16} />}
+                      {action.icon === "sensitive" && <HeartPulse size={16} />}
+                    </span>
+                    <small>{action.text}</small>
+                  </div>
+                ))}
               </div>
             </section>
 

@@ -1065,79 +1065,78 @@ input[type="range"]::-webkit-slider-thumb {
 
 /* ---------- Explorar: tarjetas planas (reemplazan los gauges circulares) ---------- */
 
-.forecast-summary-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: 12px;
+.forecast-summary-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   margin: 22px 0 14px;
-  align-items: stretch;
 }
 
 .forecast-compare-card,
 .scenario-status-card {
   min-width: 0;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid var(--panel-border);
 }
 
 .forecast-compare-card {
   display: flex;
   flex-direction: column;
-  padding: 16px 16px 14px;
+  padding: 20px 22px 18px;
   background: rgba(244, 241, 232, 0.03);
 }
 
 .forecast-summary-label {
   color: var(--panel-text);
-  font: 700 9px/1.2 var(--font-geist-mono), monospace;
+  font: 700 9.5px/1.2 var(--font-geist-mono), monospace;
   text-transform: uppercase;
   letter-spacing: .07em;
 }
 
-/* Los dos estados se apilan verticalmente -- una tarjeta de sidebar (~170-190px)
-   no tiene ancho para dos columnas sin que numero/etiqueta se encimen. */
 .stat-comparison {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 14px 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+  margin: 20px 0 18px;
 }
 
 .stat-block {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  background: rgba(244, 241, 232, 0.04);
+  align-items: center;
+  gap: 7px;
+  text-align: center;
+}
+
+.stat-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--panel-border);
 }
 
 .stat-caption {
   min-width: 0;
   color: var(--panel-text-secondary);
-  font-size: 8.5px;
+  font-size: 9px;
   line-height: 1.4;
   text-transform: uppercase;
   letter-spacing: .03em;
 }
 
-/* Numero grande y estado en su propia fila, debajo de la leyenda -- evita que
-   compitan por ancho dentro de una tarjeta angosta de sidebar. */
-.stat-value-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
+.stat-caption b {
+  color: var(--panel-text-secondary);
+  font-weight: 600;
 }
 
 .stat-value {
-  font: 700 24px/1 Georgia, "Times New Roman", serif;
+  font: 700 32px/1 Georgia, "Times New Roman", serif;
   white-space: nowrap;
 }
 
 .stat-state {
-  font: 700 8px/1 var(--font-geist-mono), monospace;
+  font: 700 9px/1 var(--font-geist-mono), monospace;
   text-transform: uppercase;
   letter-spacing: .05em;
   white-space: nowrap;
@@ -1145,13 +1144,13 @@ input[type="range"]::-webkit-slider-thumb {
 
 .forecast-summary-foot {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-wrap: wrap;
+  gap: 4px 10px;
   margin: 0;
-  padding-top: 12px;
+  padding-top: 14px;
   border-top: 1px solid var(--panel-border);
   color: var(--panel-text-secondary);
-  font-size: 9px;
+  font-size: 9.5px;
 }
 
 .forecast-summary-foot b {
@@ -1163,47 +1162,69 @@ input[type="range"]::-webkit-slider-thumb {
 .scenario-status-card {
   --status-color: var(--mint);
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 24px;
+  background: rgba(244, 241, 232, 0.03);
+}
+
+.scenario-status-left {
+  display: flex;
   flex-direction: column;
-  padding: 16px 16px;
-  background: color-mix(in srgb, var(--status-color) 14%, rgba(244,241,232,.03));
-  border-color: color-mix(in srgb, var(--status-color) 40%, transparent);
+  gap: 8px;
+  min-width: 0;
 }
 
 .scenario-status-kicker {
   color: var(--panel-text-secondary);
-  font: 700 8.5px/1.2 var(--font-geist-mono), monospace;
+  font: 700 9px/1.2 var(--font-geist-mono), monospace;
   text-transform: uppercase;
   letter-spacing: .07em;
 }
 
 .scenario-status-label {
-  margin-top: 10px;
   color: var(--status-color);
-  font: 400 22px/1.15 Georgia, "Times New Roman", serif;
+  font: 400 26px/1.15 Georgia, "Times New Roman", serif;
   letter-spacing: -0.005em;
   overflow-wrap: break-word;
 }
 
-.scenario-status-value {
-  display: block;
-  margin-top: 8px;
-  color: var(--panel-text);
-  font: 600 12px/1.3 var(--font-geist-mono), monospace;
+.scenario-status-right {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 4px;
+  min-width: 0;
 }
 
-.scenario-status-card > p {
-  margin: 10px 0 0;
+.scenario-status-percent-label {
   color: var(--panel-text-secondary);
-  font-size: 10px;
-  line-height: 1.55;
+  font: 700 9px/1.2 var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.scenario-status-percent {
+  color: var(--status-color);
+  font: 700 32px/1 Georgia, "Times New Roman", serif;
+}
+
+.scenario-status-right p {
+  margin: 4px 0 0;
+  color: var(--panel-text-secondary);
+  font-size: 10.5px;
+  line-height: 1.5;
 }
 
 .scenario-meaning-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   margin: 0 0 14px;
-  padding: 20px 24px;
+  padding: 18px 20px 20px;
   color: var(--ink);
   background: var(--paper);
   border-radius: 10px;
@@ -1226,6 +1247,10 @@ input[type="range"]::-webkit-slider-thumb {
   color: var(--mint);
 }
 
+.scenario-meaning-head > div {
+  min-width: 0;
+}
+
 .scenario-meaning-head strong {
   display: block;
   margin-bottom: 6px;
@@ -1240,24 +1265,26 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .scenario-meaning-actions {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 16px;
-  padding-left: 28px;
-  border-left: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
 }
 
 .scenario-meaning-actions > div {
+  min-width: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  text-align: center;
 }
 
 .scenario-meaning-actions span {
   flex-shrink: 0;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   display: grid;
   place-items: center;
   border-radius: 8px;
@@ -1267,9 +1294,8 @@ input[type="range"]::-webkit-slider-thumb {
 
 .scenario-meaning-actions small {
   color: var(--text-secondary);
-  font-size: 10.5px;
-  line-height: 1.45;
-  padding-top: 3px;
+  font-size: 10px;
+  line-height: 1.4;
 }
 
 .scenario-config-accordion {
