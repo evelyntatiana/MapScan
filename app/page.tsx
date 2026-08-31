@@ -8,8 +8,10 @@ import {
   useState,
   type MouseEvent as ReactMouseEvent,
   type PointerEvent as ReactPointerEvent,
+  type ReactNode,
   type WheelEvent as ReactWheelEvent,
 } from "react";
+import { Cpu, Factory, FileText, Gauge, Layers, Leaf, LineChart, MapPin, Route, Wind } from "lucide-react";
 import { AnalyticsReportPage, type AnalyticsReportKind } from "./analytics-report";
 
 type GenericRow = Record<string, string | number | boolean | null>;
@@ -824,15 +826,18 @@ function worldToLonLat(x: number, y: number, zoom: number) {
 function Toggle({
   active,
   label,
+  icon,
   onClick,
 }: {
   active: boolean;
   label: string;
+  icon?: ReactNode;
   onClick: () => void;
 }) {
   return (
     <button className={`toggle ${active ? "is-active" : ""}`} onClick={onClick} aria-pressed={active}>
       <span className="toggle-dot" />
+      {icon}
       {label}
     </button>
   );
@@ -1439,6 +1444,10 @@ export default function Home() {
   const [ingredients, setIngredients] = useState<string[]>(["NO₂", "Luz solar"]);
   const [activeMixtureReport, setActiveMixtureReport] = useState<MixtureReportKind | null>(null);
   const [activeAnalyticsReport, setActiveAnalyticsReport] = useState<AnalyticsReportKind | null>(null);
+  // Solo controla el subrayado teal del nav superior -- no crea rutas ni
+  // cambia que se muestra; "Hallazgos"/"Modelo" abren los mismos informes
+  // protegidos que ya existian (kind "air"/"model"), sin tocar su contenido.
+  const [activeNav, setActiveNav] = useState<"explorar" | "mezclas" | "hallazgos" | "modelo">("explorar");
 
   useEffect(() => {
     fetch("/app-data.json")
@@ -1565,13 +1574,27 @@ export default function Home() {
   return (
     <main className="app-shell">
       <header className="topbar">
-        <a className="brand" href="#laboratorio" aria-label="Ir al laboratorio atmosférico">
-          <span className="brand-mark">A//C</span>
-          <span><strong>Aire Cuenca</strong><small>Inteligencia atmosférica</small></span>
+        <a className="brand" href="#laboratorio" aria-label="Ir al inicio de MapScan" onClick={() => setActiveNav("explorar")}>
+          <span className="brand-mark">M</span>
+          <span><strong>MAPSCAN</strong><small>Parque Industrial, Cuenca</small></span>
         </a>
         <nav aria-label="Secciones principales">
-          <a href="#laboratorio">Laboratorio</a>
-          <a href="#mezclas">Mezclas</a>
+          <a href="#laboratorio" className={activeNav === "explorar" ? "is-active" : ""} onClick={() => setActiveNav("explorar")}>Explorar</a>
+          <a href="#mezclas" className={activeNav === "mezclas" ? "is-active" : ""} onClick={() => setActiveNav("mezclas")}>Mezclas</a>
+          <a
+            href="#laboratorio"
+            className={activeNav === "hallazgos" ? "is-active" : ""}
+            onClick={(event) => { event.preventDefault(); setActiveNav("hallazgos"); setActiveMixtureReport(null); setActiveAnalyticsReport("air"); }}
+          >
+            Hallazgos
+          </a>
+          <a
+            href="#laboratorio"
+            className={activeNav === "modelo" ? "is-active" : ""}
+            onClick={(event) => { event.preventDefault(); setActiveNav("modelo"); setActiveMixtureReport(null); setActiveAnalyticsReport("model"); }}
+          >
+            Modelo
+          </a>
         </nav>
         <div className="top-status">
           <span className="status-pulse" />
@@ -1636,10 +1659,17 @@ export default function Home() {
               />
 
               <div className="map-tools" aria-label="Capas del mapa">
-                <Toggle active={showPlumes} label="Plumas" onClick={() => setShowPlumes((value) => !value)} />
-                <Toggle active={showTraffic} label="Tráfico" onClick={() => setShowTraffic((value) => !value)} />
-                <Toggle active={showTrafficEmissions} label="SO₂ tráfico" onClick={() => setShowTrafficEmissions((value) => !value)} />
-                <Toggle active={showMonitoring} label="Muestreo" onClick={() => setShowMonitoring((value) => !value)} />
+                {/* Solo se renombraron las etiquetas visibles; showPlumes/showTraffic/
+                    showTrafficEmissions/showMonitoring y lo que dibujan en MapCanvas
+                    no cambiaron. "Fuentes industriales" = dispersion/plumas de sitios
+                    industriales reales (antes "Plumas"); "Red vial" = geometria y flujo
+                    de vias reconstruidas (antes "Trafico"); "Emisiones SO2" = puntos
+                    reales AERMOD (ya era preciso, se mantiene); "Puntos de monitoreo" =
+                    data.monitoringPoints real (antes "Muestreo"). */}
+                <Toggle active={showPlumes} label="Fuentes industriales" icon={<Factory size={13} aria-hidden="true" />} onClick={() => setShowPlumes((value) => !value)} />
+                <Toggle active={showTraffic} label="Red vial" icon={<Route size={13} aria-hidden="true" />} onClick={() => setShowTraffic((value) => !value)} />
+                <Toggle active={showTrafficEmissions} label="Emisiones SO₂" icon={<Wind size={13} aria-hidden="true" />} onClick={() => setShowTrafficEmissions((value) => !value)} />
+                <Toggle active={showMonitoring} label="Puntos de monitoreo" icon={<MapPin size={13} aria-hidden="true" />} onClick={() => setShowMonitoring((value) => !value)} />
               </div>
 
               <div className="basemap-switch" aria-label="Mapa base">
@@ -1786,82 +1816,107 @@ export default function Home() {
           </section>
 
           <aside className="forecast-panel" aria-label="Predicción a seis horas">
-            <div className="forecast-head">
-              <div>
-                <p className="panel-kicker">02 · Alerta temprana</p>
-                <h2>Próximas 6 h</h2>
-              </div>
-              <span className={model ? "model-ready" : "model-loading"}>{model ? "RF · 300 árboles" : "cargando modelo"}</span>
-            </div>
-
-            <div className="risk-comparison">
-              <div className="gauge-block is-reference">
-                <span className="gauge-caption">Estado actual histórico</span>
-                <div className="risk-gauge" style={{ "--risk": `${Math.round((referenceProbability ?? 0) * 360)}deg`, "--risk-color": referenceBand.color } as React.CSSProperties}>
-                  <div><small>mediana</small><strong>{referenceProbability === null ? "—" : `${Math.round(referenceProbability * 100)}%`}</strong><span>{referenceBand.label}</span></div>
-                </div>
-                <small>2022–2026 · {String(hour).padStart(2, "0")}:00</small>
-              </div>
-              <div className="gauge-arrow">→</div>
-              <div className="gauge-block">
-                <span className="gauge-caption">Escenario próximas 6 h</span>
-                <div className="risk-gauge" style={{ "--risk": `${Math.round((probability ?? 0) * 360)}deg`, "--risk-color": band.color } as React.CSSProperties}>
-                  <div><small>probabilidad</small><strong>{probability === null ? "—" : `${Math.round(probability * 100)}%`}</strong><span>{band.label}</span></div>
-                </div>
-                <small>Interactivo</small>
-              </div>
-            </div>
-            <p className="risk-note"><i style={{ background: band.color }} />{band.note}<span> Referencia histórica: mediana de cada hora entre 2022 y 2026.</span></p>
-
-            <div className="scenario-inputs">
-              <div className="scenario-title"><span>Escenario atmosférico</span><button onClick={() => {
-                const defaults: Record<string, number> = {};
-                data.pollutants.forEach((pollutant) => defaults[pollutant.feature] = pollutant.median);
-                defaults.MET_TEMP = 15.4; defaults.MET_HUM = 69.4; defaults.MET_PRES = 75645;
-                setInputs(defaults);
-              }}>Restablecer</button></div>
-              {SCENARIO_GROUPS.map((group) => (
-                <details className="scenario-group" key={group.label} open>
-                  <summary><span>{group.label}</span><small>{group.items.length}</small></summary>
-                  <div className="scenario-group-controls">
-                    {group.items.map((label) => data.pollutants.find((pollutant) => pollutant.label === label)).filter((pollutant): pollutant is Pollutant => Boolean(pollutant)).map((pollutant) => (
-                      <label key={pollutant.feature}>
-                        <span><strong>{pollutant.label} — {POLLUTANT_NAMES[pollutant.label]}</strong><b>{compactNumber(inputs[pollutant.feature] ?? pollutant.median, pollutant.label === "CO" ? 2 : 1)} {pollutant.unit}</b></span>
-                        <input
-                          type="range"
-                          min={pollutant.min}
-                          max={pollutant.max}
-                          step={(pollutant.max - pollutant.min) / 100}
-                          value={inputs[pollutant.feature] ?? pollutant.median}
-                          onChange={(event) => setInputs((current) => ({ ...current, [pollutant.feature]: Number(event.target.value) }))}
-                          style={{ "--range-color": pollutant.color } as React.CSSProperties}
-                        />
-                      </label>
-                    ))}
-                    {group.label.startsWith("Contaminantes") ? (
-                      <div className="scenario-unmodeled"><strong>NO — monóxido de nitrógeno</strong><small>Contexto químico; no existe una serie independiente para controlarlo en este modelo RF.</small></div>
-                    ) : null}
+            {/* Mismos valores/calculos existentes (referenceProbability, probability,
+                referenceBand, band, band.note) -- solo cambia la presentacion: de
+                gauges circulares a tarjetas planas, sin tocar ningun numero. */}
+            <div className="forecast-summary-grid">
+              <section className="forecast-compare-card" aria-label="Comparación del escenario">
+                <div className="forecast-summary-label">¿Qué está pasando ahora?</div>
+                <div className="stat-comparison">
+                  <div className="stat-block">
+                    <span className="stat-caption">Estado histórico · {String(hour).padStart(2, "0")}:00</span>
+                    <div className="stat-value-row">
+                      <strong className="stat-value" style={{ color: referenceBand.color }}>
+                        {referenceProbability === null ? "—" : `${Math.round(referenceProbability * 100)}%`}
+                      </strong>
+                      <span className="stat-state" style={{ color: referenceBand.color }}>{referenceBand.label}</span>
+                    </div>
                   </div>
-                </details>
-              ))}
-              <div className="weather-input-grid">
-                <label><span>Temperatura<b>{compactNumber(inputs.MET_TEMP ?? 15.4)} °C</b></span><input type="range" min="4" max="29" step="0.1" value={inputs.MET_TEMP ?? 15.4} onChange={(event) => setInputs((current) => ({ ...current, MET_TEMP: Number(event.target.value) }))} /></label>
-                <label><span>Humedad<b>{compactNumber(inputs.MET_HUM ?? 69.4)}%</b></span><input type="range" min="22" max="100" step="1" value={inputs.MET_HUM ?? 69.4} onChange={(event) => setInputs((current) => ({ ...current, MET_HUM: Number(event.target.value) }))} /></label>
-              </div>
+                  <div className="stat-block">
+                    <span className="stat-caption">Escenario próximas 6 h</span>
+                    <div className="stat-value-row">
+                      <strong className="stat-value" style={{ color: band.color }}>
+                        {probability === null ? "—" : `${Math.round(probability * 100)}%`}
+                      </strong>
+                      <span className="stat-state" style={{ color: band.color }}>{band.label}</span>
+                    </div>
+                  </div>
+                </div>
+                <p className="forecast-summary-foot">
+                  Umbral operativo <b>0,40</b> · Objetivo <b>PM₂.₅ &gt; 15 µg/m³</b> · <span className={model ? "model-ready" : "model-loading"}>{model ? "RF · 300 árboles" : "cargando modelo"}</span>
+                </p>
+              </section>
+
+              <section className="scenario-status-card" style={{ ["--status-color" as string]: band.color }} aria-live="polite">
+                <span className="scenario-status-kicker">Estado del escenario</span>
+                <strong className="scenario-status-label">{band.label}</strong>
+                <b className="scenario-status-value">{probability === null ? "—" : `${Math.round(probability * 100)}%`} de probabilidad</b>
+                <p>{band.note}</p>
+              </section>
             </div>
 
-            <div className="forecast-foot">
-              <span>Umbral operativo <b>0,40</b></span>
-              <span>Objetivo <b>PM₂.₅ &gt; 15 µg/m³</b></span>
-            </div>
+            <section className="scenario-meaning-card">
+              <div className="scenario-meaning-head">
+                <span className="scenario-meaning-icon" aria-hidden="true"><Leaf size={16} /></span>
+                <div>
+                  <strong>¿Qué significa y qué puedo hacer?</strong>
+                  <p>{band.note} Referencia histórica: mediana de cada hora entre 2022 y 2026.</p>
+                </div>
+              </div>
+              <div className="scenario-meaning-actions" aria-label="Recomendaciones">
+                <div><span aria-hidden="true"><LineChart size={16} /></span><small>Consulta la evolución detallada en Hallazgos</small></div>
+                <div><span aria-hidden="true"><Cpu size={16} /></span><small>Revisa cómo llega el modelo a este resultado en Modelo</small></div>
+                <div><span aria-hidden="true"><FileText size={16} /></span><small>Ante dudas, consulta fuentes oficiales de calidad del aire</small></div>
+              </div>
+            </section>
+
+            <details className="info-accordion scenario-config-accordion">
+              <summary>Configurar escenario <span>＋</span></summary>
+              <div className="scenario-inputs">
+                <div className="scenario-title"><span>Escenario atmosférico</span><button onClick={() => {
+                  const defaults: Record<string, number> = {};
+                  data.pollutants.forEach((pollutant) => defaults[pollutant.feature] = pollutant.median);
+                  defaults.MET_TEMP = 15.4; defaults.MET_HUM = 69.4; defaults.MET_PRES = 75645;
+                  setInputs(defaults);
+                }}>Restablecer</button></div>
+                {SCENARIO_GROUPS.map((group) => (
+                  <details className="scenario-group" key={group.label} open>
+                    <summary><span>{group.label}</span><small>{group.items.length}</small></summary>
+                    <div className="scenario-group-controls">
+                      {group.items.map((label) => data.pollutants.find((pollutant) => pollutant.label === label)).filter((pollutant): pollutant is Pollutant => Boolean(pollutant)).map((pollutant) => (
+                        <label key={pollutant.feature}>
+                          <span><strong>{pollutant.label} — {POLLUTANT_NAMES[pollutant.label]}</strong><b>{compactNumber(inputs[pollutant.feature] ?? pollutant.median, pollutant.label === "CO" ? 2 : 1)} {pollutant.unit}</b></span>
+                          <input
+                            type="range"
+                            min={pollutant.min}
+                            max={pollutant.max}
+                            step={(pollutant.max - pollutant.min) / 100}
+                            value={inputs[pollutant.feature] ?? pollutant.median}
+                            onChange={(event) => setInputs((current) => ({ ...current, [pollutant.feature]: Number(event.target.value) }))}
+                            style={{ "--range-color": pollutant.color } as React.CSSProperties}
+                          />
+                        </label>
+                      ))}
+                      {group.label.startsWith("Contaminantes") ? (
+                        <div className="scenario-unmodeled"><strong>NO — monóxido de nitrógeno</strong><small>Contexto químico; no existe una serie independiente para controlarlo en este modelo RF.</small></div>
+                      ) : null}
+                    </div>
+                  </details>
+                ))}
+                <div className="weather-input-grid">
+                  <label><span>Temperatura<b>{compactNumber(inputs.MET_TEMP ?? 15.4)} °C</b></span><input type="range" min="4" max="29" step="0.1" value={inputs.MET_TEMP ?? 15.4} onChange={(event) => setInputs((current) => ({ ...current, MET_TEMP: Number(event.target.value) }))} /></label>
+                  <label><span>Humedad<b>{compactNumber(inputs.MET_HUM ?? 69.4)}%</b></span><input type="range" min="22" max="100" step="1" value={inputs.MET_HUM ?? 69.4} onChange={(event) => setInputs((current) => ({ ...current, MET_HUM: Number(event.target.value) }))} /></label>
+                </div>
+              </div>
+            </details>
           </aside>
         </div>
 
         <div className="hero-facts">
-          <div><span>Modelo enriquecido</span><strong>{data.meta.enrichedFeatures}</strong><small>variables integradas</small></div>
-          <div><span>Capacidad discriminante</span><strong>{Math.round(data.meta.metrics.roc_auc * 100)}%</strong><small>AUC-ROC reportado</small></div>
-          <div><span>Campo industrial</span><strong>{data.industrial.sites.length}</strong><small>chimeneas georreferenciadas</small></div>
-          <div><span>Movilidad laboral</span><strong>19.329</strong><small>viajes/día estimados</small></div>
+          <div><Layers aria-hidden="true" /><span>Modelo enriquecido</span><strong>{data.meta.enrichedFeatures}</strong><small>variables integradas</small></div>
+          <div><Gauge aria-hidden="true" /><span>Capacidad discriminante</span><strong>{Math.round(data.meta.metrics.roc_auc * 100)}%</strong><small>AUC-ROC reportado</small></div>
+          <div><Factory aria-hidden="true" /><span>Campo industrial</span><strong>{data.industrial.sites.length}</strong><small>chimeneas georreferenciadas</small></div>
+          <div><Route aria-hidden="true" /><span>Movilidad laboral</span><strong>19.329</strong><small>viajes/día estimados</small></div>
         </div>
       </section>
 
@@ -1958,7 +2013,7 @@ export default function Home() {
         <a href="#laboratorio">Volver al mapa ↑</a>
       </footer>
       {activeMixtureReport ? <MixtureReportPage kind={activeMixtureReport} ingredients={ingredients} mixResult={mixResult} healthResult={healthResult} onClose={() => setActiveMixtureReport(null)} /> : null}
-      {activeAnalyticsReport ? <AnalyticsReportPage kind={activeAnalyticsReport} data={data} onClose={() => setActiveAnalyticsReport(null)} /> : null}
+      {activeAnalyticsReport ? <AnalyticsReportPage kind={activeAnalyticsReport} data={data} onClose={() => { setActiveAnalyticsReport(null); setActiveNav("explorar"); }} /> : null}
     </main>
   );
 }

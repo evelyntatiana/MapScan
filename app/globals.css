@@ -1,17 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #102024;
-  --deep: #091417;
-  --deep-2: #0d1b20;
-  --paper: #f2eee5;
-  --paper-2: #e9e2d6;
-  --muted: #7d8c8d;
-  --line: rgba(16, 32, 36, 0.16);
-  --line-dark: rgba(229, 239, 235, 0.16);
-  --mint: #64d5c2;
-  --yellow: #f7cf65;
-  --coral: #ef6f4e;
+  /* Identidad v3 (shell claro academico + panel oscuro del mapa como "isla de
+     instrumentos"). --bg/--ink/--text/--text-secondary son SIEMPRE el shell
+     claro (pagina, header, hero, franja inferior, seccion Mezclas). El panel
+     de mapa+pronostico (.control-deck) sigue oscuro con sus propios hex fijos
+     (no se convirtio a claro: es una superficie de instrumentos enfocada, no
+     "el color general de la pagina" del que se quejaba el usuario) -- su
+     texto usa --panel-text/--panel-text-secondary, NO --text/--text-secondary,
+     para no heredar el flip claro del shell. --paper/--paper-2/--ink son el
+     par de tarjeta clara ("crema explicativo"), ahora casi identico al shell.
+     analytics-report.tsx y mixture-report usan sus propios hex fijos y no se
+     ven afectados por este cambio. */
+  --bg: #f6f3ec;
+  --ink: #1f2f33;
+  --deep: #16333a;
+  --deep-2: #1c3d44;
+  --paper: #fbf9f4;
+  --paper-2: #f0ebe0;
+  --text: #1f2f33;
+  --text-secondary: #55666a;
+  --panel-text: #f4f1e8;
+  --panel-text-secondary: #a9bcc0;
+  --panel-border: rgba(114, 168, 161, 0.28);
+  --muted: #55666a;
+  --line: rgba(31, 47, 51, 0.14);
+  --line-dark: rgba(244, 241, 232, 0.14);
+  --mint: #2e6f6d;
+  --mint-soft: #3e8c87;
+  --mint-bg: rgba(46, 111, 109, 0.12);
+  --coral-bg: rgba(224, 122, 106, 0.14);
+  --yellow: #d8a24c;
+  --coral: #e07a6a;
   --violet: #9b8cff;
   --blue: #48a9e6;
 }
@@ -22,13 +42,13 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--paper);
+  background: var(--bg);
 }
 
 body {
   margin: 0;
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--bg);
+  color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -80,15 +100,15 @@ a {
 }
 
 .brand-mark {
-  width: 44px;
+  width: 34px;
   height: 34px;
   display: grid;
   place-items: center;
-  background: var(--ink);
-  color: var(--paper);
-  font: 800 10px/1 var(--font-geist-mono), monospace;
-  letter-spacing: -0.04em;
-  border-radius: 2px 10px 2px 2px;
+  background: var(--mint);
+  color: var(--bg);
+  font: 800 13px/1 var(--font-geist-mono), monospace;
+  letter-spacing: -0.02em;
+  border-radius: 7px;
 }
 
 .brand > span:last-child {
@@ -103,13 +123,13 @@ a {
 }
 
 .brand small {
-  color: #6e7a7b;
+  color: var(--text-secondary);
   font-size: 10px;
 }
 
 .topbar nav {
   display: flex;
-  gap: 30px;
+  gap: 26px;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -117,11 +137,29 @@ a {
 }
 
 .topbar nav a {
+  position: relative;
+  padding-bottom: 27px;
+  color: var(--text-secondary);
   transition: color 180ms ease;
 }
 
 .topbar nav a:hover {
-  color: #487f78;
+  color: var(--text);
+}
+
+.topbar nav a.is-active {
+  color: var(--text);
+}
+
+.topbar nav a.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--mint);
 }
 
 .top-status {
@@ -161,7 +199,9 @@ a {
 }
 
 .hero {
-  padding: 66px 0 88px;
+  /* Reducido drasticamente: el slogan ya no debe dominar la primera pantalla,
+     el mapa + resultado deben quedar visibles sin scroll. */
+  padding: 22px 0 20px;
 }
 
 .hero-heading,
@@ -173,6 +213,14 @@ a {
   margin-bottom: 46px;
 }
 
+/* El slogan editorial pasa a ser un subtitulo secundario y compacto -- solo
+   dentro de .hero; .section-heading (Mezclas) y .source-section conservan su
+   tamaño original, sin cambios. */
+.hero-heading {
+  margin-bottom: 16px;
+  align-items: center;
+}
+
 .eyebrow,
 .panel-kicker {
   margin: 0 0 14px;
@@ -182,7 +230,16 @@ a {
   color: #65787a;
 }
 
-.hero h1,
+.hero h1 {
+  margin: 0;
+  max-width: 620px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(19px, 1.7vw, 24px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
 .section-heading h2,
 .source-section h2 {
   margin: 0;
@@ -198,6 +255,21 @@ a {
 .section-heading h2 em {
   color: #7f8f8f;
   font-weight: 400;
+}
+
+.hero .hero-intro {
+  gap: 8px;
+  padding-bottom: 0;
+}
+
+.hero .hero-intro > p {
+  font-size: 11.5px;
+  line-height: 1.5;
+  max-width: 440px;
+}
+
+.hero .data-window {
+  padding-top: 8px;
 }
 
 .hero-intro {
@@ -250,7 +322,7 @@ a {
 .map-panel {
   min-width: 0;
   padding: 26px 26px 20px;
-  border-right: 1px solid var(--line-dark);
+  border-right: 1px solid var(--panel-border);
 }
 
 .map-header,
@@ -302,7 +374,8 @@ a {
   margin-top: 21px;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(229, 239, 235, 0.12);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
   background: #101b1e;
 }
 
@@ -330,11 +403,15 @@ a {
   top: 14px;
   z-index: 2;
   display: flex;
-  gap: 6px;
-  padding: 6px;
-  background: rgba(9, 20, 23, 0.75);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(229, 239, 235, 0.12);
+  flex-direction: column;
+  gap: 2px;
+  width: 188px;
+  padding: 8px;
+  background: rgba(9, 20, 23, 0.82);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.3);
 }
 
 .basemap-switch {
@@ -505,32 +582,56 @@ a {
 }
 
 .toggle {
+  /* Vive dentro de .map-tools, que sigue oscuro a proposito (panel de
+     instrumentos del mapa) -- usa --panel-text*, no --text* del shell claro. */
+  display: flex;
+  align-items: center;
+  width: 100%;
   border: 0;
-  padding: 7px 9px;
-  color: #8fa0a0;
+  border-radius: 6px;
+  padding: 8px 8px;
+  color: var(--panel-text-secondary);
   background: transparent;
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-size: 10px;
+  text-transform: none;
+  letter-spacing: 0.01em;
   cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
 }
 
+.toggle:hover {
+  color: var(--panel-text);
+  background: rgba(244, 241, 232, 0.05);
+}
+
+.toggle svg {
+  margin-right: 8px;
+  flex-shrink: 0;
+  color: var(--panel-text-secondary);
+  stroke-width: 1.7;
+}
+
+.toggle.is-active svg { color: var(--mint-soft); }
+
 .toggle-dot {
-  width: 5px;
-  height: 5px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   display: inline-block;
-  margin-right: 6px;
-  background: #526163;
+  margin-right: 8px;
+  border: 1px solid rgba(159, 178, 175, 0.5);
+  background: transparent;
+  flex-shrink: 0;
 }
 
 .toggle.is-active {
-  color: #edf3ee;
-  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  background: var(--mint-bg, rgba(85, 191, 169, 0.14));
 }
 
 .toggle.is-active .toggle-dot {
   background: var(--mint);
+  border-color: var(--mint);
 }
 
 .pollutant-strip {
@@ -582,7 +683,7 @@ a {
   width: min(310px, 36%);
   padding: 17px;
   background: rgba(11, 24, 27, 0.86);
-  border: 1px solid rgba(229, 239, 235, 0.13);
+  border: 1px solid var(--panel-border);
   backdrop-filter: blur(16px);
 }
 
@@ -721,7 +822,7 @@ a {
   cursor: pointer;
 }
 
-.time-mode-tabs button.is-active { color: var(--deep); background: var(--mint); border-color: var(--mint); }
+.time-mode-tabs button.is-active { color: var(--panel-text); background: var(--mint); border-color: var(--mint); }
 
 .timeline-control.is-history { grid-template-columns: minmax(0, 1fr) minmax(300px, 0.55fr); }
 
@@ -935,21 +1036,268 @@ input[type="range"]::-webkit-slider-thumb {
 .risk-gauge span { color: var(--risk-color); }
 
 .risk-note {
+  /* "Que significa y que puedo hacer": mismo contenido/calculo existente
+     (band.note), solo reformulado visualmente como tarjeta crema explicativa,
+     diferenciada del resto del panel oscuro -- sin agregar recomendaciones
+     nuevas. */
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
   min-height: 34px;
   margin: 0 0 22px;
-  color: #96a5a3;
-  font-size: 10px;
-  line-height: 1.45;
-  text-align: center;
+  padding: 14px 16px;
+  color: var(--ink);
+  background: var(--paper);
+  border-radius: 10px;
+  font-size: 11px;
+  line-height: 1.55;
+  text-align: left;
 }
 
 .risk-note i {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  margin-top: 4px;
   display: inline-block;
-  margin-right: 7px;
   border-radius: 50%;
 }
+
+/* ---------- Explorar: tarjetas planas (reemplazan los gauges circulares) ---------- */
+
+.forecast-summary-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 12px;
+  margin: 22px 0 14px;
+  align-items: stretch;
+}
+
+.forecast-compare-card,
+.scenario-status-card {
+  min-width: 0;
+  border-radius: 10px;
+  border: 1px solid var(--panel-border);
+}
+
+.forecast-compare-card {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 16px 14px;
+  background: rgba(244, 241, 232, 0.03);
+}
+
+.forecast-summary-label {
+  color: var(--panel-text);
+  font: 700 9px/1.2 var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+
+/* Los dos estados se apilan verticalmente -- una tarjeta de sidebar (~170-190px)
+   no tiene ancho para dos columnas sin que numero/etiqueta se encimen. */
+.stat-comparison {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 14px 0 auto;
+}
+
+.stat-block {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(244, 241, 232, 0.04);
+}
+
+.stat-caption {
+  min-width: 0;
+  color: var(--panel-text-secondary);
+  font-size: 8.5px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+
+/* Numero grande y estado en su propia fila, debajo de la leyenda -- evita que
+   compitan por ancho dentro de una tarjeta angosta de sidebar. */
+.stat-value-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.stat-value {
+  font: 700 24px/1 Georgia, "Times New Roman", serif;
+  white-space: nowrap;
+}
+
+.stat-state {
+  font: 700 8px/1 var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  white-space: nowrap;
+}
+
+.forecast-summary-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--panel-border);
+  color: var(--panel-text-secondary);
+  font-size: 9px;
+}
+
+.forecast-summary-foot b {
+  color: var(--panel-text);
+  font-family: var(--font-geist-mono), monospace;
+  font-weight: 600;
+}
+
+.scenario-status-card {
+  --status-color: var(--mint);
+  display: flex;
+  flex-direction: column;
+  padding: 16px 16px;
+  background: color-mix(in srgb, var(--status-color) 14%, rgba(244,241,232,.03));
+  border-color: color-mix(in srgb, var(--status-color) 40%, transparent);
+}
+
+.scenario-status-kicker {
+  color: var(--panel-text-secondary);
+  font: 700 8.5px/1.2 var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+
+.scenario-status-label {
+  margin-top: 10px;
+  color: var(--status-color);
+  font: 400 22px/1.15 Georgia, "Times New Roman", serif;
+  letter-spacing: -0.005em;
+  overflow-wrap: break-word;
+}
+
+.scenario-status-value {
+  display: block;
+  margin-top: 8px;
+  color: var(--panel-text);
+  font: 600 12px/1.3 var(--font-geist-mono), monospace;
+}
+
+.scenario-status-card > p {
+  margin: 10px 0 0;
+  color: var(--panel-text-secondary);
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.scenario-meaning-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 28px;
+  margin: 0 0 14px;
+  padding: 20px 24px;
+  color: var(--ink);
+  background: var(--paper);
+  border-radius: 10px;
+}
+
+.scenario-meaning-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.scenario-meaning-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(31, 47, 51, 0.08);
+  color: var(--mint);
+}
+
+.scenario-meaning-head strong {
+  display: block;
+  margin-bottom: 6px;
+  font: 700 14px/1.25 var(--font-geist-sans), Arial, sans-serif;
+}
+
+.scenario-meaning-head p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 11.5px;
+  line-height: 1.65;
+}
+
+.scenario-meaning-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  padding-left: 28px;
+  border-left: 1px solid var(--line);
+}
+
+.scenario-meaning-actions > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.scenario-meaning-actions span {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(31, 47, 51, 0.06);
+  color: var(--mint);
+}
+
+.scenario-meaning-actions small {
+  color: var(--text-secondary);
+  font-size: 10.5px;
+  line-height: 1.45;
+  padding-top: 3px;
+}
+
+.scenario-config-accordion {
+  margin-bottom: 14px;
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  background: rgba(244, 241, 232, 0.02);
+  overflow: hidden;
+}
+
+.scenario-config-accordion summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px;
+  color: var(--panel-text);
+  font: 700 10px/1.2 var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  cursor: pointer;
+  list-style: none;
+}
+
+.scenario-config-accordion summary::-webkit-details-marker { display: none; }
+.scenario-config-accordion summary span { color: var(--panel-text-secondary); font-size: 13px; }
+.scenario-config-accordion[open] summary span { transform: rotate(45deg); display: inline-block; }
+.scenario-config-accordion summary:hover { background: rgba(244, 241, 232, 0.04); }
+.scenario-config-accordion > .scenario-inputs { padding: 4px 16px 16px 16px; }
 
 .scenario-inputs {
   display: grid;
@@ -1077,11 +1425,19 @@ input[type="range"]::-webkit-slider-thumb {
 
 .hero-facts > div:last-child { border: 0; }
 
+.hero-facts svg {
+  width: 16px;
+  height: 16px;
+  margin-bottom: 2px;
+  color: var(--mint-soft);
+  stroke-width: 1.6;
+}
+
 .hero-facts span,
 .hero-facts small,
 .source-manifest span,
 .source-manifest small {
-  color: #6e7d7e;
+  color: var(--text-secondary);
   font-size: 8px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -1152,8 +1508,8 @@ input[type="range"]::-webkit-slider-thumb {
   align-items: center;
   gap: 9px;
   padding: 12px 13px;
-  color: #334446;
-  background: rgba(15,34,38,.035);
+  color: var(--text);
+  background: rgba(244,241,232,.04);
   cursor: pointer;
   list-style: none;
   font: 700 8px/1.35 var(--font-geist-mono), monospace;
@@ -1162,10 +1518,10 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .ingredient-group summary::-webkit-details-marker { display: none; }
-.ingredient-group summary::before { content: "+"; color: #536668; }
+.ingredient-group summary::before { content: "+"; color: var(--mint-soft); }
 .ingredient-group[open] summary::before { content: "−"; }
 .ingredient-group summary span { margin-right: auto; color: inherit; }
-.ingredient-group summary small { color: #718082; }
+.ingredient-group summary small { color: var(--text-secondary); }
 
 .ingredient-group > div {
   display: grid;
@@ -1182,7 +1538,7 @@ input[type="range"]::-webkit-slider-thumb {
   min-height: 43px;
   padding: 0 13px;
   border: 1px solid var(--line);
-  color: var(--ink);
+  color: var(--text);
   background: transparent;
   text-align: left;
   cursor: pointer;
@@ -1191,10 +1547,11 @@ input[type="range"]::-webkit-slider-thumb {
 
 .ingredient-list button:hover { transform: translateX(3px); }
 .ingredient-list button i { width: 7px; height: 7px; border: 1px solid #768486; border-radius: 50%; }
-.ingredient-list button span { color: #849092; }
+.ingredient-list button span { color: var(--text-secondary); }
 .ingredient-list .ingredient-name { display: grid; gap: 3px; color: inherit; }
-.ingredient-list .ingredient-name strong { color: var(--ink); font-size: 9px; line-height: 1.35; font-weight: 700; }
+.ingredient-list .ingredient-name strong { color: var(--text); font-size: 9px; line-height: 1.35; font-weight: 700; }
 .ingredient-list button.is-selected .ingredient-name strong { color: #eef3ee; }
+.ingredient-list button.is-selected span { color: #cdd8d5; }
 .ingredient-list button.is-selected { color: #eef3ee; background: var(--ink); }
 .ingredient-list button.is-selected i { background: var(--mint); border-color: var(--mint); box-shadow: 0 0 12px rgba(100,213,194,.5); }
 
@@ -1205,10 +1562,13 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .lab-note span {
+  color: var(--ink);
   font: 700 8px/1 var(--font-geist-mono), monospace;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
+
+.lab-note p { color: var(--ink); }
 
 .lab-note p {
   margin: 8px 0 0;
@@ -1364,6 +1724,9 @@ input[type="range"]::-webkit-slider-thumb {
 .report-links { display: grid; gap: 10px; margin-bottom: 18px; }
 
 .report-links button {
+  /* Estos botones abren MixtureReportPage, un overlay editorial claro (mismo
+     patron que la seccion protegida de los 4 informes) -- fondo/borde fijos
+     en hex explicito para que no dependan del fondo oscuro del dashboard. */
   width: 100%;
   min-height: 58px;
   display: flex;
@@ -1371,9 +1734,9 @@ input[type="range"]::-webkit-slider-thumb {
   justify-content: space-between;
   gap: 16px;
   padding: 11px 14px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(16, 32, 36, 0.16);
   color: #33494a;
-  background: rgba(231, 225, 213, .45);
+  background: #ede8de;
   text-align: left;
   cursor: pointer;
   transition: border-color .2s ease, background .2s ease, transform .2s ease;
@@ -1695,7 +2058,7 @@ input[type="range"]::-webkit-slider-thumb {
   padding: 14px 0;
   border: 0;
   border-bottom: 1px solid var(--line);
-  color: var(--ink);
+  color: var(--text);
   background: transparent;
   text-align: left;
   cursor: pointer;
@@ -2064,9 +2427,13 @@ footer > a { font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
 .map-extent-actions b { font: 600 10px/1.2 var(--font-geist-mono), monospace; }
 
 .analytics-launch-block {
+  /* Seccion protegida ("Cuatro informes..."): fondo/borde fijados a hex
+     explicitos (no a las variables del tema oscuro) para que conserve su
+     estetica editorial clara exactamente como antes, sin depender del color
+     de fondo de la pagina que la rodea. */
   margin-top: 28px;
-  border: 1px solid var(--line);
-  background: rgba(250, 248, 241, .42);
+  border: 1px solid rgba(16, 32, 36, 0.16);
+  background: #f5f2ea;
 }
 
 .analytics-launch-block > header {
@@ -2075,7 +2442,7 @@ footer > a { font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
   gap: 48px;
   align-items: end;
   padding: 30px 32px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(16, 32, 36, 0.16);
 }
 
 .analytics-launch-block h3 { max-width: 640px; margin: 9px 0 0; color: #173d3a; font: 400 clamp(28px, 3.1vw, 46px)/1.05 Georgia, serif; }
@@ -2089,7 +2456,7 @@ footer > a { font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
   gap: 13px;
   padding: 26px;
   border: 0;
-  border-right: 1px solid var(--line);
+  border-right: 1px solid rgba(16, 32, 36, 0.16);
   color: var(--ink);
   background: transparent;
   text-align: left;
