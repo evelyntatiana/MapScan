@@ -2,6 +2,10 @@
 
 Sistema de análisis y predicción orientado a anticipar el deterioro de la calidad del aire, con énfasis en concentraciones de **PM2.5** y una ventana de predicción de hasta **6 horas**.
 
+## Demo web
+
+[Explorar la aplicación publicada](https://seashell-app-zrcfw.ondigitalocean.app/)
+
 ## Objetivo
 
 MapScan fue desarrollado como proyecto de titulación para explorar cómo datos ambientales y meteorológicos pueden utilizarse para construir modelos predictivos que apoyen el monitoreo de la calidad del aire.
